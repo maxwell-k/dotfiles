@@ -1,0 +1,125 @@
+# .zshrc
+# Copyright 2023 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+#
+# vim: set foldmethod=marker foldlevel=0 filetype=zsh :
+bindkey -v
+setopt interactive_comments
+[ -n "$TMUX" ] && setopt ignore_eof
+fpath=($fpath ~/.local/share/zsh/site-functions)
+autoload compinit && compinit
+# Aliases {{{1
+# following the advice in the aliases section of the ZSH user guide
+# https://zsh.sourceforge.io/Guide/zshguide02.html
+alias gcd='cd "$(git rev-parse --show-toplevel)"'
+
+alias cp="cp -i"  # To avoid accidentally over-writing content
+alias mv="mv -i"  # "
+alias rm="rm -i"  # To avoid accidentally deleting content
+
+alias yy="if [ ! -t 0 ] ; then tail -n 1 ; else fc -l -1 | sed 's/^.\{1,7\}//' ; fi | tr -d '\n' | ygg ; >&2 printf '\n'"
+alias motd=": > /run/motd && systemctl --user restart uncommitted && cat /run/motd"
+
+alias ls="ls --color=auto --group-directories-first"
+# }}}
+bindkey -M vicmd v edit-command-line  #{{{1
+autoload edit-command-line
+zle -N edit-command-line
+bindkey -M viins '^o' execute-named-cmd #{{{1
+# using `escape` then `:` causes the result of `execute-named-cmd` to be
+# inserted before the last character of the existing line
+if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
+  # load binding for ctrl-r ^r
+  . /usr/share/fzf/shell/key-bindings.zsh
+  # prefer ctrl-e to alt-e
+  bindkey -M vicmd -r '\ec'
+  bindkey -M viins -r '\ec'
+  bindkey -M vicmd '^e' fzf-cd-widget
+  bindkey -M viins '^e' fzf-cd-widget
+  # ctrl-t is hidden by new tab
+  bindkey -M vicmd -r '^T'
+  bindkey -M viins -r '^T'
+fi
+zle -N _find
+zshrc-fzf-fzf() { #{{{1
+  local cmd
+  cmd=$( fzf<<EOF
+find | fzf --multi
+git ls-files | fzf --multi
+git status --short | fzf --multi | cut -c4-
+gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
+EOF
+  )
+  cmd+=' | while read item; do echo -n "${(q)item} "; done'
+  LBUFFER+=" $(eval $cmd)"
+  local ret=$?
+  zle reset-prompt
+  echo "hello world"
+  return $ret
+}
+zle -N zshrc-fzf-fzf
+bindkey -M viins '^f' zshrc-fzf-fzf
+bindkey -M vicmd '^f' zshrc-fzf-fzf
+zshrc-tig() { #{{{1
+  # relies on the following in config_home/tig/config
+  # bind refs <Ctrl-g> <sh -c "echo %(refname) >/tmp/tig-output"
+  # bind generic <Ctrl-g> <sh -c "echo %(commit) >/tmp/tig-output"
+  #
+  # reset to known good state
+  /bin/rm -f /tmp/tig-output
+
+  tig </dev/tty
+  local ret=$?
+  if [ -f /tmp/tig-output ] ; then
+    LBUFFER+=" $(</tmp/tig-output)"
+    zle reset-prompt
+  fi
+
+  /bin/rm -f /tmp/tig-output
+  return $ret
+}
+zle -N zshrc-tig
+# PS1 if spaceship is not installed {{{1
+if [ -n "$TMUX" ] ; then
+  PS1="%? ⁅%23<<%d⁆%# "
+else
+  PS1="%? [%23<<%d]%# "
+fi
+# }}}1
+test -f ~/.zshrc.local && . ~/.zshrc.local # late so that PS1 can be overridden
+# https://spaceship-prompt.sh {{{1
+if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" -a -z "$SPACESHIP_DISABLE" ] ; then
+  spaceship_tmux() {  # show a computer inside tmux
+    local 'tmux_status'
+    tmux_status=""
+    [ -n "$TMUX" ] && tmux_status="💻 "
+    spaceship::section::v4 --color white "$tmux_status"
+  }
+  SPACESHIP_PROMPT_ORDER=(
+    dir           # Current directory section
+    tmux          # See spaceship_tmux above
+    venv          # virtualenv section
+    git           # Git section (git_branch + git_status)
+    gcloud        # Google Cloud Platform section
+    host          # Host name so it is clear if using toolbox
+    exec_time     # Execution time
+    line_sep      # Line break
+    jobs          # Background jobs indicator
+    exit_code     # Exit code section
+    char          # Prompt character
+  )
+  SPACESHIP_HOST_SHOW=always
+  SPACESHIP_HOST_COLOR=black
+  SPACESHIP_HOST_COLOR_SSH=black
+  SPACESHIP_PROMPT_PREFIXES_SHOW=false
+  SPACESHIP_EXIT_CODE_SHOW=true
+  SPACESHIP_GCLOUD_SYMBOL="⛅ "
+  SPACESHIP_GCLOUD_COLOR=4
+  SPACESHIP_GIT_BRANCH_PREFIX="🪵 "
+  SPACESHIP_CHAR_SYMBOL="%% "
+  SPACESHIP_EXIT_CODE_SYMBOL=""
+  SPACESHIP_VENV_SYMBOL="🧫 "
+  SPACESHIP_DIR_LOCK_SYMBOL="🔒"
+  SPACESHIP_VENV_COLOR=207
+  source "$HOME/.zsh/spaceship/spaceship.zsh"
+fi

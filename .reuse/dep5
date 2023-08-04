@@ -1,0 +1,8 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: dotfiles
+Upstream-Contact: Keith Maxwell <keith.maxwell@gmail.com>
+Source: https://github.com/maxwell-k/dotfiles
+
+Files: README.md .en.utf-8.add .gitignore
+Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
+License: CC0-1.0
