@@ -1,5 +1,14 @@
 # dotfiles
 
+<!-- toc -->
+
+- [Shell](#shell)
+- [Files](#files)
+
+<!-- tocstop -->
+
+## Shell
+
 Create a new container with `git`, `fzf` and `zsh` installed:
 
 _Debian 12_
@@ -29,3 +38,27 @@ Set up ZSH and login:
     | lxc exec c1 -- tee "$HOME/.zshrc.local" \
     && lxc exec c1 -- chown --recursive "$LOGNAME:$LOGNAME" "$HOME" \
     && lxc exec c1 -- su --login "$LOGNAME"
+
+## Files
+
+_The steps below apply to Fedora 38._
+
+Configure the default profile:
+
+    printf 'export DOTDROP_PROFILE=default\n' >> ~/.zshrc.local \
+    && . ~/.zshrc.local
+
+Clone this repository, install `pipx` and `dotdrop`:
+
+    mkdir --parents ~/github.com/maxwell-k \
+    && cd ~/github.com/maxwell-k \
+    && git clone https://github.com/maxwell-k/dotfiles.git \
+    && sudo dnf install --assumeyes pipx \
+    && pipx install dotdrop
+
+Install personal files:
+
+    cd ~/github.com/maxwell-k/dotfiles \
+    && dotdrop install
+
+<!-- vim: set filetype=markdown.markdown-toc : -->

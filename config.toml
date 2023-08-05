@@ -1,0 +1,15 @@
+# config.toml
+# Copyright 2023 Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
+
+[config]
+link_on_import = "relative"
+dotpath = "dotdrop"
+
+[dotfiles.f_zshrc]
+src = "zshrc"
+dst = "~/.zshrc"
+link = "relative"
+
+[profiles.default]
+dotfiles = ["ALL"]
