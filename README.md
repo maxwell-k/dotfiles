@@ -27,4 +27,5 @@ Set up ZSH and login:
         "$HOME/.zsh/spaceship" \
     && printf 'export "PATH=$PATH:/home/$LOGNAME/.local/bin"\n' \
     | lxc exec c1 -- tee "$HOME/.zshrc.local" \
-    && lxc exec c1 -- su --login $LOGNAME
+    && lxc exec c1 -- chown --recursive "$LOGNAME:$LOGNAME" "$HOME" \
+    && lxc exec c1 -- su --login "$LOGNAME"
