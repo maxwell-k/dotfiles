@@ -48,17 +48,20 @@ Configure the default profile:
     printf 'export DOTDROP_PROFILE=default\n' >> ~/.zshrc.local \
     && . ~/.zshrc.local
 
-Clone this repository, install `pipx` and `dotdrop`:
+Clone this repository, install `pipx`, `dotdrop` and a version of `peru` that is
+compatible with `pipx`:
 
     mkdir --parents ~/github.com/maxwell-k \
     && cd ~/github.com/maxwell-k \
     && git clone https://github.com/maxwell-k/dotfiles.git \
     && sudo dnf install --assumeyes pipx \
-    && pipx install dotdrop
+    && pipx install dotdrop \
+    && pipx install git+https://github.com/maxwell-k/peru
 
 Install personal files:
 
     cd ~/github.com/maxwell-k/dotfiles \
+    && peru sync \
     && dotdrop install
 
 <!-- vim: set filetype=markdown.markdown-toc : -->

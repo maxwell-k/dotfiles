@@ -1,0 +1,8 @@
+imports:
+  deno: dotdrop/deno/bin/
+
+curl module deno:
+  # No checksum available https://github.com/denoland/deno/issues/7253
+  url: |-
+    https://github.com/denoland/deno/releases/download/v1.28.3/deno-x86_64-unknown-linux-gnu.zip
+  unpack: zip
