@@ -3,6 +3,12 @@ Upstream-Name: dotfiles
 Upstream-Contact: Keith Maxwell <keith.maxwell@gmail.com>
 Source: https://github.com/maxwell-k/dotfiles
 
-Files: .en.utf-8.add .gitignore README.md config.toml peru.yaml
+Files:
+ .en.utf-8.add
+ .gitignore
+ README.md
+ config.toml
+ dprint.json
+ peru.yaml
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: CC0-1.0
