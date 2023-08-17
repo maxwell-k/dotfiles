@@ -79,6 +79,30 @@ zshrc-tig() { #{{{1
   return $ret
 }
 zle -N zshrc-tig
+# Environment variables {{{1
+if fzf --version >/dev/null ; then export FZF_DEFAULT_OPTS=--height=10 ; fi
+if pager --version >/dev/null ; then export PAGER=pager ; fi
+if [ -x /usr/bin/vim ]; then
+  export EDITOR=vim
+else
+  export EDITOR=vi
+fi
+export FCEDIT=$EDITOR
+for i in \
+  "$HOME/.local/bin" \
+  "$HOME/.deno/bin" \
+  ;
+do
+    if ! test -d "$i" ; then continue ; fi
+    # append rather than prepend so the order is not changed by path_helper
+    case "$PATH" in
+      *"$i"*) true ;;
+      *) export PATH="$PATH:$i" ;;
+    esac
+done
+# https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
+export NCURSES_NO_UTF8_ACS=1
+# }}}1
 # PS1 if spaceship is not installed {{{1
 if [ -n "$TMUX" ] ; then
   PS1="%? ⁅%23<<%d⁆%# "
