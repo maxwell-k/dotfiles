@@ -41,11 +41,6 @@ Set up ZSH and login:
 
 _The steps below apply to Fedora 38._
 
-Configure the default profile:
-
-    printf 'export DOTDROP_PROFILE=default\n' >> ~/.zshrc.local \
-    && . ~/.zshrc.local
-
 Clone this repository, install `pipx`, `dotdrop` and a version of `peru` that is
 compatible with `pipx`:
 

@@ -80,6 +80,7 @@ zshrc-tig() { #{{{1
 }
 zle -N zshrc-tig
 # Environment variables {{{1
+export DOTDROP_PROFILE=default
 if [ -x /usr/bin/vim ]; then
   export EDITOR=vim
 else
