@@ -32,6 +32,7 @@ Set up ZSH and login:
     && lxc exec c1 -- mkdir --parents "$HOME/.zsh" "$HOME/.local/bin" \
     && lxc exec c1 -- git clone \
         --branch=v4.14.0 \
+         --config advice.detachedHead=false \
         https://github.com/spaceship-prompt/spaceship-prompt.git \
         "$HOME/.zsh/spaceship" \
     && printf 'export "PATH=$PATH:/home/$LOGNAME/.local/bin"\n' \
