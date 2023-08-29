@@ -13,5 +13,10 @@ dst = "~/.deno/bin/deno"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_tmux]
+src = "tmux.conf"
+dst = "~/.tmux.conf"
+link = "relative"
+
 [profiles.default]
 dotfiles = ["ALL"]
