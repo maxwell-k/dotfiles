@@ -34,8 +34,6 @@ Set up ZSH and login:
          --config advice.detachedHead=false \
         https://github.com/spaceship-prompt/spaceship-prompt.git \
         "$HOME/.zsh/spaceship" \
-    && printf 'export "PATH=$PATH:/home/$LOGNAME/.local/bin"\n' \
-    | lxc exec c1 -- tee "$HOME/.zshrc.local" \
     && lxc exec c1 -- chown --recursive "$LOGNAME:$LOGNAME" "$HOME" \
     && lxc exec c1 -- su --login "$LOGNAME"
 
