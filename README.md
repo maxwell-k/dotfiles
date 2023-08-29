@@ -25,7 +25,7 @@ _Fedora 38_
 Set up ZSH and login:
 
     lxc exec c1 -- curl -Lo ~/.zshrc \
-        https://github.com/maxwell-k/dotfiles/raw/main/zsh/dot-zshrc \
+        https://github.com/maxwell-k/dotfiles/raw/main/dotdrop/zshrc \
     && lxc exec c1 -- sed -i "s,$LOGNAME:/bin/bash$,$LOGNAME:/usr/bin/zsh," \
         /etc/passwd \
     && lxc exec c1 -- mkdir --parents "$HOME/.zsh" "$HOME/.local/bin" \
