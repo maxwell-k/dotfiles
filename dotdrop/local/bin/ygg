@@ -1,0 +1,44 @@
+#!/bin/sh
+# Copy STDIN to the clipboard and echo to the terminal
+#
+# Usage:
+#
+#   $ seq 2 | ygg
+#   1
+#   2
+#
+# Requires:
+# - base64 available e.g. via busybox
+# - a terminal emulator that supports `OSC52`, such as `hterm` but not
+#   `gnome-terminal` https://bugzilla.gnome.org/show_bug.cgi?id=795774
+#
+# Tested
+#
+# | OS    | tmux    | Result |
+# | ----- | ------- | -----: |
+# | Linux | Without |     OK |
+# |       | With    |     OK |
+# | MacOS | Without |     OK |
+# |       | With    |     OK |
+#
+# Implementation notes
+#
+# - https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Is-OSC-52-aka-clipboard-operations_supported
+# - /dev/stderr is not writable on Fedora Silverblue 30
+# - https://www.gnu.org/software/screen/manual/html_node/Control-Sequences.html
+# - printf '\033]52;c;%s\a' cannot be split into separate commands
+#
+# .local/bin/ygg
+# Copyright 2022 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+#
+# shellcheck disable=SC1003 # No, I'm not escaping a '
+echo=/dev/stderr
+if [ ! -w "$echo" ] ; then echo=/dev/tty ; fi
+tee "$echo" |
+base64 |
+if [ "$TERM" = 'xterm-256color' ] ; then
+  printf '\033P\033]52;c;%s\a\033\\' "$(tr -d '\n')"
+else
+  printf '\033Ptmux;\033\033]52;c;%s\a\033\\' "$(tr -d '\n')"
+fi

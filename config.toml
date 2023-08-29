@@ -18,5 +18,11 @@ src = "tmux.conf"
 dst = "~/.tmux.conf"
 link = "relative"
 
+[dotfiles.f_ygg]
+src = "local/bin/ygg"
+dst = "~/.local/bin/ygg"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]
