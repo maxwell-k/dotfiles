@@ -43,7 +43,6 @@ if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
 fi
 zle -N _find
 zshrc_fzf_fzf() { #{{{1
-  local cmd
   cmd=$( fzf<<EOF
 find | fzf --multi
 git ls-files | fzf --multi
@@ -54,6 +53,9 @@ EOF
   # shellcheck disable=SC2016
   cmd+=' | while read item; do echo -n "${(q)item} "; done'
   LBUFFER+=" $(eval "$cmd")"
+  unset cmd
+  # local is better than POSIX alternatives
+  # shellcheck disable=SC3043
   local ret=$?
   zle reset-prompt
   return $ret
@@ -70,6 +72,8 @@ zshrc_tig() { #{{{1
   /bin/rm -f /tmp/tig-output
 
   tig </dev/tty
+  # local is better than POSIX alternatives
+  # shellcheck disable=SC3043
   local ret=$?
   if [ -f /tmp/tig-output ] ; then
     LBUFFER+=" $(</tmp/tig-output)"
@@ -115,10 +119,10 @@ fi
 # https://spaceship-prompt.sh {{{1
 if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; then
   spaceship_tmux() {  # show a computer inside tmux
-    local 'tmux_status'
     tmux_status=""
     [ -n "$TMUX" ] && tmux_status="💻 "
     spaceship::section::v4 --color white "$tmux_status"
+    unset tmux_status
   }
   # the SPACESHIP_* variables are used inside spaceship
   # shellcheck disable=SC2034
