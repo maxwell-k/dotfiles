@@ -112,7 +112,7 @@ else
 fi
 # }}}1
 # https://spaceship-prompt.sh {{{1
-if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" -a -z "$SPACESHIP_DISABLE" ] ; then
+if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; then
   spaceship_tmux() {  # show a computer inside tmux
     local 'tmux_status'
     tmux_status=""
