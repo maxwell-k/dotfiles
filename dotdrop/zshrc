@@ -41,7 +41,6 @@ if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
   bindkey -M vicmd -r '^T'
   bindkey -M viins -r '^T'
 fi
-zle -N _find
 zshrc_fzf_fzf() { #{{{1
   cmd=$( fzf<<EOF
 find | fzf --multi
