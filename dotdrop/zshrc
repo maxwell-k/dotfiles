@@ -50,6 +50,7 @@ git status --short | fzf --multi | cut -c4-
 gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
 EOF
   )
+  # shellcheck disable=SC2016
   cmd+=' | while read item; do echo -n "${(q)item} "; done'
   LBUFFER+=" $(eval "$cmd")"
   local ret=$?
