@@ -7,7 +7,7 @@
 bindkey -v
 setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
-fpath=($fpath ~/.local/share/zsh/site-functions)
+fpath+=~/.local/share/zsh/site-functions
 autoload compinit && compinit
 # Aliases {{{1
 # following the advice in the aliases section of the ZSH user guide
