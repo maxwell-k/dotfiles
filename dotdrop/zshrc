@@ -51,7 +51,7 @@ gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
 EOF
   )
   cmd+=' | while read item; do echo -n "${(q)item} "; done'
-  LBUFFER+=" $(eval $cmd)"
+  LBUFFER+=" $(eval "$cmd")"
   local ret=$?
   zle reset-prompt
   echo "hello world"
