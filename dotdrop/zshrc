@@ -127,6 +127,8 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
   # the SPACESHIP_* variables are used inside spaceship
   # shellcheck disable=SC2034
   {
+    # SPACESHIP_PROMPT_ORDER needs to be an array
+    # shellcheck disable=SC3030
     SPACESHIP_PROMPT_ORDER=(
       dir           # Current directory section
       tmux          # See spaceship_tmux above
