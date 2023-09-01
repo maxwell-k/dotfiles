@@ -75,7 +75,9 @@ zshrc_tig() { #{{{1
   # shellcheck disable=SC3043
   local ret=$?
   if [ -f /tmp/tig-output ] ; then
-    LBUFFER="$LBUFFER $(</tmp/tig-output)"
+    read -r tig_output </tmp/tig-output
+    LBUFFER="$LBUFFER $tig_output"
+    unset tig_output
     zle reset-prompt
   fi
 
