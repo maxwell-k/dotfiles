@@ -51,7 +51,7 @@ gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
 EOF
   )
   # shellcheck disable=SC2016
-  cmd="$cmd"' | while read item; do echo -n "${(q)item} "; done'
+  cmd="$cmd"' | while read item; do echo -n "${(q)item} "; done'  # applies quoting
   LBUFFER="$LBUFFER $(eval "$cmd")"
   unset cmd
   # local is better than POSIX alternatives
