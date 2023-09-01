@@ -42,7 +42,7 @@ if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
   bindkey -M viins -r '^T'
 fi
 zle -N _find
-zshrc-fzf-fzf() { #{{{1
+zshrc_fzf_fzf() { #{{{1
   local cmd
   cmd=$( fzf<<EOF
 find | fzf --multi
@@ -59,10 +59,10 @@ EOF
   echo "hello world"
   return $ret
 }
-zle -N zshrc-fzf-fzf
-bindkey -M viins '^f' zshrc-fzf-fzf
-bindkey -M vicmd '^f' zshrc-fzf-fzf
-zshrc-tig() { #{{{1
+zle -N zshrc_fzf_fzf
+bindkey _M viins '^f' zshrc_fzf_fzf
+bindkey _M vicmd '^f' zshrc_fzf_fzf
+zshrc_tig() { #{{{1
   # relies on the following in config_home/tig/config
   # bind refs <Ctrl-g> <sh -c "echo %(refname) >/tmp/tig-output"
   # bind generic <Ctrl-g> <sh -c "echo %(commit) >/tmp/tig-output"
@@ -80,7 +80,7 @@ zshrc-tig() { #{{{1
   /bin/rm -f /tmp/tig-output
   return $ret
 }
-zle -N zshrc-tig
+zle -N zshrc_tig
 # Environment variables {{{1
 export DOTDROP_PROFILE=default
 if [ -x /usr/bin/vim ]; then
