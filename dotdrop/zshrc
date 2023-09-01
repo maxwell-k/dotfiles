@@ -1,8 +1,9 @@
+# shellcheck disable=SC1090,SC1091
+#
 # .zshrc
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 #
-# vim: set foldmethod=marker foldlevel=0 filetype=zsh :
 bindkey -v
 setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
@@ -153,3 +154,4 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
   . "$HOME/.zsh/spaceship/spaceship.zsh"
 fi #}}}1
 test -f ~/.zshrc.local && . ~/.zshrc.local # late so that PS1 & spaceship can be overridden
+# vim: set foldmethod=marker foldlevel=0 filetype=zsh :
