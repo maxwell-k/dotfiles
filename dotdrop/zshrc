@@ -56,7 +56,6 @@ EOF
   LBUFFER+=" $(eval "$cmd")"
   local ret=$?
   zle reset-prompt
-  echo "hello world"
   return $ret
 }
 zle -N zshrc_fzf_fzf
