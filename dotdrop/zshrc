@@ -145,6 +145,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
   SPACESHIP_VENV_SYMBOL="🧫 "
   SPACESHIP_DIR_LOCK_SYMBOL="🔒"
   SPACESHIP_VENV_COLOR=207
-  source "$HOME/.zsh/spaceship/spaceship.zsh"
+  . "$HOME/.zsh/spaceship/spaceship.zsh"
 fi #}}}1
 test -f ~/.zshrc.local && . ~/.zshrc.local # late so that PS1 & spaceship can be overridden
