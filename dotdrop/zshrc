@@ -7,7 +7,7 @@
 bindkey -v
 setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
-fpath+=~/.local/share/zsh/site-functions
+FPATH="$FPATH:~/.local/share/zsh/site-functions"
 autoload compinit && compinit
 # Aliases {{{1
 # following the advice in the aliases section of the ZSH user guide
@@ -51,8 +51,8 @@ gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
 EOF
   )
   # shellcheck disable=SC2016
-  cmd+=' | while read item; do echo -n "${(q)item} "; done'
-  LBUFFER+=" $(eval "$cmd")"
+  cmd="$cmd"' | while read item; do echo -n "${(q)item} "; done'
+  LBUFFER="$LBUFFER $(eval "$cmd")"
   unset cmd
   # local is better than POSIX alternatives
   # shellcheck disable=SC3043
@@ -76,7 +76,7 @@ zshrc_tig() { #{{{1
   # shellcheck disable=SC3043
   local ret=$?
   if [ -f /tmp/tig-output ] ; then
-    LBUFFER+=" $(</tmp/tig-output)"
+    LBUFFER="$LBUFFER $(</tmp/tig-output)"
     zle reset-prompt
   fi
 
