@@ -45,9 +45,9 @@ if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
 fi
 zshrc_fzf_fzf() { #{{{1
   cmd=$( fzf<<EOF
+git status --short | fzf --multi | cut -c4-
 find | fzf --multi
 git ls-files | fzf --multi
-git status --short | fzf --multi | cut -c4-
 gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
 EOF
   )
