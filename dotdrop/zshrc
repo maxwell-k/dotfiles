@@ -53,7 +53,7 @@ EOF
   )
   # shellcheck disable=SC2016
   cmd="$cmd"' | while read item; do echo -n "${(q)item} "; done'  # applies quoting
-  LBUFFER="$LBUFFER $(eval "$cmd")"
+  LBUFFER="$LBUFFER$(eval "$cmd")"
   unset cmd
   # local is better than POSIX alternatives
   # shellcheck disable=SC3043
