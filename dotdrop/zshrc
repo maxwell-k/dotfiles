@@ -34,7 +34,7 @@ bindkey -M viins '^o' execute-named-cmd #{{{1
 if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
   # load binding for ctrl-r ^r
   . /usr/share/fzf/shell/key-bindings.zsh
-  # prefer ctrl-e to alt-e
+  # prefer ctrl-e to alt-c
   bindkey -M vicmd -r '\ec'
   bindkey -M viins -r '\ec'
   bindkey -M vicmd '^e' fzf-cd-widget
