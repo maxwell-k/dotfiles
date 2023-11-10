@@ -18,6 +18,7 @@ alias rm="rm -i"  # To avoid accidentally deleting content
 alias ls="ls --color=auto --group-directories-first"
 
 lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
+ywd() { printf '%s' "$PWD"  | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
 gcd() { cd "$(git rev-parse --show-toplevel)" || return ; }
 # }}}
 bindkey -M vicmd v edit-command-line  #{{{1
