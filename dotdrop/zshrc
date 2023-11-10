@@ -11,19 +11,14 @@ setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
 FPATH="$FPATH:~/.local/share/zsh/site-functions"
 autoload compinit && compinit
-# Aliases {{{1
-# following the advice in the aliases section of the ZSH user guide
-# https://zsh.sourceforge.io/Guide/zshguide02.html
-alias gcd='cd "$(git rev-parse --show-toplevel)"'
-
+# Aliases and <80 character functions {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
 alias rm="rm -i"  # To avoid accidentally deleting content
-
-alias yy="if [ ! -t 0 ] ; then tail -n 1 ; else fc -l -1 | sed 's/^.\{1,7\}//' ; fi | tr -d '\n' | ygg ; >&2 printf '\n'"
-alias motd=": > /run/motd && systemctl --user restart uncommitted && cat /run/motd"
-
 alias ls="ls --color=auto --group-directories-first"
+
+lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
+gcd() { cd "$(git rev-parse --show-toplevel)" || return ; }
 # }}}
 bindkey -M vicmd v edit-command-line  #{{{1
 autoload edit-command-line
@@ -43,6 +38,9 @@ if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
   bindkey -M vicmd -r '^T'
   bindkey -M viins -r '^T'
 fi
+motd() { #{{{1
+  : > /run/motd && systemctl --user restart uncommitted && cat /run/motd
+} #}}}1
 zshrc_fzf_fzf() { #{{{1
   cmd=$( fzf<<EOF
 git status --short | fzf --multi | cut -c4-
@@ -97,9 +95,12 @@ bindkey -M menuselect l vi-forward-char
 bindkey -M menuselect h vi-backward-char
 bindkey -M menuselect '^[' undo
 bindkey -M menuselect '^I' accept-and-hold  # ^I = Tab
-lfcd () { # {{{1
-    # based upon https://github.com/gokcehan/lf/blob/master/etc/lfcd.sh
-    cd "$(command lf -print-last-dir "$@")" || return
+yy() { # {{{1
+  if [ ! -t 0 ] ; then
+    tail -n 1
+  else
+    fc -ln -1
+  fi | tr -d '\n' | ygg ; >&2 printf '\n'
 } # }}}1
 # Environment variables {{{1
 export DOTDROP_PROFILE=default
