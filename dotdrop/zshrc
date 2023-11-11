@@ -117,10 +117,14 @@ for i in \
   ;
 do
     if ! test -d "$i" ; then continue ; fi
-    # append rather than prepend so the order is not changed by path_helper
     case "$PATH" in
       *"$i"*) true ;;
-      *) export PATH="$PATH:$i" ;;
+      # On macOS the order of prefixies in PATH may be changed by path_helper.
+      # Below, if append is chosen instead of prepend, then the order will be
+      # unchanged. However it is then not possible to override binaries from
+      # system package. This file is more likely used on Linux so prepend is
+      # chosen.
+      *) export PATH="$i:$PATH" ;;
     esac
 done
 if fzf --version >/dev/null 2>&1 ; then export FZF_DEFAULT_OPTS='--height=10 --bind=ctrl-a:select-all' ; fi
