@@ -16,5 +16,6 @@ License: CC0-1.0
 Files:
  dotdrop/local/bin/percollate
  dotdrop/local/bin/prettier
+ dotdrop/local/bin/vimj
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: MPL-2.0
