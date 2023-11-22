@@ -12,3 +12,8 @@ Files:
  dprint.json
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: CC0-1.0
+
+Files:
+ dotdrop/local/bin/percollate
+Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
+License: MPL-2.0

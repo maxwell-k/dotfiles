@@ -18,5 +18,11 @@ dst = "~/.local/bin/ygg"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_percollate]
+src = "local/bin/percollate"
+dst = "~/.local/bin/percollate"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]

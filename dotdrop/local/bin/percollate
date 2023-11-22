@@ -1,0 +1,2 @@
+#!/bin/sh
+npm exec percollate -- --no-hyphenate "$@"
