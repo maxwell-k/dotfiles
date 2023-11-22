@@ -17,12 +17,13 @@ from zipfile import ZipFile
 
 DOWNLOADED = Path("downloaded")
 COMPLETIONS = Path("~/.local/share/zsh/site-functions/").expanduser()
+DEFAULT_DIRECTORY = "~/.local/bin/"
 
 
 @contextmanager
 def _download(
     url: str,
-    target: str,
+    target: str | None = None,
     expected: str | None = None,
     version: str | None = "--version",
 ) -> Generator[tuple[Path, Path], None, None]:
@@ -58,6 +59,9 @@ def _download(
     else:
         source = Path(url)
 
+    if target is None:
+        target = DEFAULT_DIRECTORY + source.name
+
     target_path = Path(target).expanduser()
     target_path.unlink(missing_ok=True)
 
@@ -80,9 +84,8 @@ def main():
 
     with _download(
         "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4",
-        "~/.local/bin/a4",
         # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
-        "1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
+        expected="1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
     ) as (source, target):
         copy(source, target)
 
@@ -133,17 +136,14 @@ def main():
     ) as (source, target):
         with tarfile.open(source, "r") as file:
             file.extract(target.name, path=target.parent)
-    with open(COMPLETIONS / "_dyff", "w") as file:
-        run(["dyff", "completion", "zsh"], check=True, stdout=file)
+    with open(COMPLETIONS / "_{target.name}", "w") as file:
+        run([target.name, "completion", "zsh"], check=True, stdout=file)
 
     print()
 
     head = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc"
     for tail in ["osc52.sh", "hterm-notify.sh", "hterm-show-file.sh"]:
-        with _download(f"{head}/{tail}", f"~/.local/bin/{tail}", version=None) as (
-            source,
-            target,
-        ):
+        with _download(head + "/" + tail, version=None) as (source, target):
             copy(source, target)
 
 
