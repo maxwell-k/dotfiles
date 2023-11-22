@@ -54,5 +54,11 @@ dst = "~/.local/bin/title"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_pager]
+src = "local/bin/pager"
+dst = "~/.local/bin/pager"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]
