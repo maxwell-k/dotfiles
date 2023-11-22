@@ -66,5 +66,11 @@ dst = "~/.local/bin/gtree"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_pyright-langserver]
+src = "local/bin/pyright-langserver"
+dst = "~/.local/bin/pyright-langserver"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]

@@ -1,0 +1,2 @@
+#!/bin/sh
+exec npm exec --package pyright --yes -- pyright-langserver "$@"
