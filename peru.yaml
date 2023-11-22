@@ -1,4 +1,5 @@
 imports:
+  a4: dotdrop/local/bin/
   deno: dotdrop/deno/bin/
 
 curl module deno:
@@ -6,3 +7,7 @@ curl module deno:
   url: |-
     https://github.com/denoland/deno/releases/download/v1.38.2/deno-x86_64-unknown-linux-gnu.zip
   unpack: zip
+
+curl module a4:
+  url: https://github.com/maxwell-k/a4/releases/download/0.0.5/a4
+  executable: a4
