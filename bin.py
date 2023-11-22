@@ -6,6 +6,7 @@
 
 Requires https://curl.se/"""
 import tarfile
+from collections.abc import Generator
 from contextlib import contextmanager
 from hashlib import file_digest
 from pathlib import Path
@@ -20,11 +21,11 @@ COMPLETIONS = Path("~/.local/share/zsh/site-functions/").expanduser()
 
 @contextmanager
 def _download(
-    url: str | None,
+    url: str,
     expected: str | None,
     target: str,
     version: str = "--version",
-):
+) -> Generator[tuple[Path, Path], None, None]:
     """Context manager to download and install a program
 
     url -- the URL to download
@@ -32,7 +33,7 @@ def _download(
     target -- the destination
     """
     DOWNLOADED.mkdir(exist_ok=True)
-    if url:
+    if url.startswith("https://"):
         source = DOWNLOADED / url.rsplit("/", 1)[1]
         if not source.is_file():
             run(
@@ -55,7 +56,7 @@ def _download(
         if expected:
             assert digest.hexdigest() == expected
     else:
-        source = None
+        source = Path(url)
 
     target_path = Path(target).expanduser()
     target_path.unlink(missing_ok=True)
@@ -69,8 +70,12 @@ def _download(
 
 
 def main():
-    with _download(None, None, "~/.local/bin/python") as (_, target):
-        target.symlink_to("/usr/bin/python3.12")
+    with _download(
+        "/usr/bin/python3.12",
+        None,
+        "~/.local/bin/python",
+    ) as (source, target):
+        target.symlink_to(source)
 
     print()
 
@@ -80,7 +85,6 @@ def main():
         "1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
         "~/.local/bin/a4",
     ) as (source, target):
-        assert source is not None
         copy(source, target)
 
     print()
@@ -95,7 +99,6 @@ def main():
         "8739c81badd437f5d704f8d8299f01b171f8dd3c27ab287026e7f3198ca92fe6",
         "~/.deno/bin/deno",
     ) as (source, target):
-        assert source is not None
         with ZipFile(source, "r") as file:
             file.extract(target.name, path=target.parent)
 
@@ -107,7 +110,6 @@ def main():
         None,  # not versioned, latest release
         "~/.local/bin/pip",
     ) as (source, target):
-        assert source is not None
         run(
             (
                 "python3.11",
