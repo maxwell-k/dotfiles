@@ -24,7 +24,7 @@ def _download(
     url: str,
     expected: str | None,
     target: str,
-    version: str = "--version",
+    version: str | None = "--version",
 ) -> Generator[tuple[Path, Path], None, None]:
     """Context manager to download and install a program
 
@@ -65,8 +65,11 @@ def _download(
 
     if not target_path.is_symlink():
         target_path.chmod(target_path.stat().st_mode | S_IEXEC)
-    print(f"$ {target} {version}")
-    run([target_path, version], check=True)
+    if version is None:
+        print(f"# {target}")
+    else:
+        print(f"$ {target} {version}")
+        run([target_path, version], check=True)
 
 
 def main():
@@ -137,6 +140,18 @@ def main():
             file.extract(target.name, path=target.parent)
     with open(COMPLETIONS / "_dyff", "w") as file:
         run(["dyff", "completion", "zsh"], check=True, stdout=file)
+
+    print()
+
+    head = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc"
+    for tail in ["osc52.sh", "hterm-notify.sh", "hterm-show-file.sh"]:
+        with _download(
+            f"{head}/{tail}",
+            None,
+            f"~/.local/bin/{tail}",
+            version=None,
+        ) as (source, target):
+            copy(source, target)
 
 
 if __name__ == "__main__":
