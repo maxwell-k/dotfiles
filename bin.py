@@ -5,6 +5,7 @@
 """Download and extract files onto $PATH
 
 Requires https://curl.se/"""
+import tarfile
 from contextlib import contextmanager
 from hashlib import file_digest
 from pathlib import Path
@@ -14,10 +15,16 @@ from subprocess import run
 from zipfile import ZipFile
 
 DOWNLOADED = Path("downloaded")
+COMPLETIONS = Path("~/.local/share/zsh/site-functions/").expanduser()
 
 
 @contextmanager
-def _download(url: str | None, expected: str | None, target: str):
+def _download(
+    url: str | None,
+    expected: str | None,
+    target: str,
+    version: str = "--version",
+):
     """Context manager to download and install a program
 
     url -- the URL to download
@@ -57,8 +64,8 @@ def _download(url: str | None, expected: str | None, target: str):
 
     if not target_path.is_symlink():
         target_path.chmod(target_path.stat().st_mode | S_IEXEC)
-    print(f"$ {target} --version")
-    run([target_path, "--version"], check=True)
+    print(f"$ {target} {version}")
+    run([target_path, version], check=True)
 
 
 def main():
@@ -90,7 +97,7 @@ def main():
     ) as (source, target):
         assert source is not None
         with ZipFile(source, "r") as file:
-            file.extract("deno", path=target.parent)
+            file.extract(target.name, path=target.parent)
 
     print()
 
@@ -112,6 +119,22 @@ def main():
             ),
             check=True,
         )
+
+    print()
+
+    with _download(
+        (
+            "https://github.com/homeport/dyff/releases/download/"
+            "v1.5.6/dyff_1.5.6_linux_amd64.tar.gz"
+        ),
+        "a733665e7c622ead6b18e9cc7834788bea30ea64b66273bd2062475dcd19968a",
+        "~/.local/bin/dyff",
+        version="version",
+    ) as (source, target):
+        with tarfile.open(source, "r") as file:
+            file.extract(target.name, path=target.parent)
+    with open(COMPLETIONS / "_dyff", "w") as file:
+        run(["dyff", "completion", "zsh"], check=True, stdout=file)
 
 
 if __name__ == "__main__":
