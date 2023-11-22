@@ -4,5 +4,5 @@ imports:
 curl module deno:
   # No checksum available https://github.com/denoland/deno/issues/7253
   url: |-
-    https://github.com/denoland/deno/releases/download/v1.36.1/deno-x86_64-unknown-linux-gnu.zip
+    https://github.com/denoland/deno/releases/download/v1.38.2/deno-x86_64-unknown-linux-gnu.zip
   unpack: zip
