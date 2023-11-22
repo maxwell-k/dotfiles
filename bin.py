@@ -152,6 +152,12 @@ def main():
     with _download(url, version=None) as (source, target):
         copy(source, target)
 
+    print()
+
+    url = "https://github.com/wp-cli/wp-cli/releases/download/v2.8.1/wp-cli-2.8.1.phar"
+    with _download(url, "~/.local/bin/wp") as (source, target):
+        copy(source, target)
+
 
 if __name__ == "__main__":
     main()
