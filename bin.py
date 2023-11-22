@@ -22,8 +22,8 @@ COMPLETIONS = Path("~/.local/share/zsh/site-functions/").expanduser()
 @contextmanager
 def _download(
     url: str,
-    expected: str | None,
     target: str,
+    expected: str | None = None,
     version: str | None = "--version",
 ) -> Generator[tuple[Path, Path], None, None]:
     """Context manager to download and install a program
@@ -53,8 +53,8 @@ def _download(
         with source.open("rb") as f:
             digest = file_digest(f, "sha256")
 
-        if expected:
-            assert digest.hexdigest() == expected
+        if expected and digest.hexdigest() != expected:
+            raise RuntimeError("Unexpected digest for {}".format(source))
     else:
         source = Path(url)
 
@@ -73,20 +73,16 @@ def _download(
 
 
 def main():
-    with _download(
-        "/usr/bin/python3.12",
-        None,
-        "~/.local/bin/python",
-    ) as (source, target):
+    with _download("/usr/bin/python3.12", "~/.local/bin/python") as (source, target):
         target.symlink_to(source)
 
     print()
 
     with _download(
         "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4",
+        "~/.local/bin/a4",
         # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
         "1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
-        "~/.local/bin/a4",
     ) as (source, target):
         copy(source, target)
 
@@ -97,20 +93,19 @@ def main():
             "https://github.com/denoland/deno/releases/download/v1.38.2/"
             "deno-x86_64-unknown-linux-gnu.zip"
         ),
+        "~/.deno/bin/deno",
         # No checksum available, see
         # https://github.com/denoland/deno/issues/7253, generated manually
         "8739c81badd437f5d704f8d8299f01b171f8dd3c27ab287026e7f3198ca92fe6",
-        "~/.deno/bin/deno",
     ) as (source, target):
         with ZipFile(source, "r") as file:
             file.extract(target.name, path=target.parent)
 
     print()
 
-    # https://pip.pypa.io/en/stable/installation/
+    # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
     with _download(
         "https://bootstrap.pypa.io/pip/pip.pyz",
-        None,  # not versioned, latest release
         "~/.local/bin/pip",
     ) as (source, target):
         run(
@@ -132,8 +127,8 @@ def main():
             "https://github.com/homeport/dyff/releases/download/"
             "v1.5.6/dyff_1.5.6_linux_amd64.tar.gz"
         ),
-        "a733665e7c622ead6b18e9cc7834788bea30ea64b66273bd2062475dcd19968a",
         "~/.local/bin/dyff",
+        "a733665e7c622ead6b18e9cc7834788bea30ea64b66273bd2062475dcd19968a",
         version="version",
     ) as (source, target):
         with tarfile.open(source, "r") as file:
@@ -145,12 +140,10 @@ def main():
 
     head = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc"
     for tail in ["osc52.sh", "hterm-notify.sh", "hterm-show-file.sh"]:
-        with _download(
-            f"{head}/{tail}",
-            None,
-            f"~/.local/bin/{tail}",
-            version=None,
-        ) as (source, target):
+        with _download(f"{head}/{tail}", f"~/.local/bin/{tail}", version=None) as (
+            source,
+            target,
+        ):
             copy(source, target)
 
 
