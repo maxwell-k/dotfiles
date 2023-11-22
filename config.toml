@@ -60,5 +60,11 @@ dst = "~/.local/bin/pager"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_gtree]
+src = "local/bin/gtree"
+dst = "~/.local/bin/gtree"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]
