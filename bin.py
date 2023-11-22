@@ -146,6 +146,12 @@ def main():
         with _download(head + "/" + tail, version=None) as (source, target):
             copy(source, target)
 
+    print()
+
+    url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
+    with _download(url, version=None) as (source, target):
+        copy(source, target)
+
 
 if __name__ == "__main__":
     main()
