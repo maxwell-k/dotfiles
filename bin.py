@@ -17,7 +17,7 @@ DOWNLOADED = Path("downloaded")
 
 
 @contextmanager
-def _download(url: str, expected: str | None, target: str):
+def _download(url: str | None, expected: str | None, target: str):
     """Context manager to download and install a program
 
     url -- the URL to download
@@ -25,45 +25,55 @@ def _download(url: str, expected: str | None, target: str):
     target -- the destination
     """
     DOWNLOADED.mkdir(exist_ok=True)
-    source = DOWNLOADED / url.rsplit("/", 1)[1]
-    if not source.is_file():
-        run(
-            [
-                "curl",
-                "--location",
-                "--continue-at",
-                "-",
-                "--remote-name",
-                "--output-dir",
-                str(DOWNLOADED),
-                url,
-            ],
-            check=True,
-        )
+    if url:
+        source = DOWNLOADED / url.rsplit("/", 1)[1]
+        if not source.is_file():
+            run(
+                [
+                    "curl",
+                    "--location",
+                    "--continue-at",
+                    "-",
+                    "--remote-name",
+                    "--output-dir",
+                    str(DOWNLOADED),
+                    url,
+                ],
+                check=True,
+            )
 
-    with source.open("rb") as f:
-        digest = file_digest(f, "sha256")
+        with source.open("rb") as f:
+            digest = file_digest(f, "sha256")
 
-    if expected:
-        assert digest.hexdigest() == expected
+        if expected:
+            assert digest.hexdigest() == expected
+    else:
+        source = None
 
     target_path = Path(target).expanduser()
     target_path.unlink(missing_ok=True)
 
     yield source, target_path
 
-    target_path.chmod(target_path.stat().st_mode | S_IEXEC)
+    if not target_path.is_symlink():
+        target_path.chmod(target_path.stat().st_mode | S_IEXEC)
     print(f"$ {target} --version")
     run([target_path, "--version"], check=True)
 
 
 def main():
+    with _download(None, None, "~/.local/bin/python") as (_, target):
+        target.symlink_to("/usr/bin/python3.12")
+
+    print()
+
     with _download(
         "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4",
         # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
         "1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
         "~/.local/bin/a4",
     ) as (source, target):
+        assert source is not None
         copy(source, target)
 
     print()
@@ -78,6 +88,7 @@ def main():
         "8739c81badd437f5d704f8d8299f01b171f8dd3c27ab287026e7f3198ca92fe6",
         "~/.deno/bin/deno",
     ) as (source, target):
+        assert source is not None
         with ZipFile(source, "r") as file:
             file.extract("deno", path=target.parent)
 
@@ -89,6 +100,7 @@ def main():
         None,  # not versioned, latest release
         "~/.local/bin/pip",
     ) as (source, target):
+        assert source is not None
         run(
             (
                 "python3.11",
