@@ -14,6 +14,7 @@ Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: CC0-1.0
 
 Files:
+ dotdrop/local/bin/jsonlint
  dotdrop/local/bin/percollate
  dotdrop/local/bin/prettier
  dotdrop/local/bin/vimj

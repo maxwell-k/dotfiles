@@ -42,5 +42,11 @@ dst = "~/.local/bin/vinfo"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_jsonlint]
+src = "local/bin/jsonlint"
+dst = "~/.local/bin/jsonlint"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]
