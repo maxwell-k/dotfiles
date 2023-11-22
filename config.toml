@@ -72,5 +72,11 @@ dst = "~/.local/bin/pyright-langserver"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_pdf-information]
+src = "local/bin/pdf-information"
+dst = "~/.local/bin/pdf-information"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]
