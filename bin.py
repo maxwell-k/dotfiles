@@ -17,7 +17,7 @@ DOWNLOADED = Path("downloaded")
 
 
 @contextmanager
-def _download(url: str, expected: str, target: str):
+def _download(url: str, expected: str | None, target: str):
     """Context manager to download and install a program
 
     url -- the URL to download
@@ -43,7 +43,9 @@ def _download(url: str, expected: str, target: str):
 
     with source.open("rb") as f:
         digest = file_digest(f, "sha256")
-    assert digest.hexdigest() == expected
+
+    if expected:
+        assert digest.hexdigest() == expected
 
     target_path = Path(target).expanduser()
     target_path.unlink(missing_ok=True)
@@ -78,6 +80,26 @@ def main():
     ) as (source, target):
         with ZipFile(source, "r") as file:
             file.extract("deno", path=target.parent)
+
+    print()
+
+    # https://pip.pypa.io/en/stable/installation/
+    with _download(
+        "https://bootstrap.pypa.io/pip/pip.pyz",
+        None,  # not versioned, latest release
+        "~/.local/bin/pip",
+    ) as (source, target):
+        run(
+            (
+                "python3.11",
+                "-m",
+                "zipapp",
+                "--python=/usr/bin/python3.11",
+                "--output={}".format(target),
+                source,
+            ),
+            check=True,
+        )
 
 
 if __name__ == "__main__":
