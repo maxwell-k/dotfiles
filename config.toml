@@ -48,5 +48,11 @@ dst = "~/.local/bin/jsonlint"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_title]
+src = "local/bin/title"
+dst = "~/.local/bin/title"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]

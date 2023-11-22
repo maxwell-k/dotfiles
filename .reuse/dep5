@@ -17,6 +17,7 @@ Files:
  dotdrop/local/bin/jsonlint
  dotdrop/local/bin/percollate
  dotdrop/local/bin/prettier
+ dotdrop/local/bin/title
  dotdrop/local/bin/vimj
  dotdrop/local/bin/vinfo
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
