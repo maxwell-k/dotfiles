@@ -75,6 +75,15 @@ def _download(
 
 
 def main():
+    url = "https://get.pulumi.com/releases/sdk/pulumi-v3.46.0-linux-x64.tar.gz"
+    with _download(url, "~/.local/bin/pulumi", version="version") as (source, target):
+        with tarfile.open(source, "r") as file:
+            for member in file.getmembers():
+                member.path = member.path.removeprefix("pulumi/")
+                file.extract(member, path=target.parent)
+
+    print()
+
     # See https://github.com/denoland/deno/issues/7253 for checksum progress
     url = "https://github.com/denoland/deno/releases/download/v1.38.2/"
     url += "deno-x86_64-unknown-linux-gnu.zip"
