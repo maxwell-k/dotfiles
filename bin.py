@@ -37,19 +37,17 @@ def _download(
     if url.startswith("https://"):
         source = DOWNLOADED / url.rsplit("/", 1)[1]
         if not source.is_file():
-            run(
-                [
-                    "curl",
-                    "--location",
-                    "--continue-at",
-                    "-",
-                    "--remote-name",
-                    "--output-dir",
-                    str(DOWNLOADED),
-                    url,
-                ],
-                check=True,
+            cmd = (
+                "curl",
+                "--location",
+                "--continue-at",
+                "-",
+                "--remote-name",
+                "--output-dir",
+                str(DOWNLOADED),
+                url,
             )
+            run(cmd, check=True)
 
         with source.open("rb") as f:
             digest = file_digest(f, "sha256")
@@ -77,59 +75,19 @@ def _download(
 
 
 def main():
-    with _download("/usr/bin/python3.12", "~/.local/bin/python") as (source, target):
-        target.symlink_to(source)
-
-    print()
-
-    with _download(
-        "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4",
-        # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
-        expected="1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
-    ) as (source, target):
-        copy(source, target)
-
-    print()
-
-    with _download(
-        (
-            "https://github.com/denoland/deno/releases/download/v1.38.2/"
-            "deno-x86_64-unknown-linux-gnu.zip"
-        ),
-        "~/.deno/bin/deno",
-        # No checksum available, see
-        # https://github.com/denoland/deno/issues/7253, generated manually
-        "8739c81badd437f5d704f8d8299f01b171f8dd3c27ab287026e7f3198ca92fe6",
-    ) as (source, target):
+    # See https://github.com/denoland/deno/issues/7253 for checksum progress
+    url = "https://github.com/denoland/deno/releases/download/v1.38.2/"
+    url += "deno-x86_64-unknown-linux-gnu.zip"
+    with _download(url, "~/.deno/bin/deno", None) as (source, target):
         with ZipFile(source, "r") as file:
             file.extract(target.name, path=target.parent)
 
     print()
 
-    # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
+    url = "https://github.com/homeport/dyff/releases/download/"
+    url += "v1.5.6/dyff_1.5.6_linux_amd64.tar.gz"
     with _download(
-        "https://bootstrap.pypa.io/pip/pip.pyz",
-        "~/.local/bin/pip",
-    ) as (source, target):
-        run(
-            (
-                "python3.11",
-                "-m",
-                "zipapp",
-                "--python=/usr/bin/python3.11",
-                "--output={}".format(target),
-                source,
-            ),
-            check=True,
-        )
-
-    print()
-
-    with _download(
-        (
-            "https://github.com/homeport/dyff/releases/download/"
-            "v1.5.6/dyff_1.5.6_linux_amd64.tar.gz"
-        ),
+        url,
         "~/.local/bin/dyff",
         "a733665e7c622ead6b18e9cc7834788bea30ea64b66273bd2062475dcd19968a",
         version="version",
@@ -141,9 +99,35 @@ def main():
 
     print()
 
-    head = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc"
+    # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
+    with _download(
+        "https://bootstrap.pypa.io/pip/pip.pyz",
+        "~/.local/bin/pip",
+    ) as (source, target):
+        cmd = (
+            "python3.11",
+            "-m",
+            "zipapp",
+            "--python=/usr/bin/python3.11",
+            "--output={}".format(target),
+            source,
+        )
+        run(cmd, check=True)
+
+    print()
+
+    # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
+    with _download(
+        "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4",
+        expected="1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
+    ) as (source, target):
+        copy(source, target)
+
+    print()
+
+    url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc"
     for tail in ["osc52.sh", "hterm-notify.sh", "hterm-show-file.sh"]:
-        with _download(head + "/" + tail, version=None) as (source, target):
+        with _download(url + "/" + tail, version=None) as (source, target):
             copy(source, target)
 
     print()
@@ -157,6 +141,11 @@ def main():
     url = "https://github.com/wp-cli/wp-cli/releases/download/v2.8.1/wp-cli-2.8.1.phar"
     with _download(url, "~/.local/bin/wp") as (source, target):
         copy(source, target)
+
+    print()
+
+    with _download("/usr/bin/python3.12", "~/.local/bin/python") as (source, target):
+        target.symlink_to(source)
 
 
 if __name__ == "__main__":
