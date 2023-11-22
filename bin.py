@@ -75,7 +75,8 @@ def _download(
 
 
 def main():
-    url = "https://get.pulumi.com/releases/sdk/pulumi-v3.46.0-linux-x64.tar.gz"
+    # https://www.pulumi.com/docs/install/
+    url = "https://get.pulumi.com/releases/sdk/pulumi-v3.94.2-linux-x64.tar.gz"
     with _download(url, "~/.local/bin/pulumi", version="version") as (source, target):
         with tarfile.open(source, "r") as file:
             for member in file.getmembers():
