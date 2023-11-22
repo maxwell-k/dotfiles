@@ -41,20 +41,18 @@ Set up ZSH and login:
 
 _The steps below apply to Fedora 38._
 
-Clone this repository, install `pipx`, `dotdrop` and a version of `peru` that is
-compatible with `pipx`:
+Clone this repository, install `pipx` and `dotdrop`:
 
     mkdir --parents ~/github.com/maxwell-k \
     && cd ~/github.com/maxwell-k \
     && git clone https://github.com/maxwell-k/dotfiles.git \
     && sudo dnf install --assumeyes pipx \
     && pipx install dotdrop \
-    && pipx install git+https://github.com/maxwell-k/peru
 
 Install personal files:
 
     cd ~/github.com/maxwell-k/dotfiles \
-    && peru sync \
+    && ./bin.py
     && dotdrop install
 
 <!-- vim: set filetype=markdown.markdown-toc : -->

@@ -7,12 +7,6 @@ src = "zshrc"
 dst = "~/.zshrc"
 link = "relative"
 
-[dotfiles.f_deno]
-src = "deno/bin/deno"
-dst = "~/.deno/bin/deno"
-link = "relative"
-chmod = "755"
-
 [dotfiles.f_tmux]
 src = "tmux.conf"
 dst = "~/.tmux.conf"
@@ -21,12 +15,6 @@ link = "relative"
 [dotfiles.f_ygg]
 src = "local/bin/ygg"
 dst = "~/.local/bin/ygg"
-link = "relative"
-chmod = "755"
-
-[dotfiles.f_a4]
-src = "local/bin/a4"
-dst = "~/.local/bin/a4"
 link = "relative"
 chmod = "755"
 
