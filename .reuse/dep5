@@ -17,5 +17,6 @@ Files:
  dotdrop/local/bin/percollate
  dotdrop/local/bin/prettier
  dotdrop/local/bin/vimj
+ dotdrop/local/bin/vinfo
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: MPL-2.0

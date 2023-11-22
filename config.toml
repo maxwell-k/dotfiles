@@ -36,5 +36,11 @@ dst = "~/.local/bin/vimj"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_vinfo]
+src = "local/bin/vinfo"
+dst = "~/.local/bin/vinfo"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]

@@ -1,0 +1,2 @@
+#!/bin/sh
+vim "+packadd vinfo" "+Vinfo ${1}" "+only"
