@@ -94,14 +94,11 @@ def main():
 
     print()
 
+    # https://github.com/homeport/dyff/releases
     url = "https://github.com/homeport/dyff/releases/download/"
-    url += "v1.5.6/dyff_1.5.6_linux_amd64.tar.gz"
-    with _download(
-        url,
-        "~/.local/bin/dyff",
-        "a733665e7c622ead6b18e9cc7834788bea30ea64b66273bd2062475dcd19968a",
-        version="version",
-    ) as (source, target):
+    url += "v1.6.0/dyff_1.6.0_linux_amd64.tar.gz"
+    expected = "d21879c4810f8f97af9ed637b8339a80dfa3fb089bd45cfbeea95b8639b203e1"
+    with _download(url, "~/.local/bin/dyff", expected, "version") as (source, target):
         with tarfile.open(source, "r") as file:
             file.extract(target.name, path=target.parent)
     with open(COMPLETIONS / "_{target.name}", "w") as file:
