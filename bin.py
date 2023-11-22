@@ -145,7 +145,8 @@ def main():
 
     print()
 
-    url = "https://github.com/wp-cli/wp-cli/releases/download/v2.8.1/wp-cli-2.8.1.phar"
+    # <https://github.com/wp-cli/wp-cli/releases/>, no checksums provided
+    url = "https://github.com/wp-cli/wp-cli/releases/download/v2.9.0/wp-cli-2.9.0.phar"
     with _download(url, "~/.local/bin/wp") as (source, target):
         copy(source, target)
 
