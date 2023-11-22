@@ -24,5 +24,11 @@ dst = "~/.local/bin/percollate"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_prettier]
+src = "local/bin/prettier"
+dst = "~/.local/bin/prettier"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]
