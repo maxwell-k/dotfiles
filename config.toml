@@ -73,8 +73,8 @@ link = "relative"
 chmod = "755"
 
 [dotfiles.f_pdf-information]
-src = "local/bin/pdf-information"
-dst = "~/.local/bin/pdf-information"
+src = "local/bin/pdf-information.py"
+dst = "~/.local/bin/pdf-information.py"
 link = "relative"
 chmod = "755"
 
