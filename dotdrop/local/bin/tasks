@@ -1,0 +1,36 @@
+#!/bin/sh
+# tasks
+# Copyright 2021 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+if [ "$#" -eq 0 ] ; then
+  echo 'Usage: tasks name[,name] [options]'
+  echo 'Run a list of ansible tasks in ~/*/configuration/tasks'
+  echo ''
+  echo 'Examples:'
+  echo '   tasks node'
+  echo '   tasks node,yaml -vvv'
+  echo '   tasks ""'
+  exit 1
+fi \
+&& if [ "${PWD##*/}" != configuration ] ; then
+  if cd "$(find -L "$HOME" -maxdepth 3 -name configuration -type d)" 2> /dev/null; then
+    echo "Moving to $PWD"
+  else
+    echo "Configuration not found"
+    exit 1
+  fi
+fi \
+&& if [ -x /usr/bin/ansible ] ; then
+  call="ANSIBLE_DISPLAY_SKIPPED_HOSTS=no" \
+  && call="$call ANSIBLE_DISPLAY_OK_HOSTS=no" \
+  && call="$call ansible-playbook -i localhost, -c local"
+else
+  call="echo ansible-playbook"
+fi \
+&& call="$call playbooks/tasks.yaml" \
+&& call="$call -e '{tasks_list: [${1}]}'" \
+&& shift \
+&& call="$call $*" \
+&& echo "$call" \
+&& eval "$call"
+unset call

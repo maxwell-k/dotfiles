@@ -78,5 +78,11 @@ dst = "~/.local/bin/pdf-information"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_tasks]
+src = "local/bin/tasks"
+dst = "~/.local/bin/tasks"
+link = "relative"
+chmod = "755"
+
 [profiles.default]
 dotfiles = ["ALL"]
