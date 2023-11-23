@@ -2,6 +2,7 @@
 # Open vim jumped to file:line or file:line:column
 vimj() {
   test "$#" -eq 1 || return 1
+  test "${1%%:*}" = "$1" && printf "No line number given\n" && return 1
   file="${1%%:*}" &&
   test -f "$file" || return 1
   line="${1#*:}" &&
