@@ -63,8 +63,9 @@ def _download(
             run(cmd, check=True)
 
         if expected:
+            digest = "sha256"
             with source.open("rb") as f:
-                digest = file_digest(f, "sha256")
+                digest = file_digest(f, digest)
 
             if digest.hexdigest() != expected:
                 raise RuntimeError("Unexpected digest for {}".format(source))
