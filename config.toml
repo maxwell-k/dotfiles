@@ -84,5 +84,11 @@ dst = "~/.local/bin/tasks"
 link = "relative"
 chmod = "755"
 
+[dotfiles.f_flake8]
+src = "config/flake8"
+dst = "~/.config/flake8"
+link = "relative"
+chmod = "644"
+
 [profiles.default]
 dotfiles = ["ALL"]
