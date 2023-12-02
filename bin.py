@@ -76,6 +76,9 @@ def _download(
     target_path = Path(target).expanduser()
     target_path.unlink(missing_ok=True)
 
+    if action is None and url.endswith(".tar.gz"):
+        action = "untar"
+
     if action == "copy":
         copy(source, target_path)
     elif action == "symlink":

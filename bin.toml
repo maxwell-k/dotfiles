@@ -51,7 +51,6 @@ url = "https://get.pulumi.com/releases/sdk/pulumi-v3.94.2-linux-x64.tar.gz"
 prefix = "pulumi/"
 target = "~/.local/bin/pulumi"
 version = "version"
-action = "untar"
 
 [python]
 url = "/usr/bin/python3.12"
