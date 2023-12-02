@@ -27,7 +27,7 @@ def _download(
     url: str,
     target: str | None = None,
     expected: str | None = None,
-    version: str | None = "--version",
+    version: str | None = None,
 ) -> Generator[tuple[Path, Path], None, None]:
     """Context manager to download and install a program
 
@@ -120,15 +120,13 @@ def main():
 
     print()
 
-    url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc"
-    for tail in ["osc52.sh", "hterm-notify.sh", "hterm-show-file.sh"]:
-        with _download(url=url + "/" + tail, version=None) as (source, target):
+    for name in ["osc52", "hterm-notify", "hterm-show-file"]:
+        with _download(**data[name]) as (source, target):
             copy(source, target)
 
     print()
 
-    url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
-    with _download(url=url, version=None) as (source, target):
+    with _download(**data["git-jump"]) as (source, target):
         copy(source, target)
 
     print()

@@ -2,11 +2,13 @@
 url = "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4"
 # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
 expected = "1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf"
+version = "--version"
 
 [deno]
 # See https://github.com/denoland/deno/issues/7253 for checksum progress
 url = "https://github.com/denoland/deno/releases/download/v1.38.2/deno-x86_64-unknown-linux-gnu.zip"
 target = "~/.deno/bin/deno"
+version = "--version"
 
 [dyff]
 url = "https://github.com/homeport/dyff/releases/download/v1.6.0/dyff_1.6.0_linux_amd64.tar.gz"
@@ -15,10 +17,23 @@ expected = "d21879c4810f8f97af9ed637b8339a80dfa3fb089bd45cfbeea95b8639b203e1"
 target = "~/.local/bin/dyff"
 version = "version"
 
+[git-jump]
+url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
+
+[osc52]
+url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/osc52.sh"
+
+[hterm-notify]
+url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-notify.sh"
+
+[hterm-show-file]
+url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-show-file.sh"
+
 [pip]
 # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
 url = "https://bootstrap.pypa.io/pip/pip.pyz"
 target = "~/.local/bin/pip"
+version = "--version"
 
 [pulumi]
 # https://www.pulumi.com/docs/install/
@@ -29,8 +44,10 @@ version = "version"
 [python]
 url = "/usr/bin/python3.12"
 target = "~/.local/bin/python"
+version = "--version"
 
 [wp]
 # <https://github.com/wp-cli/wp-cli/releases/>, no checksums provided
 url = "https://github.com/wp-cli/wp-cli/releases/download/v2.9.0/wp-cli-2.9.0.phar"
 target = "~/.local/bin/wp"
+version = "--version"
