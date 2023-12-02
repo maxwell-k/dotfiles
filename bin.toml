@@ -3,12 +3,14 @@ url = "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4"
 # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
 expected = "1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf"
 version = "--version"
+action = "copy"
 
 [deno]
 # See https://github.com/denoland/deno/issues/7253 for checksum progress
 url = "https://github.com/denoland/deno/releases/download/v1.38.2/deno-x86_64-unknown-linux-gnu.zip"
 target = "~/.deno/bin/deno"
 version = "--version"
+action = "unzip"
 
 [dyff]
 url = "https://github.com/homeport/dyff/releases/download/v1.6.0/dyff_1.6.0_linux_amd64.tar.gz"
@@ -16,38 +18,50 @@ url = "https://github.com/homeport/dyff/releases/download/v1.6.0/dyff_1.6.0_linu
 expected = "d21879c4810f8f97af9ed637b8339a80dfa3fb089bd45cfbeea95b8639b203e1"
 target = "~/.local/bin/dyff"
 version = "version"
+action = "untar"
+completions = true
 
 [git-jump]
 url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
+action = "copy"
 
 [osc52]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/osc52.sh"
+action = "copy"
 
 [hterm-notify]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-notify.sh"
+action = "copy"
 
 [hterm-show-file]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-show-file.sh"
+action = "copy"
 
 [pip]
 # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
 url = "https://bootstrap.pypa.io/pip/pip.pyz"
 target = "~/.local/bin/pip"
 version = "--version"
+action = "command"
+command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {source}"
 
 [pulumi]
 # https://www.pulumi.com/docs/install/
 url = "https://get.pulumi.com/releases/sdk/pulumi-v3.94.2-linux-x64.tar.gz"
+prefix = "pulumi/"
 target = "~/.local/bin/pulumi"
 version = "version"
+action = "untar"
 
 [python]
 url = "/usr/bin/python3.12"
 target = "~/.local/bin/python"
 version = "--version"
+action = "symlink"
 
 [wp]
 # <https://github.com/wp-cli/wp-cli/releases/>, no checksums provided
 url = "https://github.com/wp-cli/wp-cli/releases/download/v2.9.0/wp-cli-2.9.0.phar"
 target = "~/.local/bin/wp"
 version = "--version"
+action = "copy"

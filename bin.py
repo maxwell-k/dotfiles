@@ -10,6 +10,7 @@ from collections.abc import Generator
 from contextlib import contextmanager
 from hashlib import file_digest
 from pathlib import Path
+from shlex import split
 from shutil import copy
 from stat import S_IEXEC
 from subprocess import run
@@ -25,15 +26,25 @@ DEFAULT_DIRECTORY = "~/.local/bin/"
 def _download(
     *,
     url: str,
+    action: str | None = None,
     target: str | None = None,
     expected: str | None = None,
     version: str | None = None,
+    prefix: str | None = None,
+    completions: bool = False,
+    command: str | None = None,
 ) -> Generator[tuple[Path, Path], None, None]:
     """Context manager to download and install a program
 
-    url -- the URL to download
-    expected -- the SHA256 hex-digest of the file at URL
-    target -- the destination
+    Arguments:
+        url: the URL to download
+        action: action to take to install for example copy
+        target: the destination
+        expected: the SHA256 hex-digest of the file at URL
+        version: an argument to display the version for example --version
+        prefix: to remove when untarring
+        completions: whether to generate ZSH completions
+        command: command to run to install after download
     """
     DOWNLOADED.mkdir(exist_ok=True)
     if url.startswith("https://"):
@@ -65,79 +76,47 @@ def _download(
     target_path = Path(target).expanduser()
     target_path.unlink(missing_ok=True)
 
+    if action == "copy":
+        copy(source, target_path)
+    elif action == "symlink":
+        target_path.symlink_to(source)
+    elif action == "unzip":
+        with ZipFile(source, "r") as file:
+            file.extract(target_path.name, path=target_path.parent)
+    elif action == "untar":
+        with tarfile.open(source, "r") as file:
+            for member in file.getmembers():
+                if prefix:
+                    member.path = member.path.removeprefix(prefix)
+                file.extract(member, path=target_path.parent)
+    elif action == "command" and command is not None:
+        run(split(command.format(target=target_path, source=source)), check=True)
+
     yield source, target_path
 
     if not target_path.is_symlink():
         target_path.chmod(target_path.stat().st_mode | S_IEXEC)
+
+    if completions:
+        with open(COMPLETIONS / "_{target.name}", "w") as file:
+            run([target_path.name, "completion", "zsh"], check=True, stdout=file)
+
     if version is None:
         print(f"# {target}")
     else:
         print(f"$ {target} {version}")
         run([target_path, version], check=True)
 
+    print()
+
 
 def main():
     with open("bin.toml", "rb") as file:
         data = load(file)
 
-    with _download(**data["pulumi"]) as (source, target):
-        with tarfile.open(source, "r") as file:
-            for member in file.getmembers():
-                member.path = member.path.removeprefix(f"{target.name}/")
-                file.extract(member, path=target.parent)
-
-    print()
-
-    with _download(**data["deno"]) as (source, target):
-        with ZipFile(source, "r") as file:
-            file.extract(target.name, path=target.parent)
-
-    print()
-
-    with _download(**data["dyff"]) as (source, target):
-        with tarfile.open(source, "r") as file:
-            file.extract(target.name, path=target.parent)
-    with open(COMPLETIONS / "_{target.name}", "w") as file:
-        run([target.name, "completion", "zsh"], check=True, stdout=file)
-
-    print()
-
-    with _download(**data["pip"]) as (source, target):
-        cmd = (
-            "python3.11",
-            "-m",
-            "zipapp",
-            "--python=/usr/bin/python3.11",
-            "--output={}".format(target),
-            source,
-        )
-        run(cmd, check=True)
-
-    print()
-
-    with _download(**data["a4"]) as (source, target):
-        copy(source, target)
-
-    print()
-
-    for name in ["osc52", "hterm-notify", "hterm-show-file"]:
+    for name in data:
         with _download(**data[name]) as (source, target):
-            copy(source, target)
-
-    print()
-
-    with _download(**data["git-jump"]) as (source, target):
-        copy(source, target)
-
-    print()
-
-    with _download(**data["wp"]) as (source, target):
-        copy(source, target)
-
-    print()
-
-    with _download(**data["python"]) as (source, target):
-        target.symlink_to(source)
+            pass
 
 
 if __name__ == "__main__":
