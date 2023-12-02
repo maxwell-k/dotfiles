@@ -4,6 +4,12 @@ url = "https://github.com/maxwell-k/a4/releases/download/0.0.5/a4"
 expected = "1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf"
 version = "--version"
 
+[dprint]
+url = "https://github.com/dprint/dprint/releases/download/0.43.2/dprint-x86_64-unknown-linux-gnu.zip"
+target = "~/.local/bin/dprint"
+expected = "89a7e33416dfab15c61ac2aad19e82c2bdb3b57f874f9fe3806312a27aa7afd4"
+version = "--version"
+
 [deno]
 # See https://github.com/denoland/deno/issues/7253 for checksum progress
 # Manually remove the file from ./downloaded/ on upgrade
