@@ -13,6 +13,7 @@ from pathlib import Path
 from shutil import copy
 from stat import S_IEXEC
 from subprocess import run
+from tomllib import load
 from zipfile import ZipFile
 
 DOWNLOADED = Path("downloaded")
@@ -76,38 +77,24 @@ def _download(
 
 
 def main():
-    # https://www.pulumi.com/docs/install/
-    url = "https://get.pulumi.com/releases/sdk/pulumi-v3.94.2-linux-x64.tar.gz"
-    with _download(url=url, target="~/.local/bin/pulumi", version="version") as (
-        source,
-        target,
-    ):
+    with open("bin.toml", "rb") as file:
+        data = load(file)
+
+    with _download(**data["pulumi"]) as (source, target):
         with tarfile.open(source, "r") as file:
             for member in file.getmembers():
-                member.path = member.path.removeprefix("pulumi/")
+                member.path = member.path.removeprefix(f"{target.name}/")
                 file.extract(member, path=target.parent)
 
     print()
 
-    # See https://github.com/denoland/deno/issues/7253 for checksum progress
-    url = "https://github.com/denoland/deno/releases/download/v1.38.2/"
-    url += "deno-x86_64-unknown-linux-gnu.zip"
-    with _download(url=url, target="~/.deno/bin/deno", version=None) as (
-        source,
-        target,
-    ):
+    with _download(**data["deno"]) as (source, target):
         with ZipFile(source, "r") as file:
             file.extract(target.name, path=target.parent)
 
     print()
 
-    # https://github.com/homeport/dyff/releases
-    url = "https://github.com/homeport/dyff/releases/download/"
-    url += "v1.6.0/dyff_1.6.0_linux_amd64.tar.gz"
-    expected = "d21879c4810f8f97af9ed637b8339a80dfa3fb089bd45cfbeea95b8639b203e1"
-    with _download(
-        url=url, target="~/.local/bin/dyff", expected=expected, version="version"
-    ) as (source, target):
+    with _download(**data["dyff"]) as (source, target):
         with tarfile.open(source, "r") as file:
             file.extract(target.name, path=target.parent)
     with open(COMPLETIONS / "_{target.name}", "w") as file:
@@ -115,11 +102,7 @@ def main():
 
     print()
 
-    # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
-    with _download(
-        url="https://bootstrap.pypa.io/pip/pip.pyz",
-        target="~/.local/bin/pip",
-    ) as (source, target):
+    with _download(**data["pip"]) as (source, target):
         cmd = (
             "python3.11",
             "-m",
@@ -132,11 +115,7 @@ def main():
 
     print()
 
-    # https://github.com/maxwell-k/a4/releases/download/0.0.5/SHA256SUMS
-    with _download(
-        url="https://github.com/maxwell-k/a4/releases/download/0.0.5/a4",
-        expected="1495508aabcfcb979bfcedc86a0f5941463bd743ac076be4ee8a3f13859c02cf",
-    ) as (source, target):
+    with _download(**data["a4"]) as (source, target):
         copy(source, target)
 
     print()
@@ -154,17 +133,12 @@ def main():
 
     print()
 
-    # <https://github.com/wp-cli/wp-cli/releases/>, no checksums provided
-    url = "https://github.com/wp-cli/wp-cli/releases/download/v2.9.0/wp-cli-2.9.0.phar"
-    with _download(url=url, target="~/.local/bin/wp") as (source, target):
+    with _download(**data["wp"]) as (source, target):
         copy(source, target)
 
     print()
 
-    with _download(url="/usr/bin/python3.12", target="~/.local/bin/python") as (
-        source,
-        target,
-    ):
+    with _download(**data["python"]) as (source, target):
         target.symlink_to(source)
 
 
