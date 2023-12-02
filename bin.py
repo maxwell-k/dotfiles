@@ -62,11 +62,12 @@ def _download(
             )
             run(cmd, check=True)
 
-        with source.open("rb") as f:
-            digest = file_digest(f, "sha256")
+        if expected:
+            with source.open("rb") as f:
+                digest = file_digest(f, "sha256")
 
-        if expected and digest.hexdigest() != expected:
-            raise RuntimeError("Unexpected digest for {}".format(source))
+            if digest.hexdigest() != expected:
+                raise RuntimeError("Unexpected digest for {}".format(source))
     else:
         source = Path(url)
 
