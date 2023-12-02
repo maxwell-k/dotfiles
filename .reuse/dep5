@@ -9,6 +9,7 @@ Files:
  .gitignore
  README.md
  bin.toml
+ dotdrop/config/flake8
  config.toml
  dprint.json
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>

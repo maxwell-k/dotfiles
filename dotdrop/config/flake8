@@ -1,4 +1,3 @@
 # for compatiblilty with black
-# see tasks/flake8.yaml
 [flake8]
 ignore = E203, W503
