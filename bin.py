@@ -40,7 +40,7 @@ def _download(
         url: the URL to download
         action: action to take to install for example copy
         target: the destination
-        expected: the SHA256 hex-digest of the file at URL
+        expected: the SHA256 or SHA512 hex-digest of the file at URL
         version: an argument to display the version for example --version
         prefix: to remove when untarring
         completions: whether to generate ZSH completions
@@ -64,6 +64,8 @@ def _download(
 
         if expected:
             digest = "sha256"
+            if len(expected) == 128:
+                digest = "sha512"
             with source.open("rb") as f:
                 digest = file_digest(f, digest)
 
