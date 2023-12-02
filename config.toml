@@ -90,5 +90,11 @@ dst = "~/.config/flake8"
 link = "relative"
 chmod = "644"
 
+[dotfiles.f_lfrc]
+src = "config/lf/lfrc"
+dst = "~/.config/lf/lfrc"
+link = "relative"
+chmod = "644"
+
 [profiles.default]
 dotfiles = ["ALL"]

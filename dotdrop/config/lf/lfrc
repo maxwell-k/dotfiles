@@ -1,0 +1,8 @@
+# configure with:
+# test -e ~/.config/lf || ln -s $PWD/config_home/lf ~/.config/
+map i !hterm-show-file.sh "$f"
+
+set ifs "\n"
+
+cmd trash %trash-put $fx
+map <delete> trash
