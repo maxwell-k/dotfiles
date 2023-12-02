@@ -1,100 +1,83 @@
 [config]
+link_dotfile_default = "relative"
 link_on_import = "relative"
 dotpath = "dotdrop"
 
 [dotfiles.f_zshrc]
 src = "zshrc"
 dst = "~/.zshrc"
-link = "relative"
 
 [dotfiles.f_tmux]
 src = "tmux.conf"
 dst = "~/.tmux.conf"
-link = "relative"
 
 [dotfiles.f_ygg]
 src = "local/bin/ygg"
 dst = "~/.local/bin/ygg"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_percollate]
 src = "local/bin/percollate"
 dst = "~/.local/bin/percollate"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_prettier]
 src = "local/bin/prettier"
 dst = "~/.local/bin/prettier"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_vimj]
 src = "local/bin/vimj"
 dst = "~/.local/bin/vimj"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_vinfo]
 src = "local/bin/vinfo"
 dst = "~/.local/bin/vinfo"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_jsonlint]
 src = "local/bin/jsonlint"
 dst = "~/.local/bin/jsonlint"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_title]
 src = "local/bin/title"
 dst = "~/.local/bin/title"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_pager]
 src = "local/bin/pager"
 dst = "~/.local/bin/pager"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_gtree]
 src = "local/bin/gtree"
 dst = "~/.local/bin/gtree"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_pyright-langserver]
 src = "local/bin/pyright-langserver"
 dst = "~/.local/bin/pyright-langserver"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_pdf-information]
 src = "local/bin/pdf-information.py"
 dst = "~/.local/bin/pdf-information.py"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_tasks]
 src = "local/bin/tasks"
 dst = "~/.local/bin/tasks"
-link = "relative"
 chmod = "755"
 
 [dotfiles.f_flake8]
 src = "config/flake8"
 dst = "~/.config/flake8"
-link = "relative"
-chmod = "644"
 
 [dotfiles.f_lfrc]
 src = "config/lf/lfrc"
 dst = "~/.config/lf/lfrc"
-link = "relative"
-chmod = "644"
 
 [profiles.default]
 dotfiles = ["ALL"]
