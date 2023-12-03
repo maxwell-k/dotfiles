@@ -92,5 +92,9 @@ dst = "~/.config/litecli/config"
 src = "config/tig/config"
 dst = "~/.config/tig/config"
 
+[dotfiles.f_pgcli]
+src = "config/pgcli/config"
+dst = "~/.config/pgcli/config"
+
 [profiles.default]
 dotfiles = ["ALL"]
