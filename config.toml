@@ -88,5 +88,9 @@ dst = "~/.config/lf/lfrc"
 src = "config/litecli/config"
 dst = "~/.config/litecli/config"
 
+[dotfiles.f_tig]
+src = "config/tig/config"
+dst = "~/.config/tig/config"
+
 [profiles.default]
 dotfiles = ["ALL"]
