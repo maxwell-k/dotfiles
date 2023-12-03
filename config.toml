@@ -84,5 +84,9 @@ dst = "~/.config/flake8"
 src = "config/lf/lfrc"
 dst = "~/.config/lf/lfrc"
 
+[dotfiles.f_litecli]
+src = "config/litecli/config"
+dst = "~/.config/litecli/config"
+
 [profiles.default]
 dotfiles = ["ALL"]
