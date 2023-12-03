@@ -96,5 +96,13 @@ dst = "~/.config/tig/config"
 src = "config/pgcli/config"
 dst = "~/.config/pgcli/config"
 
+[dotfiles.f_gitatributes]
+src = "config/git/attributes"
+dst = "~/.config/git/attributes"
+
+[dotfiles.f_gitignore]
+src = "config/git/ignore"
+dst = "~/.config/git/ignore"
+
 [profiles.default]
 dotfiles = ["ALL"]
