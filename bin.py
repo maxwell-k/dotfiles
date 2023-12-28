@@ -2,9 +2,7 @@
 # bin.py
 # Copyright 2022 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
-"""Download and extract files onto $PATH
-
-Requires https://curl.se/"""
+"""Download and extract files from bin.toml onto $PATH"""
 import tarfile
 from collections.abc import Generator
 from contextlib import contextmanager
@@ -15,6 +13,7 @@ from shutil import copy
 from stat import S_IEXEC
 from subprocess import run
 from tomllib import load
+from urllib.request import urlopen
 from zipfile import ZipFile
 
 DOWNLOADED = Path("downloaded")
@@ -51,17 +50,17 @@ def _download(
     if url.startswith("https://"):
         downloaded = DOWNLOADED / url.rsplit("/", 1)[1]
         if not downloaded.is_file():
-            cmd = (
-                "curl",
-                "--location",
-                "--continue-at",
-                "-",
-                "--remote-name",
-                "--output-dir",
-                str(DOWNLOADED),
-                url,
-            )
-            run(cmd, check=True)
+            with urlopen(url) as fp, downloaded.open("wb") as dp:
+                if "content-length" in fp.headers:
+                    size = int(fp.headers["Content-Length"])
+                else:
+                    size = -1
+
+                print("Downloading…")
+                written = dp.write(fp.read())
+
+            if size >= 0 and written != size:
+                raise RuntimeError("Wrong content length")
 
         if expected:
             digest = "sha256"
