@@ -6,7 +6,6 @@ version = "--version"
 
 [dprint]
 url = "https://github.com/dprint/dprint/releases/download/0.43.2/dprint-x86_64-unknown-linux-gnu.zip"
-target = "~/.local/bin/dprint"
 expected = "89a7e33416dfab15c61ac2aad19e82c2bdb3b57f874f9fe3806312a27aa7afd4"
 version = "--version"
 
@@ -21,7 +20,6 @@ version = "--version"
 url = "https://github.com/homeport/dyff/releases/download/v1.6.0/dyff_1.6.0_linux_amd64.tar.gz"
 # https://github.com/homeport/dyff/releases
 expected = "d21879c4810f8f97af9ed637b8339a80dfa3fb089bd45cfbeea95b8639b203e1"
-target = "~/.local/bin/dyff"
 version = "version"
 completions = true
 
@@ -40,7 +38,6 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc
 [pip]
 # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
 url = "https://bootstrap.pypa.io/pip/pip.pyz"
-target = "~/.local/bin/pip"
 version = "--version"
 command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {source}"
 
@@ -49,16 +46,13 @@ command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {
 url = "https://get.pulumi.com/releases/sdk/pulumi-v3.95.0-linux-x64.tar.gz"
 expected = "5e086e89f04436ae14f802fca5771186390c91156c66e8815577363c7c532aa091176964556198b8d5e50f761d7da13f519c783545747e163813ca120c24a498"
 prefix = "pulumi/"
-target = "~/.local/bin/pulumi"
 version = "version"
 
 [python]
 url = "/usr/bin/python3.12"
-target = "~/.local/bin/python"
 version = "--version"
 
 [wp]
 # <https://github.com/wp-cli/wp-cli/releases/>, no checksums provided
 url = "https://github.com/wp-cli/wp-cli/releases/download/v2.9.0/wp-cli-2.9.0.phar"
-target = "~/.local/bin/wp"
 version = "--version"
