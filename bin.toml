@@ -23,6 +23,7 @@ url = "https://github.com/homeport/dyff/releases/download/v1.6.0/dyff_1.6.0_linu
 expected = "d21879c4810f8f97af9ed637b8339a80dfa3fb089bd45cfbeea95b8639b203e1"
 version = "version"
 completions = true
+ignore = ["LICENSE", "README.md"]
 
 [git-jump]
 url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"

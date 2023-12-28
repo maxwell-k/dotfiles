@@ -33,6 +33,7 @@ def _download(
     prefix: str | None = None,
     completions: bool = False,
     command: str | None = None,
+    ignore: set = set(),
 ) -> Generator[tuple[Path, Path], None, None]:
     """Context manager to download and install a program
 
@@ -105,6 +106,8 @@ def _download(
             for member in file.getmembers():
                 if prefix:
                     member.path = member.path.removeprefix(prefix)
+                if member.path in ignore:
+                    continue
                 file.extract(member, path=target_path.parent)
     elif action == "command" and command is not None:
         kwargs = dict(target=target_path, downloaded=downloaded)
