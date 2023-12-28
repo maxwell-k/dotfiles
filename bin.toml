@@ -28,13 +28,13 @@ completions = true
 [git-jump]
 url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
 
-[osc52]
+["osc52.sh"]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/osc52.sh"
 
-[hterm-notify]
+["hterm-notify.sh"]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-notify.sh"
 
-[hterm-show-file]
+["hterm-show-file.sh"]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-show-file.sh"
 
 [pip]
