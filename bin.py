@@ -60,7 +60,7 @@ def _download(
                 else:
                     size = -1
 
-                print("Downloading…")
+                print(f"Downloading {name}…")
                 written = dp.write(fp.read())
 
             if size >= 0 and written != size:
