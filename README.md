@@ -16,9 +16,9 @@ _Debian 12_
     lxc launch images:debian/12/cloud c1 \
     && lxc exec c1 -- apt-get install --yes curl fzf git zsh
 
-_Fedora 38_
+_Fedora 39_
 
-    lxc launch images:fedora/38/cloud c1 \
+    lxc launch images:fedora/39/cloud c1 \
     && sleep 1 \
     && lxc exec c1 -- dnf install --assumeyes curl fzf git zsh
 
