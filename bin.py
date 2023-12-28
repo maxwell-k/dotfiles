@@ -46,6 +46,9 @@ def _download(
         completions: whether to generate ZSH completions
         command: command to run to install after download
     """
+    if target is None:
+        target = DEFAULT_DIRECTORY + name
+
     DOWNLOADED.mkdir(exist_ok=True)
     if url.startswith("https://"):
         downloaded = DOWNLOADED / url.rsplit("/", 1)[1]
@@ -73,9 +76,6 @@ def _download(
                 raise RuntimeError("Unexpected digest for {}".format(downloaded))
     else:
         downloaded = Path(url)
-
-    if target is None:
-        target = DEFAULT_DIRECTORY + name
 
     target_path = Path(target).expanduser()
     target_path.parent.mkdir(parents=True, exist_ok=True)
