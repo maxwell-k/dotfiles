@@ -115,7 +115,7 @@ def _download(
         target_path.chmod(target_path.stat().st_mode | S_IEXEC)
 
     if completions:
-        with open(COMPLETIONS / "_{target.name}", "w") as file:
+        with open(COMPLETIONS / f"_{target_path.name}", "w") as file:
             run([target_path.name, "completion", "zsh"], check=True, stdout=file)
 
     if version is None:
