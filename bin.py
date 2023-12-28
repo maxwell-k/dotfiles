@@ -78,6 +78,7 @@ def _download(
         target = DEFAULT_DIRECTORY + name
 
     target_path = Path(target).expanduser()
+    target_path.parent.mkdir(parents=True, exist_ok=True)
     target_path.unlink(missing_ok=True)
 
     if action is None:
