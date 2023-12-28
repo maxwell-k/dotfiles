@@ -49,8 +49,8 @@ def _download(
     """
     DOWNLOADED.mkdir(exist_ok=True)
     if url.startswith("https://"):
-        source = DOWNLOADED / url.rsplit("/", 1)[1]
-        if not source.is_file():
+        downloaded = DOWNLOADED / url.rsplit("/", 1)[1]
+        if not downloaded.is_file():
             cmd = (
                 "curl",
                 "--location",
@@ -67,13 +67,13 @@ def _download(
             digest = "sha256"
             if len(expected) == 128:
                 digest = "sha512"
-            with source.open("rb") as f:
+            with downloaded.open("rb") as f:
                 digest = file_digest(f, digest)
 
             if digest.hexdigest() != expected:
-                raise RuntimeError("Unexpected digest for {}".format(source))
+                raise RuntimeError("Unexpected digest for {}".format(downloaded))
     else:
-        source = Path(url)
+        downloaded = Path(url)
 
     if target is None:
         target = DEFAULT_DIRECTORY + name
@@ -94,22 +94,24 @@ def _download(
             action = "copy"
 
     if action == "copy":
-        copy(source, target_path)
+        copy(downloaded, target_path)
     elif action == "symlink":
-        target_path.symlink_to(source)
+        target_path.symlink_to(downloaded)
     elif action == "unzip":
-        with ZipFile(source, "r") as file:
+        with ZipFile(downloaded, "r") as file:
             file.extract(target_path.name, path=target_path.parent)
     elif action == "untar":
-        with tarfile.open(source, "r") as file:
+        with tarfile.open(downloaded, "r") as file:
             for member in file.getmembers():
                 if prefix:
                     member.path = member.path.removeprefix(prefix)
                 file.extract(member, path=target_path.parent)
     elif action == "command" and command is not None:
-        run(split(command.format(target=target_path, source=source)), check=True)
+        run(
+            split(command.format(target=target_path, downloaded=downloaded)), check=True
+        )
 
-    yield source, target_path
+    yield downloaded, target_path
 
     if not target_path.is_symlink():
         target_path.chmod(target_path.stat().st_mode | S_IEXEC)
@@ -133,7 +135,7 @@ def main():
 
     for name, kwargs in data.items():
         kwargs["name"] = name
-        with _download(**kwargs) as (source, target):
+        with _download(**kwargs) as (downloaded, target):
             pass
 
 

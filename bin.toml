@@ -40,7 +40,7 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc
 # https://pip.pypa.io/en/stable/installation/, not versioned, latest release
 url = "https://bootstrap.pypa.io/pip/pip.pyz"
 version = "--version"
-command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {source}"
+command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {downloaded}"
 
 [pulumi]
 # https://www.pulumi.com/docs/install/
