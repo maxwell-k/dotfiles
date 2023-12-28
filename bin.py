@@ -25,6 +25,7 @@ DEFAULT_DIRECTORY = "~/.local/bin/"
 @contextmanager
 def _download(
     *,
+    name: str,
     url: str,
     action: str | None = None,
     target: str | None = None,
@@ -75,7 +76,7 @@ def _download(
         source = Path(url)
 
     if target is None:
-        target = DEFAULT_DIRECTORY + source.name
+        target = DEFAULT_DIRECTORY + name
 
     target_path = Path(target).expanduser()
     target_path.unlink(missing_ok=True)
@@ -130,8 +131,9 @@ def main():
     with open("bin.toml", "rb") as file:
         data = load(file)
 
-    for name in data:
-        with _download(**data[name]) as (source, target):
+    for name, kwargs in data.items():
+        kwargs["name"] = name
+        with _download(**kwargs) as (source, target):
             pass
 
 
