@@ -107,9 +107,8 @@ def _download(
                     member.path = member.path.removeprefix(prefix)
                 file.extract(member, path=target_path.parent)
     elif action == "command" and command is not None:
-        run(
-            split(command.format(target=target_path, downloaded=downloaded)), check=True
-        )
+        kwargs = dict(target=target_path, downloaded=downloaded)
+        run(split(command.format(**kwargs)), check=True)
 
     yield downloaded, target_path
 
