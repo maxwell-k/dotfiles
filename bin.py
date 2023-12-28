@@ -118,7 +118,7 @@ def _download(
     if completions:
         COMPLETIONS.mkdir(parents=True, exist_ok=True)
         with open(COMPLETIONS / f"_{target_path.name}", "w") as file:
-            run([target_path.name, "completion", "zsh"], check=True, stdout=file)
+            run([target_path, "completion", "zsh"], check=True, stdout=file)
 
     if version is None:
         print(f"# {target}")
