@@ -2,8 +2,11 @@
 # bin.py
 # Copyright 2022 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
-"""Download and extract files from bin.toml onto $PATH"""
+"""Download and extract files"""
 import tarfile
+from argparse import ArgumentDefaultsHelpFormatter as formatter_class
+from argparse import ArgumentParser
+from argparse import Namespace
 from collections.abc import Generator
 from contextlib import contextmanager
 from hashlib import file_digest
@@ -13,17 +16,14 @@ from shutil import copy
 from stat import S_IEXEC
 from subprocess import run
 from tomllib import load
+from typing import cast
 from urllib.request import urlopen
 from zipfile import ZipFile
-
-DOWNLOADED = "downloaded"
-COMPLETIONS = "~/.local/share/zsh/site-functions/"
-DEFAULT_DIRECTORY = "~/.local/bin/"
-DEFAULT_INPUT = "bin.toml"
 
 
 @contextmanager
 def _download(
+    args: Namespace,
     *,
     name: str,
     url: str,
@@ -49,11 +49,11 @@ def _download(
         command: command to run to install after download
     """
     if target is None:
-        target = DEFAULT_DIRECTORY + name
+        target = cast(str, args.output) + name
 
     if url.startswith("https://"):
-        downloaded = Path(DOWNLOADED) / url.rsplit("/", 1)[1]
-        downloaded.parent.mkdir(exist_ok=True)
+        downloaded = Path(args.downloaded) / url.rsplit("/", 1)[1]
+        downloaded.parent.mkdir(parents=True, exist_ok=True)
         if not downloaded.is_file():
             with urlopen(url) as fp, downloaded.open("wb") as dp:
                 if "content-length" in fp.headers:
@@ -120,7 +120,7 @@ def _download(
         target_path.chmod(target_path.stat().st_mode | S_IEXEC)
 
     if completions:
-        output = Path(COMPLETIONS).expanduser() / f"_{target_path.name}"
+        output = Path(args.completions).expanduser() / f"_{target_path.name}"
         output.parent.mkdir(parents=True, exist_ok=True)
         with output.open("w") as file:
             run([target_path, "completion", "zsh"], check=True, stdout=file)
@@ -135,12 +135,23 @@ def _download(
 
 
 def main() -> int:
-    with open(DEFAULT_INPUT, "rb") as file:
+    parser = ArgumentParser(prog=Path(__file__).name, formatter_class=formatter_class)
+    parser.add_argument("--input", default="bin.toml", help="TOML specification")
+    parser.add_argument("--output", default="~/.local/bin/", help="Target directory")
+    parser.add_argument("--downloaded", default="downloaded", help="Download directory")
+    parser.add_argument(
+        "--completions",
+        default="~/.local/share/zsh/site-functions/",
+        help="Directory for ZSH completions",
+    )
+    args = parser.parse_args()
+
+    with open(args.input, "rb") as file:
         data = load(file)
 
     for name, kwargs in data.items():
         kwargs["name"] = name
-        with _download(**kwargs) as (downloaded, target):
+        with _download(args, **kwargs) as (downloaded, target):
             pass
 
     return 0
