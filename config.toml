@@ -1,12 +1,8 @@
 [config]
-# `dotdrop files` to view configuration
-# `dotdrop install` to install
-# `dotdrop uninstall` to remove
 link_dotfile_default = "relative"
 # switch to nolink, below, to install a copy of each file
 # link_dotfile_default = "nolink"
 link_on_import = "relative"
-dotpath = "dotdrop"
 
 [dotfiles.f_zshrc]
 src = "zshrc"
