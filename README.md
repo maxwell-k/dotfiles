@@ -62,8 +62,7 @@ Install personal files:
 
     cd ~/github.com/maxwell-k/dotfiles \
     && ./bin.py \
-    && pipx install dotdrop \
-    && dotdrop install
+    && pipx run dotdrop install
 
 See [tests](/tests/) for more examples of running `bin.py`.
 
