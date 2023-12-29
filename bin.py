@@ -132,7 +132,7 @@ def _download(
     print()
 
 
-def main():
+def main() -> int:
     with open("bin.toml", "rb") as file:
         data = load(file)
 
@@ -141,6 +141,8 @@ def main():
         with _download(**kwargs) as (downloaded, target):
             pass
 
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
