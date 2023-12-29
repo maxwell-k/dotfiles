@@ -52,18 +52,17 @@ Login:
 
 _The steps below apply to Fedora._
 
-Clone this repository, install `pipx` and `dotdrop`:
+Clone this repository:
 
     mkdir --parents ~/github.com/maxwell-k \
     && cd ~/github.com/maxwell-k \
     && git clone https://github.com/maxwell-k/dotfiles.git \
-    && sudo dnf install --assumeyes pipx \
-    && pipx install dotdrop \
 
 Install personal files:
 
     cd ~/github.com/maxwell-k/dotfiles \
-    && ./bin.py
+    && ./bin.py \
+    && pipx install dotdrop \
     && dotdrop install
 
 See [tests](/tests/) for more examples of running `bin.py`.
