@@ -1,4 +1,4 @@
-# .github/workflows/debian.yaml
+# .github/workflows/readme-shell.yaml
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
 
@@ -15,8 +15,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: canonical/setup-lxd@v0.1.1
       - run: ./.github/profile.sh
-      - run: ./.README.md-files/debian.sh
-      - run: ./.README.md-files/zsh.sh
+      - run: ./.README.md-files/shell-00.sh
+      - run: ./.README.md-files/shell-01.sh
         env:
           HOME: /home/maxwell-k
           LOGNAME: maxwell-k
+      - run: ./.README.md-files/shell-02.sh

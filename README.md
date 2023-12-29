@@ -13,7 +13,7 @@ Create a new container with `git`, `fzf` and `zsh` installed:
 
 _Debian_
 
-<!-- embedme .README.md-files/debian.sh -->
+<!-- embedme .README.md-files/shell-00.sh -->
 
 ```
 lxc launch images:debian/12/cloud c1 \
@@ -26,9 +26,9 @@ _Fedora_
     && sleep 1 \
     && lxc exec c1 -- dnf install --assumeyes curl fzf git zsh
 
-Set up ZSH:
+Set up ZSH from the main branch on GitHub:
 
-<!-- embedme .README.md-files/zsh.sh -->
+<!-- embedme .README.md-files/shell-01.sh -->
 
 ```
 lxc exec c1 -- curl -Lo ~/.zshrc \
@@ -47,6 +47,8 @@ lxc exec c1 -- curl -Lo ~/.zshrc \
 Login:
 
     lxc exec c1 -- su --login "$LOGNAME"
+
+<!-- cleanup in .README.md-files/shell-02.sh not shown -->
 
 ## Files
 
