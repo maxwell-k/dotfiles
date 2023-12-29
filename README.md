@@ -66,20 +66,6 @@ Install personal files:
     && ./bin.py
     && dotdrop install
 
-To test `bin.py` in isolation see [`./.github/fedora.sh`](/.github/fedora.sh).
+See [tests](/tests/) for more examples of running `bin.py`.
 
-<!--
-
-_Debian 12_
-
-    lxc launch images:debian/12/cloud c1 \
-    && sleep 1 \
-    && lxc exec c1 -- apt-get install --yes python3 php \
-    && lxc file push bin.py c1/home/$LOGNAME/ \
-    && lxc file push bin.toml c1/home/$LOGNAME/ \
-    && lxc exec c1 -- su --login "$LOGNAME" -c ./bin.py \
-    && lxc stop c1 \
-    && lxc delete c1
-
--->
 <!-- vim: set filetype=markdown.embedme.markdown-toc.htmlCommentNoSpell.dprint : -->
