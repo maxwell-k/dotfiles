@@ -181,9 +181,14 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
   }
   . "$HOME/.zsh/spaceship/spaceship.zsh"
 fi #}}}1
-# nox command line completion {{{1
-if [ -d "$HOME/.local/pipx/venvs/nox" ] ; then
-  eval "$(~/.local/pipx/venvs/nox/bin/register-python-argcomplete nox)"
-fi # }}}1
+# command line completion {{{1
+output="$HOME/.local/share/zsh/site-functions"
+executable="$HOME/.local/pipx/venvs/nox/bin/register-python-argcomplete"
+if [ -x "$executable" ] ; then
+  mkdir --parents "$output"
+  printf "#compdef nox\n" > "$output/_nox"
+  "$executable" nox >> "$output/_nox"
+fi
+unset output executable #}}}1
 test -f ~/.zshrc.local && . ~/.zshrc.local # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
