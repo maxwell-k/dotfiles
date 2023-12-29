@@ -16,9 +16,10 @@ from tomllib import load
 from urllib.request import urlopen
 from zipfile import ZipFile
 
-DOWNLOADED = Path("downloaded")
-COMPLETIONS = Path("~/.local/share/zsh/site-functions/").expanduser()
+DOWNLOADED = "downloaded"
+COMPLETIONS = "~/.local/share/zsh/site-functions/"
 DEFAULT_DIRECTORY = "~/.local/bin/"
+DEFAULT_INPUT = "bin.toml"
 
 
 @contextmanager
@@ -50,9 +51,9 @@ def _download(
     if target is None:
         target = DEFAULT_DIRECTORY + name
 
-    DOWNLOADED.mkdir(exist_ok=True)
     if url.startswith("https://"):
-        downloaded = DOWNLOADED / url.rsplit("/", 1)[1]
+        downloaded = Path(DOWNLOADED) / url.rsplit("/", 1)[1]
+        downloaded.parent.mkdir(exist_ok=True)
         if not downloaded.is_file():
             with urlopen(url) as fp, downloaded.open("wb") as dp:
                 if "content-length" in fp.headers:
@@ -119,8 +120,9 @@ def _download(
         target_path.chmod(target_path.stat().st_mode | S_IEXEC)
 
     if completions:
-        COMPLETIONS.mkdir(parents=True, exist_ok=True)
-        with open(COMPLETIONS / f"_{target_path.name}", "w") as file:
+        output = Path(COMPLETIONS).expanduser() / f"_{target_path.name}"
+        output.parent.mkdir(parents=True, exist_ok=True)
+        with output.open("w") as file:
             run([target_path, "completion", "zsh"], check=True, stdout=file)
 
     if version is None:
@@ -133,7 +135,7 @@ def _download(
 
 
 def main() -> int:
-    with open("bin.toml", "rb") as file:
+    with open(DEFAULT_INPUT, "rb") as file:
         data = load(file)
 
     for name, kwargs in data.items():
