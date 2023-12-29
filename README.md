@@ -11,12 +11,11 @@
 
 Create a new container with `git`, `fzf` and `zsh` installed:
 
-_Debian 12_
+_Debian_
 
     lxc launch images:debian/12/cloud c1 \
     && lxc exec c1 -- apt-get install --yes curl fzf git zsh
 
-_Fedora 39_
 
     lxc launch images:fedora/39/cloud c1 \
     && sleep 1 \
@@ -36,10 +35,11 @@ Set up ZSH and login:
         "$HOME/.zsh/spaceship" \
     && lxc exec c1 -- chown --recursive "$LOGNAME:$LOGNAME" "$HOME" \
     && lxc exec c1 -- su --login "$LOGNAME"
+_Fedora_
 
 ## Files
 
-_The steps below apply to Fedora 38._
+_The steps below apply to Fedora._
 
 Clone this repository, install `pipx` and `dotdrop`:
 
