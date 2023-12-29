@@ -185,11 +185,20 @@ fi #}}}1
 # command line completion {{{1
 output="$HOME/.local/share/zsh/site-functions"
 executable="$HOME/.local/pipx/venvs/nox/bin/register-python-argcomplete"
-if [ -x "$executable" ] ; then
+if [ -x "$executable" ] && [ ! -f "$output/_nox" ] ; then
   mkdir --parents "$output"
   printf "#compdef nox\n" > "$output/_nox"
   "$executable" nox >> "$output/_nox"
+  rm -f "$HOME/.zcompdump"
 fi
-unset output executable #}}}1
+executable="$HOME/.local/bin/pipx"
+if [ -x "$executable" ] && [ ! -f "$output/_pipx" ] ; then
+  mkdir --parents "$output"
+  printf "#compdef pipx\n" > "$output/_pipx"
+  SHIV_CONSOLE_SCRIPT=register-python-argcomplete "$executable" pipx \
+    >> "$output/_pipx" 2>/dev/null
+  rm -f "$HOME/.zcompdump"
+fi
+unset executable output #}}}1
 test -f ~/.zshrc.local && . ~/.zshrc.local # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
