@@ -22,6 +22,7 @@ Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: CC0-1.0
 
 Files:
+ .README.md-files/*.sh
  dotdrop/local/bin/gtree
  dotdrop/local/bin/jsonlint
  dotdrop/local/bin/percollate

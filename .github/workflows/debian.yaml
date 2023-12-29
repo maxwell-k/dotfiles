@@ -1,0 +1,24 @@
+# .github/workflows/debian.yaml
+# Copyright 2023 Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
+
+name: Run through README.md on Debian
+on: # yamllint disable-line rule:truthy
+  push: { branches: [main] }
+  pull_request: { branches: [main] }
+  workflow_dispatch:
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: canonical/setup-lxd@v0.1.1
+      - run: lxc profile show default
+      - run: lxc profile edit default < .github/profile.yaml
+      - run: lxc profile show default
+      - run: ./.README.md-files/debian.sh
+      - run: ./.README.md-files/zsh.sh
+        env:
+          HOME: /home/maxwell-k
+          LOGNAME: maxwell-k

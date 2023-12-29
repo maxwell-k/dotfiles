@@ -1,0 +1,21 @@
+description: Default profile from GitHub runner with custom user.vendor-data
+devices:
+  eth0:
+    name: eth0
+    network: lxdbr0
+    type: nic
+  root:
+    path: /
+    pool: default
+    type: disk
+config:
+  user.vendor-data: |
+    #cloud-config
+    users:
+      - name: maxwell-k
+        sudo: ALL=(ALL) NOPASSWD:ALL
+        shell: /bin/bash
+#
+# .github/profile.yaml
+# Copyright 2023 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
