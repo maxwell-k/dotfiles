@@ -4,7 +4,7 @@ lxc exec c1 -- curl -Lo ~/.zshrc \
     /etc/passwd \
 && lxc exec c1 -- mkdir "$HOME/.zsh" \
 && lxc exec c1 -- git clone \
-    --branch=v4.14.0 \
+    --branch=v4.15.0 \
     --config advice.detachedHead=false \
     https://github.com/spaceship-prompt/spaceship-prompt.git \
     "$HOME/.zsh/spaceship" \
