@@ -11,6 +11,11 @@ Files:
  bin.toml
  config.toml
  dotdrop/config/flake8
+ dotdrop/config/git/attributes
+ dotdrop/config/git/ignore
+ dotdrop/config/lf/lfrc
+ dotdrop/config/litecli/config
+ dotdrop/config/pgcli/config
  dprint.json
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: CC0-1.0

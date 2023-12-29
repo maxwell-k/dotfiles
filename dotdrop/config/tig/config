@@ -1,3 +1,7 @@
+# .config/tig/config
+# Copyright 2023 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+#
 # http://jonas.github.io/tig/doc/tigrc.5.html#_external_user_defined_command
 #
 # - Neither @sh or +sh in place of !sh work
