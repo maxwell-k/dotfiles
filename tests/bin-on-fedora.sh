@@ -7,6 +7,6 @@ lxc launch images:fedora/39/cloud c1 \
 && lxc stop c1 \
 && lxc delete c1
 #
-# .github/fedora.sh
+# tests/bin-on-fedora.sh
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
