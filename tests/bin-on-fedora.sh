@@ -1,5 +1,5 @@
 lxc launch images:fedora/39/cloud c1 \
-&& sleep 1 \
+&& sleep 5 \
 && lxc exec c1 -- dnf install --assumeyes python3.11 php \
 && lxc file push bin.py "c1/home/$LOGNAME/" \
 && lxc file push bin.toml "c1/home/$LOGNAME/" \
