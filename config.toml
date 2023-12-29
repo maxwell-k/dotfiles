@@ -112,5 +112,9 @@ dst = "~/.config/git/config"
 src = "local/bin/adf"
 dst = "~/.local/bin/adf"
 
+[dotfiles.f_lint-all]
+src = "local/bin/lint-all"
+dst = "~/.local/bin/lint-all"
+
 [profiles.default]
 dotfiles = ["ALL"]
