@@ -1,5 +1,4 @@
 lxc launch images:debian/12/cloud c1 \
-&& sleep 1 \
 && lxc exec c1 -- apt-get install --yes python3 php \
 && lxc file push bin.py "c1/home/$LOGNAME/" \
 && lxc file push bin.toml "c1/home/$LOGNAME/" \
