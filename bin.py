@@ -32,7 +32,7 @@ def _download(
     expected: str | None = None,
     version: str | None = None,
     prefix: str | None = None,
-    completions: bool = False,
+    completions: str | None = None,
     command: str | None = None,
     ignore: set = set(),
 ) -> Generator[tuple[Path, Path], None, None]:
@@ -122,8 +122,9 @@ def _download(
     if completions:
         output = Path(args.completions).expanduser() / f"_{target_path.name}"
         output.parent.mkdir(parents=True, exist_ok=True)
+        kwargs = dict(target=target_path)  # target may not be on PATH
         with output.open("w") as file:
-            run([target_path, "completion", "zsh"], check=True, stdout=file)
+            run(split(completions.format(**kwargs)), check=True, stdout=file)
 
     if version is None:
         print(f"# {target}")
