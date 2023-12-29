@@ -111,6 +111,7 @@ else
   export EDITOR=vi
 fi
 export FCEDIT=$EDITOR
+export READNULLCMD=cat  # more is the default
 for i in \
   "$HOME/.local/bin" \
   "$HOME/.deno/bin" \
