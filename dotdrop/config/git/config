@@ -1,0 +1,32 @@
+# Try to make sure all options are portable across systems
+[advice] statusHints = false
+[color] pager = false
+[commit] verbose = true
+[core] safecrlf = true
+[daemon] receivepack = true #see git help daemon
+[diff] algorithm = patience
+[diff] renames = copies
+[diff] submodule = log
+[grep] lineNumber = true
+[log] date = local
+[log] decorate = short
+[merge] ff = false
+[merge] tool = vim
+[pack] packSizeLimit = 2g
+[pager] branch = false
+[pager] config = false
+[pager] diff = false
+[pager] grep = false
+[pager] log = false
+[pager] reflog = false
+[pager] tag = false
+[pull] ff = only
+[push] default = current
+[rebase] autosquash = true
+[receive] denyCurrentBranch = updateInstead
+[uploadpack] allowAnySHA1InWant = true
+[user] email = keith.maxwell@gmail.com
+[user] name = Keith Maxwell
+[includeIf "gitdir:~/*s.co.uk/"] path = config-home-star-s-dot-co-dot-uk
+
+# vim: filetype=gitconfig

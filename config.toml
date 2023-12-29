@@ -104,5 +104,9 @@ dst = "~/.config/git/attributes"
 src = "config/git/ignore"
 dst = "~/.config/git/ignore"
 
+[dotfiles.f_gitconfig]
+src = "config/git/config"
+dst = "~/.config/git/config"
+
 [profiles.default]
 dotfiles = ["ALL"]

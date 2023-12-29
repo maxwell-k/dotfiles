@@ -12,6 +12,7 @@ Files:
  config.toml
  dotdrop/config/flake8
  dotdrop/config/git/attributes
+ dotdrop/config/git/config
  dotdrop/config/git/ignore
  dotdrop/config/lf/lfrc
  dotdrop/config/litecli/config
