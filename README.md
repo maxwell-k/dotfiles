@@ -50,13 +50,11 @@ Login:
 
 ## Files
 
-_The steps below apply to Fedora._
-
 Clone this repository:
 
-    mkdir --parents ~/github.com/maxwell-k \
-    && cd ~/github.com/maxwell-k \
-    && git clone https://github.com/maxwell-k/dotfiles.git \
+    mkdir --parents github.com/maxwell-k \
+    && git -C github.com/maxwell-k \
+        clone https://github.com/maxwell-k/dotfiles.git
 
 Install personal files:
 
