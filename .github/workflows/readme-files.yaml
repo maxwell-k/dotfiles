@@ -15,7 +15,7 @@ jobs:
       - uses: canonical/setup-lxd@v0.1.1
       - run: ./.github/profile.sh
       - run: ./.README.md-files/files-00.sh
-      - run: ./.README.md-files/files-01.sh
+      - run: ./.README.md-files/03.sh
         env: { LOGNAME: maxwell-k }
       - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/files-02.sh
       - run: ./.README.md-files/cleanup.sh

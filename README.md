@@ -49,8 +49,6 @@ Login:
 
     lxc exec c1 -- su --login "$LOGNAME"
 
-<!-- cleanup in .README.md-files/cleanup.sh not shown -->
-
 ## Files
 
 Clone this repository from GitHub:
@@ -59,7 +57,7 @@ Clone this repository from GitHub:
     && git -C github.com/maxwell-k \
         clone https://github.com/maxwell-k/dotfiles.git
 
-<!-- for equivalent setup from local checkout see .README.md-files/files-01.sh -->
+<!-- for equivalent setup from local checkout see .README.md-files/03.sh -->
 
 Install personal files:
 
