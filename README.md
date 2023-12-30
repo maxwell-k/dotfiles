@@ -13,7 +13,7 @@
 Start with a container including the dependencies for these instructions,
 `bin.py` and `dotdrop`:
 
-<!-- embedme .README.md-files/00.sh -->
+<!-- embedme .README.md-files/01.sh -->
 
 ```
 lxc launch images:debian/12/cloud c1 \
@@ -30,8 +30,6 @@ Download `.zshrc` form the main branch of this repository on GitHub:
 
     curl -Lo ~/.zshrc \
         https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc
-
-<!-- push from local checkout in .README.md-files/01.sh not shown -->
 
 Switch to ZSH and install spaceship:
 
@@ -60,8 +58,7 @@ Install personal files:
 <!-- embedme .README.md-files/04.sh -->
 
 ```
-rm ~/.zshrc \
-&& cd ~/github.com/maxwell-k/dotfiles \
+cd ~/github.com/maxwell-k/dotfiles \
 && ./bin.py \
 && ~/.local/bin/pipx run dotdrop install --profile=default
 ```
