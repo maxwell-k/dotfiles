@@ -1,4 +1,4 @@
-# .github/workflows/readme-shell.yaml
+# .github/workflows/readme-files.yaml
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
 
@@ -15,9 +15,8 @@ jobs:
       - uses: actions/checkout@v3
       - uses: canonical/setup-lxd@v0.1.1
       - run: ./.github/profile.sh
-      - run: ./.README.md-files/shell-00.sh
-      - run: ./.README.md-files/shell-01.sh
-        env:
-          HOME: /home/maxwell-k
-          LOGNAME: maxwell-k
+      - run: ./.README.md-files/files-00.sh
+      - run: ./.README.md-files/files-01.sh
+        env: { LOGNAME: maxwell-k }
+      - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/files-02.sh
       - run: ./.README.md-files/cleanup.sh

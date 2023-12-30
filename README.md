@@ -26,7 +26,7 @@ _Fedora_
     && sleep 1 \
     && lxc exec c1 -- dnf install --assumeyes curl fzf git zsh
 
-Set up ZSH from the main branch on GitHub:
+Set up ZSH from the main branch of this repository on GitHub:
 
 <!-- embedme .README.md-files/shell-01.sh -->
 
@@ -48,21 +48,39 @@ Login:
 
     lxc exec c1 -- su --login "$LOGNAME"
 
-<!-- cleanup in .README.md-files/shell-02.sh not shown -->
+<!-- cleanup in .README.md-files/cleanup.sh not shown -->
 
 ## Files
 
-Clone this repository:
+Create a suitable new container, with dependencies for `bin.py` and
+`dotdrop`:
+
+<!-- embedme .README.md-files/files-00.sh -->
+
+```
+lxc launch images:debian/12/cloud c1 \
+&& lxc exec c1 -- apt-get install --yes file git php python3.11-venv
+```
+
+Clone this repository from GitHub:
 
     mkdir --parents github.com/maxwell-k \
     && git -C github.com/maxwell-k \
         clone https://github.com/maxwell-k/dotfiles.git
 
+<!-- for equivalent setup from local checkout see .README.md-files/files-01.sh -->
+
 Install personal files:
 
-    cd ~/github.com/maxwell-k/dotfiles \
-    && ./bin.py \
-    && pipx run dotdrop install
+<!-- embedme .README.md-files/files-02.sh -->
+
+```
+cd ~/github.com/maxwell-k/dotfiles \
+&& ./bin.py \
+&& ~/.local/bin/pipx run dotdrop install --profile=default
+```
+
+<!-- cleanup in .README.md-files/cleanup.sh not shown -->
 
 See [tests](/tests/) for more examples of running `bin.py`.
 
