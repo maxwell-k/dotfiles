@@ -16,6 +16,6 @@ config:
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
 #
-# .github/profile.yaml
+# .github/lxc-profile.yaml
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0

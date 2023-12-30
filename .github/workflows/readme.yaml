@@ -13,11 +13,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: canonical/setup-lxd@v0.1.1
-      - run: ./.github/profile.sh
-      - run: ./.README.md-files/01.sh
-        env: { LOGNAME: maxwell-k }
+      - run: ./.github/lxc-profile.sh
+      - { run: ./.README.md-files/01.sh, env: { LOGNAME: maxwell-k } }
+      - { run: ./.README.md-files/03.sh, env: { LOGNAME: maxwell-k } }
       - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/02.sh
-      - run: ./.README.md-files/03.sh
-        env: { LOGNAME: maxwell-k }
       - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/04.sh
       - run: ./.README.md-files/cleanup.sh

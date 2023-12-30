@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - uses: canonical/setup-lxd@v0.1.1
-      - run: ./.github/profile.sh
+      - run: ./.github/lxc-profile.sh
       - run: ./tests/bin-on-fedora.sh
         env: { LOGNAME: maxwell-k }
