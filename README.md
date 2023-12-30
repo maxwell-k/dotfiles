@@ -2,13 +2,13 @@
 
 <!-- toc -->
 
-- [Introduction](#introduction)
+- [Dependencies](#dependencies)
 - [Shell](#shell)
 - [Files](#files)
 
 <!-- tocstop -->
 
-## Introduction
+## Dependencies
 
 Start with a container including the dependencies for these instructions,
 `bin.py` and `dotdrop`:
@@ -20,12 +20,16 @@ lxc launch images:debian/12/cloud c1 \
 && lxc exec c1 -- apt-get install --yes curl file fzf git php python3.11-venv zsh
 ```
 
+Login:
+
+    lxc exec c1 -- su --login "$LOGNAME"
+
 ## Shell
 
 Download `.zshrc` form the main branch of this repository on GitHub:
 
-    lxc exec c1 -- curl -Lo ~/.zshrc \
-        https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc \
+    curl -Lo ~/.zshrc \
+        https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc
 
 <!-- push from local checkout in .README.md-files/01.sh not shown -->
 
@@ -44,10 +48,6 @@ lxc exec c1 -- sed -i "s,$LOGNAME:/bin/bash$,$LOGNAME:/usr/bin/zsh," \
     "$HOME/.zsh/spaceship" \
 && lxc exec c1 -- chown --recursive "$LOGNAME:$LOGNAME" "$HOME"
 ```
-
-Login:
-
-    lxc exec c1 -- su --login "$LOGNAME"
 
 ## Files
 
