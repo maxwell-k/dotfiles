@@ -2,13 +2,13 @@
 
 <!-- toc -->
 
-- [Dependencies](#dependencies)
+- [Prerequisites](#prerequisites)
 - [Shell](#shell)
 - [Files](#files)
 
 <!-- tocstop -->
 
-## Dependencies
+## Prerequisites
 
 Start with a container including the dependencies for these instructions,
 `bin.py` and `dotdrop`:
@@ -28,7 +28,7 @@ Login:
 
 Download `.zshrc` form the main branch of this repository on GitHub:
 
-    curl -Lo ~/.zshrc \
+    curl --location --output ~/.zshrc \
         https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc
 
 Switch to ZSH and install spaceship:
