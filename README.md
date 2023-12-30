@@ -11,20 +11,12 @@
 
 Create a new container with `git`, `fzf` and `zsh` installed:
 
-_Debian_
-
 <!-- embedme .README.md-files/00.sh -->
 
 ```
 lxc launch images:debian/12/cloud c1 \
 && lxc exec c1 -- apt-get install --yes curl fzf git zsh
 ```
-
-_Fedora_
-
-    lxc launch images:fedora/39/cloud c1 \
-    && sleep 1 \
-    && lxc exec c1 -- dnf install --assumeyes curl fzf git zsh
 
 Download `.zshrc` form the main branch of this repository on GitHub:
 
@@ -87,6 +79,6 @@ cd ~/github.com/maxwell-k/dotfiles \
 
 <!-- cleanup in .README.md-files/cleanup.sh not shown -->
 
-See [tests](/tests/) for more examples of running `bin.py`.
+See [tests](/tests/) for more examples of running `bin.py` including on Fedora.
 
 <!-- vim: set filetype=markdown.embedme.markdown-toc.htmlCommentNoSpell.dprint : -->
