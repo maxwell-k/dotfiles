@@ -2,21 +2,25 @@
 
 <!-- toc -->
 
+- [Introduction](#introduction)
 - [Shell](#shell)
 - [Files](#files)
 
 <!-- tocstop -->
 
-## Shell
+## Introduction
 
-Create a new container with `git`, `fzf` and `zsh` installed:
+Start with a container including the dependencies for these instructions,
+`bin.py` and `dotdrop`:
 
 <!-- embedme .README.md-files/00.sh -->
 
 ```
 lxc launch images:debian/12/cloud c1 \
-&& lxc exec c1 -- apt-get install --yes curl fzf git zsh
+&& lxc exec c1 -- apt-get install --yes curl file fzf git php python3.11-venv zsh
 ```
+
+## Shell
 
 Download `.zshrc` form the main branch of this repository on GitHub:
 
@@ -48,16 +52,6 @@ Login:
 <!-- cleanup in .README.md-files/cleanup.sh not shown -->
 
 ## Files
-
-Create a suitable new container, with dependencies for `bin.py` and
-`dotdrop`:
-
-<!-- embedme .README.md-files/files-00.sh -->
-
-```
-lxc launch images:debian/12/cloud c1 \
-&& lxc exec c1 -- apt-get install --yes file git php python3.11-venv
-```
 
 Clone this repository from GitHub:
 
