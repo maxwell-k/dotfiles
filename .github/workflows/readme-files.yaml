@@ -17,5 +17,5 @@ jobs:
       - run: ./.README.md-files/files-00.sh
       - run: ./.README.md-files/03.sh
         env: { LOGNAME: maxwell-k }
-      - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/files-02.sh
+      - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/04.sh
       - run: ./.README.md-files/cleanup.sh

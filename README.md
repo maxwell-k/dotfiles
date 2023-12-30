@@ -61,7 +61,7 @@ Clone this repository from GitHub:
 
 Install personal files:
 
-<!-- embedme .README.md-files/files-02.sh -->
+<!-- embedme .README.md-files/04.sh -->
 
 ```
 cd ~/github.com/maxwell-k/dotfiles \
