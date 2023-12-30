@@ -64,7 +64,8 @@ Install personal files:
 <!-- embedme .README.md-files/04.sh -->
 
 ```
-cd ~/github.com/maxwell-k/dotfiles \
+rm ~/.zshrc \
+&& cd ~/github.com/maxwell-k/dotfiles \
 && ./bin.py \
 && ~/.local/bin/pipx run dotdrop install --profile=default
 ```
