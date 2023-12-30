@@ -13,7 +13,7 @@ Create a new container with `git`, `fzf` and `zsh` installed:
 
 _Debian_
 
-<!-- embedme .README.md-files/shell-00.sh -->
+<!-- embedme .README.md-files/00.sh -->
 
 ```
 lxc launch images:debian/12/cloud c1 \
@@ -28,7 +28,7 @@ _Fedora_
 
 Set up ZSH from the main branch of this repository on GitHub:
 
-<!-- embedme .README.md-files/shell-01.sh -->
+<!-- embedme .README.md-files/02.sh -->
 
 ```
 lxc exec c1 -- curl -Lo ~/.zshrc \
