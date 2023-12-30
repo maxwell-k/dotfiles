@@ -26,14 +26,19 @@ _Fedora_
     && sleep 1 \
     && lxc exec c1 -- dnf install --assumeyes curl fzf git zsh
 
-Set up ZSH from the main branch of this repository on GitHub:
+Download `.zshrc` form the main branch of this repository on GitHub:
+
+    lxc exec c1 -- curl -Lo ~/.zshrc \
+        https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc \
+
+<!-- push from local checkout in .README.md-files/01.sh not shown -->
+
+Switch to ZSH and install spaceship:
 
 <!-- embedme .README.md-files/02.sh -->
 
 ```
-lxc exec c1 -- curl -Lo ~/.zshrc \
-    https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc \
-&& lxc exec c1 -- sed -i "s,$LOGNAME:/bin/bash$,$LOGNAME:/usr/bin/zsh," \
+lxc exec c1 -- sed -i "s,$LOGNAME:/bin/bash$,$LOGNAME:/usr/bin/zsh," \
     /etc/passwd \
 && lxc exec c1 -- mkdir "$HOME/.zsh" \
 && lxc exec c1 -- git clone \
