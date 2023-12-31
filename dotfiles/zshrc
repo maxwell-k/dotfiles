@@ -183,22 +183,22 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
   . "$HOME/.zsh/spaceship/spaceship.zsh"
 fi #}}}1
 # command line completion {{{1
-output="$HOME/.local/share/zsh/site-functions"
+site="$HOME/.local/share/zsh/site-functions"
 executable="$HOME/.local/pipx/venvs/nox/bin/register-python-argcomplete"
-if [ -x "$executable" ] && [ ! -f "$output/_nox" ] ; then
-  mkdir --parents "$output"
-  printf "#compdef nox\n" > "$output/_nox"
-  "$executable" nox >> "$output/_nox"
+if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
+  mkdir --parents "$site"
+  printf "#compdef nox\n" > "$site/_nox"
+  "$executable" nox >> "$site/_nox"
   rm -f "$HOME/.zcompdump"
 fi
 executable="$HOME/.local/bin/pipx"
-if [ -x "$executable" ] && [ ! -f "$output/_pipx" ] ; then
-  mkdir --parents "$output"
-  printf "#compdef pipx\n" > "$output/_pipx"
+if [ -x "$executable" ] && [ ! -f "$site/_pipx" ] ; then
+  mkdir --parents "$site"
+  printf "#compdef pipx\n" > "$site/_pipx"
   SHIV_CONSOLE_SCRIPT=register-python-argcomplete "$executable" pipx \
-    >> "$output/_pipx" 2>/dev/null
+    >> "$site/_pipx" 2>/dev/null
   rm -f "$HOME/.zcompdump"
 fi
-unset executable output #}}}1
+unset executable site #}}}1
 test -f ~/.zshrc.local && . ~/.zshrc.local # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
