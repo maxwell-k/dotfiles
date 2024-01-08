@@ -7,6 +7,7 @@
 [diff] algorithm = patience
 [diff] renames = copies
 [diff] submodule = log
+[diff] colorMoved = zebra
 [grep] lineNumber = true
 [log] date = local
 [log] decorate = short
