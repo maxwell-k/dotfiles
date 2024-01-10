@@ -201,4 +201,5 @@ if [ -x "$executable" ] && [ ! -f "$site/_pipx" ] ; then
 fi
 unset executable site #}}}1
 test -f ~/.zshrc.local && . ~/.zshrc.local # late so that PS1 & spaceship can be overridden
+if [ -s /run/motd ]; then cat /run/motd ; fi
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
