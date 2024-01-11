@@ -23,7 +23,7 @@ fi \
 && if [ -x /usr/bin/ansible ] ; then
   call="ANSIBLE_DISPLAY_SKIPPED_HOSTS=no" \
   && call="$call ANSIBLE_DISPLAY_OK_HOSTS=no" \
-  && call="$call ansible-playbook -i localhost, -c local"
+  && call="$call ansible-playbook"
 else
   call="echo ansible-playbook"
 fi \
