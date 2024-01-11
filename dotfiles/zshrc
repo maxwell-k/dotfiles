@@ -20,6 +20,7 @@ alias ls="ls --color=auto --group-directories-first"
 lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
 ywd() { printf '%s' "$PWD"  | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
 gcd() { cd "$(git rev-parse --show-toplevel)" || return ; }
+yz() { fc -l -n | fzf | osc52.sh ; }
 # }}}
 bindkey -M vicmd v edit-command-line  #{{{1
 autoload edit-command-line
