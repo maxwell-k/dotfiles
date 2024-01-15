@@ -72,3 +72,20 @@ url = "https://github.com/exercism/cli/releases/download/v3.2.0/exercism-3.2.0-l
 expected = "4ea3e1ea8916a8003da95dbd6eef7a3a29802e637ed6a0f2aaaa2f1c98754915"
 ignore = ["LICENSE", "README.md"]
 version = "version"
+
+[actionlint]
+url = "https://github.com/rhysd/actionlint/releases/download/v1.6.26/actionlint_1.6.26_linux_amd64.tar.gz"
+ignore = [
+  "LICENSE.txt",
+  "README.md",
+  "docs/README.md",
+  "docs/api.md",
+  "docs/checks.md",
+  "docs/config.md",
+  "docs/install.md",
+  "docs/reference.md",
+  "docs/usage.md",
+  "man/actionlint.1",
+]
+expected = "f0294c342af98fad4ff917bc32032f28e1b55f76aedf291886ec10bbed7c12e1"
+version = "-version"
