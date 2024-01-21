@@ -11,6 +11,7 @@
 bind generic 9 !sh -c 'echo %(commit) | tr -d "\\n" | osc52.sh'
 bind generic 0 !sh -c 'echo %(branch) | tr -d "\\n" | osc52.sh'
 bind generic <Ctrl-r> !git revise %(commit)
+bind generic <Ctrl-f> !git commit --fixup %(commit)
 bind generic E !git revise --edit %(commit)
 bind refs <Ctrl-g> <sh -c "echo %(refname) >/tmp/tig-output"
 bind generic <Ctrl-g> <sh -c "echo %(commit) >/tmp/tig-output"
