@@ -74,8 +74,10 @@ def _download(
             with downloaded.open("rb") as f:
                 digest = file_digest(f, digest)
 
-            if digest.hexdigest() != expected:
-                raise RuntimeError("Unexpected digest for {}".format(downloaded))
+            if (actual := digest.hexdigest()) != expected:
+                raise RuntimeError(
+                    f"Unexpected digest for {downloaded}: {actual=} {expected=}"
+                )
     else:
         downloaded = Path(url)
 
