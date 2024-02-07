@@ -51,9 +51,9 @@ command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {
 
 [pulumi]
 # https://www.pulumi.com/docs/install/
-url = "https://get.pulumi.com/releases/sdk/pulumi-v3.99.0-linux-x64.tar.gz"
-# https://github.com/pulumi/pulumi/releases/download/v3.99.0/SHA512SUMS
-expected = "3d94c42de637574e8b68062fbe34c07ee45cb1072af140f6b9eec288b577df6028d09d4c4bc3f08e6eebba9cbf7c59346aeee6dbbe298b0f1d8f28b3cf6075f4"
+url = "https://get.pulumi.com/releases/sdk/pulumi-v3.104.2-linux-x64.tar.gz"
+# https://github.com/pulumi/pulumi/releases/download/v3.104.2/SHA512SUMS
+expected = "fccc0cb2011f49ef29aabc9992d9b9993fa41c54eeacc8771d77ff3ba058d7993d1771af70c4c189bfecbc344f311824d88dc93625c94d13afe8f054ddb8eb19"
 prefix = "pulumi/"
 version = "version"
 
