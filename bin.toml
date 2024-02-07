@@ -18,7 +18,8 @@ version = "--version"
 [deno]
 # See https://github.com/denoland/deno/issues/7253 for checksum progress
 # Manually remove the file from ./downloaded/ on upgrade
-url = "https://github.com/denoland/deno/releases/download/v1.39.1/deno-x86_64-unknown-linux-gnu.zip"
+url = "https://github.com/denoland/deno/releases/download/v1.40.3/deno-x86_64-unknown-linux-gnu.zip"
+# https://github.com/denoland/deno/releases/latest
 target = "~/.deno/bin/deno"
 version = "--version"
 
