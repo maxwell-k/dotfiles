@@ -8,6 +8,7 @@
 [diff] renames = copies
 [diff] submodule = log
 [diff] colorMoved = zebra
+[diff] tool = vimdiff
 [grep] lineNumber = true
 [log] date = local
 [log] decorate = short
