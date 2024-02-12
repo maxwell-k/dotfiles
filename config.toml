@@ -26,6 +26,7 @@ chmod = "755"
 src = "local/bin/prettier"
 dst = "~/.local/bin/prettier"
 chmod = "755"
+link = "nolink"
 
 [dotfiles.f_vimj]
 src = "local/bin/vimj"
@@ -41,6 +42,7 @@ chmod = "755"
 src = "local/bin/jsonlint"
 dst = "~/.local/bin/jsonlint"
 chmod = "755"
+link = "nolink"
 
 [dotfiles.f_title]
 src = "local/bin/title"
@@ -61,6 +63,7 @@ chmod = "755"
 src = "local/bin/pyright-langserver"
 dst = "~/.local/bin/pyright-langserver"
 chmod = "755"
+link = "nolink"
 
 [dotfiles.f_pdf-information]
 src = "local/bin/pdf-information.py"
