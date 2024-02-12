@@ -112,5 +112,9 @@ dst = "~/.local/bin/adf"
 src = "local/bin/lint-all"
 dst = "~/.local/bin/lint-all"
 
+[dotfiles.f_config]
+src = "config/yamllint/config"
+dst = "~/.config/yamllint/config"
+
 [profiles.default]
 dotfiles = ["ALL"]

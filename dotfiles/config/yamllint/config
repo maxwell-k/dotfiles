@@ -1,0 +1,9 @@
+extends: default
+
+rules:
+  document-start: disable
+  comments:
+    min-spaces-from-content: 1
+  braces:
+    max-spaces-inside: 1
+# vim: set ft=yaml :
