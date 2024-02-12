@@ -70,11 +70,6 @@ src = "local/bin/pdf-information.py"
 dst = "~/.local/bin/pdf-information.py"
 chmod = "755"
 
-[dotfiles.f_tasks]
-src = "local/bin/tasks"
-dst = "~/.local/bin/tasks"
-chmod = "755"
-
 [dotfiles.f_flake8]
 src = "config/flake8"
 dst = "~/.config/flake8"
