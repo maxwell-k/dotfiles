@@ -17,6 +17,7 @@ Files:
  dotfiles/config/lf/lfrc
  dotfiles/config/litecli/config
  dotfiles/config/pgcli/config
+ dotfiles/config/yamllint/config
  dprint.json
 Copyright: 2023 Keith Maxwell <keith.maxwell@gmail.com>
 License: CC0-1.0
