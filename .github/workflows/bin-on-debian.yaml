@@ -11,7 +11,7 @@ jobs:
   main:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: canonical/setup-lxd@v0.1.1
       - run: ./.github/lxc-profile.sh
       - run: ./tests/bin-on-debian.sh
