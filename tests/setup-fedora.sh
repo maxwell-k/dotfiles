@@ -1,5 +1,6 @@
 #!/bin/sh
 incus launch --no-profiles images:fedora/39/cloud c1 <tests/incus-config.yaml \
+&& sleep 5 \
 && incus admin waitready \
 && incus exec c1 -- dnf install --assumeyes python3.11 php \
 #
