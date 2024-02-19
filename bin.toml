@@ -24,7 +24,7 @@ target = "~/.deno/bin/deno"
 version = "--version"
 
 [dyff]
-url = "https://github.com/homeport/dyff/releases/download/v1.7.0/dyff_1.7.0_linux_amd64.tar.gz"
+url = "https://github.com/homeport/dyff/releases/download/v1.7.1/dyff_1.7.0_linux_amd64.tar.gz"
 # https://github.com/homeport/dyff/releases
 expected = "ab9faa1c5d949a9819bf947f96d0ef620cb73ad91bcfb18c3b96606bf8e2a6f9"
 version = "version"
