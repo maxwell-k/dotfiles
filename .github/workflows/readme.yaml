@@ -12,10 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: canonical/setup-lxd@v0.1.1
-      - run: ./.github/lxc-profile.sh
+      - run: ./.github/reset-network.sh
+      - run: ./.github/install-incus.sh
+      - run: incus profile edit default < .github/incus-profile.yaml
       - { run: ./.README.md-files/01.sh, env: { LOGNAME: maxwell-k } }
       - { run: ./.README.md-files/03.sh, env: { LOGNAME: maxwell-k } }
-      - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/02.sh
-      - run: lxc exec c1 -- su --login maxwell-k < .README.md-files/04.sh
+      - run: incus exec c1 -- su --login maxwell-k < .README.md-files/02.sh
+      - run: incus exec c1 -- su --login maxwell-k < .README.md-files/04.sh
       - run: ./.README.md-files/cleanup.sh

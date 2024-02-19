@@ -1,21 +1,22 @@
-description: Default profile from GitHub runner with custom user.vendor-data
+description: Default profile from GitHub runner with custom user-data
 devices:
   eth0:
     name: eth0
-    network: lxdbr0
+    network: incusbr0
     type: nic
   root:
     path: /
     pool: default
     type: disk
 config:
-  user.vendor-data: |
+  cloud-init.user-data: |
     #cloud-config
     users:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
 #
-# .github/lxc-profile.yaml
-# Copyright 2023 Keith Maxwell
+# .github/incus-profile.yaml
+# Copyright 2024 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
+# vim: set filetype=yaml.dprint :

@@ -1,2 +1,2 @@
-lxc stop c1 \
-&& lxc delete c1
+incus stop c1 \
+&& incus delete c1
