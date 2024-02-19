@@ -1,0 +1,6 @@
+Enabled: yes
+Types: deb
+URIs: https://pkgs.zabbly.com/incus/stable
+Suites: jammy
+Components: main
+Signed-By: /etc/apt/keyrings/zabbly.asc
