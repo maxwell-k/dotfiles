@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: ./.github/reset-network.sh
-      - run: ./.github/install-incus.sh
+      - uses: maxwell-k/setup-incus@main
+      - run: incus admin init --auto
       - run: incus profile edit default < .github/incus-profile.yaml
       - { run: ./.README.md-files/01.sh, env: { LOGNAME: maxwell-k } }
       - { run: ./.README.md-files/03.sh, env: { LOGNAME: maxwell-k } }
