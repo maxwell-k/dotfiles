@@ -8,7 +8,7 @@ on: # yamllint disable-line rule:truthy
   workflow_dispatch:
 
 jobs:
-  main:
+  setup:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -24,7 +24,6 @@ jobs:
       - run: incus admin init --auto
       - run: ./tests/setup.sh
         env:
-          SETUP_IMAGE: ${{ matrix.SETUP_IMAGE }}
+          LOGNAME: maxwell-k
           SETUP_CONFIG: ${{ matrix.SETUP_CONFIG }}
-      - run: ./tests/bin-on-incus.sh
-        env: { LOGNAME: maxwell-k }
+          SETUP_IMAGE: ${{ matrix.SETUP_IMAGE }}
