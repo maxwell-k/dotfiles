@@ -13,13 +13,18 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        script:
-          - ./tests/setup-fedora.sh
-          - ./tests/setup-debian.sh
+        include:
+          - SETUP_IMAGE: fedora/39/cloud
+            SETUP_CONFIG: tests/config-fedora.yaml
+          - SETUP_IMAGE: debian/12/cloud
+            SETUP_CONFIG: tests/config-debian.yaml
     steps:
       - uses: actions/checkout@v4
       - uses: maxwell-k/setup-incus@main
       - run: incus admin init --auto
-      - run: ${{ matrix.script }}
+      - run: ./tests/setup.sh
+        env:
+          SETUP_IMAGE: ${{ matrix.SETUP_IMAGE }}
+          SETUP_CONFIG: ${{ matrix.SETUP_CONFIG }}
       - run: ./tests/bin-on-incus.sh
         env: { LOGNAME: maxwell-k }

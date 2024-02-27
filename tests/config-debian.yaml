@@ -13,13 +13,16 @@ config:
     #cloud-config
     package_update: true
     package_upgrade: true
+    packages:
+      - php
+      - python3
     users:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
         ssh_import_id: ["gh:maxwell-k"]
 #
-# .github/incus-config.yaml
+# .github/incus-config-fedora.yaml
 # Copyright 2024 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 # vim: set filetype=yaml.dprint :
