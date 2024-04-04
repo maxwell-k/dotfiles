@@ -4,9 +4,9 @@ url = "https://github.com/pypa/pipx/releases/download/1.5.0/pipx.pyz"
 version = "--version"
 
 [a4]
-url = "https://github.com/maxwell-k/a4/releases/download/0.1.0/a4"
-# https://github.com/maxwell-k/a4/releases/download/0.1.0/SHA256SUMS
-expected = "6fc1b8ac85c7441a2e202a465808da13554d83063f3d0ed11d07dc1b774dffc2"
+url = "https://github.com/maxwell-k/a4/releases/download/0.1.1/a4"
+# https://github.com/maxwell-k/a4/releases/download/0.1.1/SHA256SUMS
+expected = "92cf8ca42095a232ad41274f30e71c258891c3908dd012bf23fec083f18e7ca7"
 version = "--version"
 
 [dprint]
