@@ -4,9 +4,9 @@ incus launch --no-profiles "images:${SETUP_IMAGE-fedora/39/cloud}" \
 && sleep 5 \
 && incus admin waitready \
 && incus exec c1 -- cloud-init status --wait \
-&& incus file push bin.py "c1/home/$LOGNAME/" \
+&& incus file push dotlocalslashbin.py "c1/home/$LOGNAME/" \
 && incus file push bin.toml "c1/home/$LOGNAME/" \
-&& incus exec c1 -- su --login "$LOGNAME" -c ./bin.py \
+&& incus exec c1 -- su --login "$LOGNAME" -c ./dotlocalslashbin.py \
 && incus stop c1 \
 && incus delete c1
 #

@@ -11,7 +11,7 @@
 ## Prerequisites
 
 Start with a container including the dependencies for these instructions,
-`bin.py` and `dotdrop`:
+`dotlocalslashbin.py` and `dotdrop`:
 
 <!-- embedme .README.md-files/01.sh -->
 
@@ -59,12 +59,12 @@ Install personal files:
 
 ```
 cd ~/github.com/maxwell-k/dotfiles \
-&& ./bin.py \
+&& ./dotlocalslashbin.py \
 && ~/.local/bin/pipx run dotdrop install --profile=default
 ```
 
 <!-- cleanup in .README.md-files/cleanup.sh not shown -->
 
-See [tests](/tests/) for more examples of running `bin.py` including on Fedora.
+See [tests](/tests/) for more examples of running `dotlocalslashbin.py` including on Fedora.
 
 <!-- vim: set filetype=markdown.embedme.markdown-toc.htmlCommentNoSpell.dprint : -->

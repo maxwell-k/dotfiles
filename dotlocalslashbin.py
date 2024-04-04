@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-# bin.py
+# src/dotlocalslashbin.py
 # Copyright 2022 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
-"""Download and extract files"""
+"""Download and extract files to ~/.local/bin/"""
 import tarfile
-from argparse import ArgumentDefaultsHelpFormatter as formatter_class
-from argparse import ArgumentParser
-from argparse import Namespace
+from argparse import (
+    ArgumentDefaultsHelpFormatter as formatter_class,
+    ArgumentParser,
+    Namespace,
+)
 from collections.abc import Generator
 from contextlib import contextmanager
 from hashlib import file_digest
@@ -19,6 +21,9 @@ from tomllib import load
 from typing import cast
 from urllib.request import urlopen
 from zipfile import ZipFile
+
+
+__version__ = "0.0.2"
 
 
 @contextmanager
@@ -52,7 +57,7 @@ def _download(
         target = cast(str, args.output) + name
 
     if url.startswith("https://"):
-        downloaded = Path(args.downloaded) / url.rsplit("/", 1)[1]
+        downloaded = Path(args.downloaded).expanduser() / url.rsplit("/", 1)[1]
         downloaded.parent.mkdir(parents=True, exist_ok=True)
         if not downloaded.is_file():
             with urlopen(url) as fp, downloaded.open("wb") as dp:
@@ -139,9 +144,12 @@ def _download(
 
 def main() -> int:
     parser = ArgumentParser(prog=Path(__file__).name, formatter_class=formatter_class)
+    parser.add_argument("--version", action="version", version=__version__)
     parser.add_argument("--input", default="bin.toml", help="TOML specification")
     parser.add_argument("--output", default="~/.local/bin/", help="Target directory")
-    parser.add_argument("--downloaded", default="downloaded", help="Download directory")
+    parser.add_argument(
+        "--downloaded", default="~/.cache/dotlocalslashbin/", help="Download directory"
+    )
     parser.add_argument(
         "--completions",
         default="~/.local/share/zsh/site-functions/",
