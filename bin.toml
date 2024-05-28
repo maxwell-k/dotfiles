@@ -68,7 +68,7 @@ version = "version"
 
 [actionlint]
 # https://github.com/rhysd/actionlint/releases
-url = "https://github.com/rhysd/actionlint/releases/download/v1.7.0/actionlint_1.7.0_linux_amd64.tar.gz"
+url = "https://github.com/rhysd/actionlint/releases/download/v1.7.1/actionlint_1.7.1_linux_amd64.tar.gz"
 ignore = [
   "LICENSE.txt",
   "README.md",
@@ -81,7 +81,7 @@ ignore = [
   "docs/usage.md",
   "man/actionlint.1",
 ]
-expected = "8aae9148f61952d11a97651852fdc7dffd2b762ed3cdd28b3c2232ae5f55d4db"
+expected = "f53c34493657dfea83b657e4b62cc68c25fbc383dff64c8d581613b037aacaa3"
 version = "-version"
 
 [bump]
