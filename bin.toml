@@ -10,9 +10,9 @@ expected = "92cf8ca42095a232ad41274f30e71c258891c3908dd012bf23fec083f18e7ca7"
 version = "--version"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.46.2/dprint-x86_64-unknown-linux-gnu.zip"
+url = "https://github.com/dprint/dprint/releases/download/0.46.3/dprint-x86_64-unknown-linux-gnu.zip"
 # https://github.com/dprint/dprint/releases/latest
-expected = "e2819a2f1092750227cbd0a92b1172e889a30ddbb5773e85db133c1c8859edf6"
+expected = "3f0bacc98f4f173ef712eda3a3162c0ee8287ecd86bfbddaea3b20e91a385e1d"
 version = "--version"
 
 [deno]
