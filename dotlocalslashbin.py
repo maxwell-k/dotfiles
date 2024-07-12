@@ -23,7 +23,7 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 
-__version__ = "0.0.4"
+__version__ = "0.0.5"
 
 
 class CustomNamespace(Namespace):
@@ -140,7 +140,7 @@ def _download(
                     member.path = member.path.removeprefix(prefix)
                 if member.path in ignore:
                     continue
-                file.extract(member, path=target.parent)
+                file.extract(member, path=target.parent, filter="tar")
     elif action == "command" and command is not None:
         kwargs = dict(target=target, downloaded=downloaded)
         run(split(command.format(**kwargs)), check=True)
