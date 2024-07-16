@@ -44,8 +44,8 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-show-file.sh"
 
 [pip]
-# https://pip.pypa.io/en/stable/installation/, not versioned, latest release
-url = "https://bootstrap.pypa.io/pip/pip.pyz"
+# https://pip.pypa.io/en/stable/installation/
+url = "https://bootstrap.pypa.io/pip/zipapp/pip-24.1.1.pyz"
 version = "--version"
 command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {downloaded}"
 

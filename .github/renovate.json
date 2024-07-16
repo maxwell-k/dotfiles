@@ -17,6 +17,17 @@
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
       ],
       "datasourceTemplate": "github-releases"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
+        "^bin.toml$"
+      ],
+      "matchStrings": [
+        "https:[/][/]bootstrap[.]pypa[.]io[/]pip[/]zipapp[/]pip-(?<currentValue>.+?)[.]pyz"
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "pypa/pip"
     }
   ]
 }
