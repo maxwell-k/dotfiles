@@ -83,12 +83,3 @@ ignore = [
 ]
 expected = "f53c34493657dfea83b657e4b62cc68c25fbc383dff64c8d581613b037aacaa3"
 version = "-version"
-
-[bump]
-# https://github.com/guilhem/bump/releases/download/v0.2.3/checksums.txt
-url = "https://github.com/guilhem/bump/releases/download/v0.2.3/bump_Linux_x86_64.tar.gz"
-expected = "30f3b862fb7a52183f2177c9ed8808d562d3e04c544ba9b38e97795f9d42950c"
-ignore = [
-  "LICENSE",
-  "README.md",
-]
