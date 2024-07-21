@@ -10,7 +10,7 @@ bindkey -v
 setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
-autoload compinit && compinit
+autoload -U compinit && compinit
 # Aliases and <80 character functions {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
