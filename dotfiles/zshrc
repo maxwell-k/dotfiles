@@ -10,7 +10,8 @@ bindkey -v
 setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
-autoload compinit && compinit
+autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit  # for nox below
 # Aliases and <80 character functions {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
@@ -49,7 +50,6 @@ zshrc_fzf_fzf() { #{{{1
 git status --short | fzf --multi | cut -c4-
 find | fzf --multi
 git ls-files | fzf --multi
-gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
 EOF
   )
   # shellcheck disable=SC2016
@@ -106,6 +106,7 @@ yy() { # {{{1
   fi | tr -d '\n' | ygg ; >&2 printf '\n'
 } # }}}1
 # Environment variables {{{1
+export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
 export DOTDROP_PROFILE=default
 if [ -x /usr/bin/vim ]; then
   export EDITOR=vim
@@ -161,7 +162,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
       tmux          # See spaceship_tmux above
       venv          # virtualenv section
       git           # Git section (git_branch + git_status)
-      gcloud        # Google Cloud Platform section
       host          # Host name so it is clear if using toolbox
       exec_time     # Execution time
       line_sep      # Line break
@@ -174,8 +174,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
     SPACESHIP_HOST_COLOR_SSH=black
     SPACESHIP_PROMPT_PREFIXES_SHOW=false
     SPACESHIP_EXIT_CODE_SHOW=true
-    SPACESHIP_GCLOUD_SYMBOL="⛅ "
-    SPACESHIP_GCLOUD_COLOR=4
     SPACESHIP_GIT_BRANCH_PREFIX="🪵 "
     SPACESHIP_CHAR_SYMBOL="%% "
     SPACESHIP_EXIT_CODE_SYMBOL=""
@@ -187,11 +185,10 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
 fi #}}}1
 # command line completion {{{1
 site="$HOME/.local/share/zsh/site-functions"
-executable="$HOME/.local/pipx/venvs/nox/bin/register-python-argcomplete"
+executable="$HOME/.local/share/pipx/venvs/nox/bin/register-python-argcomplete"
 if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
   mkdir --parents "$site"
-  printf "#compdef nox\n" > "$site/_nox"
-  "$executable" nox >> "$site/_nox"
+  "$executable" nox >> "$site/_nox"  # starts with a compdef line
   rm -f "$HOME/.zcompdump"
 fi
 executable="$HOME/.local/bin/pipx"
