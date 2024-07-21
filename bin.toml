@@ -63,7 +63,14 @@ version = "--version"
 url = "https://github.com/exercism/cli/releases/download/v3.4.0/exercism-3.4.0-linux-x86_64.tar.gz"
 # https://github.com/exercism/cli/releases/download/v3.4.0/exercism_checksums.txt
 expected = "492b536d7e9ff909beb0e3f866af1b0ace48e5ae76235200c2add67db19a2cf3"
-ignore = ["LICENSE", "README.md"]
+ignore = [
+  "LICENSE",
+  "README.md",
+  "shell/README.md",
+  "shell/exercism.fish",
+  "shell/exercism_completion.bash",
+  "shell/exercism_completion.zsh",
+]
 version = "version"
 
 [actionlint]
