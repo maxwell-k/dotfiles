@@ -49,7 +49,6 @@ zshrc_fzf_fzf() { #{{{1
 git status --short | fzf --multi | cut -c4-
 find | fzf --multi
 git ls-files | fzf --multi
-gcloud projects list | fzf --header-lines=1 | cut -d' ' -f1
 EOF
   )
   # shellcheck disable=SC2016
@@ -161,7 +160,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
       tmux          # See spaceship_tmux above
       venv          # virtualenv section
       git           # Git section (git_branch + git_status)
-      gcloud        # Google Cloud Platform section
       host          # Host name so it is clear if using toolbox
       exec_time     # Execution time
       line_sep      # Line break
@@ -174,8 +172,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
     SPACESHIP_HOST_COLOR_SSH=black
     SPACESHIP_PROMPT_PREFIXES_SHOW=false
     SPACESHIP_EXIT_CODE_SHOW=true
-    SPACESHIP_GCLOUD_SYMBOL="⛅ "
-    SPACESHIP_GCLOUD_COLOR=4
     SPACESHIP_GIT_BRANCH_PREFIX="🪵 "
     SPACESHIP_CHAR_SYMBOL="%% "
     SPACESHIP_EXIT_CODE_SYMBOL=""
