@@ -105,6 +105,7 @@ yy() { # {{{1
   fi | tr -d '\n' | ygg ; >&2 printf '\n'
 } # }}}1
 # Environment variables {{{1
+export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
 export DOTDROP_PROFILE=default
 if [ -x /usr/bin/vim ]; then
   export EDITOR=vim
