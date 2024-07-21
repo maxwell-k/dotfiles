@@ -11,6 +11,7 @@ setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
 autoload -U compinit && compinit
+autoload -U bashcompinit && bashcompinit  # for nox below
 # Aliases and <80 character functions {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
@@ -184,11 +185,10 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
 fi #}}}1
 # command line completion {{{1
 site="$HOME/.local/share/zsh/site-functions"
-executable="$HOME/.local/pipx/venvs/nox/bin/register-python-argcomplete"
+executable="$HOME/.local/share/pipx/venvs/nox/bin/register-python-argcomplete"
 if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
   mkdir --parents "$site"
-  printf "#compdef nox\n" > "$site/_nox"
-  "$executable" nox >> "$site/_nox"
+  "$executable" nox >> "$site/_nox"  # starts with a compdef line
   rm -f "$HOME/.zcompdump"
 fi
 executable="$HOME/.local/bin/pipx"
