@@ -9,6 +9,7 @@
 [diff] submodule = log
 [diff] colorMoved = zebra
 [diff] tool = vimdiff
+[fetch] prune = true
 [grep] lineNumber = true
 [log] date = local
 [log] decorate = short
