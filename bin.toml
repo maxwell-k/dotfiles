@@ -90,3 +90,7 @@ ignore = [
 ]
 expected = "f53c34493657dfea83b657e4b62cc68c25fbc383dff64c8d581613b037aacaa3"
 version = "-version"
+
+[fnm]
+# https://github.com/Schniz/fnm/releases
+url = "https://github.com/Schniz/fnm/releases/download/v1.37.1/fnm-linux.zip"
