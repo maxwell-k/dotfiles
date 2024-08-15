@@ -60,9 +60,9 @@ url = "https://github.com/wp-cli/wp-cli/releases/download/v2.11.0/wp-cli-2.11.0.
 version = "--version"
 
 [exercism]
-url = "https://github.com/exercism/cli/releases/download/v3.4.0/exercism-3.4.0-linux-x86_64.tar.gz"
-# https://github.com/exercism/cli/releases/download/v3.4.0/exercism_checksums.txt
-expected = "492b536d7e9ff909beb0e3f866af1b0ace48e5ae76235200c2add67db19a2cf3"
+url = "https://github.com/exercism/cli/releases/download/v3.4.1/exercism-3.4.1-linux-x86_64.tar.gz"
+# https://github.com/exercism/cli/releases/download/v3.4.1/exercism_checksums.txt
+expected = "1adaa565b5b0abfafbdf06685448858744b3545a1c6a8b39f8002ff84a3798a2"
 ignore = [
   "LICENSE",
   "README.md",
