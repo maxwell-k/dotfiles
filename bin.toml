@@ -1,6 +1,6 @@
 [pipx]
-# Manually remove the file from ./downloaded/ on upgrade
-url = "https://github.com/pypa/pipx/releases/download/1.6.0/pipx.pyz"
+# Manually remove ~/.cache/dotlocalslashbin/pipx.pyz on upgrade
+url = "https://github.com/pypa/pipx/releases/download/1.7.0/pipx.pyz"
 version = "--version"
 
 [a4]
