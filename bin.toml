@@ -1,5 +1,6 @@
 [pipx]
 # Manually remove ~/.cache/dotlocalslashbin/pipx.pyz on upgrade
+# <https://github.com/pypa/pipx/releases>, no checksums provided
 url = "https://github.com/pypa/pipx/releases/download/1.7.1/pipx.pyz"
 version = "--version"
 
@@ -92,5 +93,11 @@ expected = "f53c34493657dfea83b657e4b62cc68c25fbc383dff64c8d581613b037aacaa3"
 version = "-version"
 
 [fnm]
-# https://github.com/Schniz/fnm/releases
+# <https://github.com/Schniz/fnm/releases>, no checksums provided
 url = "https://github.com/Schniz/fnm/releases/download/v1.37.1/fnm-linux.zip"
+
+[zvm]
+# <https://github.com/tristanisham/zvm/releases/>, no checksums provided
+action = "untar"
+url = "https://github.com/tristanisham/zvm/releases/download/v0.7.4/zvm-linux-amd64.tar"
+version = "--version"
