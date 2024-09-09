@@ -3,6 +3,7 @@
 [color] pager = false
 [commit] verbose = true
 [core] safecrlf = true
+[credential "https://github.com"] helper = !/usr/bin/gh auth git-credential
 [daemon] receivepack = true #see git help daemon
 [diff] algorithm = patience
 [diff] renames = copies
