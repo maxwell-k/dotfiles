@@ -60,7 +60,7 @@ Install personal files:
 ```
 cd ~/github.com/maxwell-k/dotfiles \
 && ./dotlocalslashbin.py \
-&& ~/.local/bin/pipx run dotdrop install --profile=default
+&& ~/.local/bin/uv tool run dotdrop install --profile=default
 ```
 
 <!-- cleanup in .README.md-files/cleanup.sh not shown -->

@@ -10,8 +10,24 @@ bindkey -v
 setopt interactive_comments
 [ -n "$TMUX" ] && setopt ignore_eof
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
+# Command line completion {{{1
+# these files must be generated before the compinit commands
+site="$HOME/.local/share/zsh/site-functions"
+executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
+if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
+  mkdir --parents "$site"
+  "$executable" nox >> "$site/_nox"  # starts with a compdef line
+  rm -f "$HOME/.zcompdump"
+fi
+executable="$HOME/.local/bin/uv"
+if [ -x "$executable" ] && [ ! -f "$site/_uv" ] ; then
+  mkdir --parents "$site"
+  "$executable" generate-shell-completion zsh >> "$site/_uv"
+  rm -f "$HOME/.zcompdump"
+fi
+unset executable site #}}}1
 autoload -U compinit && compinit
-autoload -U bashcompinit && bashcompinit  # for nox below
+autoload -U bashcompinit && bashcompinit  # for nox above
 # Aliases and <80 character functions {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
@@ -184,23 +200,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
   }
   . "$HOME/.zsh/spaceship/spaceship.zsh"
 fi #}}}1
-# command line completion {{{1
-site="$HOME/.local/share/zsh/site-functions"
-executable="$HOME/.local/share/pipx/venvs/nox/bin/register-python-argcomplete"
-if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
-  mkdir --parents "$site"
-  "$executable" nox >> "$site/_nox"  # starts with a compdef line
-  rm -f "$HOME/.zcompdump"
-fi
-executable="$HOME/.local/bin/pipx"
-if [ -x "$executable" ] && [ ! -f "$site/_pipx" ] ; then
-  mkdir --parents "$site"
-  printf "#compdef pipx\n" > "$site/_pipx"
-  SHIV_CONSOLE_SCRIPT=register-python-argcomplete "$executable" pipx \
-    >> "$site/_pipx" 2>/dev/null
-  rm -f "$HOME/.zcompdump"
-fi
-unset executable site #}}}1
 if [ -s /run/motd ]; then cat /run/motd ; fi
 if [ -f ~/.zshrc.local ]; then . ~/.zshrc.local ; fi # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
