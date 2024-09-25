@@ -186,18 +186,16 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
 fi #}}}1
 # command line completion {{{1
 site="$HOME/.local/share/zsh/site-functions"
-executable="$HOME/.local/share/pipx/venvs/nox/bin/register-python-argcomplete"
+executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
 if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
   mkdir --parents "$site"
   "$executable" nox >> "$site/_nox"  # starts with a compdef line
   rm -f "$HOME/.zcompdump"
 fi
-executable="$HOME/.local/bin/pipx"
-if [ -x "$executable" ] && [ ! -f "$site/_pipx" ] ; then
+executable="$HOME/.local/bin/uv"
+if [ -x "$executable" ] && [ ! -f "$site/_uv" ] ; then
   mkdir --parents "$site"
-  printf "#compdef pipx\n" > "$site/_pipx"
-  SHIV_CONSOLE_SCRIPT=register-python-argcomplete "$executable" pipx \
-    >> "$site/_pipx" 2>/dev/null
+  "$executable" generate-shell-completion zsh >> "$site/_uv"
   rm -f "$HOME/.zcompdump"
 fi
 unset executable site #}}}1
