@@ -20,7 +20,6 @@ version = "--version"
 
 [deno]
 # See https://github.com/denoland/deno/issues/7253 for checksum progress
-# Manually remove ~/.cache/dotlocalslashbin/deno-x86_64-unknown-linux-gnu.zip on upgrade
 url = "https://github.com/denoland/deno/releases/download/v1.46.3/deno-x86_64-unknown-linux-gnu.zip"
 # https://github.com/denoland/deno/releases/latest
 target = "~/.deno/bin/deno"
