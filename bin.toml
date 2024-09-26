@@ -4,6 +4,7 @@ url = "https://github.com/astral-sh/uv/releases/download/0.4.16/uv-x86_64-unknow
 expected = "f4f4de434206fb610ecb2dbc3fc44c62adb6b61e8d1237d858a10b407a2737c4"
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
+ignore = ["uv-x86_64-unknown-linux-gnu"]
 
 [a4]
 url = "https://github.com/maxwell-k/a4/releases/download/0.1.1/a4"
