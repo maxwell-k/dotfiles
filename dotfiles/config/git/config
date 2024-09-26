@@ -31,6 +31,5 @@
 [uploadpack] allowAnySHA1InWant = true
 [user] email = keith.maxwell@gmail.com
 [user] name = Keith Maxwell
-[includeIf "gitdir:~/*s.co.uk/"] path = config-home-star-s-dot-co-dot-uk
 
 # vim: filetype=gitconfig
