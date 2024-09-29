@@ -76,9 +76,9 @@ ignore = [
 version = "version"
 
 [actionlint]
-url = "https://github.com/rhysd/actionlint/releases/download/v1.7.2/actionlint_1.7.2_linux_amd64.tar.gz"
+url = "https://github.com/rhysd/actionlint/releases/download/v1.7.3/actionlint_1.7.3_linux_amd64.tar.gz"
 # https://github.com/rhysd/actionlint/releases
-expected = "e1537c2032d3517e2e257dc0ad51777da56be4a62d3cf0ee290e3aa36da012a1"
+expected = "37252b4d440b56374b0fc1726e05fd7452d30d6d774f6e9b52e65bb64475f9db"
 ignore = [
   "LICENSE.txt",
   "README.md",
