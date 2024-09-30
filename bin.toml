@@ -100,6 +100,5 @@ version = "--version"
 
 [zvm]
 # <https://github.com/tristanisham/zvm/releases/>, no checksums provided
-action = "untar"
-url = "https://github.com/tristanisham/zvm/releases/download/v0.7.5/zvm-linux-amd64.tar"
+url = "https://github.com/tristanisham/zvm/releases/download/v0.7.6/zvm-linux-amd64.tar"
 version = "--version"
