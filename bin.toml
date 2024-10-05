@@ -25,14 +25,6 @@ url = "https://github.com/denoland/deno/releases/download/v1.46.3/deno-x86_64-un
 target = "~/.deno/bin/deno"
 version = "--version"
 
-[dyff]
-url = "https://github.com/homeport/dyff/releases/download/v1.9.2/dyff_1.9.1_linux_amd64.tar.gz"
-# https://github.com/homeport/dyff/releases
-expected = "4fa0bc39a4af463a0b928e9223c112d066d78ed4007ef50dd411be6a9ef09f52"
-version = "version"
-completions = "{target} completion zsh"
-ignore = ["LICENSE", "README.md"]
-
 [git-jump]
 url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
 
