@@ -87,7 +87,7 @@ version = "-version"
 
 [fnm]
 # <https://github.com/Schniz/fnm/releases>, no checksums provided
-url = "https://github.com/Schniz/fnm/releases/download/v1.37.1/fnm-linux.zip"
+url = "https://github.com/Schniz/fnm/releases/download/v1.37.2/fnm-linux.zip"
 version = "--version"
 
 [zvm]
