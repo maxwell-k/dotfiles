@@ -10,7 +10,7 @@
 
 ## Prerequisites
 
-Start with a container including the dependencies for these instructions,
+Command to start a container then install the dependencies for these instructions,
 `dotlocalslashbin.py` and `dotdrop`:
 
 <!-- embedme .README.md-files/01.sh -->
@@ -20,18 +20,18 @@ incus launch images:debian/12/cloud c1 \
 && incus exec c1 -- apt-get install --yes curl file fzf git python3.11-venv zsh
 ```
 
-Login:
+Command to login:
 
     incus exec c1 -- su --login "$LOGNAME"
 
 ## Shell
 
-Download `.zshrc` form the main branch of this repository on GitHub:
+Command to download `.zshrc` from the main branch of this repository on GitHub:
 
     curl --location --output ~/.zshrc \
         https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc
 
-Switch to ZSH and install spaceship:
+Commands to switch to ZSH and install spaceship:
 
 <!-- embedme .README.md-files/02.sh -->
 
@@ -45,7 +45,7 @@ sudo sed -i "s,$LOGNAME:/bin/bash$,$LOGNAME:/usr/bin/zsh," /etc/passwd \
 
 ## Files
 
-Clone this repository from GitHub:
+Commands to clone this repository from GitHub:
 
     mkdir --parents github.com/maxwell-k \
     && git -C github.com/maxwell-k \
@@ -53,7 +53,7 @@ Clone this repository from GitHub:
 
 <!-- for equivalent setup from local checkout see .README.md-files/03.sh -->
 
-Install personal files:
+Commands to install personal files:
 
 <!-- embedme .README.md-files/04.sh -->
 
