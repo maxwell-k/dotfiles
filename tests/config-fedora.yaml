@@ -21,7 +21,7 @@ config:
         shell: /bin/bash
         ssh_import_id: ["gh:maxwell-k"]
 #
-# .github/incus-config-fedora.yaml
+# tests/config-fedora.yaml
 # Copyright 2024 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 # vim: set filetype=yaml.dprint :
