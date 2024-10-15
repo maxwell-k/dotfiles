@@ -14,7 +14,7 @@ config:
     package_update: true
     package_upgrade: true
     packages:
-      - python3.11 # avaiable in Debian 12
+      - python3.11 # available in Debian 12
     users:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
