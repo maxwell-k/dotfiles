@@ -21,6 +21,18 @@
     {
       "customType": "regex",
       "fileMatch": [
+        "^README.md$",
+        "^.README.md-files/02.sh$"
+      ],
+      "matchStrings": [
+        "\\n +--branch=(?<currentValue>v[^ ]+) https:\\/\\/github[.]com\\/spaceship-prompt\\/spaceship-prompt.git \\\\\\n"
+      ],
+      "datasourceTemplate": "github-tags",
+      "depNameTemplate": "spaceship-prompt/spaceship-prompt"
+    },
+    {
+      "customType": "regex",
+      "fileMatch": [
         "^bin.toml$"
       ],
       "matchStrings": [
