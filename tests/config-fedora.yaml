@@ -14,7 +14,6 @@ config:
     package_update: true
     package_upgrade: true
     packages:
-      - php
       - python3.11 # avaiable in Debian 12
     users:
       - name: maxwell-k

@@ -48,11 +48,6 @@ url = "/usr/bin/python3.13"
 # Python 3.13 is not available on Debian 12
 # version = "--version"
 
-[wp]
-# <https://github.com/wp-cli/wp-cli/releases/>, no checksums provided
-url = "https://github.com/wp-cli/wp-cli/releases/download/v2.11.0/wp-cli-2.11.0.phar"
-version = "--version"
-
 [exercism]
 url = "https://github.com/exercism/cli/releases/download/v3.5.2/exercism-3.5.2-linux-x86_64.tar.gz"
 # https://github.com/exercism/cli/releases/download/v3.5.2/exercism_checksums.txt
