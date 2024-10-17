@@ -19,9 +19,10 @@ expected = "62297402bc9ede9434c33c5de1918d97864002347c0ff85863de7d1ffe6ea384"
 version = "--version"
 
 [deno]
-# See https://github.com/denoland/deno/issues/7253 for checksum progress
-url = "https://github.com/denoland/deno/releases/download/v2.0.1/deno-x86_64-unknown-linux-gnu.zip"
 # https://github.com/denoland/deno/releases/latest
+url = "https://github.com/denoland/deno/releases/download/v2.0.1/deno-x86_64-unknown-linux-gnu.zip"
+#      https://github.com/denoland/deno/releases/download/v2.0.1/deno-x86_64-unknown-linux-gnu.zip.sha256sum
+expected = "70c7947ed8b3d0ca80c4a70f9b6a87397ce9fb2bf1dd19b5221d6819b49bf067"
 target = "~/.deno/bin/deno"
 version = "--version"
 
