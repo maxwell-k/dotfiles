@@ -13,7 +13,7 @@ expected = "92cf8ca42095a232ad41274f30e71c258891c3908dd012bf23fec083f18e7ca7"
 version = "--version"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.47.2/dprint-x86_64-unknown-linux-gnu.zip"
+url = "https://github.com/dprint/dprint/releases/download/0.47.4/dprint-x86_64-unknown-linux-gnu.zip"
 # https://github.com/dprint/dprint/releases/latest
 expected = "62297402bc9ede9434c33c5de1918d97864002347c0ff85863de7d1ffe6ea384"
 version = "--version"
