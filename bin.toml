@@ -42,11 +42,12 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc
 # https://pip.pypa.io/en/stable/installation/
 url = "https://bootstrap.pypa.io/pip/zipapp/pip-24.3.1.pyz"
 version = "--version"
+# Python 3.13 is not available on Debian 12 bookworm
 command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {downloaded}"
 
 [python]
 url = "/usr/bin/python3.13"
-# Python 3.13 is not available on Debian 12
+# Python 3.13 is not available on Debian 12 bookworm
 # version = "--version"
 
 [exercism]
@@ -90,3 +91,10 @@ version = "--version"
 # <https://github.com/tristanisham/zvm/releases/>, no checksums provided
 url = "https://github.com/tristanisham/zvm/releases/download/v0.7.9/zvm-linux-amd64.tar"
 version = "--version"
+
+[dnscontrol]
+url = "https://github.com/StackExchange/dnscontrol/releases/download/v4.14.0/dnscontrol_4.14.0_linux_amd64.tar.gz"
+#      https://github.com/StackExchange/dnscontrol/releases/download/v4.14.0/checksums.txt
+expected = "5910b04d7998aa2af6f16852e042fbe9579535d440b162068d90aa6de15d462c"
+ignore = ["LICENSE", "README.md"]
+version = "version"
