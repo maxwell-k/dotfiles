@@ -20,9 +20,9 @@ version = "--version"
 
 [deno]
 # https://github.com/denoland/deno/releases/latest
-url = "https://github.com/denoland/deno/releases/download/v2.0.1/deno-x86_64-unknown-linux-gnu.zip"
-#      https://github.com/denoland/deno/releases/download/v2.0.1/deno-x86_64-unknown-linux-gnu.zip.sha256sum
-expected = "70c7947ed8b3d0ca80c4a70f9b6a87397ce9fb2bf1dd19b5221d6819b49bf067"
+url = "https://github.com/denoland/deno/releases/download/v2.0.3/deno-x86_64-unknown-linux-gnu.zip"
+#      https://github.com/denoland/deno/releases/download/v2.0.3/deno-x86_64-unknown-linux-gnu.zip.sha256sum
+expected = "b79cba35c39645ab658516b22ae3941ff80190e4eeeb52bc18f12ee33bbc912e"
 target = "~/.deno/bin/deno"
 version = "--version"
 
