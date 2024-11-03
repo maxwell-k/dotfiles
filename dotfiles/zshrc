@@ -8,7 +8,6 @@
 #
 bindkey -v
 setopt interactive_comments
-[ -n "$TMUX" ] && setopt ignore_eof
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
 # Command line completion {{{1
 # these files must be generated before the compinit commands
