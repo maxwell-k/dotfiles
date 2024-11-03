@@ -7,8 +7,6 @@ SPDX-PackageDownloadLocation = "https://github.com/maxwell-k/dotfiles"
 path = [
   ".en.utf-8.add",
   ".flake8",
-  ".github/zabbly-incus-stable.sources",
-  ".github/zabbly.asc",
   ".gitignore",
   "README.md",
   "bin.toml",
