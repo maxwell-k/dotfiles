@@ -1,7 +1,7 @@
 [uv]
-url = "https://github.com/astral-sh/uv/releases/download/0.5.0/uv-x86_64-unknown-linux-gnu.tar.gz"
-#      https://github.com/astral-sh/uv/releases/download/0.5.0/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
-expected = "e8f8c7e55ef2dfb0b57faba265faeb5049e30b9065a38e2a4fef89d6f6a492d0"
+url = "https://github.com/astral-sh/uv/releases/download/0.5.1/uv-x86_64-unknown-linux-gnu.tar.gz"
+#      https://github.com/astral-sh/uv/releases/download/0.5.1/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
+expected = "942e29ff6769b096c7c99e9c3b1c08276869667d0d5d6121852dd9b9d875b3f3"
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
