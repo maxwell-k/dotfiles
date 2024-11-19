@@ -18,6 +18,11 @@ src = "local/bin/ygg"
 dst = "~/.local/bin/ygg"
 chmod = "755"
 
+[dotfiles.f_vimf]
+src = "local/bin/vimf"
+dst = "~/.local/bin/vimf"
+chmod = "755"
+
 [dotfiles.f_percollate]
 src = "local/bin/percollate"
 dst = "~/.local/bin/percollate"

@@ -1,0 +1,9 @@
+#!/bin/sh
+for i in "$@"; do
+    cmd="vim \"+call ale#quit#Mapping()\" \"$i\""
+    # Backticks are intentionally used inside single quotes below, knowing that
+    # they are not expanded.
+    # shellcheck disable=SC2016
+    printf 'Calling `%s`\n' "$cmd"
+    eval "$cmd" && printf 'Completed successfully\n'
+done
