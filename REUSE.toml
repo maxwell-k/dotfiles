@@ -33,6 +33,7 @@ path = [
   "dotfiles/local/bin/prettier",
   "dotfiles/local/bin/pyright-langserver",
   "dotfiles/local/bin/title",
+  "dotfiles/local/bin/vimf",
   "dotfiles/local/bin/vimj",
   "dotfiles/local/bin/vinfo",
 ]
