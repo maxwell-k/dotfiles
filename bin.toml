@@ -93,8 +93,8 @@ url = "https://github.com/tristanisham/zvm/releases/download/v0.8.2/zvm-linux-am
 version = "--version"
 
 [dnscontrol]
-url = "https://github.com/StackExchange/dnscontrol/releases/download/v4.15.0/dnscontrol_4.15.0_linux_amd64.tar.gz"
-#      https://github.com/StackExchange/dnscontrol/releases/download/v4.15.0/checksums.txt
-expected = "13e247e9e9188284f8be927b59ef906b25cc33dbcff6a9ea7312c5a4cfa231d6"
+url = "https://github.com/StackExchange/dnscontrol/releases/download/v4.15.1/dnscontrol_4.15.1_linux_amd64.tar.gz"
+#      https://github.com/StackExchange/dnscontrol/releases/download/v4.15.1/checksums.txt
+expected = "29773315d7773d1c8472f6a7e8074b563248c663b752619124d9b1981076211a"
 ignore = ["LICENSE", "README.md"]
 version = "version"
