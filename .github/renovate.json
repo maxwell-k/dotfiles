@@ -41,5 +41,14 @@
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "pypa/pip"
     }
+  ],
+  "packageRules": [
+    {
+      "description": "Automerge upgrades to dprint.json",
+      "matchFileNames": [
+        "dprint.json"
+      ],
+      "automerge": true
+    }
   ]
 }
