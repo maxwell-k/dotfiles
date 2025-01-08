@@ -3,7 +3,7 @@
 #    For portability use POSIX compatible shell script syntax where possible
 #
 # .zshrc
-# Copyright 2023 Keith Maxwell
+# Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 #
 bindkey -v
