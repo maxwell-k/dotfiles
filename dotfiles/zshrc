@@ -187,8 +187,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
       char          # Prompt character
     )
     SPACESHIP_HOST_SHOW=always
-    SPACESHIP_HOST_COLOR=black
-    SPACESHIP_HOST_COLOR_SSH=black
     SPACESHIP_PROMPT_PREFIXES_SHOW=false
     SPACESHIP_EXIT_CODE_SHOW=true
     SPACESHIP_GIT_BRANCH_PREFIX="🪵 "
