@@ -103,6 +103,8 @@ zshrc_tig() { #{{{1
   return $ret
 }
 zle -N zshrc_tig
+bindkey _M viins '^p' zshrc_tig
+bindkey _M vicmd '^p' zshrc_tig
 zmodload zsh/complist
 zshrc_menu_select() { zle expand-or-complete; zle menu-select ; }
 zle -N zshrc_menu_select
