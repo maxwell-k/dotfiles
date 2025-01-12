@@ -78,6 +78,7 @@ zshrc_fzf_fzf() {
 git status --short | fzf --multi | cut -c4-
 find | fzf --multi
 git ls-files | fzf --multi
+git ls-files --others --exclude-standard | fzf --multi
 EOF
   )
   # shellcheck disable=SC2016
