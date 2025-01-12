@@ -156,14 +156,9 @@ if pager --version >/dev/null 2>&1 ; then export PAGER=pager ; fi
 # https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
 export NCURSES_NO_UTF8_ACS=1
 # }}}1
-# PS1 if spaceship is not installed {{{1
-if [ -n "$TMUX" ] ; then
-  PS1="%? ⁅%23<<%d⁆%# "
-else
-  PS1="%? [%23<<%d]%# "
-fi
 # }}}1
-# https://spaceship-prompt.sh {{{1
+# Prompt — PS1 {{{1
+# https://spaceship-prompt.sh
 if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; then
   spaceship_tmux() {  # show a computer inside tmux
     tmux_status=""
@@ -199,7 +194,12 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
     SPACESHIP_VENV_COLOR=207
   }
   . "$HOME/.zsh/spaceship/spaceship.zsh"
-fi #}}}1
+elif [ -n "$TMUX" ] ; then
+  PS1="%? ⁅%23<<%d⁆%# "
+else
+  PS1="%? [%23<<%d]%# "
+fi
+# }}}
 if [ -s /run/motd ]; then cat /run/motd ; fi
 if [ -f ~/.zshrc.local ]; then . ~/.zshrc.local ; fi # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
