@@ -122,9 +122,9 @@ yy() { # {{{1
     fc -ln -1
   fi | tr -d '\n' | ygg ; >&2 printf '\n'
 } # }}}1
-# Environment variables {{{1
-export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
-export DOTDROP_PROFILE=default
+# Environment variables for interactive shells {{{1
+#
+# Store environment variables that affect all shells in `~/.zshenv`.
 if [ -x /usr/bin/vim ]; then
   export EDITOR=vim
 else
@@ -132,30 +132,10 @@ else
 fi
 export FCEDIT=$EDITOR
 export READNULLCMD=cat  # more is the default
-for i in \
-  "$HOME/.local/bin" \
-  "$HOME/.deno/bin" \
-  "$HOME/.zvm/bin" \
-  "$HOME/.cargo/bin" \
-  ;
-do
-    if ! test -d "$i" ; then continue ; fi
-    case "$PATH" in
-      *"$i"*) true ;;
-      # On macOS the order of prefixies in PATH may be changed by path_helper.
-      # Below, if append is chosen instead of prepend, then the order will be
-      # unchanged. However it is then not possible to override binaries from
-      # system package. This file is more likely used on Linux so prepend is
-      # chosen.
-      *) export PATH="$i:$PATH" ;;
-    esac
-done
-unset i
 if fzf --version >/dev/null 2>&1 ; then export FZF_DEFAULT_OPTS='--height=10 --bind=ctrl-a:select-all' ; fi
 if pager --version >/dev/null 2>&1 ; then export PAGER=pager ; fi
 # https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
 export NCURSES_NO_UTF8_ACS=1
-# }}}1
 # }}}1
 # Prompt — PS1 {{{1
 # https://spaceship-prompt.sh
