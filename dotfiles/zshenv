@@ -1,0 +1,31 @@
+# Environment variables for ZSH
+#
+# Store environment variables that only affect an interactive shell in
+# `~/.zshrc`.
+export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
+export DOTDROP_PROFILE=default
+for i in \
+  "$HOME/.local/bin" \
+  "$HOME/.deno/bin" \
+  "$HOME/.zvm/bin" \
+  "$HOME/.cargo/bin" \
+  ;
+do
+    if ! test -d "$i" ; then continue ; fi
+    case "$PATH" in
+      *"$i"*) true ;;
+      # On macOS the order of prefixies in PATH may be changed by path_helper.
+      # Below, if append is chosen instead of prepend, then the order will be
+      # unchanged. However it is then not possible to override binaries from
+      # system package. This file is more likely used on Linux so prepend is
+      # chosen.
+      *) export PATH="$i:$PATH" ;;
+    esac
+done
+unset i
+#
+# .zshenv
+# Copyright 2025 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+#
+# shellcheck shell=sh disable=SC1090,SC1091,SC1094

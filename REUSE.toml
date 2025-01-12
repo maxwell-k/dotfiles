@@ -21,7 +21,7 @@ path = [
   "dotfiles/config/yamllint/config",
   "dprint.json",
 ]
-SPDX-FileCopyrightText = "2024 Keith Maxwell <keith.maxwell@gmail.com>"
+SPDX-FileCopyrightText = "2025 Keith Maxwell <keith.maxwell@gmail.com>"
 SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
@@ -37,8 +37,8 @@ path = [
   "dotfiles/local/bin/vimj",
   "dotfiles/local/bin/vinfo",
 ]
-SPDX-FileCopyrightText = "2024 Keith Maxwell <keith.maxwell@gmail.com>"
+SPDX-FileCopyrightText = "2025 Keith Maxwell <keith.maxwell@gmail.com>"
 SPDX-License-Identifier = "MPL-2.0"
 
-# SPDX-FileCopyrightText: 2024 Keith Maxwell <keith.maxwell@gmail.com>
+# SPDX-FileCopyrightText: 2025 Keith Maxwell <keith.maxwell@gmail.com>
 # SPDX-License-Identifier: CC0-1.0

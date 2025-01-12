@@ -1,0 +1,18 @@
+# File to update the vendored version of dotlocalslashbin.py
+#
+# Use this file with:
+#
+#     uv tool run dotlocalslashbin --input=vendor.toml --output=.
+#
+["dotlocalslashbin.py"]
+# Update the url and hash below from the output of:
+#
+#     uv tool run qypi files dotlocalslashbin
+#
+url = "https:////files.pythonhosted.org/packages/10/b0/d2bd4bb65ef9a4ae668286d0c9e9b713f4f3d64d7c2c7708f6fa5b82eabd/dotlocalslashbin-0.0.15-py2.py3-none-any.whl"
+expected = "4b94d19d686df555c0390d34dbcadf2b74ca48f805c5d0f97adc746db96ef1dc"
+action = "unzip"
+version = "--version"
+#
+# SPDX-FileCopyrightText: 2025 Keith Maxwell <keith.maxwell@gmail.com>
+# SPDX-License-Identifier: CC0-1.0

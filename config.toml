@@ -9,6 +9,10 @@ force_chmod = true
 src = "zshrc"
 dst = "~/.zshrc"
 
+[dotfiles.f_zshenv]
+src = "zshenv"
+dst = "~/.zshenv"
+
 [dotfiles.f_tmux]
 src = "tmux.conf"
 dst = "~/.tmux.conf"

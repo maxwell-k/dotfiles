@@ -3,13 +3,13 @@
 #    For portability use POSIX compatible shell script syntax where possible
 #
 # .zshrc
-# Copyright 2023 Keith Maxwell
+# Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 #
-bindkey -v
+bindkey -v  # vi mode, see man zshzle
 setopt interactive_comments
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
-# Command line completion {{{1
+# Files for command line completion {{{1
 # these files must be generated before the compinit commands
 site="$HOME/.local/share/zsh/site-functions"
 executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
@@ -27,25 +27,40 @@ fi
 unset executable site #}}}1
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit  # for nox above
-# Aliases and <80 character functions {{{1
+# Aliases {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
 alias rm="rm -i"  # To avoid accidentally deleting content
 alias ls="ls --color=auto --group-directories-first"
 alias lc="tig --reverse remotes/origin/HEAD.."
-
-lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
-ywd() { printf '%s' "$PWD"  | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
+# Functions for use as commands {{{1
+# <80 characters, alphabetically sorted {{{
 gcd() { cd "$(git rev-parse --show-toplevel)" || return ; }
+lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
+ywd() { printf '%s' "$PWD" | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
 yz() { fc -l -n 0- | fzf --tac | osc52.sh ; }
 # }}}
-bindkey -M vicmd v edit-command-line  #{{{1
+motd() { #{{{
+  : > /run/motd && systemctl --user restart uncommitted && cat /run/motd
+} #}}}
+yy() { # {{{
+  if [ ! -t 0 ] ; then
+    tail -n 1
+  else
+    fc -ln -1
+  fi | tr -d '\n' | ygg ; >&2 printf '\n'
+} # }}}
+# }}}
+# Editing command lines {{{1
+bindkey -M vicmd v edit-command-line
 autoload edit-command-line
 zle -N edit-command-line
-bindkey -M viins '^o' execute-named-cmd #{{{1
+bindkey -M viins '^o' execute-named-cmd #{{{
 # using `escape` then `:` causes the result of `execute-named-cmd` to be
 # inserted before the last character of the existing line
-if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
+# }}}
+# FZF key bindings {{{
+if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then
   # load binding for ctrl-r ^r
   . /usr/share/fzf/shell/key-bindings.zsh
   # prefer ctrl-e to alt-c
@@ -56,11 +71,9 @@ if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then  #{{{1
   # ctrl-t is hidden by new tab
   bindkey -M vicmd -r '^T'
   bindkey -M viins -r '^T'
-fi
-motd() { #{{{1
-  : > /run/motd && systemctl --user restart uncommitted && cat /run/motd
-} #}}}1
-zshrc_fzf_fzf() { #{{{1
+fi #}}}
+# Ctrl-f to present an fzf menu of fzf menus {{{
+zshrc_fzf_fzf() {
   cmd=$( fzf<<EOF
 git status --short | fzf --multi | cut -c4-
 find | fzf --multi
@@ -80,7 +93,9 @@ EOF
 zle -N zshrc_fzf_fzf
 bindkey _M viins '^f' zshrc_fzf_fzf
 bindkey _M vicmd '^f' zshrc_fzf_fzf
-zshrc_tig() { #{{{1
+# }}}
+# Ctrl-p to select a git commit hash with tig {{{
+zshrc_tig() {
   # relies on the following in config_home/tig/config
   # bind refs <Ctrl-g> <sh -c "echo %(refname) >/tmp/tig-output"
   # bind generic <Ctrl-g> <sh -c "echo %(commit) >/tmp/tig-output"
@@ -103,6 +118,9 @@ zshrc_tig() { #{{{1
   return $ret
 }
 zle -N zshrc_tig
+bindkey _M viins '^p' zshrc_tig
+bindkey _M vicmd '^p' zshrc_tig
+#}}}
 zmodload zsh/complist
 zshrc_menu_select() { zle expand-or-complete; zle menu-select ; }
 zle -N zshrc_menu_select
@@ -113,16 +131,9 @@ bindkey -M menuselect l vi-forward-char
 bindkey -M menuselect h vi-backward-char
 bindkey -M menuselect '^[' undo
 bindkey -M menuselect '^I' accept-and-hold  # ^I = Tab
-yy() { # {{{1
-  if [ ! -t 0 ] ; then
-    tail -n 1
-  else
-    fc -ln -1
-  fi | tr -d '\n' | ygg ; >&2 printf '\n'
-} # }}}1
-# Environment variables {{{1
-export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
-export DOTDROP_PROFILE=default
+# }}}1
+# Environment variables for interactive shells {{{1
+# Store environment variables that affect all shells in `~/.zshenv`.
 if [ -x /usr/bin/vim ]; then
   export EDITOR=vim
 else
@@ -130,38 +141,13 @@ else
 fi
 export FCEDIT=$EDITOR
 export READNULLCMD=cat  # more is the default
-for i in \
-  "$HOME/.local/bin" \
-  "$HOME/.deno/bin" \
-  "$HOME/.zvm/bin" \
-  "$HOME/.cargo/bin" \
-  ;
-do
-    if ! test -d "$i" ; then continue ; fi
-    case "$PATH" in
-      *"$i"*) true ;;
-      # On macOS the order of prefixies in PATH may be changed by path_helper.
-      # Below, if append is chosen instead of prepend, then the order will be
-      # unchanged. However it is then not possible to override binaries from
-      # system package. This file is more likely used on Linux so prepend is
-      # chosen.
-      *) export PATH="$i:$PATH" ;;
-    esac
-done
-unset i
 if fzf --version >/dev/null 2>&1 ; then export FZF_DEFAULT_OPTS='--height=10 --bind=ctrl-a:select-all' ; fi
 if pager --version >/dev/null 2>&1 ; then export PAGER=pager ; fi
 # https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
 export NCURSES_NO_UTF8_ACS=1
 # }}}1
-# PS1 if spaceship is not installed {{{1
-if [ -n "$TMUX" ] ; then
-  PS1="%? ⁅%23<<%d⁆%# "
-else
-  PS1="%? [%23<<%d]%# "
-fi
-# }}}1
-# https://spaceship-prompt.sh {{{1
+# Prompt — PS1 {{{1
+# https://spaceship-prompt.sh
 if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; then
   spaceship_tmux() {  # show a computer inside tmux
     tmux_status=""
@@ -187,8 +173,6 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
       char          # Prompt character
     )
     SPACESHIP_HOST_SHOW=always
-    SPACESHIP_HOST_COLOR=black
-    SPACESHIP_HOST_COLOR_SSH=black
     SPACESHIP_PROMPT_PREFIXES_SHOW=false
     SPACESHIP_EXIT_CODE_SHOW=true
     SPACESHIP_GIT_BRANCH_PREFIX="🪵 "
@@ -199,7 +183,12 @@ if [ -f "$HOME/.zsh/spaceship/spaceship.zsh" ] && [ -z "$SPACESHIP_DISABLE" ] ; 
     SPACESHIP_VENV_COLOR=207
   }
   . "$HOME/.zsh/spaceship/spaceship.zsh"
-fi #}}}1
+elif [ -n "$TMUX" ] ; then
+  PS1="%? ⁅%23<<%d⁆%# "
+else
+  PS1="%? [%23<<%d]%# "
+fi
+# }}}
 if [ -s /run/motd ]; then cat /run/motd ; fi
 if [ -f ~/.zshrc.local ]; then . ~/.zshrc.local ; fi # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
