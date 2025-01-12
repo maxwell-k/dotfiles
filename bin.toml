@@ -89,7 +89,7 @@ version = "--version"
 
 [zvm]
 # <https://github.com/tristanisham/zvm/releases/>, no checksums provided
-url = "https://github.com/tristanisham/zvm/releases/download/v0.8.2/zvm-linux-amd64.tar"
+url = "https://github.com/tristanisham/zvm/releases/download/v0.8.4/zvm-linux-amd64.tar"
 version = "--version"
 
 [dnscontrol]
