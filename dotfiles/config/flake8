@@ -1,3 +1,0 @@
-# for compatiblilty with black
-[flake8]
-ignore = E203, W503

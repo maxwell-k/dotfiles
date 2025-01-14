@@ -7,9 +7,7 @@ SPDX-PackageDownloadLocation = "https://github.com/maxwell-k/dotfiles"
 path = [
   # file formats that do no suit comments
   ".en.utf-8.add",
-  ".flake8",
   ".gitignore",
-  "dotfiles/config/flake8",
   "dotfiles/config/git/attributes",
   "dotfiles/config/git/ignore",
   "dprint.json",
