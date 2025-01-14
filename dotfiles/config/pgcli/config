@@ -1,4 +1,9 @@
 # vi: ft=dosini
+#
+# dotfiles/config/pgcli/config
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
+#
 [main]
 
 # https://github.com/dbcli/pgcli/blob/master/pgcli/pgclirc

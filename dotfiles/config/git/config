@@ -32,4 +32,7 @@
 [user] email = keith.maxwell@gmail.com
 [user] name = Keith Maxwell
 
+# dotfiles/config/git/config
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
 # vim: filetype=gitconfig

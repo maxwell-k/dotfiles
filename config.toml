@@ -126,3 +126,7 @@ dst = "~/.config/yamllint/config"
 
 [profiles.default]
 dotfiles = ["ALL"]
+
+# config.toml
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0

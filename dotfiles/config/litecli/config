@@ -111,3 +111,7 @@ output.even-row = ""
 
 # Favorite queries.
 [favorite_queries]
+
+# dotfiles/config/litecli/config
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0

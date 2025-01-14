@@ -67,4 +67,9 @@ cd ~/github.com/maxwell-k/dotfiles \
 
 See [tests](/tests/) for more examples of running `dotlocalslashbin.py` including on Fedora.
 
+<!--
+README.md
+SPDX-License-Identifier: CC0-1.0
+Copyright Keith Maxwell
+-->
 <!-- vim: set filetype=markdown.embedme.markdown-toc.htmlCommentNoSpell.dprint : -->
