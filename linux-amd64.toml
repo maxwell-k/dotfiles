@@ -1,0 +1,80 @@
+[actionlint]
+url = "https://github.com/rhysd/actionlint/releases/download/v1.7.6/actionlint_1.7.6_linux_amd64.tar.gz"
+#      https://github.com/rhysd/actionlint/releases/download/v1.7.6/actionlint_1.7.6_checksums.txt
+expected = "5d1a70d9de15fee5371e6f9e20cc29b284e814d6ee1b882f9749e91caf716eba"
+ignore = [
+  "LICENSE.txt",
+  "README.md",
+  "docs/README.md",
+  "docs/api.md",
+  "docs/checks.md",
+  "docs/config.md",
+  "docs/install.md",
+  "docs/reference.md",
+  "docs/usage.md",
+  "man/actionlint.1",
+]
+version = "-version"
+
+[a4]
+url = "https://github.com/maxwell-k/a4/releases/download/0.1.1/a4"
+# https://github.com/maxwell-k/a4/releases/download/0.1.1/SHA256SUMS
+expected = "92cf8ca42095a232ad41274f30e71c258891c3908dd012bf23fec083f18e7ca7"
+version = "--version"
+
+[deno]
+# https://github.com/denoland/deno/releases/latest
+url = "https://github.com/denoland/deno/releases/download/v2.1.4/deno-x86_64-unknown-linux-gnu.zip"
+#      https://github.com/denoland/deno/releases/download/v2.1.4/deno-x86_64-unknown-linux-gnu.zip.sha256sum
+expected = "54a81939cccb2af114c4d0a68a554cf4a04b1f08728e70f663f83781de19d785"
+target = "~/.deno/bin/deno"
+version = "--version"
+
+[dnscontrol]
+url = "https://github.com/StackExchange/dnscontrol/releases/download/v4.15.3/dnscontrol_4.15.3_linux_amd64.tar.gz"
+#      https://github.com/StackExchange/dnscontrol/releases/download/v4.15.3/checksums.txt
+expected = "d1b35eaa5fb4e372acb3e692da5d6730af3e8b9271666613348d087192b9b5c1"
+ignore = ["LICENSE", "README.md"]
+version = "version"
+
+[dprint]
+url = "https://github.com/dprint/dprint/releases/download/0.48.0/dprint-x86_64-unknown-linux-gnu.zip"
+# https://github.com/dprint/dprint/releases/latest
+expected = "746c7134de53329a01934f20241acc7b6be95b95f8a197689a465ecf58e13f1b"
+version = "--version"
+
+[exercism]
+url = "https://github.com/exercism/cli/releases/download/v3.5.4/exercism-3.5.4-linux-x86_64.tar.gz"
+# https://github.com/exercism/cli/releases/download/v3.5.4/exercism_checksums.txt
+expected = "97a18dda052f4766e6b7f1fbfadabf37b32522949516e6416be008c80c068e87"
+ignore = [
+  "LICENSE",
+  "README.md",
+  "shell/README.md",
+  "shell/exercism.fish",
+  "shell/exercism_completion.bash",
+  "shell/exercism_completion.zsh",
+]
+version = "version"
+
+[fnm]
+# <https://github.com/Schniz/fnm/releases>, no checksums provided
+url = "https://github.com/Schniz/fnm/releases/download/v1.38.1/fnm-linux.zip"
+version = "--version"
+
+[uv]
+url = "https://github.com/astral-sh/uv/releases/download/0.5.18/uv-x86_64-unknown-linux-gnu.tar.gz"
+#      https://github.com/astral-sh/uv/releases/download/0.5.18/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
+expected = "1dbaeffc5cfac769f99700c0fc8c4ef4494a339720c6bf8b79367b1acd701b46"
+version = "--version"
+prefix = "uv-x86_64-unknown-linux-gnu/"
+ignore = ["uv-x86_64-unknown-linux-gnu"]
+
+[zvm]
+# <https://github.com/tristanisham/zvm/releases/>, no checksums provided
+url = "https://github.com/tristanisham/zvm/releases/download/v0.8.2/zvm-linux-amd64.tar"
+version = "--version"
+
+# linux-amd64.toml
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
