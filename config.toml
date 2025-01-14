@@ -80,10 +80,6 @@ src = "local/bin/pdf-information.py"
 dst = "~/.local/bin/pdf-information.py"
 chmod = "755"
 
-[dotfiles.f_flake8]
-src = "config/flake8"
-dst = "~/.config/flake8"
-
 [dotfiles.f_lfrc]
 src = "config/lf/lfrc"
 dst = "~/.config/lf/lfrc"
@@ -126,3 +122,7 @@ dst = "~/.config/yamllint/config"
 
 [profiles.default]
 dotfiles = ["ALL"]
+
+# config.toml
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0

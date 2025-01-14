@@ -5,20 +5,11 @@ SPDX-PackageDownloadLocation = "https://github.com/maxwell-k/dotfiles"
 
 [[annotations]]
 path = [
+  # file formats that do no suit comments
   ".en.utf-8.add",
-  ".flake8",
   ".gitignore",
-  "README.md",
-  "bin.toml",
-  "config.toml",
-  "dotfiles/config/flake8",
   "dotfiles/config/git/attributes",
-  "dotfiles/config/git/config",
   "dotfiles/config/git/ignore",
-  "dotfiles/config/lf/lfrc",
-  "dotfiles/config/litecli/config",
-  "dotfiles/config/pgcli/config",
-  "dotfiles/config/yamllint/config",
   "dprint.json",
 ]
 SPDX-FileCopyrightText = "2025 Keith Maxwell <keith.maxwell@gmail.com>"
@@ -26,7 +17,9 @@ SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
 path = [
+  # includied in README.md so hide comments here
   ".README.md-files/**.sh",
+  # files are two lines each, so avoid three extra lines of comments
   "dotfiles/local/bin/gtree",
   "dotfiles/local/bin/jsonlint",
   "dotfiles/local/bin/percollate",
@@ -40,5 +33,6 @@ path = [
 SPDX-FileCopyrightText = "2025 Keith Maxwell <keith.maxwell@gmail.com>"
 SPDX-License-Identifier = "MPL-2.0"
 
+# REUSE.toml
 # SPDX-FileCopyrightText: 2025 Keith Maxwell <keith.maxwell@gmail.com>
 # SPDX-License-Identifier: CC0-1.0

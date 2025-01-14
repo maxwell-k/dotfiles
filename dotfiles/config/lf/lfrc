@@ -4,3 +4,7 @@ set ifs "\n"
 
 cmd trash %trash-put $fx
 map <delete> trash
+
+# dotfiles/config/lf/lfrc
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0

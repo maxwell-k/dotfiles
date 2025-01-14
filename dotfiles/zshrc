@@ -68,9 +68,6 @@ if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then
   bindkey -M viins -r '\ec'
   bindkey -M vicmd '^e' fzf-cd-widget
   bindkey -M viins '^e' fzf-cd-widget
-  # ctrl-t is hidden by new tab
-  bindkey -M vicmd -r '^T'
-  bindkey -M viins -r '^T'
 fi #}}}
 # Ctrl-f to present an fzf menu of fzf menus {{{
 zshrc_fzf_fzf() {
@@ -78,6 +75,7 @@ zshrc_fzf_fzf() {
 git status --short | fzf --multi | cut -c4-
 find | fzf --multi
 git ls-files | fzf --multi
+git ls-files --others --exclude-standard | fzf --multi
 EOF
   )
   # shellcheck disable=SC2016

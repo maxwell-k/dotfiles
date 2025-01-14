@@ -31,5 +31,9 @@
 [uploadpack] allowAnySHA1InWant = true
 [user] email = keith.maxwell@gmail.com
 [user] name = Keith Maxwell
+[includeIf "gitdir:~/github.com/a*/"] path = config-home-github-dot-com-slash-a-star-slash
 
+# dotfiles/config/git/config
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
 # vim: filetype=gitconfig

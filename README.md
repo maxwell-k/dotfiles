@@ -59,7 +59,7 @@ Commands to install personal files:
 
 ```
 cd ~/github.com/maxwell-k/dotfiles \
-&& ./dotlocalslashbin.py \
+&& ./dotlocalslashbin.py --input=bin.toml --input=linux-amd64.toml \
 && ~/.local/bin/uv tool run dotdrop install --profile=default
 ```
 
@@ -67,4 +67,9 @@ cd ~/github.com/maxwell-k/dotfiles \
 
 See [tests](/tests/) for more examples of running `dotlocalslashbin.py` including on Fedora.
 
+<!--
+README.md
+SPDX-License-Identifier: CC0-1.0
+Copyright Keith Maxwell
+-->
 <!-- vim: set filetype=markdown.embedme.markdown-toc.htmlCommentNoSpell.dprint : -->
