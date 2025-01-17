@@ -11,8 +11,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^bin.toml$",
-        "^linux-amd64.toml$"
+        "^[[:alnum:]]\\+.toml$"
       ],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
@@ -34,8 +33,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^bin.toml$",
-        "^linux-amd64.toml$"
+        "^[[:alnum:]]\\+.toml$"
       ],
       "matchStrings": [
         "https:[/][/]bootstrap[.]pypa[.]io[/]pip[/]zipapp[/]pip-(?<currentValue>.+?)[.]pyz"
