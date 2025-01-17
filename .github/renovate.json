@@ -11,7 +11,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^[[:alnum:]]+.toml$"
+        "^[[:alnum:]-]+.toml$"
       ],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
@@ -33,7 +33,7 @@
     {
       "customType": "regex",
       "fileMatch": [
-        "^[[:alnum:]]+.toml$"
+        "^[[:alnum:]-]+.toml$"
       ],
       "matchStrings": [
         "https:[/][/]bootstrap[.]pypa[.]io[/]pip[/]zipapp[/]pip-(?<currentValue>.+?)[.]pyz"
