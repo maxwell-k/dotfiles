@@ -63,9 +63,9 @@ url = "https://github.com/Schniz/fnm/releases/download/v1.38.1/fnm-linux.zip"
 version = "--version"
 
 [uv]
-url = "https://github.com/astral-sh/uv/releases/download/0.5.18/uv-x86_64-unknown-linux-gnu.tar.gz"
-#      https://github.com/astral-sh/uv/releases/download/0.5.18/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
-expected = "1dbaeffc5cfac769f99700c0fc8c4ef4494a339720c6bf8b79367b1acd701b46"
+url = "https://github.com/astral-sh/uv/releases/download/0.5.20/uv-x86_64-unknown-linux-gnu.tar.gz"
+#      https://github.com/astral-sh/uv/releases/download/0.5.20/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
+expected = "8fdbfca767917f957e4541747cbf7b23b45c211109dbba97b49962fa3547aab4"
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
