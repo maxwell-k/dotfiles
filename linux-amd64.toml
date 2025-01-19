@@ -31,9 +31,9 @@ target = "~/.deno/bin/deno"
 version = "--version"
 
 [dnscontrol]
-url = "https://github.com/StackExchange/dnscontrol/releases/download/v4.15.4/dnscontrol_4.15.4_linux_amd64.tar.gz"
-#      https://github.com/StackExchange/dnscontrol/releases/download/v4.15.4/checksums.txt
-expected = "a5623b70a9d1bc7a6857f9afc8e7d3f0056aedb09b00f023db48140376f626ea"
+url = "https://github.com/StackExchange/dnscontrol/releases/download/v4.15.5/dnscontrol_4.15.5_linux_amd64.tar.gz"
+#      https://github.com/StackExchange/dnscontrol/releases/download/v4.15.5/checksums.txt
+expected = "b3cf3468671464e86c285933141dd3ad3a2d03cd7ea6dcc34bf4d2b01f171b4d"
 ignore = ["LICENSE", "README.md"]
 version = "version"
 
