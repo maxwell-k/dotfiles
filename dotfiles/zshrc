@@ -140,7 +140,7 @@ fi
 export FCEDIT=$EDITOR
 export READNULLCMD=cat  # more is the default
 if fzf --version >/dev/null 2>&1 ; then export FZF_DEFAULT_OPTS='--height=10 --bind=ctrl-a:select-all' ; fi
-if pager --version >/dev/null 2>&1 ; then export PAGER=pager ; fi
+if command -v pager >/dev/null ; then export PAGER=pager ; fi
 # https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
 export NCURSES_NO_UTF8_ACS=1
 # }}}1
