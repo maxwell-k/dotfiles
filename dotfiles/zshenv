@@ -17,7 +17,7 @@ do
       # On macOS the order of prefixies in PATH may be changed by path_helper.
       # Below, if append is chosen instead of prepend, then the order will be
       # unchanged. However it is then not possible to override binaries from
-      # system package. This file is more likely used on Linux so prepend is
+      # system packages. This file is more likely used on Linux so prepend is
       # chosen.
       *) export PATH="$i:$PATH" ;;
     esac
