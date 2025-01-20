@@ -130,8 +130,29 @@ bindkey -M menuselect h vi-backward-char
 bindkey -M menuselect '^[' undo
 bindkey -M menuselect '^I' accept-and-hold  # ^I = Tab
 # }}}1
-# Environment variables for interactive shells {{{1
-# Store environment variables that affect all shells in `~/.zshenv`.
+# Environment variables {{{1
+# Interactive command line {{{2
+# Set the PATH {{{3
+#
+# On MacOS /usr/libexec/path_helper changes the order of the entries in PATH.
+# Following the advice in the gist below I do not use a separate zshenv file to
+# avoid that issue.
+# https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
+#
+for i in \
+  "$HOME/.zvm/bin" \
+  "$HOME/.cargo/bin" \
+  "$HOME/.deno/bin" \
+  "$HOME/.local/bin" \
+  ;
+do
+    if ! test -d "$i" ; then continue ; fi
+    case "$PATH" in
+      *"$i"*) true ;;
+      *) export PATH="$i:$PATH" ;;
+    esac
+done
+unset i # }}}3
 if [ -x /usr/bin/vim ]; then
   export EDITOR=vim
 else
@@ -143,6 +164,9 @@ if fzf --version >/dev/null 2>&1 ; then export FZF_DEFAULT_OPTS='--height=10 --b
 if command -v pager >/dev/null ; then export PAGER=pager ; fi
 # https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
 export NCURSES_NO_UTF8_ACS=1
+# Wider {{{2
+export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
+export DOTDROP_PROFILE=default
 # }}}1
 # Prompt — PS1 {{{1
 # https://spaceship-prompt.sh
