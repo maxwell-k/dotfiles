@@ -60,15 +60,22 @@ bindkey -M viins '^o' execute-named-cmd #{{{
 # inserted before the last character of the existing line
 # }}}
 # FZF key bindings {{{
-if [ -f /usr/share/fzf/shell/key-bindings.zsh ] ; then
+key_bindings=/usr/share/fzf/shell/key-bindings.zsh
+if [ ! -f "$key_bindings" ] && [ -d /opt/homebrew/Cellar/fzf ] ; then
+  key_bindings="$(find /opt/homebrew/Cellar/fzf -name key-bindings.zsh)"
+fi
+if [ -f "$key_bindings" ] ; then
   # load binding for ctrl-r ^r
-  . /usr/share/fzf/shell/key-bindings.zsh
+  . "$key_bindings"
   # prefer ctrl-e to alt-c
   bindkey -M vicmd -r '\ec'
   bindkey -M viins -r '\ec'
   bindkey -M vicmd '^e' fzf-cd-widget
   bindkey -M viins '^e' fzf-cd-widget
-fi #}}}
+else
+   echo "zshrc: key-bindings.zsh from fzf not found"
+fi
+unset key_bindings #}}}
 # Ctrl-f to present an fzf menu of fzf menus {{{
 zshrc_fzf_fzf() {
   cmd=$( fzf<<EOF
