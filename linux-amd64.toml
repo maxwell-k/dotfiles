@@ -38,14 +38,14 @@ ignore = ["LICENSE", "README.md"]
 version = "version"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.48.0/dprint-x86_64-unknown-linux-gnu.zip"
-# https://github.com/dprint/dprint/releases/latest
-expected = "746c7134de53329a01934f20241acc7b6be95b95f8a197689a465ecf58e13f1b"
+url = "https://github.com/dprint/dprint/releases/download/0.49.0/dprint-x86_64-unknown-linux-gnu.zip"
+#      https://github.com/dprint/dprint/releases/download/0.49.0/SHASUMS256.txt
+expected = "fa10179ea9272045882b831f10a39e19255abf197d075cd3646aff15fffe227d"
 version = "--version"
 
 [exercism]
 url = "https://github.com/exercism/cli/releases/download/v3.5.4/exercism-3.5.4-linux-x86_64.tar.gz"
-# https://github.com/exercism/cli/releases/download/v3.5.4/exercism_checksums.txt
+#      https://github.com/exercism/cli/releases/download/v3.5.4/exercism_checksums.txt
 expected = "97a18dda052f4766e6b7f1fbfadabf37b32522949516e6416be008c80c068e87"
 ignore = [
   "LICENSE",
