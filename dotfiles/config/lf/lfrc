@@ -5,6 +5,9 @@ set ifs "\n"
 cmd trash %trash-put $fx
 map <delete> trash
 
+cmd chrome %google-chrome-stable $fx
+map <enter> chrome
+
 # dotfiles/config/lf/lfrc
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
