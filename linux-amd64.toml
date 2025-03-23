@@ -30,36 +30,10 @@ expected = "c4584a6f427f03c6de28878a15b14e749340ec580c650b53fd600f048315db5f"
 target = "~/.deno/bin/deno"
 version = "--version"
 
-[dnscontrol]
-url = "https://github.com/StackExchange/dnscontrol/releases/download/v4.16.0/dnscontrol_4.16.0_linux_amd64.tar.gz"
-#      https://github.com/StackExchange/dnscontrol/releases/download/v4.16.0/checksums.txt
-expected = "542420aadece72e43da0db7408a1d60bd4ef85b54922411a8993ec64b15ad22a"
-ignore = ["LICENSE", "README.md"]
-version = "version"
-
 [dprint]
 url = "https://github.com/dprint/dprint/releases/download/0.49.1/dprint-x86_64-unknown-linux-gnu.zip"
 #      https://github.com/dprint/dprint/releases/download/0.49.1/SHASUMS256.txt
 expected = "06c9eb656c8021f03e75620d391304de29ad540ee714bd23f91243370ac4435c"
-version = "--version"
-
-[exercism]
-url = "https://github.com/exercism/cli/releases/download/v3.5.4/exercism-3.5.4-linux-x86_64.tar.gz"
-#      https://github.com/exercism/cli/releases/download/v3.5.4/exercism_checksums.txt
-expected = "97a18dda052f4766e6b7f1fbfadabf37b32522949516e6416be008c80c068e87"
-ignore = [
-  "LICENSE",
-  "README.md",
-  "shell/README.md",
-  "shell/exercism.fish",
-  "shell/exercism_completion.bash",
-  "shell/exercism_completion.zsh",
-]
-version = "version"
-
-[fnm]
-# <https://github.com/Schniz/fnm/releases>, no checksums provided
-url = "https://github.com/Schniz/fnm/releases/download/v1.38.1/fnm-linux.zip"
 version = "--version"
 
 [uv]
@@ -69,11 +43,6 @@ expected = "001b87a0c2ea642a3c75a98c6af3e8528aa473d560e653cf213efcc9aaa4a028"
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
-
-[zvm]
-# <https://github.com/tristanisham/zvm/releases/>, no checksums provided
-url = "https://github.com/tristanisham/zvm/releases/download/v0.8.5/zvm-linux-amd64.tar"
-version = "--version"
 
 # linux-amd64.toml
 # Copyright Keith Maxwell
