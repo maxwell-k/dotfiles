@@ -38,9 +38,9 @@ ignore = ["LICENSE", "README.md"]
 version = "version"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.49.0/dprint-x86_64-unknown-linux-gnu.zip"
-#      https://github.com/dprint/dprint/releases/download/0.49.0/SHASUMS256.txt
-expected = "fa10179ea9272045882b831f10a39e19255abf197d075cd3646aff15fffe227d"
+url = "https://github.com/dprint/dprint/releases/download/0.49.1/dprint-x86_64-unknown-linux-gnu.zip"
+#      https://github.com/dprint/dprint/releases/download/0.49.1/SHASUMS256.txt
+expected = "06c9eb656c8021f03e75620d391304de29ad540ee714bd23f91243370ac4435c"
 version = "--version"
 
 [exercism]
