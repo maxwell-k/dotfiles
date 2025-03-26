@@ -14,8 +14,10 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - SETUP_IMAGE: fedora/41/cloud
-            SETUP_CONFIG: tests/config-fedora.yaml
+          # Disabled while investigating an issue with Fedora containers:
+          # https://discuss.linuxcontainers.org/t/containers-from-fedora-images-launch-with-no-network/23306
+          # - SETUP_IMAGE: "" # use defaults in ./tests/setup.sh
+          #   SETUP_CONFIG: ""
           - SETUP_IMAGE: debian/12/cloud
             SETUP_CONFIG: tests/config-debian.yaml
     steps:
