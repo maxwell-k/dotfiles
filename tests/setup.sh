@@ -1,5 +1,5 @@
 #!/bin/sh
-incus launch --no-profiles "images:${SETUP_IMAGE-fedora/40/cloud}" \
+incus launch --no-profiles "images:${SETUP_IMAGE-fedora/41/cloud}" \
   c1 < "${SETUP_CONFIG-tests/config-fedora.yaml}" \
 && sleep 5 \
 && incus admin waitready \

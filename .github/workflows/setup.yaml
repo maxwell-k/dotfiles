@@ -14,8 +14,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - SETUP_IMAGE: fedora/41/cloud
-            SETUP_CONFIG: tests/config-fedora.yaml
+          - SETUP_IMAGE: "" # use defaults in ./tests/setup.sh
+            SETUP_CONFIG: ""
           - SETUP_IMAGE: debian/12/cloud
             SETUP_CONFIG: tests/config-debian.yaml
     steps:
