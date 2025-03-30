@@ -37,9 +37,9 @@ expected = "06c9eb656c8021f03e75620d391304de29ad540ee714bd23f91243370ac4435c"
 version = "--version"
 
 [uv]
-url = "https://github.com/astral-sh/uv/releases/download/0.6.10/uv-x86_64-unknown-linux-gnu.tar.gz"
-#      https://github.com/astral-sh/uv/releases/download/0.6.10/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
-expected = "d58885f055fdb726d12cdd1cc54119432a0e4557c8e8ba04ca1d625058b98832"
+url = "https://github.com/astral-sh/uv/releases/download/0.6.11/uv-x86_64-unknown-linux-gnu.tar.gz"
+#      https://github.com/astral-sh/uv/releases/download/0.6.11/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
+expected = "c19b3be7ac26f8b211f7a5f07f01a77fd4d2b6205ff257790770a585f7f5bda4"
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
