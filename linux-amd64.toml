@@ -30,8 +30,8 @@ target = "~/.deno/bin/deno"
 version = "--version"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.49.1/dprint-x86_64-unknown-linux-gnu.zip"
-#      https://github.com/dprint/dprint/releases/download/0.49.1/SHASUMS256.txt
+url = "https://github.com/dprint/dprint/releases/download/0.50.0/dprint-x86_64-unknown-linux-gnu.zip"
+#      https://github.com/dprint/dprint/releases/download/0.50.0/SHASUMS256.txt
 expected = "06c9eb656c8021f03e75620d391304de29ad540ee714bd23f91243370ac4435c"
 version = "--version"
 
