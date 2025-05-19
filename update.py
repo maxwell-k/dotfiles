@@ -10,7 +10,7 @@ from pathlib import Path
 from tomllib import load
 from urllib.request import urlopen
 
-SUFFIXES = {
+MODIFIERS = {
     "deno": ".sha256sum",
     "uv": ".sha256",
 }
@@ -18,15 +18,12 @@ SUFFIXES = {
 
 def parse_args(arg_list: list[str] | None):
     parser = ArgumentParser()
-
-    help_ = "item to update"
-    parser.add_argument("key", type=str, help=help_)
-    help_ = "file to update, default: '%(default)s'"
+    parser.add_argument("key", type=str, help="item to update")
     parser.add_argument(
         "target",
         nargs="?",
         type=str,
-        help=help_,
+        help="file to update, default: '%(default)s'",
         default="linux-amd64.toml",
     )
     return parser.parse_args(arg_list)
@@ -40,7 +37,11 @@ def main(arg_list: list[str] | None = None) -> int:
     with path.open("rb") as file:
         item = load(file)[args.key]
 
-    url = item["url"] + SUFFIXES[args.key]
+    modifier = MODIFIERS[args.key]
+    if modifier.startswith("."):
+        url = item["url"] + modifier
+    else:
+        raise NotImplementedError()
     with urlopen(url) as response:
         content = response.read()
     new = content.decode().split()[0]
