@@ -37,8 +37,7 @@ version = "--version"
 
 [uv]
 url = "https://github.com/astral-sh/uv/releases/download/0.7.5/uv-x86_64-unknown-linux-gnu.tar.gz"
-#      https://github.com/astral-sh/uv/releases/download/0.7.5/uv-x86_64-unknown-linux-gnu.tar.gz.sha256
-expected = "a3d1964080a855e1f8806975b5fa943376045a64852c06ba80540813aa333305"
+expected = "a3d1964080a855e1f8806975b5fa943376045a64852c06ba80540813aa333305" # update with: ./helpers/uv.py
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
