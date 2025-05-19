@@ -13,6 +13,7 @@ from urllib.request import urlopen
 MODIFIERS = {
     "deno": ".sha256sum",
     "uv": ".sha256",
+    "dprint": "SHASUMS256.txt",
 }
 
 
@@ -36,17 +37,21 @@ def main(arg_list: list[str] | None = None) -> int:
     path = Path(args.target)
     with path.open("rb") as file:
         item = load(file)[args.key]
+    url = item["url"]
+    old = item["expected"]
+
+    filename = url[url.rindex("/") + 1 :]
 
     modifier = MODIFIERS[args.key]
     if modifier.startswith("."):
-        url = item["url"] + modifier
+        url += modifier
     else:
-        raise NotImplementedError()
+        url = url.removesuffix(filename) + modifier
     with urlopen(url) as response:
-        content = response.read()
-    new = content.decode().split()[0]
+        content = response.read().decode()
+    line = next(i for i in content.splitlines() if filename in i)
+    new = line.split()[0]
 
-    old = item["expected"]
     text = path.read_text().replace(old, new)
     path.write_text(text)
 

@@ -23,7 +23,6 @@ ignore = [
 version = "-version"
 
 [deno]
-# https://github.com/denoland/deno/releases/latest
 url = "https://github.com/denoland/deno/releases/download/v2.3.3/deno-x86_64-unknown-linux-gnu.zip"
 expected = "cb573ef18e06b6f17db31b7a410143abfebe0c8d1faa99cb934a7c1351c75701" # ./update.py deno
 target = "~/.deno/bin/deno"
@@ -31,8 +30,7 @@ version = "--version"
 
 [dprint]
 url = "https://github.com/dprint/dprint/releases/download/0.50.0/dprint-x86_64-unknown-linux-gnu.zip"
-#      https://github.com/dprint/dprint/releases/download/0.50.0/SHASUMS256.txt
-expected = "06c9eb656c8021f03e75620d391304de29ad540ee714bd23f91243370ac4435c"
+expected = "f68122411325908f076f65e02d03103c9dbb9feabe80c8fbca8f81b7e8cd2512" # ./update.py dprint
 version = "--version"
 
 [uv]
