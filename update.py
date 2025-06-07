@@ -10,12 +10,6 @@ from pathlib import Path
 from tomllib import load
 from urllib.request import urlopen
 
-MODIFIERS = {
-    "deno": ".sha256sum",
-    "uv": ".sha256",
-    "dprint": "SHASUMS256.txt",
-}
-
 
 def _parse_args(arg_list: list[str] | None) -> Namespace:
     parser = ArgumentParser()
@@ -42,7 +36,7 @@ def main(arg_list: list[str] | None = None) -> int:
 
     filename = url[url.rindex("/") + 1 :]
 
-    modifier = MODIFIERS[args.key]
+    modifier = item["modifier"]
     if modifier.startswith("."):
         url += modifier
     else:
