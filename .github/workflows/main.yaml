@@ -1,4 +1,4 @@
-# .github/workflows/renovate.yaml
+# .github/workflows/main.yaml
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
 
@@ -8,7 +8,7 @@ on: # yamllint disable-line rule:truthy
   workflow_dispatch:
 
 jobs:
-  dprint:
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
