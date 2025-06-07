@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: dprint/check@v2.2
+      - uses: fsfe/reuse-action@v5
       - uses: actions/setup-node@v4
         # https://github.com/renovatebot/renovate/blob/main/package.json#L141
         with: { node-version: "^22.13.0" }
