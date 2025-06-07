@@ -22,3 +22,4 @@ jobs:
           && npm --version \
           && npm exec --yes --package renovate -- renovate --version
       - run: npm exec --yes --package renovate -- renovate-config-validator
+      - run: npm exec --yes embedme -- --verify README.md
