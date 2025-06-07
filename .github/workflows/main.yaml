@@ -23,3 +23,10 @@ jobs:
           && npm exec --yes --package renovate -- renovate --version
       - run: npm exec --yes --package renovate -- renovate-config-validator
       - run: npm exec --yes embedme -- --verify README.md
+      - uses: maxwell-k/setup-incus@main
+      - run: incus profile edit default < .github/incus-profile.yaml
+      - { run: ./.README.md-files/01.sh, env: { LOGNAME: maxwell-k } }
+      - { run: ./.README.md-files/03.sh, env: { LOGNAME: maxwell-k } }
+      - run: incus exec c1 -- su --login maxwell-k < .README.md-files/02.sh
+      - run: incus exec c1 -- su --login maxwell-k < .README.md-files/04.sh
+      - run: ./.README.md-files/cleanup.sh
