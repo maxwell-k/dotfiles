@@ -1,10 +1,15 @@
 #!/usr/bin/env python3
+"""Open vim at the specified file, line and column."""
+from argparse import ArgumentParser, Namespace
 from os import execlp
-from sys import argv
+
+FILE = 1
+FILE_AND_LINE = 2
+FILE_AND_LINE_AND_COLUMN = 3
 
 
 def split(arg: str) -> tuple[str, int | None, int | None]:
-    """Parse filename and line number from argument
+    """Parse filename, line and column numbers  from argument.
 
     >>> split('tests/setup.sh')
     ('tests/setup.sh', None, None)
@@ -17,32 +22,37 @@ def split(arg: str) -> tuple[str, int | None, int | None]:
     """
     components = arg.split(":", maxsplit=2)
     result: tuple[str, int | None, int | None] = ("", None, None)
-    if len(components) >= 1:
+    if len(components) >= FILE:
         result = (components[0], result[1], result[2])
 
-    if len(components) >= 2 and components[1].isnumeric():
+    if len(components) >= FILE_AND_LINE and components[1].isnumeric():
         result = (result[0], int(components[1]), result[2])
 
-    if len(components) >= 3 and components[2].isnumeric():
+    if len(components) >= FILE_AND_LINE_AND_COLUMN and components[2].isnumeric():
         result = (result[0], result[1], int(components[2]))
 
     return result
 
 
-def main() -> int:
-    if len(argv) < 2:
-        print("One argument expected")
-        return 1
+def _parse_args(args: list[str] | None = None) -> Namespace:
+    parser = ArgumentParser()
+    parser.add_argument("reference")
+    return parser.parse_args(args)
 
-    file, line, column = split(argv[1])
+
+def main() -> int:
+    """Open vim at specified file, line and column."""
+    args = _parse_args()
+    file, line, column = split(args.reference)
 
     if line is None:
-        execlp("vim", "vim", file)
+        args = (file,)
     elif column is None:
-        execlp("vim", "vim", "-c", f":{line}", file)
+        args = ("-c", f":{line}", file)
     else:
-        execlp("vim", "vim", "-c", f":{line}", "-c", f"normal {column}|", file)
+        args = ("-c", f":{line}", "-c", f"normal {column}|", file)
 
+    execlp("vim", "vim", *args)  # noqa: S606, S607
     return 0
 
 
