@@ -13,7 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22 }
+        # https://github.com/renovatebot/renovate/blob/main/package.json#L141
+        with: { node-version: "^22.13.0" }
       - run: |-
           node --version \
           && npm --version \
