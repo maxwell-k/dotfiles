@@ -8,7 +8,7 @@ on: # yamllint disable-line rule:truthy
   workflow_dispatch:
 
 jobs:
-  setup:
+  matrix:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
