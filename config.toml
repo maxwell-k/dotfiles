@@ -76,6 +76,11 @@ src = "local/bin/pdf-information.py"
 dst = "~/.local/bin/pdf-information.py"
 chmod = "755"
 
+[dotfiles.f_mvslugify]
+src = "local/bin/mvslugify"
+dst = "~/.local/bin/mvslugify"
+chmod = "755"
+
 [dotfiles.f_lfrc]
 src = "config/lf/lfrc"
 dst = "~/.config/lf/lfrc"
