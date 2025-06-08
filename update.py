@@ -17,20 +17,16 @@ def _parse_args(arg_list: list[str] | None) -> Namespace:
     parser.add_argument(
         "target",
         nargs="?",
-        type=str,
+        type=Path,
         help="file to update, default: '%(default)s'",
-        default="linux-amd64.toml",
+        default=Path("linux-amd64.toml"),
     )
     return parser.parse_args(arg_list)
 
 
-def main(arg_list: list[str] | None = None) -> int:
-    """Update the expected hash in target using the URL plus a suffix."""
-    args = _parse_args(arg_list)
-
-    path = Path(args.target)
-    with path.open("rb") as file:
-        item = load(file)[args.key]
+def _update(target: Path, key: str) -> None:
+    with target.open("rb") as file:
+        item = load(file)[key]
     url = item["url"]
     old = item["expected"]
 
@@ -46,8 +42,14 @@ def main(arg_list: list[str] | None = None) -> int:
     line = next(i for i in content.splitlines() if filename in i)
     new = line.split()[0]
 
-    text = path.read_text().replace(old, new)
-    path.write_text(text)
+    text = target.read_text().replace(old, new)
+    target.write_text(text)
+
+
+def main(arg_list: list[str] | None = None) -> int:
+    """Update the expected hash in target using the URL plus a suffix."""
+    args = _parse_args(arg_list)
+    _update(args.target, args.key)
 
     return 0
 
