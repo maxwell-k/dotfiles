@@ -1,6 +1,6 @@
 #!/bin/sh
-incus launch --no-profiles "images:${SETUP_IMAGE-fedora/40/cloud}" \
-  c1 < "${SETUP_CONFIG-tests/config-fedora.yaml}" \
+incus launch --no-profiles "images:${SETUP_IMAGE:-fedora/41/cloud}" \
+  c1 < "${SETUP_CONFIG:-tests/config-fedora.yaml}" \
 && sleep 5 \
 && incus admin waitready \
 && incus exec c1 -- cloud-init status --wait \

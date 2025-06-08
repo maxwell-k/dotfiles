@@ -3,21 +3,15 @@
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
-"""Upate the checksum for deno"""
+"""Upate the checksums in a TOML file."""
 
-from argparse import ArgumentParser
+from argparse import ArgumentParser, Namespace
 from pathlib import Path
 from tomllib import load
 from urllib.request import urlopen
 
-MODIFIERS = {
-    "deno": ".sha256sum",
-    "uv": ".sha256",
-    "dprint": "SHASUMS256.txt",
-}
 
-
-def parse_args(arg_list: list[str] | None):
+def _parse_args(arg_list: list[str] | None) -> Namespace:
     parser = ArgumentParser()
     parser.add_argument("key", type=str, help="item to update")
     parser.add_argument(
@@ -31,8 +25,8 @@ def parse_args(arg_list: list[str] | None):
 
 
 def main(arg_list: list[str] | None = None) -> int:
-    """Update the expected hash in target using the URL plus a suffix"""
-    args = parse_args(arg_list)
+    """Update the expected hash in target using the URL plus a suffix."""
+    args = _parse_args(arg_list)
 
     path = Path(args.target)
     with path.open("rb") as file:
@@ -42,7 +36,7 @@ def main(arg_list: list[str] | None = None) -> int:
 
     filename = url[url.rindex("/") + 1 :]
 
-    modifier = MODIFIERS[args.key]
+    modifier = item["modifier"]
     if modifier.startswith("."):
         url += modifier
     else:

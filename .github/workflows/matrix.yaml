@@ -8,16 +8,14 @@ on: # yamllint disable-line rule:truthy
   workflow_dispatch:
 
 jobs:
-  setup:
+  matrix:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         include:
-          # Disabled while investigating an issue with Fedora containers:
-          # https://discuss.linuxcontainers.org/t/containers-from-fedora-images-launch-with-no-network/23306
-          # - SETUP_IMAGE: "" # use defaults in ./tests/setup.sh
-          #   SETUP_CONFIG: ""
+          - SETUP_IMAGE: "" # use defaults in ./tests/setup.sh
+            SETUP_CONFIG: ""
           - SETUP_IMAGE: debian/12/cloud
             SETUP_CONFIG: tests/config-debian.yaml
     steps:

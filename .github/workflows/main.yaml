@@ -1,5 +1,5 @@
-# .github/workflows/readme.yaml
-# Copyright 2023 Keith Maxwell
+# .github/workflows/main.yaml
+# Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
 
 on: # yamllint disable-line rule:truthy
@@ -8,10 +8,23 @@ on: # yamllint disable-line rule:truthy
   workflow_dispatch:
 
 jobs:
-  readme:
+  main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: fsfe/reuse-action@v5
+      - uses: astral-sh/setup-uv@v6
+      - run: uv tool run ruff check
+      - uses: dprint/check@v2.2
+      - uses: actions/setup-node@v4
+        # https://github.com/renovatebot/renovate/blob/main/package.json#L141
+        with: { node-version: "^22.13.0" }
+      - run: |-
+          node --version \
+          && npm --version \
+          && npm exec --yes --package renovate -- renovate --version
+      - run: npm exec --yes --package renovate -- renovate-config-validator
+      - run: npm exec --yes embedme -- --verify README.md
       - uses: maxwell-k/setup-incus@main
       - run: incus profile edit default < .github/incus-profile.yaml
       - { run: ./.README.md-files/01.sh, env: { LOGNAME: maxwell-k } }
