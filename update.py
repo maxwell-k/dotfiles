@@ -13,7 +13,12 @@ from urllib.request import urlopen
 
 def _parse_args(arg_list: list[str] | None) -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("key", type=str, help="item to update")
+    parser.add_argument(
+        "key",
+        nargs="?",
+        type=str,
+        help="item to update, all items if unspecified",
+    )
     parser.add_argument(
         "target",
         nargs="?",
@@ -49,7 +54,14 @@ def _update(target: Path, key: str) -> None:
 def main(arg_list: list[str] | None = None) -> int:
     """Update the expected hash in target using the URL plus a suffix."""
     args = _parse_args(arg_list)
-    _update(args.target, args.key)
+    if args.key:
+        _update(args.target, args.key)
+        return 0
+
+    with args.target.open("rb") as file:
+        keys = [key for key, value in load(file).items() if "modifier" in value]
+    for key in keys:
+        _update(args.target, key)
 
     return 0
 
