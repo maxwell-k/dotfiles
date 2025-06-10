@@ -37,7 +37,11 @@ def _update(target: Path, key: str) -> None:
 
     filename = url[url.rindex("/") + 1 :]
 
-    modifier = item["modifier"]
+    try:
+        modifier = item["modifier"]
+    except KeyError:
+        print(f"{key} does not have `modifier` specified")
+        return
     if modifier.startswith("."):
         url += modifier
     else:
