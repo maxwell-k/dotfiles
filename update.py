@@ -8,7 +8,7 @@
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
 from tomllib import load
-from urllib.request import urlopen
+from urllib.request import HTTPError, urlopen
 
 
 def _parse_args(arg_list: list[str] | None) -> Namespace:
@@ -46,8 +46,12 @@ def _update(target: Path, key: str) -> None:
         url += modifier
     else:
         url = url.removesuffix(filename) + modifier
-    with urlopen(url) as response:
-        content = response.read().decode()
+    try:
+        with urlopen(url) as response:
+            content = response.read().decode()
+    except HTTPError as error:
+        print(f"{url} responded with status code {error.status}")
+        return
     line = next(i for i in content.splitlines() if filename in i)
     new = line.split()[0]
 
