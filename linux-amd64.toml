@@ -1,8 +1,9 @@
 [a4]
-url = "https://github.com/maxwell-k/a4/releases/download/0.1.1/a4"
-# https://github.com/maxwell-k/a4/releases/download/0.1.1/SHA256SUMS
-expected = "92cf8ca42095a232ad41274f30e71c258891c3908dd012bf23fec083f18e7ca7"
+url = "https://github.com/maxwell-k/a4/releases/download/0.2.0/a4"
+# https://github.com/maxwell-k/a4/releases/download/0.2.0/SHA256SUMS
+expected = "a15420c22fd67b2a31e54467c63a0dec8e060ee59b5005d9a66896c207672591"
 version = "--version"
+modifier = "SHA256SUMS"
 
 [actionlint]
 url = "https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz"
