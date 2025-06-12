@@ -32,6 +32,7 @@
 [user] email = keith.maxwell@gmail.com
 [user] name = Keith Maxwell
 [includeIf "gitdir:~/github.com/a*/"] path = config-home-github-dot-com-slash-a-star-slash
+[includeIf "gitdir:~/github.a*/"] path = config-home-github-dot-com-slash-a-star-slash
 
 # dotfiles/config/git/config
 # Copyright Keith Maxwell
