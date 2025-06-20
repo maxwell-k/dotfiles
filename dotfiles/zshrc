@@ -81,7 +81,7 @@ zshrc_fzf_fzf() {
   cmd=$( fzf<<EOF
 git status --short | fzf --multi | cut -c4-
 find | fzf --multi
-git diff --name-only HEAD^..HEAD
+git diff --name-only HEAD^..HEAD | fzf --multi
 git ls-files | fzf --multi
 git ls-files --others --exclude-standard | fzf --multi
 EOF
