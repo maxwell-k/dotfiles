@@ -1,2 +1,5 @@
 #!/bin/sh
+# dotfiles/local/bin/gtree
+# Copyright 2025 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
 git ls-tree -r HEAD | grep " blob $(git hash-object "$1")"

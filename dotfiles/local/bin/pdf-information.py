@@ -76,6 +76,6 @@ def main() -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-# pdf-information.py
+# dotfiles/local/bin/pdf-information.py
 # Copyright 2018 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0

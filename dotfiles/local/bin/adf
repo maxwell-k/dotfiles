@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# .local/bin/adf
+# dotfiles/local/bin/adf
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 #
