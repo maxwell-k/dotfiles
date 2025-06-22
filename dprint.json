@@ -4,6 +4,7 @@
   "markdown": {
   },
   "toml": {
+    "comment.forceLeadingSpace": false
   },
   "excludes": [
     "**/*-lock.json"

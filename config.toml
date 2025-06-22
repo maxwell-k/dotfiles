@@ -1,3 +1,4 @@
+#!/usr/bin/env -S uv tool run dotdrop install --profile default --cfg
 [config]
 link_dotfile_default = "relative"
 # switch to nolink, below, to install a copy of each file
@@ -120,6 +121,14 @@ dst = "~/.local/bin/lint-all"
 [dotfiles.f_config]
 src = "config/yamllint/config"
 dst = "~/.config/yamllint/config"
+
+[dotfiles.f_renovate_config_validator]
+src = "local/bin/renovate-config-validator"
+dst = "~/.local/bin/renovate-config-validator"
+
+[dotfiles.f_renovate]
+src = "local/bin/renovate"
+dst = "~/.local/bin/renovate"
 
 [profiles.default]
 dotfiles = ["ALL"]

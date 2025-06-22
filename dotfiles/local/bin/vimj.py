@@ -1,5 +1,12 @@
 #!/usr/bin/env python3
-"""Open vim at the specified file, line and column."""
+"""Open vim at the specified file, line and column.
+
+Command to run tests:
+
+    python -m doctest --verbose dotfiles/local/bin/vimj.py
+
+vimj.py not vimj so that the command above passes.
+"""
 from argparse import ArgumentParser, Namespace
 from os import execlp
 
@@ -59,8 +66,6 @@ def main() -> int:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-#
 # dotfiles/local/bin/vimj.py
 # Copyright 2024 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
-# vim: set filetype=python.black.usort :

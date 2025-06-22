@@ -17,18 +17,15 @@ SPDX-License-Identifier = "CC0-1.0"
 
 [[annotations]]
 path = [
-  # includied in README.md so hide comments here
-  ".README.md-files/**.sh",
-  # files are two lines each, so avoid three extra lines of comments
-  "dotfiles/local/bin/gtree",
+  # also included in ~/.vim/site.yaml
   "dotfiles/local/bin/jsonlint",
-  "dotfiles/local/bin/percollate",
   "dotfiles/local/bin/prettier",
   "dotfiles/local/bin/pyright-langserver",
-  "dotfiles/local/bin/title",
-  "dotfiles/local/bin/vimf",
-  "dotfiles/local/bin/vimj",
-  "dotfiles/local/bin/vinfo",
+  # includied in README.md so hide comments here
+  ".README.md-files/01.sh",
+  ".README.md-files/03.sh",
+  ".README.md-files/02.sh",
+  ".README.md-files/04.sh",
 ]
 SPDX-FileCopyrightText = "2025 Keith Maxwell <keith.maxwell@gmail.com>"
 SPDX-License-Identifier = "MPL-2.0"

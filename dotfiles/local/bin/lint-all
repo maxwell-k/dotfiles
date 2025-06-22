@@ -14,7 +14,7 @@
 #
 # all is a new repository where everything has been staged
 #
-# .local/bin/lint-all
+# dotfiles/local/bin/lint-all
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 #
