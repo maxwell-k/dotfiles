@@ -2,7 +2,7 @@
 # dotfiles/local/bin/renovate-config-validator
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
-fnm exec --using=v22.13.1 \
+exec fnm exec --using=v22.13.1 \
 npm exec --yes --package renovate -- renovate-config-validator
 # match --using above to an engine from:
 # https://github.com/renovatebot/renovate/blob/main/package.json#L141

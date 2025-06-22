@@ -6,6 +6,6 @@
 RENOVATE_PLATFORM=local \
 GITHUB_COM_TOKEN=$(keyring get gh:github.com "") \
 LOG_LEVEL=debug \
-fnm exec --using=v22.13.1 npm exec --yes renovate -- "$@"
+exec fnm exec --using=v22.13.1 npm exec --yes renovate -- "$@"
 # match --using above to an engine from:
 # https://github.com/renovatebot/renovate/blob/main/package.json#L141
