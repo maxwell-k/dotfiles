@@ -1,3 +1,4 @@
+#!/usr/bin/env -S uv tool run dotdrop install --profile default --cfg
 [config]
 link_dotfile_default = "relative"
 # switch to nolink, below, to install a copy of each file
