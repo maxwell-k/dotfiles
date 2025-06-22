@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: fsfe/reuse-action@v5
       - uses: astral-sh/setup-uv@v6
       - run: uv tool run ruff check
+      - run: uv tool run reuse lint
       - uses: dprint/check@v2.3
       - uses: actions/setup-node@v4
         # https://github.com/renovatebot/renovate/blob/main/package.json#L141
