@@ -122,6 +122,14 @@ dst = "~/.local/bin/lint-all"
 src = "config/yamllint/config"
 dst = "~/.config/yamllint/config"
 
+[dotfiles.f_renovate_config_validator]
+src = "local/bin/renovate-config-validator"
+dst = "~/.local/bin/renovate-config-validator"
+
+[dotfiles.f_renovate]
+src = "local/bin/renovate"
+dst = "~/.local/bin/renovate"
+
 [profiles.default]
 dotfiles = ["ALL"]
 
