@@ -37,8 +37,8 @@ version = "--version"
 modifier = "SHASUMS256.txt"
 
 [uv]
-url = "https://github.com/astral-sh/uv/releases/download/0.7.13/uv-x86_64-unknown-linux-gnu.tar.gz"
-expected = "909278eb197c5ed0e9b5f16317d1255270d1f9ea4196e7179ce934d48c4c2545" # ./update.py uv
+url = "https://github.com/astral-sh/uv/releases/download/0.7.20/uv-x86_64-unknown-linux-gnu.tar.gz"
+expected = "10f204426ff188925d22a53c1d0310d190a8d4d24513712e1b8e2ca9873f0666" # ./update.py uv
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
