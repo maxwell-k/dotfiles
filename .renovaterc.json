@@ -44,9 +44,9 @@
   ],
   "packageRules": [
     {
-      "description": "Automerge upgrades to dprint.json",
+      "description": "Automerge upgrades to .dprint.json",
       "matchFileNames": [
-        "dprint.json"
+        ".dprint.json"
       ],
       "automerge": true
     },

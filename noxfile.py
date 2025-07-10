@@ -49,7 +49,7 @@ def reuse(session: Session) -> None:
 
 @nox.session(python=False)
 def dprint(session: Session) -> None:
-    """Format files configured in dprint.json."""
+    """Format files configured in .dprint.json."""
     cmd = "npm exec --yes dprint -- check"
     session.run(*cmd.split(" "))
 

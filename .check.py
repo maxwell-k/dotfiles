@@ -21,7 +21,7 @@ IGNORED = [
     "dotfiles/local/bin/jsonlint",
     "dotfiles/local/bin/prettier",
     "dotfiles/local/bin/pyright-langserver",
-    "dprint.json",
+    ".dprint.json",
 ]
 
 
