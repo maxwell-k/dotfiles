@@ -15,7 +15,7 @@
       ],
       "datasourceTemplate": "pypi",
       "matchStrings": [
-        "url = \"https:[/][/]files.pythonhosted.org[/]packages[/]py2.py3[/].[/].+[/](?<packageName>.+?)-(?<currentValue>.+?)-py2.py3-none-any.whl\""
+        "url = \"https:[/][/]files.pythonhosted.org[/]packages[/]py3[/].[/].+[/](?<packageName>.+?)-(?<currentValue>.+?)-py3-none-any.whl\""
       ]
     },
     {
