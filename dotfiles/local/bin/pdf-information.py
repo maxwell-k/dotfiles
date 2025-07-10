@@ -25,7 +25,7 @@ def pdfinfo(file_: str) -> dict:
     return dict([j.strip() for j in i.split(":", maxsplit=1)] for i in output)
 
 
-def output(files: list[str], sizes: list[int], pages: list[int] | None =None) -> None:
+def output(files: list[str], sizes: list[int], pages: list[int] | None = None) -> None:
     """Print some summary measures."""
     total = sum(sizes)
     rows = [
