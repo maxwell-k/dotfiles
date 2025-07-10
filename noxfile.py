@@ -40,5 +40,12 @@ def reuse(session: Session) -> None:
     session.run(*cmd.split(" "))
 
 
+@nox.session(python=False)
+def embedme(session: Session) -> None:
+    """Check the content embedded into README.md."""
+    cmd = "npm exec --yes embedme -- --verify README.md"
+    session.run(*cmd.split(" "))
+
+
 if __name__ == "__main__":
     nox.main()

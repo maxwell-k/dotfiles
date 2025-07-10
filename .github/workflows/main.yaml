@@ -24,7 +24,6 @@ jobs:
         with: { enable-cache: false }
       - run: ./noxfile.py
       - uses: dprint/check@9cb3a2b17a8e606d37aae341e49df3654933fc23 # v2.3
-      - run: npm exec --yes embedme -- --verify README.md
       - uses: maxwell-k/setup-incus@main
       - run: incus profile edit default < .github/incus-profile.yaml
       - { run: ./.README.md-files/01.sh, env: { LOGNAME: maxwell-k } }
