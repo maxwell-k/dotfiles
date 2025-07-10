@@ -5,7 +5,7 @@
 #
 #     uv tool run qypi files dotlocalslashbin
 #
-url = "https://files.pythonhosted.org/packages/05/34/3a7669f6b449f3645c66b0c7caef38d236c3d8e70c9873d40d778d2ba362/dotlocalslashbin-0.0.16-py2.py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/py2.py3/d/dotlocalslashbin/dotlocalslashbin-0.0.16-py2.py3-none-any.whl"
 expected = "7753d55fe57537b76d83171f1353a4f28272ada5316b50813f0d3c5412e7df27"
 action = "unzip"
 version = "--version"
