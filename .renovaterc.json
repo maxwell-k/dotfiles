@@ -54,6 +54,16 @@
   ],
   "packageRules": [
     {
+      "description": "Automerge upgrades to dotlocalslashbin.py",
+      "matchDatasources": [
+        "pypi"
+      ],
+      "matchPackageNames": [
+        "dotlocalslashbin"
+      ],
+      "automerge": true
+    },
+    {
       "description": "Automerge upgrades to .dprint.json",
       "matchFileNames": [
         ".dprint.json"
