@@ -12,10 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba # v6
-      - run: uv tool run ruff check
-      - run: uv tool run reuse lint
-      - uses: dprint/check@9cb3a2b17a8e606d37aae341e49df3654933fc23 # v2.3
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         # https://github.com/renovatebot/renovate/blob/main/package.json#L141
         with: { node-version: "^22.13.0" }
@@ -24,7 +20,9 @@ jobs:
           && npm --version \
           && npm exec --yes --package renovate -- renovate --version
       - run: npm exec --yes --package renovate -- renovate-config-validator
-      - run: npm exec --yes embedme -- --verify README.md
+      - uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba # v6
+        with: { enable-cache: false }
+      - run: ./noxfile.py
       - uses: maxwell-k/setup-incus@main
       - run: incus profile edit default < .github/incus-profile.yaml
       - { run: ./.README.md-files/01.sh, env: { LOGNAME: maxwell-k } }
