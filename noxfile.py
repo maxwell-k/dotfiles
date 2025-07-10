@@ -41,6 +41,13 @@ def reuse(session: Session) -> None:
 
 
 @nox.session(python=False)
+def dprint(session: Session) -> None:
+    """Format files configured in dprint.json."""
+    cmd = "npm exec --yes dprint -- check"
+    session.run(*cmd.split(" "))
+
+
+@nox.session(python=False)
 def embedme(session: Session) -> None:
     """Check the content embedded into README.md."""
     cmd = "npm exec --yes embedme -- --verify README.md"
