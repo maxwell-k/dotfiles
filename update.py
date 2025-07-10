@@ -42,10 +42,9 @@ def _update(target: Path, key: str) -> None:
     except KeyError:
         print(f"{key} does not have `modifier` specified")
         return
-    if modifier.startswith("."):
-        url += modifier
-    else:
-        url = url.removesuffix(filename) + modifier
+    if not modifier.startswith("."):
+        url = url.removesuffix(filename)
+    url += modifier
     try:
         with urlopen(url) as response:
             content = response.read().decode()
@@ -60,7 +59,7 @@ def _update(target: Path, key: str) -> None:
 
 
 def main(arg_list: list[str] | None = None) -> int:
-    """Update the expected hash in target using the URL plus a suffix."""
+    """Update each expected field using a modifier field and a GET request."""
     args = _parse_args(arg_list)
     if args.key:
         _update(args.target, args.key)

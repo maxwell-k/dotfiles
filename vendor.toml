@@ -1,16 +1,45 @@
+#!/usr/bin/env -S uv tool run dotlocalslashbin --output . --input
 # File to update the vendored version of dotlocalslashbin.py
-#
-# Use this file with:
-#
-#     uv tool run dotlocalslashbin --input=vendor.toml --output=.
-#
 ["dotlocalslashbin.py"]
-# Update the url and hash below from the output of:
+url = "https://files.pythonhosted.org/packages/py2.py3/d/dotlocalslashbin/dotlocalslashbin-0.0.16-py2.py3-none-any.whl"
+# Update the hash below with
 #
-#     uv tool run qypi files dotlocalslashbin
+#     uv tool run --from cogapp cog -r vendor.toml
 #
-url = "https://files.pythonhosted.org/packages/05/34/3a7669f6b449f3645c66b0c7caef38d236c3d8e70c9873d40d778d2ba362/dotlocalslashbin-0.0.16-py2.py3-none-any.whl"
+#[[[cog
+# """Update the checksum."""
+#
+# import cog
+# import json
+# import urllib.request
+# from pathlib import Path
+# from tomllib import load
+# from urllib.parse import urlparse
+#
+#
+# with Path("vendor.toml").open("rb") as file:
+#     data = load(file)
+# url = data["dotlocalslashbin.py"]["url"]
+# name = Path(urlparse(url).path).name
+#
+# req = urllib.request.Request(
+#     "https://pypi.org/simple/dotlocalslashbin",
+#     headers={"Accept": "application/vnd.pypi.simple.v1+json"},
+# )
+#
+# with urllib.request.urlopen(req) as response:
+#     data = json.load(response)
+# for i in data["files"]:
+#     if i["filename"] != name:
+#         continue
+#     sha256 = i["hashes"]["sha256"]
+#     break
+# else:
+#     raise SystemExit
+# cog.outl(f'expected = "{sha256}"')
+#]]]
 expected = "7753d55fe57537b76d83171f1353a4f28272ada5316b50813f0d3c5412e7df27"
+#[[[end]]]
 action = "unzip"
 version = "--version"
 #
