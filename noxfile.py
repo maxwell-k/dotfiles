@@ -6,7 +6,14 @@
 # dependencies = ["nox"]
 # requires-python = ">=3.13"
 # ///
-"""Run checks."""
+"""Run checks.
+
+Dependencies:
+
+- [npm](https://github.com/npm/cli)
+- [uv](https://github.com/astral-sh/uv)
+
+"""
 from pathlib import Path
 
 import nox
