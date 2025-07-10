@@ -11,6 +11,16 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "/^vendor.toml$/"
+      ],
+      "datasourceTemplate": "pypi",
+      "matchStrings": [
+        "^url = \"https:[/][/]files.pythonhosted.org[/]packages[/]py2.py3[/].[/].+[/](?<packageName>.+?)-(?<currentValue>.+?)-py2.py3-none-any.whl\"$"
+      ]
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "/^[[:alnum:]-]+.toml$/"
       ],
       "matchStrings": [
