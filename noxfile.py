@@ -77,5 +77,12 @@ def black(session: Session) -> None:
     session.run(*cmd.split(" "))
 
 
+@nox.session(python=False)
+def vendor(session: Session) -> None:
+    """Run vendor.toml and check for changes."""
+    for cmd in ["./vendor.toml", "git diff --exit-code"]:
+        session.run(*cmd.split(" "))
+
+
 if __name__ == "__main__":
     nox.main()
