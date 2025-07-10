@@ -24,21 +24,21 @@ ignore = [
 version = "-version"
 
 [deno]
-url = "https://github.com/denoland/deno/releases/download/v2.3.6/deno-x86_64-unknown-linux-gnu.zip"
-expected = "b263e0989e5ceb169f5b91b96de6b1cf6ce4951d54b58b7ea29c6248bf075342" # ./update.py deno
+url = "https://github.com/denoland/deno/releases/download/v2.4.1/deno-x86_64-unknown-linux-gnu.zip"
+expected = "9cd61b07ddd4956aa1ca5b4a0d7f3a404da8e5fd6228d22e1a6486aafcc081a9" # ./update.py deno
 target = "~/.deno/bin/deno"
 version = "--version"
 modifier = ".sha256sum"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.50.0/dprint-x86_64-unknown-linux-gnu.zip"
-expected = "f68122411325908f076f65e02d03103c9dbb9feabe80c8fbca8f81b7e8cd2512" # ./update.py dprint
+url = "https://github.com/dprint/dprint/releases/download/0.50.1/dprint-x86_64-unknown-linux-gnu.zip"
+expected = "11d791a5da5178a6d1359f23ea00b2d47426672fe310c5f32da2c66e80e07675" # ./update.py dprint
 version = "--version"
 modifier = "SHASUMS256.txt"
 
 [uv]
-url = "https://github.com/astral-sh/uv/releases/download/0.7.13/uv-x86_64-unknown-linux-gnu.tar.gz"
-expected = "909278eb197c5ed0e9b5f16317d1255270d1f9ea4196e7179ce934d48c4c2545" # ./update.py uv
+url = "https://github.com/astral-sh/uv/releases/download/0.7.20/uv-x86_64-unknown-linux-gnu.tar.gz"
+expected = "10f204426ff188925d22a53c1d0310d190a8d4d24513712e1b8e2ca9873f0666" # ./update.py uv
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
