@@ -1,9 +1,5 @@
+#!/usr/bin/env -S uv tool run dotlocalslashbin --output . --input
 # File to update the vendored version of dotlocalslashbin.py
-#
-# Use this file with:
-#
-#     uv tool run dotlocalslashbin --input=vendor.toml --output=.
-#
 ["dotlocalslashbin.py"]
 # Update the url and hash below from the output of:
 #
