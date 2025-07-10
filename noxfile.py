@@ -70,5 +70,12 @@ def usort(session: Session) -> None:
     session.run(*cmd.split(" "), *files.rstrip("\n").split("\n"))
 
 
+@nox.session(python=False)
+def black(session: Session) -> None:
+    """Format all of the Python files."""
+    cmd = "uv tool run black --check ."
+    session.run(*cmd.split(" "))
+
+
 if __name__ == "__main__":
     nox.main()
