@@ -61,5 +61,14 @@ def embedme(session: Session) -> None:
     session.run(*cmd.split(" "))
 
 
+def usort(session: Session) -> None:
+    """Check imports are sorted in all Python files."""
+    files = session.run("git", "ls-files", "*.py", silent=True)
+    if files is None:
+        session.error("No files found.")
+    cmd = "uv tool run usort check"
+    session.run(*cmd.split(" "), *files.rstrip("\n").split("\n"))
+
+
 if __name__ == "__main__":
     nox.main()
