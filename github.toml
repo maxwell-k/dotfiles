@@ -1,3 +1,4 @@
+#!/usr/bin/env -S uv tool run dotlocalslashbin --input
 [git-jump]
 url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
 
