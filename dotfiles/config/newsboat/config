@@ -1,0 +1,11 @@
+browser "google-chrome-stable %u &"
+
+# https://forums.freebsd.org/threads/newsboat-rss-reader-enable-vim-key-bindings.69448/
+unbind-key j
+unbind-key k
+bind-key j down
+bind-key k up
+
+# dotfiles/config/newsboat/config
+# SPDX-License-Identifier: MPL-2.0
+# Copyright 2025 Keith Maxwell

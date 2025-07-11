@@ -1,0 +1,5 @@
+# Copyright 2025 Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
+# dotfiles/config/newsboat/urls
+https://matklad.github.io/feed.xml
+https://rachelbythebay.com/w/atom.xml
