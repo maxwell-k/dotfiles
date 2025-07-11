@@ -11,6 +11,9 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc
 ["hterm-show-file.sh"]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-show-file.sh"
 
+[wcurl]
+url = "https://github.com/curl/wcurl/releases/download/v2025.04.20/wcurl"
+
 # github.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
