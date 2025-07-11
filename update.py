@@ -29,28 +29,41 @@ def _parse_args(arg_list: list[str] | None) -> Namespace:
     return parser.parse_args(arg_list)
 
 
+def _apply_modifier(url: str, modifier: str) -> str:
+    """Calculate the URL for the checksums from the URL using a modifier.
+
+    >>> _apply_modifier("https://example.org/file-1.1.1.zip", "SHA256SUMS")
+    'https://example.org/SHA256SUMS'
+
+    >>> _apply_modifier("https://example.org/file-1.1.1.zip", ".sha256")
+    'https://example.org/file-1.1.1.zip.sha256'
+    """
+    filename = url[url.rindex("/") + 1 :]
+    if not modifier.startswith("."):
+        url = url.removesuffix(filename)
+    url += modifier
+    return url
+
+
 def _update(target: Path, key: str) -> None:
     with target.open("rb") as file:
         item = load(file)[key]
     url = item["url"]
     old = item["expected"]
 
-    filename = url[url.rindex("/") + 1 :]
-
     try:
         modifier = item["modifier"]
     except KeyError:
         print(f"{key} does not have `modifier` specified")
         return
-    if not modifier.startswith("."):
-        url = url.removesuffix(filename)
-    url += modifier
+    url = _apply_modifier(url, modifier)
     try:
         with urlopen(url) as response:
             content = response.read().decode()
     except HTTPError as error:
         print(f"{url} responded with status code {error.status}")
         return
+    filename = url[url.rindex("/") + 1 :]
     line = next(i for i in content.splitlines() if filename in i)
     new = line.split()[0]
 
