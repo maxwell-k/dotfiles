@@ -142,6 +142,10 @@ dst = "~/.config/newsboat/urls"
 src = "config/newsboat/config"
 dst = "~/.config/newsboat/config"
 
+[dotfiles.f_anslibe_lint]
+src = "local/bin/ansible-lint"
+dst = "~/.local/bin/ansible-lint"
+
 [profiles.default]
 dotfiles = ["ALL"]
 
