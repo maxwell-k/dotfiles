@@ -44,6 +44,12 @@ prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
 modifier = ".sha256"
 
+[fnm]
+# <https://github.com/Schniz/fnm/releases>, no checksums provided
+url = "https://github.com/Schniz/fnm/releases/download/v1.38.1/fnm-linux.zip"
+version = "--version"
+expected = "b69e5c9a05c1e17e4a7de9a17df14ba430d049f2591af791a6f850a170296069"
+
 # linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
