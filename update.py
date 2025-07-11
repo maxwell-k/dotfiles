@@ -37,9 +37,15 @@ def _apply_modifier(url: str, modifier: str) -> str:
 
     >>> _apply_modifier("https://example.org/file-1.1.1.zip", ".sha256")
     'https://example.org/file-1.1.1.zip.sha256'
+
+    >>> url = "https://example.org/file_1.2.3_linux_amd64.tar.gz"
+    >>> _apply_modifier(url, "_checksums.txt")
+    'https://example.org/file_1.2.3_checksums.txt'
     """
     filename = url[url.rindex("/") + 1 :]
-    if not modifier.startswith("."):
+    if url.endswith("_linux_amd64.tar.gz"):
+        url = url.removesuffix("_linux_amd64.tar.gz")
+    elif not modifier.startswith("."):
         url = url.removesuffix(filename)
     url += modifier
     return url
@@ -56,6 +62,7 @@ def _update(target: Path, key: str) -> None:
     except KeyError:
         print(f"{key} does not have `modifier` specified")
         return
+    filename = url[url.rindex("/") + 1 :]
     url = _apply_modifier(url, modifier)
     try:
         with urlopen(url) as response:
@@ -63,7 +70,6 @@ def _update(target: Path, key: str) -> None:
     except HTTPError as error:
         print(f"{url} responded with status code {error.status}")
         return
-    filename = url[url.rindex("/") + 1 :]
     line = next(i for i in content.splitlines() if filename in i)
     new = line.split()[0]
 
