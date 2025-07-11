@@ -134,6 +134,14 @@ dst = "~/.local/bin/renovate"
 src = "local/bin/tomlv.py"
 dst = "~/.local/bin/tomlv.py"
 
+[dotfiles.f_newsboat_urls]
+src = "config/newsboat/urls"
+dst = "~/.config/newsboat/urls"
+
+[dotfiles.f_newsboat_config]
+src = "config/newsboat/config"
+dst = "~/.config/newsboat/config"
+
 [profiles.default]
 dotfiles = ["ALL"]
 
