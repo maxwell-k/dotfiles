@@ -85,5 +85,16 @@ def vendor(session: Session) -> None:
         session.run(*cmd.split(" "))
 
 
+@nox.session()
+def doctest(session: Session) -> None:
+    """Run all doctests in this repository."""
+    for i in [
+        "update.py",
+        "dotfiles/local/bin/vimj.py",
+        "dotfiles/local/bin/tomlv.py",
+    ]:
+        session.run("python", "-m", "doctest", "-v", i)
+
+
 if __name__ == "__main__":
     nox.main()
