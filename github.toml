@@ -3,13 +3,13 @@
 url = "https://raw.githubusercontent.com/git/git/master/contrib/git-jump/git-jump"
 
 ["osc52.sh"]
-url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/osc52.sh"
+url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.67/hterm/etc/osc52.sh"
 
 ["hterm-notify.sh"]
-url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-notify.sh"
+url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.67/hterm/etc/hterm-notify.sh"
 
 ["hterm-show-file.sh"]
-url = "https://raw.githubusercontent.com/libapps/libapps-mirror/master/hterm/etc/hterm-show-file.sh"
+url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.67/hterm/etc/hterm-show-file.sh"
 
 [wcurl]
 url = "https://github.com/curl/wcurl/releases/download/v2025.04.20/wcurl"

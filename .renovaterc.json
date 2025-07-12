@@ -32,6 +32,17 @@
     {
       "customType": "regex",
       "managerFilePatterns": [
+        "/^[[:alnum:]-]+.toml$/"
+      ],
+      "matchStrings": [
+        "https:[/][/]raw.githubusercontent[.]com[/](?<depName>.+?)[/]refs/tags[/](?<currentValue>.+?)[/]"
+      ],
+      "datasourceTemplate": "github-tags",
+      "versioningTemplate": "regex:^nassh-(?<major>\\d+)[.](?<minor>\\d+)$"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
         "README.md",
         ".README.md-files/02.sh"
       ],
