@@ -30,7 +30,7 @@ def _parse_args(arg_list: list[str] | None) -> Namespace:
 
 
 def _apply_modifier(url: str, modifier: str) -> str:
-    """Calculate the URL for the checksums from the URL using a modifier.
+    """Apply a modifier to the file URL to get the checksum URL.
 
     >>> _apply_modifier("https://example.org/file-1.1.1.zip", "SHA256SUMS")
     'https://example.org/SHA256SUMS'
@@ -43,9 +43,9 @@ def _apply_modifier(url: str, modifier: str) -> str:
     'https://example.org/file_1.2.3_checksums.txt'
     """
     filename = url[url.rindex("/") + 1 :]
-    if url.endswith("_linux_amd64.tar.gz"):
-        url = url.removesuffix("_linux_amd64.tar.gz")
-    elif not modifier.startswith("."):
+    for suffix in ["_linux_amd64.tar.gz"]:
+        url = url.removesuffix(suffix)
+    if modifier.startswith("SHA256SUMS"):
         url = url.removesuffix(filename)
     url += modifier
     return url
