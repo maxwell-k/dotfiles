@@ -57,6 +57,12 @@ expected = "4714768d1c502cd3a67ad8925cea44280e1c732ff005fcf1ee006530441cf667" # 
 ignore = ["LICENSE", "README.md", "CHANGELOG.md"]
 version = "version"
 
+[yq]
+url = "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_amd64"
+version = "--version"
+expected = "b96de04645707e14a12f52c37e6266832e03c29e95b9b139cddcae7314466e69" # ./update.py yq
+modifier = "checksums-bsd"
+
 # linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
