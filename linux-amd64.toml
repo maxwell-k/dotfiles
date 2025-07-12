@@ -1,3 +1,4 @@
+#!/usr/bin/env -S uv tool run dotlocalslashbin --input
 [a4]
 url = "https://github.com/maxwell-k/a4/releases/download/0.2.0/a4"
 expected = "a15420c22fd67b2a31e54467c63a0dec8e060ee59b5005d9a66896c207672591" # ./update.py a4
