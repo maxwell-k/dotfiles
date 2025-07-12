@@ -12,14 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        # https://github.com/renovatebot/renovate/blob/main/package.json#L141
-        with: { node-version: "^22.13.0" }
-      - run: |-
-          node --version \
-          && npm --version \
-          && npm exec --yes --package renovate -- renovate --version
-      - run: npm exec --yes --package renovate -- renovate-config-validator
       - uses: astral-sh/setup-uv@bd01e18f51369d5a26f1651c3cb451d3417e3bba # v6
         with: { enable-cache: false }
       - run: ./noxfile.py
@@ -30,3 +22,6 @@ jobs:
       - run: incus exec c1 -- su --login maxwell-k < .README.md-files/02.sh
       - run: incus exec c1 -- su --login maxwell-k < .README.md-files/04.sh
       - run: ./.README.md-files/cleanup.sh
+  renovate-config-validator:
+    # yamllint disable-line rule:line-length
+    uses: maxwell-k/dotlocalslashbin/.github/workflows/renovate.yaml@a33ce13bfa55aac3dbc6658478e1e91c55003020 # v0.0.18
