@@ -26,7 +26,19 @@
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
       ],
-      "datasourceTemplate": "github-releases"
+      "datasourceTemplate": "github-releases",
+      "versioningTemplate": "{{#if (containsString currentValue '.0')}}loose{{else}}semver-coerced{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/^[[:alnum:]-]+.toml$/"
+      ],
+      "matchStrings": [
+        "https:[/][/]raw.githubusercontent[.]com[/](?<depName>.+?)[/]refs/tags[/](?<currentValue>.+?)[/]"
+      ],
+      "datasourceTemplate": "github-tags",
+      "versioningTemplate": "{{#if (containsString depName 'libapps')}}regex:^nassh-(?<major>\\d+)[.](?<minor>\\d+){{else}}semver-coerced{{/if}}$"
     },
     {
       "customType": "regex",

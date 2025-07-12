@@ -61,6 +61,7 @@ def embedme(session: Session) -> None:
     session.run(*cmd.split(" "))
 
 
+@nox.session(python=False)
 def usort(session: Session) -> None:
     """Check imports are sorted in all Python files."""
     files = session.run("git", "ls-files", "*.py", silent=True)
@@ -82,6 +83,17 @@ def vendor(session: Session) -> None:
     """Run vendor.toml and check for changes."""
     for cmd in ["./vendor.toml", "git diff --exit-code"]:
         session.run(*cmd.split(" "))
+
+
+@nox.session()
+def doctest(session: Session) -> None:
+    """Run all doctests in this repository."""
+    for i in [
+        "update.py",
+        "dotfiles/local/bin/vimj.py",
+        "dotfiles/local/bin/tomlv.py",
+    ]:
+        session.run("python", "-m", "doctest", "-v", i)
 
 
 if __name__ == "__main__":

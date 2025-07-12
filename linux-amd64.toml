@@ -1,14 +1,14 @@
+#!/usr/bin/env -S uv tool run dotlocalslashbin --input
 [a4]
 url = "https://github.com/maxwell-k/a4/releases/download/0.2.0/a4"
-# https://github.com/maxwell-k/a4/releases/download/0.2.0/SHA256SUMS
-expected = "a15420c22fd67b2a31e54467c63a0dec8e060ee59b5005d9a66896c207672591"
+expected = "a15420c22fd67b2a31e54467c63a0dec8e060ee59b5005d9a66896c207672591" # ./update.py a4
 version = "--version"
 modifier = "SHA256SUMS"
 
 [actionlint]
 url = "https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz"
-#      https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_checksums.txt
-expected = "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757"
+expected = "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757" # ./update.py actionlint
+modifier = "_checksums.txt"
 ignore = [
   "LICENSE.txt",
   "README.md",
@@ -43,6 +43,25 @@ version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
 modifier = ".sha256"
+
+[fnm]
+# <https://github.com/Schniz/fnm/releases>, no checksums provided
+url = "https://github.com/Schniz/fnm/releases/download/v1.38.1/fnm-linux.zip"
+version = "--version"
+expected = "b69e5c9a05c1e17e4a7de9a17df14ba430d049f2591af791a6f850a170296069"
+
+[tofu]
+url = "https://github.com/opentofu/opentofu/releases/download/v1.8.6/tofu_1.8.6_linux_amd64.zip"
+modifier = "_SHA256SUMS"
+expected = "4714768d1c502cd3a67ad8925cea44280e1c732ff005fcf1ee006530441cf667" # ./update.py tofu
+ignore = ["LICENSE", "README.md", "CHANGELOG.md"]
+version = "version"
+
+[yq]
+url = "https://github.com/mikefarah/yq/releases/download/v4.45.4/yq_linux_amd64"
+version = "--version"
+expected = "b96de04645707e14a12f52c37e6266832e03c29e95b9b139cddcae7314466e69" # ./update.py yq
+modifier = "checksums-bsd"
 
 # linux-amd64.toml
 # Copyright Keith Maxwell
