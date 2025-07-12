@@ -61,6 +61,7 @@ def embedme(session: Session) -> None:
     session.run(*cmd.split(" "))
 
 
+@nox.session(python=False)
 def usort(session: Session) -> None:
     """Check imports are sorted in all Python files."""
     files = session.run("git", "ls-files", "*.py", silent=True)
