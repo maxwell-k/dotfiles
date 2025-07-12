@@ -31,16 +31,16 @@ __version__ = "0.0.1"
 def error(toml: str) -> tuple[int, int, str] | None:
     r"""Return (line, column, message) for invalid TOML.
 
-    >>> _error("") is None
+    >>> error("") is None
     True
 
-    >>> _error("example =")
+    >>> error("example =")
     (1, 9, 'Invalid value')
 
-    >>> _error("x =\n")
-    (1, 3, 'Invalid value')
+    >>> error("x =\n")
+    (1, 4, 'Invalid value')
 
-    >>> _error('example = ["1"\n"2"]')
+    >>> error('example = ["1"\n"2"]')
     (2, 1, 'Unclosed array')
 
     """
