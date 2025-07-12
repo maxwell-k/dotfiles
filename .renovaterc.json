@@ -38,7 +38,7 @@
         "https:[/][/]raw.githubusercontent[.]com[/](?<depName>.+?)[/]refs/tags[/](?<currentValue>.+?)[/]"
       ],
       "datasourceTemplate": "github-tags",
-      "versioningTemplate": "regex:^nassh-(?<major>\\d+)[.](?<minor>\\d+)$"
+      "versioningTemplate": "{{#if (containsString depName 'libapps')}}regex:^nassh-(?<major>\\d+)[.](?<minor>\\d+){{else}}semver-coerced{{/if}}$"
     },
     {
       "customType": "regex",
