@@ -4,15 +4,11 @@
     "config:best-practices",
     "github>kachick/renovate-config-dprint#1.3.0"
   ],
-  "assignees": [
-    "maxwell-k"
-  ],
+  "assignees": ["maxwell-k"],
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/^vendor.toml$/"
-      ],
+      "managerFilePatterns": ["/^vendor.toml$/"],
       "datasourceTemplate": "pypi",
       "matchStrings": [
         "url = \"https:[/][/]files.pythonhosted.org[/]packages[/]py3[/].[/].+[/](?<packageName>.+?)-(?<currentValue>.+?)-py3-none-any.whl\""
@@ -20,9 +16,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/^[[:alnum:]-]+.toml$/"
-      ],
+      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
       ],
@@ -31,9 +25,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/^[[:alnum:]-]+.toml$/"
-      ],
+      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
       "matchStrings": [
         "https:[/][/]raw.githubusercontent[.]com[/](?<depName>.+?)[/]refs/tags[/](?<currentValue>.+?)[/]"
       ],
@@ -42,10 +34,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "README.md",
-        ".README.md-files/02.sh"
-      ],
+      "managerFilePatterns": ["README.md", ".README.md-files/02.sh"],
       "matchStrings": [
         "\\n +--branch=(?<currentValue>v[^ ]+) https:\\/\\/github[.]com\\/spaceship-prompt\\/spaceship-prompt.git \\\\\\n"
       ],
@@ -54,9 +43,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/^[[:alnum:]-]+.toml$/"
-      ],
+      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
       "matchStrings": [
         "https:[/][/]bootstrap[.]pypa[.]io[/]pip[/]zipapp[/]pip-(?<currentValue>.+?)[.]pyz"
       ],
@@ -67,26 +54,18 @@
   "packageRules": [
     {
       "description": "Automerge upgrades to dotlocalslashbin.py",
-      "matchDatasources": [
-        "pypi"
-      ],
-      "matchPackageNames": [
-        "dotlocalslashbin"
-      ],
+      "matchDatasources": ["pypi"],
+      "matchPackageNames": ["dotlocalslashbin"],
       "automerge": true
     },
     {
       "description": "Automerge upgrades to .dprint.json",
-      "matchFileNames": [
-        ".dprint.json"
-      ],
+      "matchFileNames": [".dprint.json"],
       "automerge": true
     },
     {
       "description": "Automerge upgrades to GitHub Actions",
-      "matchManagers": [
-        "github-actions"
-      ],
+      "matchManagers": ["github-actions"],
       "automerge": true
     }
   ]
