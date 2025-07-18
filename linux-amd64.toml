@@ -6,8 +6,8 @@ version = "--version"
 modifier = "SHA256SUMS"
 
 [actionlint]
-url = "https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz"
-expected = "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757" # ./update.py actionlint
+url = "https://github.com/rhysd/actionlint/releases/download/v1.7.6/actionlint_1.7.6_linux_amd64.tar.gz"
+expected = "5d1a70d9de15fee5371e6f9e20cc29b284e814d6ee1b882f9749e91caf716eba" # ./update.py actionlint
 modifier = "_checksums.txt"
 ignore = [
   "LICENSE.txt",
