@@ -28,7 +28,7 @@ VENV = Path(".venv").absolute()
 def dev(session: Session) -> None:
     """Set up a development environment (virtual environment)."""
     metadata = nox.project.load_toml("noxfile.py")
-    session.run("uv", "venv", "--python", metadata["requires-python"], VENV)
+    session.run("uv", "venv", "--clear", "--python", metadata["requires-python"], VENV)
     env = {"VIRTUAL_ENV": str(VENV)}
     session.run("uv", "pip", "install", *metadata["dependencies"], env=env)
 
