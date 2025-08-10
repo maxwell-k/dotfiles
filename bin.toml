@@ -1,6 +1,6 @@
 [pip]
 # https://pip.pypa.io/en/stable/installation/
-url = "https://bootstrap.pypa.io/pip/zipapp/pip-25.1.1.pyz"
+url = "https://bootstrap.pypa.io/pip/zipapp/pip-25.2.pyz"
 version = "--version"
 # Python 3.13 is not available on Debian 12 bookworm
 command = "python3.11 -m zipapp --python=/usr/bin/python3.11 --output={target} {downloaded}"
