@@ -19,7 +19,7 @@ jobs:
           - SETUP_IMAGE: debian/12/cloud
             SETUP_CONFIG: tests/config-debian.yaml
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - uses: maxwell-k/setup-incus@main
       - run: incus admin init --auto
       - run: ./tests/setup.sh
