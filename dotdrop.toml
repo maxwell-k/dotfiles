@@ -153,6 +153,6 @@ dst = "~/.config/ghostty/config"
 [profiles.default]
 dotfiles = ["ALL"]
 
-# config.toml
+# dotdrop.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
