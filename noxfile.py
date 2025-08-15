@@ -34,6 +34,12 @@ def dev(session: Session) -> None:
 
 
 @nox.session(python=False)
+def check(session: Session) -> None:
+    """Check that each file contains its filename."""
+    session.run("bin/check.py")
+
+
+@nox.session(python=False)
 def ruff(session: Session) -> None:
     """Lint all Python files."""
     cmd = "uv tool run ruff check"
