@@ -16,11 +16,11 @@ IGNORED = [
     ".renovaterc.json.license",
     "LICENSES/CC0-1.0.txt",
     "LICENSES/MPL-2.0.txt",
-    "dotfiles/config/git/attributes",
-    "dotfiles/config/git/ignore",
-    "dotfiles/local/bin/jsonlint",
-    "dotfiles/local/bin/prettier",
-    "dotfiles/local/bin/pyright-langserver",
+    "config/git/attributes",
+    "config/git/ignore",
+    "local/bin/jsonlint",
+    "local/bin/prettier",
+    "local/bin/pyright-langserver",
     ".dprint.json",
 ]
 

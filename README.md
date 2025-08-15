@@ -29,7 +29,7 @@ Command to login:
 Command to download `.zshrc` from the main branch of this repository on GitHub:
 
     curl --location --output ~/.zshrc \
-        https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc
+        https://github.com/maxwell-k/dotfiles/raw/main/zshrc
 
 Commands to switch to ZSH and install spaceship:
 
