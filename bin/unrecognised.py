@@ -6,7 +6,7 @@ from tomllib import load
 TARGET = Path("~/.local/bin/").expanduser()
 TOML_INPUTS = [
     "bin.toml",
-    "github.toml",
+    "bin/github.toml",
     "linux-amd64.toml",
 ]
 
