@@ -15,7 +15,7 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
     >>> parse_args([])
-    Namespace(key=None, target=PosixPath('linux-amd64.toml'))
+    Namespace(key=None, target=PosixPath('bin/linux-amd64.toml'))
     """
     parser = ArgumentParser()
     parser.add_argument(
@@ -29,7 +29,7 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
         nargs="?",
         type=Path,
         help="file to update, default: '%(default)s'",
-        default=Path("linux-amd64.toml"),
+        default=Path("bin/linux-amd64.toml"),
     )
     return parser.parse_args(arg_list)
 
