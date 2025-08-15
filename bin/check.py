@@ -10,6 +10,7 @@ IGNORED = [
     ".README.md-files/02.sh",
     ".README.md-files/03.sh",
     ".README.md-files/04.sh",
+    ".dprint.json",
     ".en.utf-8.add",
     ".gitignore",
     ".renovaterc.json",
@@ -21,7 +22,6 @@ IGNORED = [
     "local/bin/jsonlint",
     "local/bin/prettier",
     "local/bin/pyright-langserver",
-    ".dprint.json",
 ]
 
 
