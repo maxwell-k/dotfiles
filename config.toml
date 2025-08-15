@@ -146,6 +146,10 @@ dst = "~/.config/newsboat/config"
 src = "local/bin/ansible-lint"
 dst = "~/.local/bin/ansible-lint"
 
+[dotfiles.f_ghostty]
+src = "config/ghostty/config"
+dst = "~/.config/ghostty/config"
+
 [profiles.default]
 dotfiles = ["ALL"]
 
