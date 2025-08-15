@@ -53,7 +53,7 @@
   ],
   "packageRules": [
     {
-      "description": "Automerge upgrades to dotlocalslashbin.py",
+      "description": "Automerge upgrades to bin/dotlocalslashbin.py",
       "matchDatasources": ["pypi"],
       "matchPackageNames": ["dotlocalslashbin"],
       "automerge": true
