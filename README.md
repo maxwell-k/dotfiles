@@ -61,7 +61,7 @@ Commands to install personal files:
 cd ~/github.com/maxwell-k/dotfiles \
 && bin/dotlocalslashbin.py \
   --input=bin.toml --input=linux-amd64.toml --input=github.toml \
-&& PATH="$HOME/.local/bin:$PATH" ./dotdrop.toml
+&& PATH="$HOME/.local/bin:$PATH" bin/dotdrop.toml
 ```
 
 <!-- cleanup in .README.md-files/cleanup.sh not shown -->

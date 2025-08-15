@@ -16,7 +16,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
       ],
@@ -25,7 +25,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]raw.githubusercontent[.]com[/](?<depName>.+?)[/]refs/tags[/](?<currentValue>.+?)[/]"
       ],
@@ -43,7 +43,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]bootstrap[.]pypa[.]io[/]pip[/]zipapp[/]pip-(?<currentValue>.+?)[.]pyz"
       ],

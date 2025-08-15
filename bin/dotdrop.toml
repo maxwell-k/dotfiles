@@ -1,5 +1,6 @@
 #!/usr/bin/env -S uv tool run dotdrop install --profile default --cfg
 [config]
+dotpath = "../dotfiles/"
 link_dotfile_default = "relative"
 # switch to nolink, below, to install a copy of each file
 # link_dotfile_default = "nolink"
@@ -153,6 +154,6 @@ dst = "~/.config/ghostty/config"
 [profiles.default]
 dotfiles = ["ALL"]
 
-# dotdrop.toml
+# bin/dotdrop.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
