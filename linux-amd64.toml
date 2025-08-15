@@ -1,13 +1,13 @@
 #!/usr/bin/env -S uv tool run dotlocalslashbin --input
 [a4]
 url = "https://github.com/maxwell-k/a4/releases/download/0.2.0/a4"
-expected = "a15420c22fd67b2a31e54467c63a0dec8e060ee59b5005d9a66896c207672591" # ./update.py a4
+expected = "a15420c22fd67b2a31e54467c63a0dec8e060ee59b5005d9a66896c207672591" # bin/update.py a4
 version = "--version"
 modifier = "SHA256SUMS"
 
 [actionlint]
 url = "https://github.com/rhysd/actionlint/releases/download/v1.7.7/actionlint_1.7.7_linux_amd64.tar.gz"
-expected = "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757" # ./update.py actionlint
+expected = "023070a287cd8cccd71515fedc843f1985bf96c436b7effaecce67290e7e0757" # bin/update.py actionlint
 modifier = "_checksums.txt"
 ignore = [
   "LICENSE.txt",
@@ -25,20 +25,20 @@ version = "-version"
 
 [deno]
 url = "https://github.com/denoland/deno/releases/download/v2.4.4/deno-x86_64-unknown-linux-gnu.zip"
-expected = "e52b05627ee9c99a166624e491fbaa6edf2a4472601d736df113b6ac977fce19" # ./update.py deno
+expected = "e52b05627ee9c99a166624e491fbaa6edf2a4472601d736df113b6ac977fce19" # bin/update.py deno
 target = "~/.deno/bin/deno"
 version = "--version"
 modifier = ".sha256sum"
 
 [dprint]
 url = "https://github.com/dprint/dprint/releases/download/0.50.1/dprint-x86_64-unknown-linux-gnu.zip"
-expected = "11d791a5da5178a6d1359f23ea00b2d47426672fe310c5f32da2c66e80e07675" # ./update.py dprint
+expected = "11d791a5da5178a6d1359f23ea00b2d47426672fe310c5f32da2c66e80e07675" # bin/update.py dprint
 version = "--version"
 modifier = "SHASUMS256.txt"
 
 [uv]
 url = "https://github.com/astral-sh/uv/releases/download/0.8.11/uv-x86_64-unknown-linux-gnu.tar.gz"
-expected = "0c6078318332c100d7d9988ea99144b534e40adef2958aa314a9f7c7b8516ed7" # ./update.py uv
+expected = "0c6078318332c100d7d9988ea99144b534e40adef2958aa314a9f7c7b8516ed7" # bin/update.py uv
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
 ignore = ["uv-x86_64-unknown-linux-gnu"]
@@ -53,14 +53,14 @@ expected = "b69e5c9a05c1e17e4a7de9a17df14ba430d049f2591af791a6f850a170296069"
 [tofu]
 url = "https://github.com/opentofu/opentofu/releases/download/v1.10.3/tofu_1.10.3_linux_amd64.zip"
 modifier = "_SHA256SUMS"
-expected = "acf330602ec6ae29ba68dd5d8eb1f645811ae9809231ecdccd4774b21d5c79bc" # ./update.py tofu
+expected = "acf330602ec6ae29ba68dd5d8eb1f645811ae9809231ecdccd4774b21d5c79bc" # bin/update.py tofu
 ignore = ["LICENSE", "README.md", "CHANGELOG.md"]
 version = "version"
 
 [yq]
 url = "https://github.com/mikefarah/yq/releases/download/v4.47.1/yq_linux_amd64"
 version = "--version"
-expected = "0fb28c6680193c41b364193d0c0fc4a03177aecde51cfc04d506b1517158c2fb" # ./update.py yq
+expected = "0fb28c6680193c41b364193d0c0fc4a03177aecde51cfc04d506b1517158c2fb" # bin/update.py yq
 modifier = "checksums-bsd"
 
 # linux-amd64.toml

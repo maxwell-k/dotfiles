@@ -89,7 +89,7 @@ def vendor(session: Session) -> None:
 def doctest(session: Session) -> None:
     """Run all doctests in this repository."""
     for i in [
-        "update.py",
+        "bin/update.py",
         "dotfiles/local/bin/vimj.py",
         "dotfiles/local/bin/tomlv.py",
     ]:

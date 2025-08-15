@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# update.py
+# bin/update.py
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
