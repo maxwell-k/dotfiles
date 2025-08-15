@@ -8,7 +8,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^vendor.toml$/"],
+      "managerFilePatterns": ["/^bin[/]vendor.toml$/"],
       "datasourceTemplate": "pypi",
       "matchStrings": [
         "url = \"https:[/][/]files.pythonhosted.org[/]packages[/]py3[/].[/].+[/](?<packageName>.+?)-(?<currentValue>.+?)-py3-none-any.whl\""

@@ -43,5 +43,6 @@ expected = "21faf16f09b41089432a658e97989475b48691307dd405d260b6dc05caf4630c"
 action = "unzip"
 version = "--version"
 #
+# bin/vendor.toml
 # SPDX-FileCopyrightText: 2025 Keith Maxwell <keith.maxwell@gmail.com>
 # SPDX-License-Identifier: CC0-1.0
