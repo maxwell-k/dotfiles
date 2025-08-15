@@ -10,8 +10,8 @@
 
 ## Prerequisites
 
-Command to start a container then install the dependencies for these instructions,
-`dotlocalslashbin.py` and `dotdrop`:
+Command to start a container and install the dependencies for these
+instructions:
 
 <!-- embedme .README.md-files/01.sh -->
 
@@ -29,7 +29,7 @@ Command to login:
 Command to download `.zshrc` from the main branch of this repository on GitHub:
 
     curl --location --output ~/.zshrc \
-        https://github.com/maxwell-k/dotfiles/raw/main/dotfiles/zshrc
+        https://github.com/maxwell-k/dotfiles/raw/main/zshrc
 
 Commands to switch to ZSH and install spaceship:
 
@@ -59,14 +59,14 @@ Commands to install personal files:
 
 ```
 cd ~/github.com/maxwell-k/dotfiles \
-&& ./dotlocalslashbin.py \
-  --input=bin.toml --input=linux-amd64.toml --input=github.toml \
-&& PATH="$HOME/.local/bin:$PATH" ./config.toml
+&& bin/dotlocalslashbin.py \
+  --input=bin/python.toml --input=bin/linux-amd64.toml --input=bin/github.toml \
+&& PATH="$HOME/.local/bin:$PATH" bin/dotdrop.toml
 ```
 
 <!-- cleanup in .README.md-files/cleanup.sh not shown -->
 
-See [tests](/tests/) for more examples of running `dotlocalslashbin.py` including on Fedora.
+Another example using Fedora Linux is included as in [tests](/tests/).
 
 <!--
 README.md

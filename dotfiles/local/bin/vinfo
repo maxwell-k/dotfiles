@@ -1,9 +1,0 @@
-#!/bin/sh
-# dotfiles/local/bin/vinfo
-# Copyright 2025 Keith Maxwell
-# SPDX-License-Identifier: MPL-2.0
-if ! info --version >/dev/null 2>&1 ; then
-  printf '"info" not found; "info" is required for "vinfo".\n'
-else
-  exec vim "+packadd vinfo" "+Vinfo ${1}" "+only"
-fi

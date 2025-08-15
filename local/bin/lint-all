@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# lint-all
+#
+# Run all of the lint-staged rules on the current repository
+#
+# Dependencies:
+# - npm (tested on version 8.3.0)
+# - git (tested on version 2.25.0)
+#
+# lint-staged is run via npm `exec` (tested on version 12.1.4)
+#
+# See https://www.npmjs.com/package/lint-staged
+#
+# all is a new repository where everything has been staged
+#
+# local/bin/lint-all
+# Copyright 2023 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+#
+all="$(mktemp -d /tmp/lint-all.XXXXXX)" \
+&& cd "$all" \
+&& git init -b main \
+&& git commit --allow-empty -m "Initial commit" \
+&& git -C "$OLDPWD" write-tree \
+| xargs git -C "$OLDPWD" archive \
+| tar x \
+&& git add . \
+&& npm exec --prefer-offline -- lint-staged \
+&& cd "$OLDPWD" \
+&& rm -rf "$all" \
+&& unset all

@@ -1,0 +1,48 @@
+#!/usr/bin/env -S uv tool run dotlocalslashbin --output . --input
+# File to update the vendored version of dotlocalslashbin.py
+["bin/dotlocalslashbin.py"]
+url = "https://files.pythonhosted.org/packages/py3/d/dotlocalslashbin/dotlocalslashbin-0.0.19-py3-none-any.whl"
+# Update the hash below with
+#
+#     uv tool run --from cogapp cog -r vendor.toml
+#
+#[[[cog
+# """Update the checksum."""
+#
+# import cog
+# import json
+# import urllib.request
+# from pathlib import Path
+# from tomllib import load
+# from urllib.parse import urlparse
+#
+#
+# with Path("vendor.toml").open("rb") as file:
+#     data = load(file)
+# url = data["dotlocalslashbin.py"]["url"]
+# name = Path(urlparse(url).path).name
+#
+# req = urllib.request.Request(
+#     "https://pypi.org/simple/dotlocalslashbin",
+#     headers={"Accept": "application/vnd.pypi.simple.v1+json"},
+# )
+#
+# with urllib.request.urlopen(req) as response:
+#     data = json.load(response)
+# for i in data["files"]:
+#     if i["filename"] != name:
+#         continue
+#     sha256 = i["hashes"]["sha256"]
+#     break
+# else:
+#     raise SystemExit
+# cog.outl(f'expected = "{sha256}"')
+#]]]
+expected = "21faf16f09b41089432a658e97989475b48691307dd405d260b6dc05caf4630c"
+#[[[end]]]
+action = "unzip"
+version = "--version"
+#
+# bin/vendor.toml
+# SPDX-FileCopyrightText: 2025 Keith Maxwell <keith.maxwell@gmail.com>
+# SPDX-License-Identifier: CC0-1.0

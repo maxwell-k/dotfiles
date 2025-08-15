@@ -1,0 +1,5 @@
+#!/bin/sh
+# local/bin/title
+# Copyright 2025 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+printf '\033]2;%s\007' "${1}"

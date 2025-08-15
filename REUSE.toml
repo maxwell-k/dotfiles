@@ -8,8 +8,8 @@ path = [
   # file formats that do no suit comments
   ".en.utf-8.add",
   ".gitignore",
-  "dotfiles/config/git/attributes",
-  "dotfiles/config/git/ignore",
+  "config/git/attributes",
+  "config/git/ignore",
   ".dprint.json",
 ]
 SPDX-FileCopyrightText = "2025 Keith Maxwell <keith.maxwell@gmail.com>"
@@ -18,9 +18,9 @@ SPDX-License-Identifier = "CC0-1.0"
 [[annotations]]
 path = [
   # also included in ~/.vim/site.yaml
-  "dotfiles/local/bin/jsonlint",
-  "dotfiles/local/bin/prettier",
-  "dotfiles/local/bin/pyright-langserver",
+  "local/bin/jsonlint",
+  "local/bin/prettier",
+  "local/bin/pyright-langserver",
   # includied in README.md so hide comments here
   ".README.md-files/01.sh",
   ".README.md-files/03.sh",

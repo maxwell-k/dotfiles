@@ -8,7 +8,7 @@
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^vendor.toml$/"],
+      "managerFilePatterns": ["/^bin[/]vendor.toml$/"],
       "datasourceTemplate": "pypi",
       "matchStrings": [
         "url = \"https:[/][/]files.pythonhosted.org[/]packages[/]py3[/].[/].+[/](?<packageName>.+?)-(?<currentValue>.+?)-py3-none-any.whl\""
@@ -16,7 +16,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
       ],
@@ -25,7 +25,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]raw.githubusercontent[.]com[/](?<depName>.+?)[/]refs/tags[/](?<currentValue>.+?)[/]"
       ],
@@ -43,7 +43,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["/^[[:alnum:]-]+.toml$/"],
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]bootstrap[.]pypa[.]io[/]pip[/]zipapp[/]pip-(?<currentValue>.+?)[.]pyz"
       ],
@@ -53,7 +53,7 @@
   ],
   "packageRules": [
     {
-      "description": "Automerge upgrades to dotlocalslashbin.py",
+      "description": "Automerge upgrades to bin/dotlocalslashbin.py",
       "matchDatasources": ["pypi"],
       "matchPackageNames": ["dotlocalslashbin"],
       "automerge": true

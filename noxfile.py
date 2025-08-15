@@ -34,6 +34,12 @@ def dev(session: Session) -> None:
 
 
 @nox.session(python=False)
+def check(session: Session) -> None:
+    """Check that each file contains its filename."""
+    session.run("bin/check.py")
+
+
+@nox.session(python=False)
 def ruff(session: Session) -> None:
     """Lint all Python files."""
     cmd = "uv tool run ruff check"
@@ -80,8 +86,8 @@ def black(session: Session) -> None:
 
 @nox.session(python=False)
 def vendor(session: Session) -> None:
-    """Run vendor.toml and check for changes."""
-    for cmd in ["./vendor.toml", "git diff --exit-code"]:
+    """Run bin/vendor.toml and check for changes."""
+    for cmd in ["bin/vendor.toml", "git diff --exit-code"]:
         session.run(*cmd.split(" "))
 
 
@@ -89,9 +95,9 @@ def vendor(session: Session) -> None:
 def doctest(session: Session) -> None:
     """Run all doctests in this repository."""
     for i in [
-        "update.py",
-        "dotfiles/local/bin/vimj.py",
-        "dotfiles/local/bin/tomlv.py",
+        "bin/update.py",
+        "local/bin/vimj.py",
+        "local/bin/tomlv.py",
     ]:
         session.run("python", "-m", "doctest", "-v", i)
 

@@ -1,5 +1,0 @@
-#!/bin/sh
-# dotfiles/local/bin/ansible-lint
-# SPDX-License-Identifier: CC0-1.0
-# Copyright Keith Maxwell 2025
-uv tool run --python=python3.12 --with=ansible --with=ansible-core ansible-lint "$@"
