@@ -10,8 +10,8 @@
 
 ## Prerequisites
 
-Command to start a container then install the dependencies for these instructions,
-`dotlocalslashbin.py` and `dotdrop`:
+Command to start a container and install the dependencies for these
+instructions:
 
 <!-- embedme .README.md-files/01.sh -->
 
@@ -66,7 +66,7 @@ cd ~/github.com/maxwell-k/dotfiles \
 
 <!-- cleanup in .README.md-files/cleanup.sh not shown -->
 
-See [tests](/tests/) for more examples of running `dotlocalslashbin.py` including on Fedora.
+Another example using Fedora Linux is included as in [tests](/tests/).
 
 <!--
 README.md
