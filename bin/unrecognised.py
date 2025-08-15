@@ -42,6 +42,6 @@ def main() -> None:
 if __name__ == "__main__":
     raise SystemExit(main())
 
-# unrecognised.py
+# bin/unrecognised.py
 # SPDX-License-Identifier: MPL-2.0
 # Copyright Keith Maxwell 2025
