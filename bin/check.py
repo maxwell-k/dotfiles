@@ -40,6 +40,6 @@ def _main() -> int:
 if __name__ == "__main__":
     raise SystemExit(_main())
 
-# .check.py
+# bin/check.py
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
