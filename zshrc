@@ -148,8 +148,6 @@ bindkey -M menuselect '^I' accept-and-hold  # ^I = Tab
 # https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
 #
 for i in \
-  "$HOME/.zvm/bin" \
-  "$HOME/.cargo/bin" \
   "$HOME/.deno/bin" \
   "$HOME/.local/bin" \
   ;
