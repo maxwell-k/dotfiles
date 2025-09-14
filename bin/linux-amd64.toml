@@ -31,8 +31,8 @@ version = "--version"
 modifier = ".sha256sum"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.50.1/dprint-x86_64-unknown-linux-gnu.zip"
-expected = "11d791a5da5178a6d1359f23ea00b2d47426672fe310c5f32da2c66e80e07675" # bin/update.py dprint
+url = "https://github.com/dprint/dprint/releases/download/0.50.2/dprint-x86_64-unknown-linux-gnu.zip"
+expected = "95c7e633a67531ffc4990c152d59ed0802e1c0caf7e27e424e9cea9ef3d499d4" # bin/update.py dprint
 version = "--version"
 modifier = "SHASUMS256.txt"
 
