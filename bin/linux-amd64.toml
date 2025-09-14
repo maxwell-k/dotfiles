@@ -24,8 +24,8 @@ ignore = [
 version = "-version"
 
 [deno]
-url = "https://github.com/denoland/deno/releases/download/v2.4.5/deno-x86_64-unknown-linux-gnu.zip"
-expected = "6f9d8115bb3df582c0c5674507e906323b680be0f0b15e735d0cd5ec6be44444" # bin/update.py deno
+url = "https://github.com/denoland/deno/releases/download/v2.5.0/deno-x86_64-unknown-linux-gnu.zip"
+expected = "4561adb06b13f287a3785276cb29f377b7ffb49d54290178223b037e161446d3" # bin/update.py deno
 target = "~/.deno/bin/deno"
 version = "--version"
 modifier = ".sha256sum"
