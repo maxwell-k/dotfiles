@@ -97,8 +97,8 @@ EOF
   return $ret
 }
 zle -N zshrc_fzf_fzf
-bindkey _M viins '^f' zshrc_fzf_fzf
-bindkey _M vicmd '^f' zshrc_fzf_fzf
+bindkey -M viins '^f' zshrc_fzf_fzf
+bindkey -M vicmd '^f' zshrc_fzf_fzf
 # }}}
 # Ctrl-p to select a git commit hash with tig {{{
 zshrc_tig() {
