@@ -12,7 +12,7 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.68/hterm/etc/hterm-show-file.sh"
 
 [wcurl]
-url = "https://github.com/curl/wcurl/releases/download/v2025.05.26/wcurl"
+url = "https://github.com/curl/wcurl/releases/download/v2025.09.27/wcurl"
 
 # bin/github.toml
 # Copyright Keith Maxwell
