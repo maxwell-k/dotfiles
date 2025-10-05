@@ -24,6 +24,7 @@ nox.options.default_venv_backend = "uv"
 VENV = Path(".venv").absolute()
 PYTHON_SCRIPTS = [
     "local/bin/mvslugify",
+    "local/bin/mvh1.py",
 ]
 
 

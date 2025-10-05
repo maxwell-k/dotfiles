@@ -83,6 +83,11 @@ src = "local/bin/mvslugify"
 dst = "~/.local/bin/mvslugify"
 chmod = "755"
 
+[dotfiles.f_mvh1]
+src = "local/bin/mvh1.py"
+dst = "~/.local/bin/mvh1"
+chmod = "755"
+
 [dotfiles.f_lfrc]
 src = "config/lf/lfrc"
 dst = "~/.config/lf/lfrc"
