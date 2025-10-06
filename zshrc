@@ -128,19 +128,30 @@ bindkey _M viins '^p' zshrc_tig
 bindkey _M vicmd '^p' zshrc_tig
 #}}}
 # Menu selection with vi-keys and {{{
-# - `Escape` then `j` opens the menu; `Space` or `Enter` exits the menu.
-# - `^[` is the `Escape` key; `^I` is the `Tab` key.
+# Usage:
+# - use `Shift` and `Tab` together to open the menu
+# - use `Tab` ofr down, `Shift-Tab` for up, arrows or `hjkl`
+# - use `Shift` and `Enter` together to add multiple selections
+# - use `u` for undo
+# Configuration:
+# - Remember `^[` is `Escape`
 # - See `man zshzle` for explanation of commands.
+# - Tested with Ghostty
 zmodload zsh/complist
 zshrc_menu_select() { zle expand-or-complete; zle menu-select ; }
 zle -N zshrc_menu_select
-bindkey -M viins '^[j' zshrc_menu_select # `Escape` then `j` starts menu completion
+# `Shift` and `Tab` together starts menu completion:
+bindkey -M viins '^[[Z' zshrc_menu_select
+# `Shift` and `Tab` together then matches `↑`:
+bindkey -M menuselect '^[[Z' up-line-or-history
+# `Shift` and `Enter` adds the selection and repeats:
+bindkey -M menuselect '^[[27;2;13~' accept-and-menu-complete
+# vi keys for simple motions and undo:
 bindkey -M menuselect k up-line-or-history # Matches `↑` exactly
 bindkey -M menuselect j down-line-or-history # Matches `↓` exactly
 bindkey -M menuselect l forward-char # Matches `→` exactly
 bindkey -M menuselect h backward-char # Matches `←` exactly
-bindkey -M menuselect '^[' undo # `Escape` is undo
-bindkey -M menuselect '^I' accept-and-hold  # `Tab` selects and moves down
+bindkey -M menuselect u undo
 # }}}
 # }}}1
 # Environment variables {{{1
