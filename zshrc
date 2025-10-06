@@ -127,16 +127,21 @@ zle -N zshrc_tig
 bindkey _M viins '^p' zshrc_tig
 bindkey _M vicmd '^p' zshrc_tig
 #}}}
+# Menu selection with vi-keys and {{{
+# - `Escape` then `j` opens the menu; `Space` or `Enter` exits the menu.
+# - `^[` is the `Escape` key; `^I` is the `Tab` key.
+# - See `man zshzle` for explanation of commands.
 zmodload zsh/complist
 zshrc_menu_select() { zle expand-or-complete; zle menu-select ; }
 zle -N zshrc_menu_select
-bindkey -M viins '^[j' zshrc_menu_select
-bindkey -M menuselect j down-history
-bindkey -M menuselect k up-history
-bindkey -M menuselect l vi-forward-char
-bindkey -M menuselect h vi-backward-char
-bindkey -M menuselect '^[' undo
-bindkey -M menuselect '^I' accept-and-hold  # ^I = Tab
+bindkey -M viins '^[j' zshrc_menu_select # `Escape` then `j` starts menu completion
+bindkey -M menuselect k up-line-or-history # Matches `↑` exactly
+bindkey -M menuselect j down-line-or-history # Matches `↓` exactly
+bindkey -M menuselect l forward-char # Matches `→` exactly
+bindkey -M menuselect h backward-char # Matches `←` exactly
+bindkey -M menuselect '^[' undo # `Escape` is undo
+bindkey -M menuselect '^I' accept-and-hold  # `Tab` selects and moves down
+# }}}
 # }}}1
 # Environment variables {{{1
 # Interactive command line {{{2
