@@ -5,12 +5,6 @@ url = "https://raw.githubusercontent.com/git/git/refs/tags/v2.51.0/contrib/git-j
 ["osc52.sh"]
 url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.68/hterm/etc/osc52.sh"
 
-["hterm-notify.sh"]
-url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.68/hterm/etc/hterm-notify.sh"
-
-["hterm-show-file.sh"]
-url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.68/hterm/etc/hterm-show-file.sh"
-
 [wcurl]
 url = "https://github.com/curl/wcurl/releases/download/v2025.09.27/wcurl"
 
