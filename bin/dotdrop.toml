@@ -23,28 +23,13 @@ dst = "~/.local/bin/ygg"
 src = "local/bin/percollate"
 dst = "~/.local/bin/percollate"
 
-[dotfiles.f_prettier]
-src = "local/bin/prettier"
-dst = "~/.local/bin/prettier"
-link = "nolink"
-
 [dotfiles.f_vinfo]
 src = "local/bin/vinfo"
 dst = "~/.local/bin/vinfo"
 
-[dotfiles.f_jsonlint]
-src = "local/bin/jsonlint"
-dst = "~/.local/bin/jsonlint"
-link = "nolink"
-
 [dotfiles.f_gtree]
 src = "local/bin/gtree"
 dst = "~/.local/bin/gtree"
-
-[dotfiles.f_pyright-langserver]
-src = "local/bin/pyright-langserver"
-dst = "~/.local/bin/pyright-langserver"
-link = "nolink"
 
 [dotfiles.f_pdf-information]
 src = "local/bin/pdf-information.py"
