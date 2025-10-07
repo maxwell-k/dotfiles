@@ -121,10 +121,6 @@ dst = "~/.local/bin/renovate-config-validator"
 src = "local/bin/renovate"
 dst = "~/.local/bin/renovate"
 
-[dotfiles.f_tomlv_py]
-src = "local/bin/tomlv.py"
-dst = "~/.local/bin/tomlv.py"
-
 [dotfiles.f_newsboat_urls]
 src = "config/newsboat/urls"
 dst = "~/.config/newsboat/urls"

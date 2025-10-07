@@ -103,7 +103,6 @@ def doctest(session: Session) -> None:
     """Run all doctests in this repository."""
     for i in [
         "bin/update.py",
-        "local/bin/tomlv.py",
     ]:
         session.run("python", "-m", "doctest", "-v", i)
 
