@@ -3,7 +3,7 @@
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 for i in "$@"; do
-    cmd="vim \"+call ale#quit#Mapping()\" \"$i\""
+    cmd="vim \"+call vim#AleQuit()\" \"$i\""
     # Backticks are intentionally used inside single quotes below, knowing that
     # they are not expanded.
     # shellcheck disable=SC2016
