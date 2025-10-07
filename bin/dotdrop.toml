@@ -31,11 +31,6 @@ dst = "~/.local/bin/prettier"
 chmod = "755"
 link = "nolink"
 
-[dotfiles.f_vimj]
-src = "local/bin/vimj.py" # .py so that doctest passes
-dst = "~/.local/bin/vimj"
-chmod = "755"
-
 [dotfiles.f_vinfo]
 src = "local/bin/vinfo"
 dst = "~/.local/bin/vinfo"
