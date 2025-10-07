@@ -20,11 +20,6 @@ src = "local/bin/ygg"
 dst = "~/.local/bin/ygg"
 chmod = "755"
 
-[dotfiles.f_vimf]
-src = "local/bin/vimf"
-dst = "~/.local/bin/vimf"
-chmod = "755"
-
 [dotfiles.f_percollate]
 src = "local/bin/percollate"
 dst = "~/.local/bin/percollate"
@@ -36,11 +31,6 @@ dst = "~/.local/bin/prettier"
 chmod = "755"
 link = "nolink"
 
-[dotfiles.f_vimj]
-src = "local/bin/vimj.py" # .py so that doctest passes
-dst = "~/.local/bin/vimj"
-chmod = "755"
-
 [dotfiles.f_vinfo]
 src = "local/bin/vinfo"
 dst = "~/.local/bin/vinfo"
@@ -51,16 +41,6 @@ src = "local/bin/jsonlint"
 dst = "~/.local/bin/jsonlint"
 chmod = "755"
 link = "nolink"
-
-[dotfiles.f_title]
-src = "local/bin/title"
-dst = "~/.local/bin/title"
-chmod = "755"
-
-[dotfiles.f_pager]
-src = "local/bin/pager"
-dst = "~/.local/bin/pager"
-chmod = "755"
 
 [dotfiles.f_gtree]
 src = "local/bin/gtree"
@@ -135,10 +115,6 @@ dst = "~/.local/bin/renovate-config-validator"
 [dotfiles.f_renovate]
 src = "local/bin/renovate"
 dst = "~/.local/bin/renovate"
-
-[dotfiles.f_tomlv_py]
-src = "local/bin/tomlv.py"
-dst = "~/.local/bin/tomlv.py"
 
 [dotfiles.f_newsboat_urls]
 src = "config/newsboat/urls"
