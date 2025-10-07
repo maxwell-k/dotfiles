@@ -57,11 +57,6 @@ src = "local/bin/title"
 dst = "~/.local/bin/title"
 chmod = "755"
 
-[dotfiles.f_pager]
-src = "local/bin/pager"
-dst = "~/.local/bin/pager"
-chmod = "755"
-
 [dotfiles.f_gtree]
 src = "local/bin/gtree"
 dst = "~/.local/bin/gtree"
