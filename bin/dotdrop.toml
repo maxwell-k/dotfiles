@@ -18,55 +18,30 @@ dst = "~/.tmux.conf"
 [dotfiles.f_ygg]
 src = "local/bin/ygg"
 dst = "~/.local/bin/ygg"
-chmod = "755"
 
 [dotfiles.f_percollate]
 src = "local/bin/percollate"
 dst = "~/.local/bin/percollate"
-chmod = "755"
-
-[dotfiles.f_prettier]
-src = "local/bin/prettier"
-dst = "~/.local/bin/prettier"
-chmod = "755"
-link = "nolink"
 
 [dotfiles.f_vinfo]
 src = "local/bin/vinfo"
 dst = "~/.local/bin/vinfo"
-chmod = "755"
-
-[dotfiles.f_jsonlint]
-src = "local/bin/jsonlint"
-dst = "~/.local/bin/jsonlint"
-chmod = "755"
-link = "nolink"
 
 [dotfiles.f_gtree]
 src = "local/bin/gtree"
 dst = "~/.local/bin/gtree"
-chmod = "755"
-
-[dotfiles.f_pyright-langserver]
-src = "local/bin/pyright-langserver"
-dst = "~/.local/bin/pyright-langserver"
-chmod = "755"
-link = "nolink"
 
 [dotfiles.f_pdf-information]
 src = "local/bin/pdf-information.py"
 dst = "~/.local/bin/pdf-information.py"
-chmod = "755"
 
 [dotfiles.f_mvslugify]
 src = "local/bin/mvslugify"
 dst = "~/.local/bin/mvslugify"
-chmod = "755"
 
 [dotfiles.f_mvh1]
 src = "local/bin/mvh1.py"
 dst = "~/.local/bin/mvh1"
-chmod = "755"
 
 [dotfiles.f_lfrc]
 src = "config/lf/lfrc"

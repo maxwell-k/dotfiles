@@ -23,6 +23,7 @@ def main() -> None:
     links = {i for i in unrecognised if i.is_symlink()}
     unrecognised -= {i for i in links if "uv" in i.readlink().parts}
     unrecognised -= {i for i in links if "dotfiles" in i.readlink().parts}
+    unrecognised -= {i for i in links if ".vim" in i.readlink().parts}
     for i in unrecognised:
         if i.name == "__pycache__":
             continue
