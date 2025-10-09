@@ -1,7 +1,7 @@
 #!/bin/sh
-SETUP_IMAGE="${SETUP_IMAGE:-fedora/41/cloud}"
-incus launch --no-profiles "images:$SETUP_IMAGE" \
-  c1 < "tests/config-${SETUP_IMAGE%%/*}.yaml" \
+MATRIX_IMAGE="${MATRIX_IMAGE:-fedora/41/cloud}"
+incus launch --no-profiles "images:$MATRIX_IMAGE" \
+  c1 < "tests/config-${MATRIX_IMAGE%%/*}.yaml" \
 && sleep 5 \
 && incus admin waitready \
 && incus exec c1 -- cloud-init status --wait \
@@ -12,7 +12,7 @@ incus launch --no-profiles "images:$SETUP_IMAGE" \
 && incus stop c1 \
 && incus delete c1
 #
-# tests/setup.sh
+# tests/matrix.sh
 # Copyright 2024 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
