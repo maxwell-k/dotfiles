@@ -18,3 +18,19 @@ jobs:
   renovate-config-validator:
     # yamllint disable-line rule:line-length
     uses: maxwell-k/dotlocalslashbin/.github/workflows/renovate.yaml@cb4570426901ca2d8c6ae59eb8df8122b6892436 # v0.0.20
+  matrix:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - MATRIX_IMAGE: "" # use defaults in ./tests/matrix.sh
+          - MATRIX_IMAGE: debian/13/cloud
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+      - uses: maxwell-k/setup-incus@main
+      - run: incus admin init --auto
+      - run: ./tests/matrix.sh
+        env:
+          LOGNAME: maxwell-k
+          MATRIX_IMAGE: ${{ matrix.MATRIX_IMAGE }}
