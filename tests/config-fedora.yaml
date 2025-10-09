@@ -1,13 +1,3 @@
-description: Default profile from GitHub runner with custom user.vendor-data
-devices:
-  eth0:
-    name: eth0
-    network: incusbr0
-    type: nic
-  root:
-    path: /
-    pool: default
-    type: disk
 config:
   cloud-init.user-data: |
     #cloud-config
