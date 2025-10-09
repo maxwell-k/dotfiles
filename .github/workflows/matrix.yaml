@@ -15,9 +15,7 @@ jobs:
       matrix:
         include:
           - SETUP_IMAGE: "" # use defaults in ./tests/setup.sh
-            SETUP_CONFIG: ""
           - SETUP_IMAGE: debian/13/cloud
-            SETUP_CONFIG: tests/config-debian.yaml
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
       - uses: maxwell-k/setup-incus@main
@@ -25,5 +23,4 @@ jobs:
       - run: ./tests/setup.sh
         env:
           LOGNAME: maxwell-k
-          SETUP_CONFIG: ${{ matrix.SETUP_CONFIG }}
           SETUP_IMAGE: ${{ matrix.SETUP_IMAGE }}
