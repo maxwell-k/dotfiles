@@ -1,5 +1,5 @@
 #!/bin/sh
-MATRIX_IMAGE="${MATRIX_IMAGE:-fedora/41/cloud}"
+MATRIX_IMAGE="${MATRIX_IMAGE:-fedora/42/cloud}"
 incus launch "images:$MATRIX_IMAGE" c1 \
   < "config-${MATRIX_IMAGE%%/*}.yaml" \
 && sleep 5 \
