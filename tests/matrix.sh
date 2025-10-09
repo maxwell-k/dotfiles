@@ -1,7 +1,7 @@
 #!/bin/sh
 MATRIX_IMAGE="${MATRIX_IMAGE:-fedora/41/cloud}"
 incus launch "images:$MATRIX_IMAGE" c1 \
-  < "tests/config-${MATRIX_IMAGE%%/*}.yaml" \
+  < "config-${MATRIX_IMAGE%%/*}.yaml" \
 && sleep 5 \
 && incus admin waitready \
 && incus exec c1 -- cloud-init status --wait --long \
