@@ -15,10 +15,11 @@ config:
     package_upgrade: true
     packages:
       - python3.13 # default in Debian 13
+      - zsh
     users:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
-        shell: /bin/bash
+        shell: /usr/bin/zsh
 #
 # tests/config-fedora.yaml
 # Copyright 2024 Keith Maxwell

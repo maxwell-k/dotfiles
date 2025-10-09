@@ -15,10 +15,11 @@ config:
     package_upgrade: true
     packages:
       - python3
+      - zsh
     users:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
-        shell: /bin/bash
+        shell: /usr/bin/zsh
 #
 # tests/config-debian.yaml
 # Copyright 2024 Keith Maxwell
