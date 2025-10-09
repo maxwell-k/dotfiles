@@ -16,7 +16,7 @@ jobs:
         include:
           - SETUP_IMAGE: "" # use defaults in ./tests/setup.sh
             SETUP_CONFIG: ""
-          - SETUP_IMAGE: debian/12/cloud
+          - SETUP_IMAGE: debian/13/cloud
             SETUP_CONFIG: tests/config-debian.yaml
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
