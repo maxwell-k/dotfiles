@@ -28,7 +28,7 @@ Command to download `.zshrc` from the main branch of this repository on GitHub:
 
 Commands to install spaceship:
 
-<!-- embedme .README.md-files/02.sh -->
+<!-- embedme .README.md-files/1.sh -->
 
 ```
 mkdir --parents "$HOME/.zsh" \
@@ -45,11 +45,11 @@ Commands to clone this repository from GitHub:
     && git -C github.com/maxwell-k \
         clone https://github.com/maxwell-k/dotfiles.git
 
-<!-- for equivalent setup from local checkout see .README.md-files/03.sh -->
+<!-- for equivalent setup from local checkout see .README.md-files/2.sh -->
 
 Commands to install personal files:
 
-<!-- embedme .README.md-files/04.sh -->
+<!-- embedme .README.md-files/3.sh -->
 
 ```
 cd ~/github.com/maxwell-k/dotfiles \

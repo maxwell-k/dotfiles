@@ -22,9 +22,9 @@ path = [
   "local/bin/prettier",
   "local/bin/pyright-langserver",
   # includied in README.md so hide comments here
-  ".README.md-files/03.sh",
-  ".README.md-files/02.sh",
-  ".README.md-files/04.sh",
+  ".README.md-files/1.sh",
+  ".README.md-files/2.sh",
+  ".README.md-files/3.sh",
 ]
 SPDX-FileCopyrightText = "2025 Keith Maxwell <keith.maxwell@gmail.com>"
 SPDX-License-Identifier = "MPL-2.0"
