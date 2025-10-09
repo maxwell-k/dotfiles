@@ -3,8 +3,10 @@
 <!-- toc -->
 
 - [Prerequisites](#prerequisites)
-- [Shell](#shell)
-- [Files](#files)
+- [1. Spaceship](#1-spaceship)
+- [2. Clone](#2-clone)
+- [3. Configuration files and executables](#3-configuration-files-and-executables)
+- [Test strategy](#test-strategy)
 
 <!-- tocstop -->
 
@@ -19,12 +21,12 @@ Command to login:
 
     incus exec c1 -- su --login "$LOGNAME"
 
-## Shell
-
-Command to download `.zshrc` from the main branch of this repository on GitHub:
+(Optional) Command to download `.zshrc` from the main branch of this repository on GitHub:
 
     curl --location --output ~/.zshrc \
         https://github.com/maxwell-k/dotfiles/raw/main/zshrc
+
+## 1. Spaceship
 
 Commands to install spaceship:
 
@@ -37,7 +39,7 @@ mkdir --parents "$HOME/.zsh" \
     "$HOME/.zsh/spaceship"
 ```
 
-## Files
+## 2. Clone
 
 Commands to clone this repository from GitHub:
 
@@ -45,9 +47,11 @@ Commands to clone this repository from GitHub:
     && git -C github.com/maxwell-k \
         clone https://github.com/maxwell-k/dotfiles.git
 
-<!-- for equivalent setup from local checkout see .README.md-files/2.sh -->
+<!-- for equivalent setup from a local checkout see .README.md-files/2.sh -->
 
-Commands to install personal files:
+## 3. Configuration files and executables
+
+Commands to install configuration files and executables:
 
 <!-- embedme .README.md-files/3.sh -->
 
@@ -58,7 +62,11 @@ cd ~/github.com/maxwell-k/dotfiles \
 && PATH="$HOME/.local/bin:$PATH" bin/dotdrop.toml
 ```
 
-Another example using Fedora Linux is included as in [tests](/tests/).
+## Test strategy
+
+This repository is tested against the latest stable release of Debian and Fedora
+Linux, see [`.github/workflows/main.yaml`](.github/workflows/main.yaml) and
+[`tests/matrix.sh`](tests/matrix.sh).
 
 <!--
 README.md
