@@ -16,8 +16,7 @@ instructions:
 <!-- embedme .README.md-files/01.sh -->
 
 ```
-incus launch images:debian/13/cloud c1 \
-&& incus exec c1 -- apt-get install --yes curl file fzf git python3 zsh
+incus launch images:debian/13/cloud c1 < config-debian.yaml
 ```
 
 Command to login:
@@ -36,8 +35,7 @@ Commands to switch to ZSH and install spaceship:
 <!-- embedme .README.md-files/02.sh -->
 
 ```
-sudo sed -i "s,$LOGNAME:/bin/bash$,$LOGNAME:/usr/bin/zsh," /etc/passwd \
-&& mkdir --parents "$HOME/.zsh" \
+mkdir --parents "$HOME/.zsh" \
 && git clone --config advice.detachedHead=false \
     --branch=v4.19.0 https://github.com/spaceship-prompt/spaceship-prompt.git \
     "$HOME/.zsh/spaceship"
