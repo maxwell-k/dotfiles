@@ -19,7 +19,6 @@ config:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /bin/bash
-        ssh_import_id: ["gh:maxwell-k"]
 #
 # tests/config-fedora.yaml
 # Copyright 2024 Keith Maxwell
