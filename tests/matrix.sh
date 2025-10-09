@@ -4,7 +4,7 @@ incus launch --no-profiles "images:$MATRIX_IMAGE" \
   c1 < "tests/config-${MATRIX_IMAGE%%/*}.yaml" \
 && sleep 5 \
 && incus admin waitready \
-&& incus exec c1 -- cloud-init status --wait \
+&& incus exec c1 -- cloud-init status --wait --long \
 && incus file push bin/dotlocalslashbin.py "c1/home/$LOGNAME/" \
 && incus file push bin/python.toml bin/linux-amd64.toml "c1/home/$LOGNAME/" \
 && incus exec c1 -- su --login "$LOGNAME" -c \
