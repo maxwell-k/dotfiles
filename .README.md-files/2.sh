@@ -3,6 +3,7 @@ git bundle create HEAD.bundle HEAD \
 && rm HEAD.bundle \
 && incus exec c1 -- mkdir --parents "/home/$LOGNAME/github.com/maxwell-k/dotfiles" \
 && incus exec c1 -- git \
+  -c init.defaultBranch=thisValueOnlySilencesAWarning \
   -c advice.detachedHead=false \
   -C "/home/$LOGNAME/github.com/maxwell-k/dotfiles" \
   clone /tmp/HEAD.bundle . \

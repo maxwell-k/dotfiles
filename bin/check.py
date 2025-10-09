@@ -6,10 +6,9 @@ from subprocess import check_output
 TARGET = Path("dotfiles")
 
 IGNORED = [
-    ".README.md-files/01.sh",
-    ".README.md-files/02.sh",
-    ".README.md-files/03.sh",
-    ".README.md-files/04.sh",
+    ".README.md-files/1.sh",
+    ".README.md-files/2.sh",
+    ".README.md-files/3.sh",
     ".dprint.json",
     ".en.utf-8.add",
     ".gitignore",

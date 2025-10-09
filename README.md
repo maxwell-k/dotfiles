@@ -3,8 +3,10 @@
 <!-- toc -->
 
 - [Prerequisites](#prerequisites)
-- [Shell](#shell)
-- [Files](#files)
+- [1. Spaceship](#1-spaceship)
+- [2. Clone](#2-clone)
+- [3. Configuration files and executables](#3-configuration-files-and-executables)
+- [Test strategy](#test-strategy)
 
 <!-- tocstop -->
 
@@ -13,37 +15,31 @@
 Command to start a container and install the dependencies for these
 instructions:
 
-<!-- embedme .README.md-files/01.sh -->
-
-```
-incus launch images:debian/13/cloud c1 \
-&& incus exec c1 -- apt-get install --yes curl file fzf git python3 zsh
-```
+    incus launch images:debian/13/cloud c1 < config-debian.yaml
 
 Command to login:
 
     incus exec c1 -- su --login "$LOGNAME"
 
-## Shell
-
-Command to download `.zshrc` from the main branch of this repository on GitHub:
+(Optional) Command to download `.zshrc` from the main branch of this repository on GitHub:
 
     curl --location --output ~/.zshrc \
         https://github.com/maxwell-k/dotfiles/raw/main/zshrc
 
-Commands to switch to ZSH and install spaceship:
+## 1. Spaceship
 
-<!-- embedme .README.md-files/02.sh -->
+Commands to install spaceship:
+
+<!-- embedme .README.md-files/1.sh -->
 
 ```
-sudo sed -i "s,$LOGNAME:/bin/bash$,$LOGNAME:/usr/bin/zsh," /etc/passwd \
-&& mkdir --parents "$HOME/.zsh" \
+mkdir --parents "$HOME/.zsh" \
 && git clone --config advice.detachedHead=false \
     --branch=v4.19.0 https://github.com/spaceship-prompt/spaceship-prompt.git \
     "$HOME/.zsh/spaceship"
 ```
 
-## Files
+## 2. Clone
 
 Commands to clone this repository from GitHub:
 
@@ -51,11 +47,13 @@ Commands to clone this repository from GitHub:
     && git -C github.com/maxwell-k \
         clone https://github.com/maxwell-k/dotfiles.git
 
-<!-- for equivalent setup from local checkout see .README.md-files/03.sh -->
+<!-- for equivalent setup from a local checkout see .README.md-files/2.sh -->
 
-Commands to install personal files:
+## 3. Configuration files and executables
 
-<!-- embedme .README.md-files/04.sh -->
+Commands to install configuration files and executables:
+
+<!-- embedme .README.md-files/3.sh -->
 
 ```
 cd ~/github.com/maxwell-k/dotfiles \
@@ -64,9 +62,11 @@ cd ~/github.com/maxwell-k/dotfiles \
 && PATH="$HOME/.local/bin:$PATH" bin/dotdrop.toml
 ```
 
-<!-- cleanup in .README.md-files/cleanup.sh not shown -->
+## Test strategy
 
-Another example using Fedora Linux is included as in [tests](/tests/).
+This repository is tested against the latest stable release of Debian and Fedora
+Linux, see [`.github/workflows/main.yaml`](.github/workflows/main.yaml) and
+[`tests/matrix.sh`](tests/matrix.sh).
 
 <!--
 README.md

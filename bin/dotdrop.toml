@@ -23,10 +23,6 @@ dst = "~/.local/bin/ygg"
 src = "local/bin/percollate"
 dst = "~/.local/bin/percollate"
 
-[dotfiles.f_vinfo]
-src = "local/bin/vinfo"
-dst = "~/.local/bin/vinfo"
-
 [dotfiles.f_gtree]
 src = "local/bin/gtree"
 dst = "~/.local/bin/gtree"

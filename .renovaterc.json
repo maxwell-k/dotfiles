@@ -34,7 +34,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": ["README.md", ".README.md-files/02.sh"],
+      "managerFilePatterns": ["README.md", ".README.md-files/1.sh"],
       "matchStrings": [
         "\\n +--branch=(?<currentValue>v[^ ]+) https:\\/\\/github[.]com\\/spaceship-prompt\\/spaceship-prompt.git \\\\\\n"
       ],

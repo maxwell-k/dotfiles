@@ -4,14 +4,18 @@ config:
     package_update: true
     package_upgrade: true
     packages:
-      - python3.13 # default in Debian 13
+      - curl
+      - file
+      - fzf
+      - git
+      - python3
       - zsh
     users:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /usr/bin/zsh
 #
-# tests/config-fedora.yaml
+# config-debian.yaml
 # Copyright 2024 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 # vim: set filetype=yaml.dprint :
