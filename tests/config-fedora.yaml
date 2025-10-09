@@ -1,25 +1,15 @@
-description: Default profile from GitHub runner with custom user.vendor-data
-devices:
-  eth0:
-    name: eth0
-    network: incusbr0
-    type: nic
-  root:
-    path: /
-    pool: default
-    type: disk
 config:
   cloud-init.user-data: |
     #cloud-config
     package_update: true
     package_upgrade: true
     packages:
-      - python3.11 # available in Debian 12
+      - python3.13 # default in Debian 13
+      - zsh
     users:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
-        shell: /bin/bash
-        ssh_import_id: ["gh:maxwell-k"]
+        shell: /usr/bin/zsh
 #
 # tests/config-fedora.yaml
 # Copyright 2024 Keith Maxwell
