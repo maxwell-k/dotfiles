@@ -62,8 +62,6 @@ cd ~/github.com/maxwell-k/dotfiles \
 && PATH="$HOME/.local/bin:$PATH" bin/dotdrop.toml
 ```
 
-<!-- cleanup in .README.md-files/cleanup.sh not shown -->
-
 Another example using Fedora Linux is included as in [tests](/tests/).
 
 <!--
