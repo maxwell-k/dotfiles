@@ -22,7 +22,6 @@ path = [
   "local/bin/prettier",
   "local/bin/pyright-langserver",
   # includied in README.md so hide comments here
-  ".README.md-files/01.sh",
   ".README.md-files/03.sh",
   ".README.md-files/02.sh",
   ".README.md-files/04.sh",

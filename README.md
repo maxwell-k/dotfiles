@@ -13,11 +13,7 @@
 Command to start a container and install the dependencies for these
 instructions:
 
-<!-- embedme .README.md-files/01.sh -->
-
-```
-incus launch images:debian/13/cloud c1 < config-debian.yaml
-```
+    incus launch images:debian/13/cloud c1 < config-debian.yaml
 
 Command to login:
 
@@ -30,7 +26,7 @@ Command to download `.zshrc` from the main branch of this repository on GitHub:
     curl --location --output ~/.zshrc \
         https://github.com/maxwell-k/dotfiles/raw/main/zshrc
 
-Commands to switch to ZSH and install spaceship:
+Commands to install spaceship:
 
 <!-- embedme .README.md-files/02.sh -->
 

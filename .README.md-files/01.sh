@@ -1,1 +1,0 @@
-incus launch images:debian/13/cloud c1 < config-debian.yaml
