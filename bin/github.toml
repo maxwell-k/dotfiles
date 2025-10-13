@@ -3,7 +3,7 @@
 url = "https://raw.githubusercontent.com/git/git/refs/tags/v2.51.0/contrib/git-jump/git-jump"
 
 ["osc52.sh"]
-url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.68/hterm/etc/osc52.sh"
+url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-0.69/hterm/etc/osc52.sh"
 
 [wcurl]
 url = "https://github.com/curl/wcurl/releases/download/v2025.09.27/wcurl"
