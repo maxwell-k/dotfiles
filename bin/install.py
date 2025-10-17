@@ -32,8 +32,6 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/adf",),
     ("~/.local/bin/lint-all",),
     ("~/.config/yamllint/config",),
-    ("~/.local/bin/renovate-config-validator",),
-    ("~/.local/bin/renovate",),
     ("~/.config/newsboat/urls",),
     ("~/.config/newsboat/config",),
     ("~/.local/bin/ansible-lint",),
