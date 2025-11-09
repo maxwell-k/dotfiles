@@ -23,7 +23,7 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 
-__version__ = "0.0.20"
+__version__ = "0.0.21"
 
 _CACHE = Path("~/.cache/dotlocalslashbin/")
 _HOME = str(Path("~").expanduser())
@@ -101,7 +101,7 @@ def main() -> int:
         prompt = "#" if item.version else "$"
         print(" ".join((prompt, arg0.replace(_HOME, "~"), item.version)))
         if item.version:
-            run([arg0, item.version], check=True)
+            run([arg0, *split(item.version)], check=True)
         print()
 
     return 0
