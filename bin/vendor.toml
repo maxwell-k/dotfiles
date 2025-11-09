@@ -4,7 +4,7 @@
 url = "https://files.pythonhosted.org/packages/py3/d/dotlocalslashbin/dotlocalslashbin-0.0.20-py3-none-any.whl"
 # Update the hash below with
 #
-#     uv tool run --from cogapp cog -r vendor.toml
+#     uv tool run --from cogapp cog -r bin/vendor.toml
 #
 #[[[cog
 # """Update the checksum."""
@@ -17,9 +17,9 @@ url = "https://files.pythonhosted.org/packages/py3/d/dotlocalslashbin/dotlocalsl
 # from urllib.parse import urlparse
 #
 #
-# with Path("vendor.toml").open("rb") as file:
+# with Path(cog.inFile).open("rb") as file:
 #     data = load(file)
-# url = data["dotlocalslashbin.py"]["url"]
+# url = data["bin/dotlocalslashbin.py"]["url"]
 # name = Path(urlparse(url).path).name
 #
 # req = urllib.request.Request(
