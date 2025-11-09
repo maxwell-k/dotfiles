@@ -7,11 +7,14 @@ on: # yamllint disable-line rule:truthy
   pull_request: { branches: [main] }
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   main:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
+        with: { persist-credentials: false }
       - uses: astral-sh/setup-uv@85856786d1ce8acfbcc2f13a5f3fbd6b938f9f41 # v7
         with: { enable-cache: false }
       - run: ./noxfile.py
@@ -28,7 +31,9 @@ jobs:
           - debian/13/cloud
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5
-      - uses: maxwell-k/setup-incus@main
+        with: { persist-credentials: false }
+      # yamllint disable-line rule:line-length
+      - uses: maxwell-k/setup-incus@a14c4b5d766e96e0ee3095fcedd07e97b93b13db # main
       - run: incus admin init --auto
       - run: ./tests/matrix.sh
         env:
