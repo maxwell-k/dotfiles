@@ -37,7 +37,7 @@ version = "--version"
 modifier = "SHASUMS256.txt"
 
 [uv]
-url = "https://github.com/astral-sh/uv/releases/download/0.9.8/uv-x86_64-unknown-linux-gnu.tar.gz"
+url = "https://github.com/astral-sh/uv/releases/download/0.9.9/uv-x86_64-unknown-linux-gnu.tar.gz"
 expected = "950bad4899800ab158db97081b30a601a3ff4237d705756fda8695342cfcc20a" # bin/update.py uv
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
