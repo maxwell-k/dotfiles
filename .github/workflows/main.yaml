@@ -35,6 +35,13 @@ jobs:
       # setup-incus is pinned manually, beacuse the repository is not tagged
       # yamllint disable-line rule:line-length
       - uses: maxwell-k/setup-incus@405158dae5b151081fc9b53e72b84f97ded3b0c2 # main
+      # Workaround for error using fedora/43/cloud image:
+      # Failed to set the hostname to c1 (c1)
+      - run: |
+          sudo systemctl stop apparmor
+          sudo systemctl disable apparmor
+          sudo aa-teardown
+        if: matrix.image == ''
       - run: incus admin init --auto
       - run: tests/matrix.sh
         env:
