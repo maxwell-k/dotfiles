@@ -43,4 +43,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           path: "*.log"
-          name: "{{ matrix.image }}.zip"
+          name: "${{ matrix.image }}.zip"
