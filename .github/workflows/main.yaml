@@ -40,3 +40,6 @@ jobs:
         env:
           LOGNAME: maxwell-k
           MATRIX_IMAGE: ${{ matrix.image }}
+      - uses: actions/upload-artifact@v4
+        with:
+          path: "*.log"
