@@ -13,6 +13,9 @@ config:
       - name: maxwell-k
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /usr/bin/zsh
+    # workaround for below error on GitHub Actions:
+    # 'Failed to set the hostname to c1 (c1)'
+    preserve_hostname: true
 #
 # config-fedora.yaml
 # Copyright 2024 Keith Maxwell
