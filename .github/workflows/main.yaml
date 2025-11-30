@@ -44,6 +44,8 @@ jobs:
         if: matrix.image == ''
       - run: sudo hostnamectl set-hostname c1
         if: matrix.image == ''
+      - run: incus exec c1 -- hostnamectl
+        if: matrix.image == ''
       - run: incus admin init --auto
       - run: tests/matrix.sh
         env:
