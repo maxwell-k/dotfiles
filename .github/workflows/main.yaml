@@ -39,7 +39,8 @@ jobs:
       # Failed to set the hostname to c1 (c1)
       - run: |
           sudo aa-teardown || true
-          sudo systemctl disable --now apparmor
+          sudo systemctl stop apparmor.service
+          sudo systemctl disable apparmor.service
         if: matrix.image == ''
       - run: incus admin init --auto
       - run: tests/matrix.sh
