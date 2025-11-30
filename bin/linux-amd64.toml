@@ -58,9 +58,9 @@ ignore = ["LICENSE", "README.md", "CHANGELOG.md"]
 version = "version"
 
 [yq]
-url = "https://github.com/mikefarah/yq/releases/download/v4.48.1/yq_linux_amd64"
+url = "https://github.com/mikefarah/yq/releases/download/v4.49.2/yq_linux_amd64"
 version = "--version"
-expected = "99df6047f5b577a9d25f969f7c3823ada3488de2e2115b30a0abb10d9324fd9f" # bin/update.py yq
+expected = "be2c0ddcf426b6a231648610ec5d1666ae50e9f6473e82f6486f9f4cb6e3e2f7" # bin/update.py yq
 modifier = "checksums-bsd"
 
 # bin/linux-amd64.toml
