@@ -38,9 +38,8 @@ jobs:
       # Workaround for error using fedora/43/cloud image:
       # Failed to set the hostname to c1 (c1)
       - run: |
-          sudo systemctl stop apparmor
-          sudo systemctl disable apparmor
-          sudo aa-teardown
+          sudo aa-teardown || true
+          sudo systemctl disable --now apparmor
         if: matrix.image == ''
       - run: incus admin init --auto
       - run: tests/matrix.sh
