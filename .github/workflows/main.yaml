@@ -36,7 +36,7 @@ jobs:
       # yamllint disable-line rule:line-length
       - uses: maxwell-k/setup-incus@405158dae5b151081fc9b53e72b84f97ded3b0c2 # main
       - run: incus admin init --auto
-      - run: ./tests/matrix.sh
+      - run: tests/matrix.sh
         env:
           LOGNAME: maxwell-k
           MATRIX_IMAGE: ${{ matrix.image }}
