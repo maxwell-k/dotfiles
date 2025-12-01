@@ -42,8 +42,8 @@ def dev(session: Session) -> None:
 
 @nox.session(python=False)
 def check(session: Session) -> None:
-    """Check that each file contains its filename."""
-    session.run("bin/check.py")
+    """Check each path is in the file contents."""
+    session.run("bin/check_each_path_is_in_file_contents.py")
 
 
 @nox.session(python=False)

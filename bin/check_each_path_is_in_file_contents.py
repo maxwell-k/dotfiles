@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 """Check that each file contains its filename."""
+
+# bin/check_each_path_is_in_file_contents.py
+# Copyright 2025 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+
 from pathlib import Path
 from subprocess import check_output
 
@@ -40,7 +45,3 @@ def _main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(_main())
-
-# bin/check.py
-# Copyright 2025 Keith Maxwell
-# SPDX-License-Identifier: MPL-2.0
