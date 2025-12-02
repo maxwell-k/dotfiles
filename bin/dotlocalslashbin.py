@@ -23,7 +23,7 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 
-__version__ = "0.0.21"
+__version__ = "0.0.22"
 
 _CACHE = Path("~/.cache/dotlocalslashbin/")
 _HOME = str(Path("~").expanduser())
@@ -185,7 +185,7 @@ def _untar(item: Item) -> None:
 
 
 def _guess_action(item: Item) -> Action:
-    if item.url.endswith((".tar.gz", ".tar")):
+    if item.url.endswith((".tar.xz", ".tar.gz", ".tar")):
         guess = Action.untar
     elif item.url.endswith(".zip"):
         guess = Action.unzip
