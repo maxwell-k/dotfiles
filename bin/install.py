@@ -36,6 +36,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/percollate",),
     ("~/.local/bin/reference.py",),
     ("~/.local/bin/repositories.py",),
+    ("~/.local/bin/venv.py",),
     ("~/.local/bin/ygg",),
     ("~/.tmux.conf",),
     ("~/.zshrc",),
