@@ -162,8 +162,7 @@ def _find() -> int:
 
 def _untracked() -> int:
     for i in paths("--others"):
-        argv.pop(0)
-        if len(argv) and "paths".startswith(argv[1]):
+        if len(argv) == len(("reference.py", "untracked", "path")):
             print(REFERENCE_REPOSITORY / i)
         else:
             print(file_url(i))
