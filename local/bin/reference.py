@@ -20,6 +20,11 @@ reference.py untracked [paths]
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
+# /// script
+# dependencies = ["pyenchant"]
+# requires-python = ">=3.12"
+# ///
+
 
 from collections.abc import Callable, Generator, Iterable
 from datetime import datetime, UTC
