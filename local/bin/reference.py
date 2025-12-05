@@ -20,6 +20,11 @@ reference.py untracked [paths]
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
+# /// script
+# dependencies = ["pyenchant"]
+# requires-python = ">=3.12"
+# ///
+
 
 from collections.abc import Callable, Generator, Iterable
 from datetime import datetime, UTC
@@ -157,8 +162,7 @@ def _find() -> int:
 
 def _untracked() -> int:
     for i in paths("--others"):
-        argv.pop(0)
-        if len(argv) and "paths".startswith(argv[1]):
+        if len(argv) == len(("reference.py", "untracked", "path")):
             print(REFERENCE_REPOSITORY / i)
         else:
             print(file_url(i))
