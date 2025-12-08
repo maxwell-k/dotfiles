@@ -63,6 +63,19 @@ version = "--version"
 expected = "be2c0ddcf426b6a231648610ec5d1666ae50e9f6473e82f6486f9f4cb6e3e2f7" # bin/update.py yq
 modifier = "checksums-bsd"
 
+[jsonnet-lint]
+url = "https://github.com/google/go-jsonnet/releases/download/v0.21.0/go-jsonnet_Linux_x86_64.tar.gz"
+modifier = "checksums.txt"
+expected = "ad3181fde77726b02d17eb4e72687020bf2cb35b9336cdeaaca4783c7ff104f7"
+ignore = [
+  "LICENSE",
+  "README",
+  "jsonnet",
+  "jsonnetfmt",
+  "jsonnet-deps",
+]
+version = "--version"
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
