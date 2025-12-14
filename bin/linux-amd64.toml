@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv tool run dotlocalslashbin --input
 [a4]
-url = "https://github.com/maxwell-k/a4/releases/download/0.2.0/a4"
-expected = "a15420c22fd67b2a31e54467c63a0dec8e060ee59b5005d9a66896c207672591" # bin/update.py a4
+url = "https://github.com/maxwell-k/a4/releases/download/0.2.1/a4"
+expected = "a68b6bd92be782e109c5066da692d6463c807cf5213b732c4fe5e9e51bd194eb" # bin/update.py a4
 version = "--version"
 modifier = "SHA256SUMS"
 
