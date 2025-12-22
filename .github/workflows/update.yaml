@@ -1,0 +1,17 @@
+# .github/workflows/update.yaml
+# Copyright 2025 Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
+
+on: # yamllint disable-line rule:truthy
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        with: { persist-credentials: false }
+      - run: python3 --version && python3 bin/update.py
+      - run: git diff
