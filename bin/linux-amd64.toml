@@ -53,7 +53,7 @@ expected = "b69e5c9a05c1e17e4a7de9a17df14ba430d049f2591af791a6f850a170296069"
 [tofu]
 url = "https://github.com/opentofu/opentofu/releases/download/v1.11.2/tofu_1.11.2_linux_amd64.zip"
 modifier = "_SHA256SUMS"
-expected = "bbfaf9baff1e5baf2775a4a9e7ba9e3c0152841f29f4ee7cf4610feb48f2db1c" # bin/update.py tofu
+expected = "1bfb425c940098952df7a74e2f67dd318614bbea2767a25de94e46ca5d5b85ec" # bin/update.py tofu
 ignore = ["LICENSE", "README.md", "CHANGELOG.md"]
 version = "version"
 
