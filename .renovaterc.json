@@ -49,6 +49,13 @@
       ],
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "pypa/pip"
+    },
+    {
+      "customType": "regex",
+      "depNameTemplate": "opentofu/opentofu",
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
+      "matchStrings": ["tofu_(?<currentValue>.+?)_linux_amd64[.]zip\""],
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
