@@ -16,4 +16,27 @@ jobs:
           persist-credentials: false
           fetch-depth: 2
       - run: python3 --version && python3 bin/update.py
-      - run: git diff
+      - env:
+          DEPLOY_KEY: ${{ secrets.DOTFILES_DEPLOY_KEY }}
+          REPOSITORY: git@github.com:${{ github.repository }}.git
+          REFSPEC: HEAD:${{ github.ref }}
+        run: |
+          if git diff --exit-code ; then exit 0 ; fi
+          git \
+            -c 'user.name=Keith Maxwell [Automation]' \
+            -c user.email=keith.maxwell@gmail.com \
+            commit \
+            --all \
+            "--message=Update checksum using .github/workflows/update.yaml"
+          mkdir --parents ~/.ssh
+          echo "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          # https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints
+          echo \
+            github.com \
+            ssh-ed25519 \
+          AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl \
+          > ~/.ssh/known_hosts
+          GIT_SSH_COMMAND="ssh -i ~/.ssh/id_ed25519" \
+            git push "$REPOSITORY" "$REFSPEC"
+        if: github.actor == 'maxwell-k'
