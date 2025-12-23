@@ -69,7 +69,7 @@ modifier = "checksums.txt"
 expected = "ad3181fde77726b02d17eb4e72687020bf2cb35b9336cdeaaca4783c7ff104f7"
 ignore = [
   "LICENSE",
-  "README",
+  "README.md",
   "jsonnet",
   "jsonnetfmt",
   "jsonnet-deps",
