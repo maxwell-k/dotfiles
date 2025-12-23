@@ -7,7 +7,8 @@
 
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
-from tomllib import load
+from subprocess import run
+from tomllib import load, loads
 from urllib.request import HTTPError, urlopen
 
 
@@ -15,15 +16,26 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
     >>> parse_args([])
-    Namespace(key=None, target=PosixPath('bin/linux-amd64.toml'))
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
+
+    >>> parse_args(['--git'])
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
+
+    >>> parse_args(['--all'])
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=True, key=None)
+
+    >>> parse_args(['--key=one'])
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=False, key='one')
+
+    >>> parse_args(['--all', '--git'])
+    --all is not compatible with --git, ignoring.
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
+
+    >>> parse_args(['--all', '--key', 'one'])
+    --all is not compatible with --key, ignoring.
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=False, key='one')
     """
     parser = ArgumentParser()
-    parser.add_argument(
-        "key",
-        nargs="?",
-        type=str,
-        help="item to update, all items if unspecified",
-    )
     parser.add_argument(
         "target",
         nargs="?",
@@ -31,7 +43,33 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
         help="file to update, default: '%(default)s'",
         default=Path("bin/linux-amd64.toml"),
     )
-    return parser.parse_args(arg_list)
+    parser.add_argument(
+        "--git",
+        help="update items that changed in the last commit (default)",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--all",
+        help="update all items that have a modifier",
+        action="store_true",
+    )
+    parser.add_argument(
+        "--key",
+        nargs="?",
+        type=str,
+        help="item to update",
+    )
+    args = parser.parse_args(arg_list)
+    if args.key is None and args.all is False:
+        args.git = True
+    if args.git and args.all:
+        print("--all is not compatible with --git, ignoring.")
+        args.all = False
+    if args.all and args.key:
+        print("--all is not compatible with --key, ignoring.")
+        args.all = False
+
+    return args
 
 
 def apply_modifier(url: str, modifier: str) -> str:
@@ -125,15 +163,34 @@ def _update(target: Path, key: str) -> None:
     target.write_text(text)
 
 
+def _git(target: Path) -> list[str]:
+    cmd = ("git", "show", f"HEAD^:{target}")
+    result = run(cmd, capture_output=True, check=True, text=True)
+
+    before = loads(result.stdout)
+    after = loads(target.read_text())
+
+    return [key for key in after.keys() & before.keys() if after[key] != before[key]]
+
+
 def main(arg_list: list[str] | None = None) -> int:
     """Update each expected field using a modifier field and a GET request."""
     args = parse_args(arg_list)
-    if args.key:
-        _update(args.target, args.key)
-        return 0
 
-    with args.target.open("rb") as file:
-        keys = [key for key, value in load(file).items() if "modifier" in value]
+    keys: list[str] = []
+
+    if args.all:
+        toml = load(args.target.read_bytes())
+        for key, value in toml.items():
+            if "modifier" in value:
+                keys.append(key)
+
+    if args.git:
+        keys.extend(_git(args.target))
+
+    if args.key:
+        keys.append(args.key)
+
     for key in keys:
         _update(args.target, key)
 
