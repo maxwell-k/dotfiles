@@ -91,9 +91,13 @@ def apply_modifier(url: str, modifier: str) -> str:
     >>> url = "https://example.org/file_1.2.3_linux_amd64.zip"
     >>> apply_modifier(url, "_checksums.txt")
     'https://example.org/file_1.2.3_checksums.txt'
+
+    >>> url = "https://example.org/file_1.2.3_linux_amd64"
+    >>> apply_modifier(url, "_checksums.txt")
+    'https://example.org/file_1.2.3_checksums.txt'
     """
     filename = url[url.rindex("/") + 1 :]
-    for suffix in ["_linux_amd64.tar.gz", "_linux_amd64.zip"]:
+    for suffix in ["_linux_amd64.tar.gz", "_linux_amd64.zip", "_linux_amd64"]:
         url = url.removesuffix(suffix)
     if modifier[0] != ".":
         url = url.removesuffix(filename)
