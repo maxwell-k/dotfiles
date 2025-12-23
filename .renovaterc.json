@@ -18,7 +18,8 @@
       "customType": "regex",
       "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
-        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]"
+        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]",
+        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/].+[/].+_(?<currentValue>.+?)_linux_amd64[.](?:tar[.]gz|zip)\""
       ],
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "{{#if (containsString currentValue '.0')}}loose{{else}}semver-coerced{{/if}}"
@@ -49,13 +50,6 @@
       ],
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "pypa/pip"
-    },
-    {
-      "customType": "regex",
-      "depNameTemplate": "opentofu/opentofu",
-      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
-      "matchStrings": ["tofu_(?<currentValue>.+?)_linux_amd64[.]zip\""],
-      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
