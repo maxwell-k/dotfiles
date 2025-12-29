@@ -31,8 +31,8 @@ version = "--version"
 modifier = ".sha256sum"
 
 [dprint]
-url = "https://github.com/dprint/dprint/releases/download/0.51.0/dprint-x86_64-unknown-linux-gnu.zip"
-expected = "ee5ff0865c461ef6d3023a491f2ee5c1c63c833a15fb3c42fdb2ef835b1c7072"
+url = "https://github.com/dprint/dprint/releases/download/0.51.1/dprint-x86_64-unknown-linux-gnu.zip"
+expected = "674c1f9fcdf8a564c26cc027e080d0c4758a40a566e04a776fc83c875ad51d45"
 version = "--version"
 modifier = "SHASUMS256.txt"
 
