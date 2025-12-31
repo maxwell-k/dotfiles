@@ -6,7 +6,7 @@ version = "--version"
 modifier = "SHA256SUMS"
 
 [actionlint]
-url = "https://github.com/rhysd/actionlint/releases/download/v1.7.9/actionlint_1.7.9_linux_amd64.tar.gz"
+url = "https://github.com/rhysd/actionlint/releases/download/v1.7.10/actionlint_1.7.10_linux_amd64.tar.gz"
 expected = "233b280d05e100837f4af1433c7b40a5dcb306e3aa68fb4f17f8a7f45a7df7b4"
 modifier = "_checksums.txt"
 ignore = [
