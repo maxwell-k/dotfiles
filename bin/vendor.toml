@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv tool run dotlocalslashbin --output . --input
+#!/usr/bin/env -S python3 bin/dotlocalslashbin.py --output . --input
 # File to update the vendored version of dotlocalslashbin.py
 ["bin/dotlocalslashbin.py"]
 url = "https://files.pythonhosted.org/packages/py3/d/dotlocalslashbin/dotlocalslashbin-0.0.22-py3-none-any.whl"
