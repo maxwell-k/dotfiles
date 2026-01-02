@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv tool run dotlocalslashbin --input
+#!/usr/bin/env -S python3 bin/dotlocalslashbin.py --input
 [git-jump]
 url = "https://raw.githubusercontent.com/git/git/refs/tags/v2.52.0/contrib/git-jump/git-jump"
 
