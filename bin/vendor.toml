@@ -1,7 +1,7 @@
 #!/usr/bin/env -S python3 bin/dotlocalslashbin.py --output . --input
 # File to update the vendored version of dotlocalslashbin.py
 ["bin/dotlocalslashbin.py"]
-url = "https://files.pythonhosted.org/packages/py3/d/dotlocalslashbin/dotlocalslashbin-0.0.22-py3-none-any.whl"
+url = "https://files.pythonhosted.org/packages/py3/d/dotlocalslashbin/dotlocalslashbin-0.0.23-py3-none-any.whl"
 # Update the hash below with
 #
 #     uv tool run --from cogapp cog -r bin/vendor.toml
@@ -38,7 +38,7 @@ url = "https://files.pythonhosted.org/packages/py3/d/dotlocalslashbin/dotlocalsl
 #     raise SystemExit
 # cog.outl(f'expected = "{sha256}"')
 #]]]
-expected = "189a91eb6f640ae78cad1c9ec1f7c2c60b6132a79b85a3687bfafd3c80375844"
+expected = "da520100cf0c45d095277ab5726f94b51aab0d49e1bff666cba56bb37b199691"
 #[[[end]]]
 action = "unzip"
 version = "--version"
