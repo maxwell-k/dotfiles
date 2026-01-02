@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with: { persist-credentials: false }
-      # setup-incus is pinned manually, beacuse the repository is not tagged
+      # setup-incus is pinned manually, because the repository is not tagged
       # yamllint disable-line rule:line-length
       - uses: maxwell-k/setup-incus@b36d49cb1873ed93f9a69da39a8632e05d5005d1 # main
       - run: incus admin init --auto
