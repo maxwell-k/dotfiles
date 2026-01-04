@@ -4,15 +4,15 @@ target-version = "py313"
 
 [lint]
 select = ["ALL"]
-ignore = [
+ignore = [ # see https://docs.astral.sh/ruff/rules/
   "D203", # incompatible with D211
   "D213", # incompatible with D212
   "I", # prefer usort to ruff isort implementation
   "PT", # prefer unittest style
-  "S310", # the rule errors on the "use instead" code from `ruff rule S310`
+  "S310", # "use instead" code from the documentation triggers this warning
   "S602", # assume arguments to subprocess.run are validated
-  "S603", # assume trusted input  to subprocess.run
-  "T201", # print is used for output in command line scripts
+  "S603", # assume trusted input to subprocess.run
+  "T201", # allow print for output in command line scripts
 ]
 #
 # .ruff.toml
