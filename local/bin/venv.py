@@ -26,6 +26,7 @@ PYTHON = VIRTUAL_ENVIRONMENT / "bin/python"
 
 DEBUG = "DEBUG" in environ
 
+Cmd = list[str] | tuple[str, ...]
 
 logger = logging.getLogger(__name__)
 
@@ -85,11 +86,8 @@ def _main() -> int:
     return 0
 
 
-def _run(
-    cmd: list[str] | tuple[str, ...],
-    *,
-    stdout: bool = False,
-) -> CompletedProcess:
+def _run(cmd: Cmd, *, stdout: bool = False) -> CompletedProcess:
+    """Run a command in a subprocess with logging."""
     logger.debug("Running: %s", " ".join(quote(i) for i in cmd))
     if stdout:
         return run(cmd, check=True, stdout=PIPE, text=True)
