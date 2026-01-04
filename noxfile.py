@@ -22,11 +22,6 @@ from nox.sessions import Session
 nox.options.default_venv_backend = "uv"
 
 VENV = Path(".venv").absolute()
-PYTHON_SCRIPTS = [
-    "local/bin/mvslugify",
-    "local/bin/mvh1.py",
-]
-
 
 @nox.session(python=False)
 def dev(session: Session) -> None:
@@ -34,10 +29,7 @@ def dev(session: Session) -> None:
     metadata = nox.project.load_toml("noxfile.py")
     session.run("uv", "venv", "--clear", "--python", metadata["requires-python"], VENV)
     env = {"VIRTUAL_ENV": str(VENV)}
-    dependencies = metadata["dependencies"]
-    for script in PYTHON_SCRIPTS:
-        dependencies += nox.project.load_toml(script)["dependencies"]
-    session.run("uv", "pip", "install", *dependencies, env=env)
+    session.run("uv", "pip", "install", *metadata["dependencies"], env=env)
 
 
 @nox.session(python=False)
