@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
-# bin/install.py
-# Copyright 2025 Keith Maxwell
-# SPDX-License-Identifier: MPL-2.0
 """Install symbolic links to files in this repository.
 
 Maintain compatibility with the system Python on Debian stable. Today that is
 Python 3.11.
 """
+
+# bin/install.py
+# Copyright 2025 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
 
 from os.path import relpath
 from pathlib import Path

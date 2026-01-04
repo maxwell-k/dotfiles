@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
+"""Upate the checksums in a TOML file."""
+
 # bin/update.py
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
-"""Upate the checksums in a TOML file."""
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 
 from argparse import ArgumentParser, Namespace
 from pathlib import Path

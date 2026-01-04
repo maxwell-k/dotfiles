@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
 """Check for unrecognised files in ~/.local/bin/."""
+
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 from pathlib import Path
 from tomllib import load
 

@@ -9,6 +9,11 @@ specifiers in package dependencies.
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 import argparse
 import logging
 import re
