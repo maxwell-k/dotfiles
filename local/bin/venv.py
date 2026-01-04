@@ -19,7 +19,7 @@ import logging
 import re
 import tomllib
 from json import loads
-from os import access, environ, X_OK
+from os import access, X_OK
 from pathlib import Path
 from shlex import quote
 from subprocess import CompletedProcess, PIPE, run
@@ -29,17 +29,15 @@ REGEX = r"(?m)^# /// (?P<type>[a-zA-Z0-9-]+)$\s(?P<content>(^#(| .*)$\s)+)^# ///
 VIRTUAL_ENVIRONMENT = Path(".venv")
 PYTHON = VIRTUAL_ENVIRONMENT / "bin/python"
 
-DEBUG = "DEBUG" in environ
-
 Cmd = list[str] | tuple[str, ...]
 
 logger = logging.getLogger(__name__)
 
 
 def _main() -> int:
-    logging.basicConfig(level=logging.DEBUG if DEBUG else logging.INFO)
 
     args = _parse_args()
+    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
     logger.debug("args %s", args)
 
     metadata = _read(args.script.read_text())
@@ -108,6 +106,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("-c", "--create", action="store_true", help=help_)
     help_ = "pass --quiet to uv"
     parser.add_argument("-q", "--quiet", action="store_true", help=help_)
+    help_ = "show debug output"
+    parser.add_argument("-d", "--debug", action="store_true", help=help_)
     return parser.parse_args()
 
 
