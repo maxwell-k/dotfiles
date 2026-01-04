@@ -98,9 +98,9 @@ def _run(
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    help_ = "Script with inline metadata"
+    help_ = "script with inline metadata"
     parser.add_argument("script", type=Path, help=help_)
-    help_ = "Create a new virtual environment"
+    help_ = "create a new virtual environment"
     parser.add_argument("-c", "--create", action="store_true", help=help_)
     return parser.parse_args()
 
