@@ -76,9 +76,9 @@ def _main() -> int:
     dependencies = cast("set[str]", metadata.get("dependencies", set()))
     logger.debug("dependencies %s", dependencies)
     if args.create and dependencies:
-        cmd = (*head, "pip", "install", *dependencies)
+        cmd = (*head, "pip", "install", f"--python={PYTHON}", *dependencies)
         _run(cmd)
-    cmd = (*head, "pip", "list", "--format=json")
+    cmd = (*head, "pip", "list", f"--python={PYTHON}", "--format=json")
     result = run(cmd, check=True, capture_output=True, text=True)
     names = {i["name"] for i in loads(result.stdout)}
     logger.debug("names %s", names)
