@@ -99,7 +99,7 @@ def doctest(session: Session) -> None:
 def pyright(session: Session) -> None:
     """Run pyright on all Python files."""
     for i in _python_files(session):
-        session.run("local/bin/venv.py", "--create", i, external=True)
+        session.run("local/bin/venv.py", "--create", "--quiet", i, external=True)
         cmd = "npm exec --yes pyright -- --pythonpath=.venv/bin/python"
         session.run(*cmd.split(" "), i, external=True)
 
