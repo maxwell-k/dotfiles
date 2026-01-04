@@ -34,7 +34,7 @@ def check(session: Session) -> None:
 def ruff(session: Session) -> None:
     """Lint all Python files."""
     cmd = "uv tool run ruff check"
-    session.run(*cmd.split(" "))
+    session.run(*cmd.split(" "), *_python_files(session))
 
 
 @nox.session(python=False)
@@ -85,11 +85,7 @@ def vendor(session: Session) -> None:
 @nox.session(python=False)
 def doctest(session: Session) -> None:
     """Run all doctests in this repository."""
-    cmd = ("git", "grep", "--files-with-matches", ">>> ")
-    output = session.run(*cmd, silent=True)
-    if output is None:
-        session.error("No files found.")
-    files = output.strip().split("\n")
+    files = _files(session, ">>> ")
     files.remove("noxfile.py")
     for i in files:
         python = "python"
@@ -97,6 +93,25 @@ def doctest(session: Session) -> None:
             session.run("local/bin/venv.py", "--create", "--quiet", i)
             python = ".venv/bin/python"
         session.run(python, "-m", "doctest", "-v", i)
+
+
+def _files(session: Session, marker: str) -> list[str]:
+    """List all files that include a marker."""
+    cmd = ("git", "grep", "--files-with-matches", marker)
+    output = session.run(*cmd, silent=True, external=True)
+    if output is None:
+        session.error("No files found.")
+    return output.strip().split("\n")
+
+
+def _python_files(session: Session) -> list[str]:
+    """List all Python files.
+
+    So that scripts in local/bin do not need the `.py` extension.
+
+    Assumes all Python files include the string "requires-python".
+    """
+    return _files(session, "requires-python")
 
 
 if __name__ == "__main__":
