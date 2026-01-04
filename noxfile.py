@@ -82,14 +82,19 @@ def vendor(session: Session) -> None:
         session.run(*cmd.split(" "))
 
 
-@nox.session()
+@nox.session(python=False)
 def doctest(session: Session) -> None:
     """Run all doctests in this repository."""
     for i in [
         "bin/update.py",
         "bin/install.py",
+        "local/bin/mvh1.py",
     ]:
-        session.run("python", "-m", "doctest", "-v", i)
+        python = "python"
+        if "/// script" in Path(i).read_text():
+            session.run("local/bin/venv.py", "--create", "--quiet", i)
+            python = ".venv/bin/python"
+        session.run(python, "-m", "doctest", "-v", i)
 
 
 if __name__ == "__main__":
