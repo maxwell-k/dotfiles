@@ -5,7 +5,7 @@
 
 Command to setup a development environment:
 
-    ./noxfile.py --session dev
+    local/bin/venv.py local/bin/mvh1.py
 
 Command to run tests:
 

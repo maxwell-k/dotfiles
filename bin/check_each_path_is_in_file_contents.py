@@ -5,6 +5,11 @@
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 from pathlib import Path
 from subprocess import check_output
 

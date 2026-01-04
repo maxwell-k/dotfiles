@@ -5,6 +5,12 @@ Requires git and optionally pdfinfo from poppler
 
 Run in a folder of PDFs
 """
+
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 from collections import Counter
 from pathlib import Path
 from shutil import which

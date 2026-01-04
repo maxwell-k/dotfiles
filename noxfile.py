@@ -22,22 +22,6 @@ from nox.sessions import Session
 nox.options.default_venv_backend = "uv"
 
 VENV = Path(".venv").absolute()
-PYTHON_SCRIPTS = [
-    "local/bin/mvslugify",
-    "local/bin/mvh1.py",
-]
-
-
-@nox.session(python=False)
-def dev(session: Session) -> None:
-    """Set up a development environment (virtual environment)."""
-    metadata = nox.project.load_toml("noxfile.py")
-    session.run("uv", "venv", "--clear", "--python", metadata["requires-python"], VENV)
-    env = {"VIRTUAL_ENV": str(VENV)}
-    dependencies = metadata["dependencies"]
-    for script in PYTHON_SCRIPTS:
-        dependencies += nox.project.load_toml(script)["dependencies"]
-    session.run("uv", "pip", "install", *dependencies, env=env)
 
 
 @nox.session(python=False)
@@ -50,7 +34,7 @@ def check(session: Session) -> None:
 def ruff(session: Session) -> None:
     """Lint all Python files."""
     cmd = "uv tool run ruff check"
-    session.run(*cmd.split(" "))
+    session.run(*cmd.split(" "), *_python_files(session))
 
 
 @nox.session(python=False)
@@ -98,14 +82,45 @@ def vendor(session: Session) -> None:
         session.run(*cmd.split(" "))
 
 
-@nox.session()
+@nox.session(python=False)
 def doctest(session: Session) -> None:
     """Run all doctests in this repository."""
-    for i in [
-        "bin/update.py",
-        "bin/install.py",
-    ]:
-        session.run("python", "-m", "doctest", "-v", i)
+    files = _files(session, ">>> ")
+    files.remove("noxfile.py")
+    for i in files:
+        python = "python"
+        if "/// script" in Path(i).read_text():
+            session.run("local/bin/venv.py", "--create", "--quiet", i)
+            python = ".venv/bin/python"
+        session.run(python, "-m", "doctest", "-v", i)
+
+
+@nox.session()
+def pyright(session: Session) -> None:
+    """Run pyright on all Python files."""
+    for i in _python_files(session):
+        session.run("local/bin/venv.py", "--create", i, external=True)
+        cmd = "npm exec --yes pyright -- --pythonpath=.venv/bin/python"
+        session.run(*cmd.split(" "), i, external=True)
+
+
+def _files(session: Session, marker: str) -> list[str]:
+    """List all files that include a marker."""
+    cmd = ("git", "grep", "--files-with-matches", marker)
+    output = session.run(*cmd, silent=True, external=True)
+    if output is None:
+        session.error("No files found.")
+    return output.strip().split("\n")
+
+
+def _python_files(session: Session) -> list[str]:
+    """List all Python files.
+
+    So that scripts in local/bin do not need the `.py` extension.
+
+    Assumes all Python files include the string "requires-python".
+    """
+    return _files(session, "requires-python")
 
 
 if __name__ == "__main__":

@@ -9,31 +9,35 @@ specifiers in package dependencies.
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
+# /// script
+# requires-python = ">=3.11"
+# dependencies = []
+# ///
+
 import argparse
 import logging
 import re
 import tomllib
 from json import loads
-from os import access, environ, X_OK
+from os import access, X_OK
 from pathlib import Path
 from shlex import quote
 from subprocess import CompletedProcess, PIPE, run
 from typing import cast
 
 REGEX = r"(?m)^# /// (?P<type>[a-zA-Z0-9-]+)$\s(?P<content>(^#(| .*)$\s)+)^# ///$"
-VIRTUAL_ENVIRONMENT = Path(".venv")
-PYTHON = VIRTUAL_ENVIRONMENT / "bin/python"
+PATH = Path(".venv")
+PYTHON = PATH / "bin/python"
 
-DEBUG = "DEBUG" in environ
-
+Cmd = list[str] | tuple[str, ...]
 
 logger = logging.getLogger(__name__)
 
 
 def _main() -> int:
-    logging.basicConfig(level=logging.DEBUG if DEBUG else logging.INFO)
 
     args = _parse_args()
+    logging.basicConfig(level=logging.DEBUG if args.debug else logging.INFO)
     logger.debug("args %s", args)
 
     metadata = _read(args.script.read_text())
@@ -42,13 +46,14 @@ def _main() -> int:
         return 1
     logger.debug("metadata %s", metadata)
 
+    head = ("uv", "--quiet") if args.quiet else ("uv",)
     required = metadata.get("requires-python", None)
     logger.debug("requires-python %s", required)
     if args.create:
-        cmd = ["uv", "venv", "--clear"]
+        cmd = [*head, "venv", "--clear"]
         if required:
             cmd.append("--python=" + required)
-        cmd.append(str(VIRTUAL_ENVIRONMENT))
+        cmd.append(str(PATH))
         _run(cmd)
 
     if not access(PYTHON, X_OK):
@@ -70,10 +75,10 @@ def _main() -> int:
 
     dependencies = cast("set[str]", metadata.get("dependencies", set()))
     logger.debug("dependencies %s", dependencies)
-    if args.create:
-        cmd = ("uv", "pip", "install", *dependencies)
+    if args.create and dependencies:
+        cmd = (*head, "pip", "install", f"--python={PYTHON}", *dependencies)
         _run(cmd)
-    cmd = ("uv", "pip", "list", "--format=json")
+    cmd = (*head, "pip", "list", f"--python={PYTHON}", "--format=json")
     result = run(cmd, check=True, capture_output=True, text=True)
     names = {i["name"] for i in loads(result.stdout)}
     logger.debug("names %s", names)
@@ -85,11 +90,8 @@ def _main() -> int:
     return 0
 
 
-def _run(
-    cmd: list[str] | tuple[str, ...],
-    *,
-    stdout: bool = False,
-) -> CompletedProcess:
+def _run(cmd: Cmd, *, stdout: bool = False) -> CompletedProcess:
+    """Run a command in a subprocess with logging."""
     logger.debug("Running: %s", " ".join(quote(i) for i in cmd))
     if stdout:
         return run(cmd, check=True, stdout=PIPE, text=True)
@@ -98,10 +100,14 @@ def _run(
 
 def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
-    help_ = "Script with inline metadata"
+    help_ = "script with inline metadata"
     parser.add_argument("script", type=Path, help=help_)
-    help_ = "Create a new virtual environment"
+    help_ = "create a new virtual environment"
     parser.add_argument("-c", "--create", action="store_true", help=help_)
+    help_ = "pass --quiet to uv"
+    parser.add_argument("-q", "--quiet", action="store_true", help=help_)
+    help_ = "show debug output"
+    parser.add_argument("-d", "--debug", action="store_true", help=help_)
     return parser.parse_args()
 
 
