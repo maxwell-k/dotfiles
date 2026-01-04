@@ -85,11 +85,13 @@ def vendor(session: Session) -> None:
 @nox.session(python=False)
 def doctest(session: Session) -> None:
     """Run all doctests in this repository."""
-    for i in [
-        "bin/update.py",
-        "bin/install.py",
-        "local/bin/mvh1.py",
-    ]:
+    cmd = ("git", "grep", "--files-with-matches", ">>> ")
+    output = session.run(*cmd, silent=True)
+    if output is None:
+        session.error("No files found.")
+    files = output.strip().split("\n")
+    files.remove("noxfile.py")
+    for i in files:
         python = "python"
         if "/// script" in Path(i).read_text():
             session.run("local/bin/venv.py", "--create", "--quiet", i)
