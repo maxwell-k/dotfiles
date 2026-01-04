@@ -26,8 +26,8 @@ from subprocess import CompletedProcess, PIPE, run
 from typing import cast
 
 REGEX = r"(?m)^# /// (?P<type>[a-zA-Z0-9-]+)$\s(?P<content>(^#(| .*)$\s)+)^# ///$"
-VIRTUAL_ENVIRONMENT = Path(".venv")
-PYTHON = VIRTUAL_ENVIRONMENT / "bin/python"
+PATH = Path(".venv")
+PYTHON = PATH / "bin/python"
 
 Cmd = list[str] | tuple[str, ...]
 
@@ -53,7 +53,7 @@ def _main() -> int:
         cmd = [*head, "venv", "--clear"]
         if required:
             cmd.append("--python=" + required)
-        cmd.append(str(VIRTUAL_ENVIRONMENT))
+        cmd.append(str(PATH))
         _run(cmd)
 
     if not access(PYTHON, X_OK):
