@@ -95,6 +95,15 @@ def doctest(session: Session) -> None:
         session.run(python, "-m", "doctest", "-v", i)
 
 
+@nox.session()
+def pyright(session: Session) -> None:
+    """Run pyright on all Python files."""
+    for i in _python_files(session):
+        session.run("local/bin/venv.py", "--create", i, external=True)
+        cmd = "npm exec --yes pyright -- --pythonpath=.venv/bin/python"
+        session.run(*cmd.split(" "), i, external=True)
+
+
 def _files(session: Session, marker: str) -> list[str]:
     """List all files that include a marker."""
     cmd = ("git", "grep", "--files-with-matches", marker)
