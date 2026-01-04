@@ -43,10 +43,11 @@ def _main() -> int:
         return 1
     logger.debug("metadata %s", metadata)
 
+    head = ("uv", "--quiet") if args.quiet else ("uv",)
     required = metadata.get("requires-python", None)
     logger.debug("requires-python %s", required)
     if args.create:
-        cmd = ["uv", "venv", "--clear"]
+        cmd = [*head, "venv", "--clear"]
         if required:
             cmd.append("--python=" + required)
         cmd.append(str(VIRTUAL_ENVIRONMENT))
@@ -72,9 +73,9 @@ def _main() -> int:
     dependencies = cast("set[str]", metadata.get("dependencies", set()))
     logger.debug("dependencies %s", dependencies)
     if args.create:
-        cmd = ("uv", "pip", "install", *dependencies)
+        cmd = (*head, "pip", "install", *dependencies)
         _run(cmd)
-    cmd = ("uv", "pip", "list", "--format=json")
+    cmd = (*head, "pip", "list", "--format=json")
     result = run(cmd, check=True, capture_output=True, text=True)
     names = {i["name"] for i in loads(result.stdout)}
     logger.debug("names %s", names)
@@ -100,6 +101,8 @@ def _parse_args() -> argparse.Namespace:
     parser.add_argument("script", type=Path, help=help_)
     help_ = "create a new virtual environment"
     parser.add_argument("-c", "--create", action="store_true", help=help_)
+    help_ = "pass --quiet to uv"
+    parser.add_argument("-q", "--quiet", action="store_true", help=help_)
     return parser.parse_args()
 
 
