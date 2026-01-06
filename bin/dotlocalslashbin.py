@@ -7,6 +7,7 @@
 # dependencies = []
 # ///
 """Download and extract files to `~/.local/bin/`."""
+import gzip
 import tarfile
 from argparse import ArgumentParser, BooleanOptionalAction, Namespace
 from dataclasses import dataclass
@@ -14,7 +15,7 @@ from enum import Enum
 from hashlib import file_digest
 from pathlib import Path
 from shlex import split
-from shutil import copy
+from shutil import copy, copyfileobj
 from stat import S_IEXEC
 from subprocess import run
 from tomllib import load
@@ -23,7 +24,7 @@ from urllib.request import urlopen
 from zipfile import ZipFile
 
 
-__version__ = "0.0.23"
+__version__ = "0.0.24"
 
 _CACHE = Path("~/.cache/dotlocalslashbin/")
 _HOME = str(Path("~").expanduser())
@@ -38,7 +39,7 @@ class _CustomNamespace(Namespace):
     cache: Path
 
 
-Action = Enum("Action", ["command", "copy", "symlink", "untar", "unzip"])
+Action = Enum("Action", ["command", "copy", "gunzip", "symlink", "untar", "unzip"])
 
 
 @dataclass(init=False)
@@ -123,19 +124,7 @@ def _process(item: Item) -> None:
 
     item.target.parent.mkdir(parents=True, exist_ok=True)
     item.target.unlink(missing_ok=True)
-    if item.action == Action.copy:
-        copy(item.downloaded, item.target)
-    elif item.action == Action.symlink:
-        item.target.symlink_to(item.downloaded)
-    elif item.action == Action.unzip:
-        with ZipFile(item.downloaded, "r") as file:
-            file.extract(item.target.name, path=item.target.parent)
-    elif item.action == Action.untar:
-        _untar(item)
-    elif item.action == Action.command and item.command is not None:
-        kwargs = {"target": item.target, "downloaded": item.downloaded}
-        run(split(item.command.format(**kwargs)), check=True)
-
+    _action(item)
     if not item.target.is_symlink():
         item.target.chmod(item.target.stat().st_mode | S_IEXEC)
 
@@ -172,21 +161,37 @@ def _download(item: Item) -> None:
         raise RuntimeError(msg)
 
 
-def _untar(item: Item) -> None:
-    with tarfile.open(item.downloaded, "r") as file:
-        for member in file.getmembers():
-            if member.name in item.ignore:
-                continue
-            member.name = member.name.removeprefix(item.prefix)
-            try:
-                file.extract(member, path=item.target.parent, filter="tar")
-            except TypeError:  # before 3.11.4 e.g. Debian 12
-                file.extract(member, path=item.target.parent)
+def _action(item: Item) -> None:
+    if item.action == Action.copy:
+        copy(item.downloaded, item.target)
+    elif item.action == Action.symlink:
+        item.target.symlink_to(item.downloaded)
+    elif item.action == Action.unzip:
+        with ZipFile(item.downloaded, "r") as file:
+            file.extract(item.target.name, path=item.target.parent)
+    elif item.action == Action.gunzip:
+        with gzip.open(item.downloaded, "r") as fsrc, item.target.open("wb") as fdst:
+            copyfileobj(fsrc, fdst)
+    elif item.action == Action.untar:
+        with tarfile.open(item.downloaded, "r") as file:
+            for member in file.getmembers():
+                if member.name in item.ignore:
+                    continue
+                member.name = member.name.removeprefix(item.prefix)
+                try:
+                    file.extract(member, path=item.target.parent, filter="tar")
+                except TypeError:  # before 3.11.4 e.g. Debian 12
+                    file.extract(member, path=item.target.parent)
+    elif item.action == Action.command and item.command is not None:
+        cmd = item.command.format(target=item.target, downloaded=item.downloaded)
+        run(split(cmd), check=True)
 
 
 def _guess_action(item: Item) -> Action:
     if item.url.endswith((".tar.xz", ".tar.gz", ".tar")):
         guess = Action.untar
+    elif item.url.endswith((".gz",)):
+        guess = Action.gunzip
     elif item.url.endswith(".zip"):
         guess = Action.unzip
     elif item.url.startswith("/"):
