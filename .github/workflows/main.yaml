@@ -10,6 +10,14 @@ on: # yamllint disable-line rule:truthy
 permissions: {}
 
 jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        with: { persist-credentials: false }
+      - run: bin/linux-amd64.toml
+      - run: bin/github.toml
+      #      bin/python.toml is not run, python3.13 is not installed
   main:
     runs-on: ubuntu-latest
     steps:
