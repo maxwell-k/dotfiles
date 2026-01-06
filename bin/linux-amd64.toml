@@ -82,18 +82,6 @@ expected = "42c7d38515e5a2008de26d678140e2d7fd1825eb977d78023fe997913e3dc2be"
 version = "--version"
 modifier = "_checksums.txt"
 
-[beancount-language-server]
-url = "https://github.com/polarmutex/beancount-language-server/releases/download/v1.4.1/beancount-language-server-x86_64-unknown-linux-gnu.tar.xz"
-expected = "450c496675e36f79c0f0118efa5cfe7116000e883d4033894bd5b14ad35d1189"
-version = "--version"
-prefix = "beancount-language-server-x86_64-unknown-linux-gnu/"
-ignore = [
-  "README.md",
-  "CHANGELOG.md",
-  "LICENSE",
-]
-modifier = ".sha256"
-
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
