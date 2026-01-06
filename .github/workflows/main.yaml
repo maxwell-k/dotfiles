@@ -10,8 +10,17 @@ on: # yamllint disable-line rule:truthy
 permissions: {}
 
 jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        with: { persist-credentials: false }
+      - run: bin/linux-amd64.toml
+      - run: bin/github.toml
+      #      bin/python.toml is not run, python3.13 is not installed
   main:
     runs-on: ubuntu-latest
+    needs: smoke
     steps:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
         with: { persist-credentials: false }
@@ -19,9 +28,11 @@ jobs:
         with: { enable-cache: false }
       - run: ./noxfile.py
   renovate-config-validator:
+    needs: smoke
     # yamllint disable-line rule:line-length
     uses: maxwell-k/dotlocalslashbin/.github/workflows/renovate.yaml@e4f20b5c4b2487e16deeb23f821f63e1cd26eecb # v0.0.24
   matrix:
+    needs: smoke
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
