@@ -88,6 +88,15 @@ expected = "535a91297c9af45d9b46d58385a76d45f665a22bd7706405291fb35a02647fb9"
 version = "--version"
 modifier = ".sha256"
 
+[jj]
+url = "https://github.com/jj-vcs/jj/releases/download/v0.36.0/jj-v0.36.0-x86_64-unknown-linux-musl.tar.gz"
+expected = "b9526754d35ee643dd7f91a927d0e5650563e1092ffa599765624a3f212277ab"
+ignore = [
+  "LICENSE",
+  "README.md",
+]
+version = "--version"
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
