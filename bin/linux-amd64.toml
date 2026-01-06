@@ -83,7 +83,7 @@ version = "--version"
 modifier = "_checksums.txt"
 
 [beancount-language-server]
-url = "https://github.com/polarmutex/beancount-language-server/releases/download/v1.4.1/beancount-language-server-x86_64-unknown-linux-gnu.tar.xz"
+url = "https://github.com/polarmutex/beancount-language-server/releases/download/1.6.0/beancount-language-server-x86_64-unknown-linux-gnu.tar.xz"
 expected = "450c496675e36f79c0f0118efa5cfe7116000e883d4033894bd5b14ad35d1189"
 version = "--version"
 prefix = "beancount-language-server-x86_64-unknown-linux-gnu/"
