@@ -1,0 +1,9 @@
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
+
+[user]
+name = "Keith Maxwell"
+email = "keith.maxwell@gmail.com"
+
+# config/jj/config.toml
+# Copyright 2026 Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0

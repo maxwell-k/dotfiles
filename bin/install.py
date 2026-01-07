@@ -25,6 +25,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.config/git/attributes",),
     ("~/.config/git/config",),
     ("~/.config/git/ignore",),
+    ("~/.config/jj/config.toml",),
     ("~/.config/lf/lfrc",),
     ("~/.config/litecli/config",),
     ("~/.config/newsboat/config",),
