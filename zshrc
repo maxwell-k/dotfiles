@@ -23,6 +23,11 @@ if [ -x "$executable" ] && [ ! -f "$site/_uv" ] ; then
   "$executable" generate-shell-completion zsh >> "$site/_uv"
   rm -f "$HOME/.zcompdump"
 fi
+executable="$HOME/.local/bin/jj"
+if [ -x "$executable" ] && [ ! -f "$site/_jj" ] ; then
+  "$executable" util completion zsh >> "$site/_jj"
+  rm -f "$HOME/.zcompdump"
+fi
 unset executable site #}}}1
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit  # for nox above
