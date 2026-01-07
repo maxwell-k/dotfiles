@@ -12,15 +12,14 @@ FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
 # Files for command line completion {{{1
 # these files must be generated before the compinit commands
 site="$HOME/.local/share/zsh/site-functions"
+test -d "$site" || mkdir --parents "$site"
 executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
 if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
-  mkdir --parents "$site"
   "$executable" nox >> "$site/_nox"  # starts with a compdef line
   rm -f "$HOME/.zcompdump"
 fi
 executable="$HOME/.local/bin/uv"
 if [ -x "$executable" ] && [ ! -f "$site/_uv" ] ; then
-  mkdir --parents "$site"
   "$executable" generate-shell-completion zsh >> "$site/_uv"
   rm -f "$HOME/.zcompdump"
 fi
