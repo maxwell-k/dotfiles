@@ -14,7 +14,7 @@ FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
 site="$HOME/.local/share/zsh/site-functions"
 test -d "$site" || mkdir --parents "$site"
 executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
-call="$executable nox"
+call="$executable --shell=zsh nox"
 file="$site/_nox"
 if [ -x "$executable" ] && [ ! -f "$file" ] ; then
   zsh -c "$call" >> "$file"
