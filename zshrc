@@ -9,40 +9,25 @@
 bindkey -v  # vi mode, see man zshzle
 setopt interactive_comments
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
-# Files for command line completion {{{1
+# Command line completion {{{1
 # these files must be generated before the compinit commands
 site="$HOME/.local/share/zsh/site-functions"
-test -d "$site" || mkdir --parents "$site"
-executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
-call="$executable --shell=zsh nox"
-file="$site/_nox"
-if [ -x "$executable" ] && [ ! -f "$file" ] ; then
-  zsh -c "$call" >> "$file"
-  rm -f "$HOME/.zcompdump"
-fi
-executable="$HOME/.local/bin/uv"
-call="$executable generate-shell-completion zsh"
-file="$site/_$(basename "$executable")"
-if [ -x "$executable" ] && [ ! -f "$file" ] ; then
-  zsh -c "$call" >> "$file"
-  rm -f "$HOME/.zcompdump"
-fi
-executable="$HOME/.local/bin/jj"
-call="$executable util completion zsh"
-file="$site/_$(basename "$executable")"
-if [ -x "$executable" ] && [ ! -f "$file" ] ; then
-  zsh -c "$call" >> "$file"
-  rm -f "$HOME/.zcompdump"
-fi
-executable="$HOME/.deno/bin/deno"
-call="$executable completions zsh"
-file="$site/_$(basename "$executable")"
-if [ -x "$executable" ] && [ ! -f "$file" ] ; then
-  zsh -c "$call" >> "$file"
-  rm -f "$HOME/.zcompdump"
-fi
-unset executable site #}}}1
-autoload -U compinit && compinit
+create() {
+  call="$1"
+  test -d "$site" || mkdir --parents "$site"
+  executable="${call%%[[:space:]]*}"
+  file="${2:-$site/_$(basename "$executable")}"
+  if [ -x "$executable" ] && [ ! -f "$file" ] ; then
+    zsh -c "$call" >> "$file"
+    rm -f "$HOME/.zcompdump"
+  fi
+}
+create "$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete --shell=zsh nox" "$site/_nox"
+create "$HOME/.local/bin/uv generate-shell-completion zsh"
+create "$HOME/.local/bin/jj util completion zsh"
+create "$HOME/.deno/bin/deno completions zsh"
+unset create executable site
+autoload -U compinit && compinit #}}}1
 # Aliases {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
