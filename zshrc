@@ -43,7 +43,6 @@ if [ -x "$executable" ] && [ ! -f "$file" ] ; then
 fi
 unset executable site #}}}1
 autoload -U compinit && compinit
-autoload -U bashcompinit && bashcompinit  # for nox above
 # Aliases {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
