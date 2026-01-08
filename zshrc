@@ -28,6 +28,11 @@ if [ -x "$executable" ] && [ ! -f "$site/_jj" ] ; then
   "$executable" util completion zsh >> "$site/_jj"
   rm -f "$HOME/.zcompdump"
 fi
+executable="$HOME/.deno/bin/deno"
+if [ -x "$executable" ] && [ ! -f "$site/_deno" ] ; then
+  "$executable" completions zsh >> "$site/_deno"
+  rm -f "$HOME/.zcompdump"
+fi
 unset executable site #}}}1
 autoload -U compinit && compinit
 autoload -U bashcompinit && bashcompinit  # for nox above
