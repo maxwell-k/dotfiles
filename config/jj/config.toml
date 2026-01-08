@@ -4,6 +4,9 @@
 name = "Keith Maxwell"
 email = "keith.maxwell@gmail.com"
 
+[ui]
+pager = ":builtin"
+
 # config/jj/config.toml
 # Copyright 2026 Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
