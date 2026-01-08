@@ -11,12 +11,13 @@
 # ///
 
 
+import json
 import logging
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
 from subprocess import run
 from tomllib import load, loads
-from urllib.request import HTTPError, urlopen
+from urllib.request import HTTPError, Request, urlopen
 
 logger = logging.getLogger(__name__)
 
@@ -190,25 +191,55 @@ def _update(target: Path, key: str) -> None:
     with target.open("rb") as file:
         item = load(file)[key]
     url = item["url"]
-    old = item["expected"]
 
+    new = None
     if "modifier" in item:
-        modifier = item["modifier"]
-        filename = url[url.rindex("/") + 1 :]
-        url = apply_modifier(url, modifier)
+        url = apply_modifier(url, item["modifier"])
         try:
             with urlopen(url) as response:
                 text = response.read().decode()
         except HTTPError as error:
             logger.exception("%s responded with status code %s", url, error.status)
             return
+        filename = url[url.rindex("/") + 1 :]
         new = extract(text, filename)
+    elif url.startswith("https://github.com/") and "/releases/download/" in url:
+        new = api(url)
 
-        text = target.read_text().replace(old, new)
+    if new is None:
+        logger.error("No checksum available for %s", key)
+    else:
+        text = target.read_text().replace(item["expected"], new)
         target.write_text(text)
 
-    logger.error("%s does not have `modifier` specified", key)
-    return
+
+def api(url: str) -> str | None:
+    """Fetch the sha2556 from the GitHub releases API."""
+    logger.debug("querying GitHub for sha256 for %s", url)
+    filename = url[url.rindex("/") + 1 :]
+    project, tag = (
+        url.removeprefix("https://github.com/")
+        .removesuffix("/" + filename)
+        .split("/releases/download/")
+    )
+    api = f"https://api.github.com/repos/{project}/releases/tags/{tag}"
+    logger.debug("GET %s", api)
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
+
+    with urlopen(Request(api, headers=headers, method="GET")) as response:
+        text = response.read().decode()
+        assets = json.loads(text).get("assets", [])
+
+    result = None
+    for asset in assets:
+        if asset["name"] == filename and "digest" in asset:
+            result = asset["digest"].removeprefix("sha256:")
+            break
+
+    return result
 
 
 def _git(target: Path) -> list[str]:
