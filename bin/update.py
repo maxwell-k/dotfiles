@@ -18,6 +18,30 @@ from tomllib import load, loads
 from urllib.request import HTTPError, urlopen
 
 
+def main(arg_list: list[str] | None = None) -> int:
+    """Update each expected field using a modifier field and a GET request."""
+    args = parse_args(arg_list)
+
+    keys: list[str] = []
+
+    if args.all:
+        toml = load(args.target.read_bytes())
+        for key, value in toml.items():
+            if "modifier" in value:
+                keys.append(key)
+
+    if args.git:
+        keys.extend(_git(args.target))
+
+    if args.key:
+        keys.append(args.key)
+
+    for key in keys:
+        _update(args.target, key)
+
+    return 0
+
+
 def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
@@ -181,30 +205,6 @@ def _git(target: Path) -> list[str]:
     after = loads(target.read_text())
 
     return [key for key in after.keys() & before.keys() if after[key] != before[key]]
-
-
-def main(arg_list: list[str] | None = None) -> int:
-    """Update each expected field using a modifier field and a GET request."""
-    args = parse_args(arg_list)
-
-    keys: list[str] = []
-
-    if args.all:
-        toml = load(args.target.read_bytes())
-        for key, value in toml.items():
-            if "modifier" in value:
-                keys.append(key)
-
-    if args.git:
-        keys.extend(_git(args.target))
-
-    if args.key:
-        keys.append(args.key)
-
-    for key in keys:
-        _update(args.target, key)
-
-    return 0
 
 
 if __name__ == "__main__":
