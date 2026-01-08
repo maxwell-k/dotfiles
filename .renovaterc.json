@@ -19,7 +19,7 @@
       "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]",
-        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/].+[/].+_(?<currentValue>.+?)_linux_amd64(?:[.]tar[.]gz|[.]zip)?\""
+        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/].+[/][^-_]+[-_](?<currentValue>[^-_]+?)[-_].+(?:[.]tar[.]gz|[.]zip)?\""
       ],
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "{{#if (containsString currentValue '.0')}}loose{{else}}semver-coerced{{/if}}"
