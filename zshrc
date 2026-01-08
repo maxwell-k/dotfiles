@@ -9,28 +9,25 @@
 bindkey -v  # vi mode, see man zshzle
 setopt interactive_comments
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
-# Files for command line completion {{{1
+# Command line completion {{{1
 # these files must be generated before the compinit commands
 site="$HOME/.local/share/zsh/site-functions"
-test -d "$site" || mkdir --parents "$site"
-executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
-if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
-  "$executable" nox >> "$site/_nox"  # starts with a compdef line
-  rm -f "$HOME/.zcompdump"
-fi
-executable="$HOME/.local/bin/uv"
-if [ -x "$executable" ] && [ ! -f "$site/_uv" ] ; then
-  "$executable" generate-shell-completion zsh >> "$site/_uv"
-  rm -f "$HOME/.zcompdump"
-fi
-executable="$HOME/.local/bin/jj"
-if [ -x "$executable" ] && [ ! -f "$site/_jj" ] ; then
-  "$executable" util completion zsh >> "$site/_jj"
-  rm -f "$HOME/.zcompdump"
-fi
-unset executable site #}}}1
-autoload -U compinit && compinit
-autoload -U bashcompinit && bashcompinit  # for nox above
+create() {
+  call="$1"
+  test -d "$site" || mkdir --parents "$site"
+  executable="${call%%[[:space:]]*}"
+  file="${2:-$site/_$(basename "$executable")}"
+  if [ -x "$executable" ] && [ ! -f "$file" ] ; then
+    zsh -c "$call" >> "$file"
+    rm -f "$HOME/.zcompdump"
+  fi
+}
+create "$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete --shell=zsh nox" "$site/_nox"
+create "$HOME/.local/bin/uv generate-shell-completion zsh"
+create "$HOME/.local/bin/jj util completion zsh"
+create "$HOME/.deno/bin/deno completions zsh"
+unset create executable site
+autoload -U compinit && compinit #}}}1
 # Aliases {{{1
 alias cp="cp -i"  # To avoid accidentally over-writing content
 alias mv="mv -i"  # "
