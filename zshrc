@@ -14,23 +14,31 @@ FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
 site="$HOME/.local/share/zsh/site-functions"
 test -d "$site" || mkdir --parents "$site"
 executable="$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete"
-if [ -x "$executable" ] && [ ! -f "$site/_nox" ] ; then
-  "$executable" nox >> "$site/_nox"  # starts with a compdef line
+call="$executable nox"
+file="$site/_nox"
+if [ -x "$executable" ] && [ ! -f "$file" ] ; then
+  zsh -c "$call" >> "$file"
   rm -f "$HOME/.zcompdump"
 fi
 executable="$HOME/.local/bin/uv"
-if [ -x "$executable" ] && [ ! -f "$site/_uv" ] ; then
-  "$executable" generate-shell-completion zsh >> "$site/_uv"
+call="$executable generate-shell-completion zsh"
+file="$site/_$(basename "$executable")"
+if [ -x "$executable" ] && [ ! -f "$file" ] ; then
+  zsh -c "$call" >> "$file"
   rm -f "$HOME/.zcompdump"
 fi
 executable="$HOME/.local/bin/jj"
-if [ -x "$executable" ] && [ ! -f "$site/_jj" ] ; then
-  "$executable" util completion zsh >> "$site/_jj"
+call="$executable util completion zsh"
+file="$site/_$(basename "$executable")"
+if [ -x "$executable" ] && [ ! -f "$file" ] ; then
+  zsh -c "$call" >> "$file"
   rm -f "$HOME/.zcompdump"
 fi
 executable="$HOME/.deno/bin/deno"
-if [ -x "$executable" ] && [ ! -f "$site/_deno" ] ; then
-  "$executable" completions zsh >> "$site/_deno"
+call="$executable completions zsh"
+file="$site/_$(basename "$executable")"
+if [ -x "$executable" ] && [ ! -f "$file" ] ; then
+  zsh -c "$call" >> "$file"
   rm -f "$HOME/.zcompdump"
 fi
 unset executable site #}}}1
