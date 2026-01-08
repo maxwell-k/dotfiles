@@ -11,16 +11,24 @@
 # ///
 
 
+import logging
 from argparse import ArgumentParser, Namespace
 from pathlib import Path
 from subprocess import run
 from tomllib import load, loads
 from urllib.request import HTTPError, urlopen
 
+logger = logging.getLogger(__name__)
+
 
 def main(arg_list: list[str] | None = None) -> int:
     """Update each expected field using a modifier field and a GET request."""
     args = parse_args(arg_list)
+
+    level = logging.DEBUG if args.debug else logging.INFO
+    format_ = "%(levelname)s:%(name)s:%(asctime)s:" if args.debug else ""
+    format_ += "%(message)s"
+    logging.basicConfig(level=level, format=format_)
 
     keys: list[str] = []
 
@@ -36,6 +44,7 @@ def main(arg_list: list[str] | None = None) -> int:
     if args.key:
         keys.append(args.key)
 
+    logger.debug("looping through keys: %s", keys)
     for key in keys:
         _update(args.target, key)
 
@@ -89,14 +98,19 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
         type=str,
         help="item to update",
     )
+    parser.add_argument(
+        "--debug",
+        action="store_true",
+        help="show debug logging.",
+    )
     args = parser.parse_args(arg_list)
     if args.key is None and args.all is False:
         args.git = True
     if args.git and args.all:
-        print("--all is not compatible with --git, ignoring.")
+        logger.error("--all is not compatible with --git, ignoring.")
         args.all = False
     if args.all and args.key:
-        print("--all is not compatible with --key, ignoring.")
+        logger.error("--all is not compatible with --key, ignoring.")
         args.all = False
 
     return args
@@ -178,23 +192,23 @@ def _update(target: Path, key: str) -> None:
     url = item["url"]
     old = item["expected"]
 
-    try:
+    if "modifier" in item:
         modifier = item["modifier"]
-    except KeyError:
-        print(f"{key} does not have `modifier` specified")
-        return
-    filename = url[url.rindex("/") + 1 :]
-    url = apply_modifier(url, modifier)
-    try:
-        with urlopen(url) as response:
-            text = response.read().decode()
-    except HTTPError as error:
-        print(f"{url} responded with status code {error.status}")
-        return
-    new = extract(text, filename)
+        filename = url[url.rindex("/") + 1 :]
+        url = apply_modifier(url, modifier)
+        try:
+            with urlopen(url) as response:
+                text = response.read().decode()
+        except HTTPError as error:
+            logger.exception("%s responded with status code %s", url, error.status)
+            return
+        new = extract(text, filename)
 
-    text = target.read_text().replace(old, new)
-    target.write_text(text)
+        text = target.read_text().replace(old, new)
+        target.write_text(text)
+
+    logger.error("%s does not have `modifier` specified", key)
+    return
 
 
 def _git(target: Path) -> list[str]:
