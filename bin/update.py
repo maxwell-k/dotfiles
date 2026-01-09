@@ -35,7 +35,8 @@ def main(arg_list: list[str] | None = None) -> int:
     keys: list[str] = []
 
     if args.mode == "all":
-        toml = load(args.target.read_bytes())
+        with args.target.open("rb") as file:
+            toml = load(file)
         for key, value in toml.items():
             if "modifier" in value:
                 keys.append(key)
