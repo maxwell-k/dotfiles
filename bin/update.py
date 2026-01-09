@@ -11,71 +11,81 @@
 # ///
 
 
+import json
+import logging
 from argparse import ArgumentParser, Namespace
+from enum import Enum
 from pathlib import Path
 from subprocess import run
 from tomllib import load, loads
-from urllib.request import HTTPError, urlopen
+from urllib.request import HTTPError, Request, urlopen
+
+Mode = Enum("Mode", ["git", "all", "keys"])
+
+logger = logging.getLogger(__name__)
+
+
+def main(arg_list: list[str] | None = None) -> int:
+    """Update each expected field using a modifier field and a GET request."""
+    args = parse_args(arg_list)
+
+    level = logging.DEBUG if args.debug else logging.INFO
+    format_ = "%(levelname)s:%(name)s:%(asctime)s:" if args.debug else ""
+    format_ += "%(message)s"
+    logging.basicConfig(level=level, format=format_)
+    logger.debug("command line arguments: %s", args)
+
+    keys: list[str] = []
+
+    if args.mode == Mode.all:
+        with args.target.open("rb") as file:
+            toml = load(file)
+        for key, value in toml.items():
+            if "modifier" in value:
+                keys.append(key)
+    elif args.mode == Mode.keys:
+        keys.extend(args.key)
+    else:
+        keys.extend(_git(args.target))
+
+    logger.debug("looping through keys: %s", keys)
+    for key in keys:
+        _update(args.target, key)
+
+    return 0
 
 
 def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
     >>> parse_args([])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
-    >>> parse_args(['--git'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
+    >>> parse_args(['git'])
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
-    >>> parse_args(['--all'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=True, key=None)
+    >>> parse_args(['all'])
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.all: 2>)
 
-    >>> parse_args(['--key=one'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=False, key='one')
-
-    >>> parse_args(['--all', '--git'])
-    --all is not compatible with --git, ignoring.
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
-
-    >>> parse_args(['--all', '--key', 'one'])
-    --all is not compatible with --key, ignoring.
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=False, key='one')
+    >>> parse_args(['keys', 'one'])   # doctest: +ELLIPSIS
+    Namespace(target=..., debug=False, mode=<Mode.keys: 3>, key=['one'])
     """
     parser = ArgumentParser()
-    parser.add_argument(
-        "target",
-        nargs="?",
-        type=Path,
-        help="file to update, default: '%(default)s'",
-        default=Path("bin/linux-amd64.toml"),
-    )
-    parser.add_argument(
-        "--git",
-        help="update items that changed in the last commit (default)",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--all",
-        help="update all items that have a modifier",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--key",
-        nargs="?",
-        type=str,
-        help="item to update",
-    )
-    args = parser.parse_args(arg_list)
-    if args.key is None and args.all is False:
-        args.git = True
-    if args.git and args.all:
-        print("--all is not compatible with --git, ignoring.")
-        args.all = False
-    if args.all and args.key:
-        print("--all is not compatible with --key, ignoring.")
-        args.all = False
 
-    return args
+    help_ = "file to update, default: '%(default)s'"
+    default = Path("bin/linux-amd64.toml")
+    parser.add_argument("--target", nargs="?", type=Path, help=help_, default=default)
+    parser.add_argument("--debug", action="store_true", help="show debug logging.")
+    parser.set_defaults(mode=Mode.git)
+
+    subparsers = parser.add_subparsers()
+    subparsers.add_parser("all", help="update all keys").set_defaults(mode=Mode.all)
+    help_ = "update keys that change in the last git commit (default)"
+    subparsers.add_parser("git", help=help_).set_defaults(mode=Mode.git)
+    key = subparsers.add_parser("keys", help="update specified keys")
+    key.set_defaults(mode=Mode.keys)
+    key.add_argument("key", nargs="+", type=str, help="item to update")
+    return parser.parse_args(arg_list)
 
 
 def apply_modifier(url: str, modifier: str) -> str:
@@ -85,6 +95,9 @@ def apply_modifier(url: str, modifier: str) -> str:
     'https://example.org/SHA256SUMS'
 
     >>> apply_modifier("https://example.org/file-1.1.1.zip", "checksums-bsd")
+    'https://example.org/checksums-bsd'
+
+    >>> apply_modifier("https://example.org/yq_linux_amd64", "checksums-bsd")
     'https://example.org/checksums-bsd'
 
     >>> apply_modifier("https://example.org/file-1.1.1.zip", ".sha256")
@@ -102,10 +115,11 @@ def apply_modifier(url: str, modifier: str) -> str:
     >>> apply_modifier(url, "_checksums.txt")
     'https://example.org/file_1.2.3_checksums.txt'
     """
-    filename = url[url.rindex("/") + 1 :]
-    for suffix in ["_linux_amd64.tar.gz", "_linux_amd64.zip", "_linux_amd64"]:
-        url = url.removesuffix(suffix)
-    if modifier[0] != ".":
+    if modifier.startswith((".", "_")):
+        for suffix in ["_linux_amd64.tar.gz", "_linux_amd64.zip", "_linux_amd64"]:
+            url = url.removesuffix(suffix)
+    else:
+        filename = url[url.rindex("/") + 1 :]
         url = url.removesuffix(filename)
     url += modifier
     return url
@@ -136,9 +150,17 @@ def extract(text: str, filename: str) -> str:
     >>> text += "a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447\n"
     >>> extract(text, "file")
     'a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447'
+
+    Handles a checksum followed by a newline:
+
+    >>> text = "a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447\n"
+    >>> extract(text, "file")
+    'a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447'
     """
     lines = text.splitlines()
-    if "=" in lines[0]:
+    if filename not in text:
+        result = text.strip()
+    elif "=" in lines[0]:
         marker = f"({filename})"
         line = next(i for i in lines if marker in i and i.startswith("SHA256"))
         result = line.split()[3]
@@ -148,29 +170,73 @@ def extract(text: str, filename: str) -> str:
     return result
 
 
+def github_release(url: str) -> bool:
+    """Check that a url represents a GitHub release.
+
+    >>> github_release("https://example.com/artifact.zip")
+    False
+
+    >>> github_release("https://github.com/a/b/releases/download/v0.0.1/artifact.zip")
+    True
+    """
+    return url.startswith("https://github.com/") and "/releases/download/" in url
+
+
 def _update(target: Path, key: str) -> None:
+    logger.debug("updating '%s' from '%s'", key, target)
     with target.open("rb") as file:
         item = load(file)[key]
-    url = item["url"]
-    old = item["expected"]
 
-    try:
-        modifier = item["modifier"]
-    except KeyError:
-        print(f"{key} does not have `modifier` specified")
-        return
+    new = None
+    if "modifier" in item:
+        modified = apply_modifier(item["url"], item["modifier"])
+        try:
+            logger.debug("GET %s", modified)
+            with urlopen(modified) as response:
+                text = response.read().decode()
+        except HTTPError as error:
+            logger.exception("%s responded with status code %s", modified, error.status)
+            return
+        url = item["url"]
+        filename = url[url.rindex("/") + 1 :]
+        new = extract(text, filename)
+    elif github_release(item["url"]):
+        new = api(item["url"])
+
+    if new is None:
+        logger.error("No checksum available for %s", key)
+    else:
+        text = target.read_text().replace(item["expected"], new)
+        target.write_text(text)
+
+
+def api(url: str) -> str | None:
+    """Fetch the sha2556 from the GitHub releases API."""
+    logger.debug("querying GitHub for sha256 for %s", url)
     filename = url[url.rindex("/") + 1 :]
-    url = apply_modifier(url, modifier)
-    try:
-        with urlopen(url) as response:
-            text = response.read().decode()
-    except HTTPError as error:
-        print(f"{url} responded with status code {error.status}")
-        return
-    new = extract(text, filename)
+    project, tag = (
+        url.removeprefix("https://github.com/")
+        .removesuffix("/" + filename)
+        .split("/releases/download/")
+    )
+    api = f"https://api.github.com/repos/{project}/releases/tags/{tag}"
+    logger.debug("GET %s", api)
+    headers = {
+        "Accept": "application/vnd.github+json",
+        "X-GitHub-Api-Version": "2022-11-28",
+    }
 
-    text = target.read_text().replace(old, new)
-    target.write_text(text)
+    with urlopen(Request(api, headers=headers, method="GET")) as response:
+        text = response.read().decode()
+        assets = json.loads(text).get("assets", [])
+
+    result = None
+    for asset in assets:
+        if asset["name"] == filename and "digest" in asset:
+            result = asset["digest"].removeprefix("sha256:")
+            break
+
+    return result
 
 
 def _git(target: Path) -> list[str]:
@@ -181,30 +247,6 @@ def _git(target: Path) -> list[str]:
     after = loads(target.read_text())
 
     return [key for key in after.keys() & before.keys() if after[key] != before[key]]
-
-
-def main(arg_list: list[str] | None = None) -> int:
-    """Update each expected field using a modifier field and a GET request."""
-    args = parse_args(arg_list)
-
-    keys: list[str] = []
-
-    if args.all:
-        toml = load(args.target.read_bytes())
-        for key, value in toml.items():
-            if "modifier" in value:
-                keys.append(key)
-
-    if args.git:
-        keys.extend(_git(args.target))
-
-    if args.key:
-        keys.append(args.key)
-
-    for key in keys:
-        _update(args.target, key)
-
-    return 0
 
 
 if __name__ == "__main__":
