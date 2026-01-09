@@ -181,19 +181,21 @@ def github_release(url: str) -> bool:
 
 
 def _update(target: Path, key: str) -> None:
+    logger.debug("updating '%s' from '%s'", key, target)
     with target.open("rb") as file:
         item = load(file)[key]
-    url = item["url"]
 
     new = None
     if "modifier" in item:
-        url = apply_modifier(url, item["modifier"])
+        modified = apply_modifier(item["url"], item["modifier"])
         try:
-            with urlopen(url) as response:
+            logger.debug("GET %s", modified)
+            with urlopen(modified) as response:
                 text = response.read().decode()
         except HTTPError as error:
-            logger.exception("%s responded with status code %s", url, error.status)
+            logger.exception("%s responded with status code %s", modified, error.status)
             return
+        url = item["url"]
         filename = url[url.rindex("/") + 1 :]
         new = extract(text, filename)
     elif github_release(item["url"]):
