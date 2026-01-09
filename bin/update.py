@@ -30,20 +30,19 @@ def main(arg_list: list[str] | None = None) -> int:
     format_ = "%(levelname)s:%(name)s:%(asctime)s:" if args.debug else ""
     format_ += "%(message)s"
     logging.basicConfig(level=level, format=format_)
+    logger.debug("command line arguments: %s", args)
 
     keys: list[str] = []
 
-    if args.all:
+    if args.mode == "all":
         toml = load(args.target.read_bytes())
         for key, value in toml.items():
             if "modifier" in value:
                 keys.append(key)
-
-    if args.git:
+    elif args.mode == "key":
+        keys.extend(args.key)
+    else:
         keys.extend(_git(args.target))
-
-    if args.key:
-        keys.append(args.key)
 
     logger.debug("looping through keys: %s", keys)
     for key in keys:
@@ -56,46 +55,34 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
     >>> parse_args([])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode='git')
 
-    >>> parse_args(['--git'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
+    >>> parse_args(['git'])
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode='git')
 
-    >>> parse_args(['--all'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=True, key=None)
+    >>> parse_args(['all'])
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode='all')
 
-    >>> parse_args(['--key=one'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=False, key='one')
+    >>> parse_args(['keys', 'one'])   # doctest: +ELLIPSIS
+    Namespace(target=..., debug=False, mode='keys', key=['one'])
 
-    >>> parse_args(['--all', '--git'])
-    --all is not compatible with --git, ignoring.
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=True, all=False, key=None)
-
-    >>> parse_args(['--all', '--key', 'one'])
-    --all is not compatible with --key, ignoring.
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=False, key='one')
     """
     parser = ArgumentParser()
+
     help_ = "file to update, default: '%(default)s'"
     default = Path("bin/linux-amd64.toml")
-    parser.add_argument("target", nargs="?", type=Path, help=help_, default=default)
-    help_ = "update items that changed in the last commit (default)"
-    parser.add_argument("--git", help=help_, action="store_true")
-    help_ = "update all items that have a modifier"
-    parser.add_argument("--all", help=help_, action="store_true")
-    parser.add_argument("--key", nargs="?", type=str, help="item to update")
+    parser.add_argument("--target", nargs="?", type=Path, help=help_, default=default)
     parser.add_argument("--debug", action="store_true", help="show debug logging.")
-    args = parser.parse_args(arg_list)
-    if args.key is None and args.all is False:
-        args.git = True
-    if args.git and args.all:
-        logger.error("--all is not compatible with --git, ignoring.")
-        args.all = False
-    if args.all and args.key:
-        logger.error("--all is not compatible with --key, ignoring.")
-        args.all = False
+    parser.set_defaults(mode="git")
 
-    return args
+    subparsers = parser.add_subparsers()
+    subparsers.add_parser("all", help="update all keys").set_defaults(mode="all")
+    help_ = "update keys that change in the last git commit (default)"
+    subparsers.add_parser("git", help=help_).set_defaults(mode="git")
+    key = subparsers.add_parser("keys", help="update specified keys")
+    key.set_defaults(mode="keys")
+    key.add_argument("key", nargs="+", type=str, help="item to update")
+    return parser.parse_args(arg_list)
 
 
 def apply_modifier(url: str, modifier: str) -> str:
