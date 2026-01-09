@@ -168,6 +168,18 @@ def extract(text: str, filename: str) -> str:
     return result
 
 
+def github_release(url: str) -> bool:
+    """Check that a url represents a GitHub release.
+
+    >>> github_release("https://example.com/artifact.zip")
+    False
+
+    >>> github_release("https://github.com/a/b/releases/download/v0.0.1/artifact.zip")
+    True
+    """
+    return url.startswith("https://github.com/") and "/releases/download/" in url
+
+
 def _update(target: Path, key: str) -> None:
     with target.open("rb") as file:
         item = load(file)[key]
@@ -184,8 +196,8 @@ def _update(target: Path, key: str) -> None:
             return
         filename = url[url.rindex("/") + 1 :]
         new = extract(text, filename)
-    elif url.startswith("https://github.com/") and "/releases/download/" in url:
-        new = api(url)
+    elif github_release(item["url"]):
+        new = api(item["url"])
 
     if new is None:
         logger.error("No checksum available for %s", key)
