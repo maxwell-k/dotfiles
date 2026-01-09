@@ -14,10 +14,13 @@
 import json
 import logging
 from argparse import ArgumentParser, Namespace
+from enum import Enum
 from pathlib import Path
 from subprocess import run
 from tomllib import load, loads
 from urllib.request import HTTPError, Request, urlopen
+
+Mode = Enum("Mode", ["git", "all", "keys"])
 
 logger = logging.getLogger(__name__)
 
@@ -34,13 +37,13 @@ def main(arg_list: list[str] | None = None) -> int:
 
     keys: list[str] = []
 
-    if args.mode == "all":
+    if args.mode == Mode.all:
         with args.target.open("rb") as file:
             toml = load(file)
         for key, value in toml.items():
             if "modifier" in value:
                 keys.append(key)
-    elif args.mode == "key":
+    elif args.mode == Mode.keys:
         keys.extend(args.key)
     else:
         keys.extend(_git(args.target))
@@ -56,17 +59,16 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
     >>> parse_args([])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode='git')
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
     >>> parse_args(['git'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode='git')
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
     >>> parse_args(['all'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode='all')
+    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.all: 2>)
 
     >>> parse_args(['keys', 'one'])   # doctest: +ELLIPSIS
-    Namespace(target=..., debug=False, mode='keys', key=['one'])
-
+    Namespace(target=..., debug=False, mode=<Mode.keys: 3>, key=['one'])
     """
     parser = ArgumentParser()
 
@@ -74,14 +76,14 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     default = Path("bin/linux-amd64.toml")
     parser.add_argument("--target", nargs="?", type=Path, help=help_, default=default)
     parser.add_argument("--debug", action="store_true", help="show debug logging.")
-    parser.set_defaults(mode="git")
+    parser.set_defaults(mode=Mode.git)
 
     subparsers = parser.add_subparsers()
-    subparsers.add_parser("all", help="update all keys").set_defaults(mode="all")
+    subparsers.add_parser("all", help="update all keys").set_defaults(mode=Mode.all)
     help_ = "update keys that change in the last git commit (default)"
-    subparsers.add_parser("git", help=help_).set_defaults(mode="git")
+    subparsers.add_parser("git", help=help_).set_defaults(mode=Mode.git)
     key = subparsers.add_parser("keys", help="update specified keys")
-    key.set_defaults(mode="keys")
+    key.set_defaults(mode=Mode.keys)
     key.add_argument("key", nargs="+", type=str, help="item to update")
     return parser.parse_args(arg_list)
 
