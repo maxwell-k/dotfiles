@@ -95,6 +95,9 @@ def apply_modifier(url: str, modifier: str) -> str:
     >>> apply_modifier("https://example.org/file-1.1.1.zip", "checksums-bsd")
     'https://example.org/checksums-bsd'
 
+    >>> apply_modifier("https://example.org/yq_linux_amd64", "checksums-bsd")
+    'https://example.org/checksums-bsd'
+
     >>> apply_modifier("https://example.org/file-1.1.1.zip", ".sha256")
     'https://example.org/file-1.1.1.zip.sha256'
 
@@ -110,10 +113,11 @@ def apply_modifier(url: str, modifier: str) -> str:
     >>> apply_modifier(url, "_checksums.txt")
     'https://example.org/file_1.2.3_checksums.txt'
     """
-    filename = url[url.rindex("/") + 1 :]
-    for suffix in ["_linux_amd64.tar.gz", "_linux_amd64.zip", "_linux_amd64"]:
-        url = url.removesuffix(suffix)
-    if modifier[0] != ".":
+    if modifier.startswith((".", "_")):
+        for suffix in ["_linux_amd64.tar.gz", "_linux_amd64.zip", "_linux_amd64"]:
+            url = url.removesuffix(suffix)
+    else:
+        filename = url[url.rindex("/") + 1 :]
         url = url.removesuffix(filename)
     url += modifier
     return url
