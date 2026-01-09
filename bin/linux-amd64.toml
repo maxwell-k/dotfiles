@@ -54,7 +54,6 @@ expected = "b69e5c9a05c1e17e4a7de9a17df14ba430d049f2591af791a6f850a170296069"
 url = "https://github.com/opentofu/opentofu/releases/download/v1.11.2/tofu_1.11.2_linux_amd64.zip"
 modifier = "_SHA256SUMS"
 expected = "1bfb425c940098952df7a74e2f67dd318614bbea2767a25de94e46ca5d5b85ec"
-ignore = ["LICENSE", "README.md", "CHANGELOG.md"]
 version = "version"
 
 [yq]
