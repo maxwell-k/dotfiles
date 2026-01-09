@@ -148,9 +148,17 @@ def extract(text: str, filename: str) -> str:
     >>> text += "a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447\n"
     >>> extract(text, "file")
     'a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447'
+
+    Handles a checksum followed by a newline:
+
+    >>> text = "a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447\n"
+    >>> extract(text, "file")
+    'a948904f2f0f479b8f8197694b30184b0d2ed1c1cd2a1ec0fb85d299a192a447'
     """
     lines = text.splitlines()
-    if "=" in lines[0]:
+    if filename not in text:
+        result = text.strip()
+    elif "=" in lines[0]:
         marker = f"({filename})"
         line = next(i for i in lines if marker in i and i.startswith("SHA256"))
         result = line.split()[3]
