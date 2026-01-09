@@ -76,34 +76,15 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     Namespace(target=PosixPath('bin/linux-amd64.toml'), git=False, all=False, key='one')
     """
     parser = ArgumentParser()
-    parser.add_argument(
-        "target",
-        nargs="?",
-        type=Path,
-        help="file to update, default: '%(default)s'",
-        default=Path("bin/linux-amd64.toml"),
-    )
-    parser.add_argument(
-        "--git",
-        help="update items that changed in the last commit (default)",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--all",
-        help="update all items that have a modifier",
-        action="store_true",
-    )
-    parser.add_argument(
-        "--key",
-        nargs="?",
-        type=str,
-        help="item to update",
-    )
-    parser.add_argument(
-        "--debug",
-        action="store_true",
-        help="show debug logging.",
-    )
+    help_ = "file to update, default: '%(default)s'"
+    default = Path("bin/linux-amd64.toml")
+    parser.add_argument("target", nargs="?", type=Path, help=help_, default=default)
+    help_ = "update items that changed in the last commit (default)"
+    parser.add_argument("--git", help=help_, action="store_true")
+    help_ = "update all items that have a modifier"
+    parser.add_argument("--all", help=help_, action="store_true")
+    parser.add_argument("--key", nargs="?", type=str, help="item to update")
+    parser.add_argument("--debug", action="store_true", help="show debug logging.")
     args = parser.parse_args(arg_list)
     if args.key is None and args.all is False:
         args.git = True
