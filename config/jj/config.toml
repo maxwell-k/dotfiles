@@ -6,6 +6,7 @@ email = "keith.maxwell@gmail.com"
 
 [ui]
 pager = ":builtin"
+default-command = "log"
 
 # config/jj/config.toml
 # Copyright 2026 Keith Maxwell
