@@ -47,7 +47,7 @@ encode() {
 	shift
 	if found adf.????.pbm ; then
 		jbig2 -T 200 -p -b adf  -s "$@" adf.????.pbm &&
-		DPI=$DPI pdf.py adf.sym adf.???? > "${output}" &&
+		DPI=$DPI jbig2topdf.py adf.sym adf.???? > "${output}" &&
 		rm -f adf.sym adf.???? &&
 		case "${output}" in
 			/*) ;;
