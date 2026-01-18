@@ -14,6 +14,7 @@ Dependencies:
 - [uv](https://github.com/astral-sh/uv)
 
 """
+
 from pathlib import Path
 
 import nox
