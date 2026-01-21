@@ -53,7 +53,7 @@ expected = "b69e5c9a05c1e17e4a7de9a17df14ba430d049f2591af791a6f850a170296069"
 [tofu]
 url = "https://github.com/opentofu/opentofu/releases/download/v1.11.4/tofu_1.11.4_linux_amd64.zip"
 modifier = "_SHA256SUMS"
-expected = "340195f742ba1939078e46010a0f45b620811f986b0051f43748f600eade674d"
+expected = "f3907e96b5a9f2fce311078ca273bcdf1e13980dac150b2549932c26b515c61b"
 version = "version"
 
 [yq]
