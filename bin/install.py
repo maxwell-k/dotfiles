@@ -45,6 +45,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/podcast-to-dropbox.py",),
     ("~/.local/bin/reference.py",),
     ("~/.local/bin/repositories.py",),
+    ("~/.local/bin/sha1-create.sh",),
     ("~/.local/bin/venv.py",),
     ("~/.local/bin/ygg",),
     ("~/.tmux.conf",),
