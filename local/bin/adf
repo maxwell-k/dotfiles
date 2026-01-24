@@ -4,85 +4,182 @@
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 #
-DPI="${DPI:-200}"
+# # Pre-requisites
+#
+# `sane-backends, `brscan5` and `jbig2enc`
+#
+# ## sane-backends
+#
+# Command to install `sane-backends` on Fedora Linux 40:
+#
+#   sudo dnf install sane-backends
+#
+# ## brscan5
+#
+# To use with a Brother ADS-1200, first install the driver from:
+# <https://support.brother.com/g/b/downloadlist.aspx?c=gb&lang=en&prod=ads1200_all&os=127>.
+#
+# Commands to install the `brscan5` driver:
+#
+#   wcurl https://download.brother.com/welcome/dlf104036/brscan5-1.5.1-0.x86_64.rpm
+#   sudo rpm --install --verbose --nodigest brscan5-1.5.1-0.x86_64.rpm
+#
+# ## jbig2enc
+#
+# jbig2 and jbig2topdf.py from <https://github.com/agl/jbig2enc> >= 0.30
+
+ADF_DPI="${ADF_DPI:-200}"
+ADF_VIEWER="${ADF_VIEWER:-google-chrome}"
+
+export SANE_CONFIG_DIR="$HOME/.config/adf"
+
+usage() {
+cat <<EOF
+Usage: ${0##*/} acquire|clean|encode|full|prepare
+
+DETAILS
+
+	--AutoDeskew=yes is not used as it changes the size of the scanned image
+
+ENVIRONMENT
+
+	ADF_DPI		Resolution in DPI, default is 200 [$ADF_DPI]
+	ADF_VIEWER	Command to open resulting PDF, default is google-chrome [$ADF_VIEWER]
+
+	Other configuration can be controlled by adding command line arguments, see
+	EXAMPLES.
+
+EXAMPLES
+
+	Each example results in a single output file: example.pdf
+
+	Scan a single side:
+
+		adf full example.pdf --batch-count=1
+
+	Scan multiple pages single sided:
+
+		adf full example.pdf '--source=Automatic Document Feeder(left aligned)'
+
+	Scan a very faint single-side:
+
+		adf acquire --mode "True Gray" --batch-count=1
+		mv adf.0001.pbm original
+		magick original -threshold 90% adf.0001.pbm
+		adf encode example.pdf
+
+	Scan a receipt:
+
+		adf full example.pdf --AutoDocumentSize=yes --batch-count=1
+EOF
+  exit "${1:-1}"
+}
 
 die() {
-	printf '%s\n' "${1}"
+	printf '%s\n' "$1"
 	exit 1
 }
-found() {
-	found=1
-	for i in "$@" ; do test -e "${i}" && found=0 && break ; done
-	return "${found}"
+files() { ls adf.????.pbm >/dev/null 2>&1 ; }
+
+_acquire() {
+	scanimage \
+		"--resolution=$ADF_DPI" \
+		-x210 \
+		-y297 \
+		"$@"
 }
 acquire() {
-	if test "${1}" = '--no-clean'; then shift
-	elif found adf.????.pbm ; then die "Run '${0##*/} clean' first."
+	if [ "$1" = '--no-clean' ]; then shift
+	elif files ; then die "Run '${0##*/} clean' first."
 	fi
-	if scanadf --list-devices | grep -q LiDE25; then
-		scanadf \
-			--end-count 1 \
-			--resolution "${DPI}" \
-			--mode Lineart \
-			-x 210 \
-			-y 297 \
-			--output-file 'adf.%04d.pbm' \
-			"$@"
-	else
-		scanadf \
-			--source "ADF Duplex" \
-			--resolution "${DPI}" \
-			--mode Lineart \
-			--threshold 200 \
-			--rollerdeskew yes \
-			-x 210 \
-			-y 297 \
-			--output-file adf.%04d.pbm \
-			"$@"
+
+	if ! command -v scanimage >/dev/null 2>&1 ; then
+		die "scanimage not found; try installing sane-frontends"
 	fi
+
+	# scanadf causes a segmentation fault; scanimage doesn't
+	devices="$(scanimage --list-devices 2>/dev/null)"
+	case "$devices" in
+		*LiDE25*)
+			_acquire \
+				--mode=Lineart \
+				--output-file=adf.%04d.pbm \
+				"$@"
+			;;
+		*brother5*)
+			_acquire \
+				"--mode=Black & White" \
+				"--source=Automatic Document Feeder(center aligned,Duplex)" \
+				--batch=adf.%04d.pbm \
+				"$@"
+			;;
+		*)
+			die "Recognised scanner not present."
+			;;
+	esac
 }
 encode() {
-	test "$#" -ge 1 || die "Can't encode - missing output filename"
-	output="${1}"
+	[ "$#" -gt 0 ] || die "Missing output filename"
+	output="$1"
 	shift
-	if found adf.????.pbm ; then
-		jbig2 -T 200 -p -b adf  -s "$@" adf.????.pbm &&
-		DPI=$DPI pdf.py adf.sym adf.???? > "${output}" &&
-		rm -f adf.sym adf.???? &&
-		case "${output}" in
-			/*) ;;
-			*) output="${PWD}/${output}" ;;
-		esac &&
-		if command -v ab > /dev/null ; then
-			ab --print "${output}"
-		fi
-	else
-		printf 'No input files found, exiting.\n'
-		die "Run '${0##*/} acquire' first."
+
+	case "$output" in
+		/*) ;;
+		*) output="$PWD/$output" ;;
+	esac
+	directory="$(dirname "$output")"
+	if [ ! -d "$directory" ] ; then
+		die "$directory does not exist."
 	fi
+
+	if ! jbig2 --version 2>/dev/null ; then
+		die "jbig2 --version failed."
+	fi
+
+	if ! command -v jbig2topdf.py > /dev/null 2>&1 ; then
+		die "jbig2topdf.py not found."
+	fi
+
+	if ! files ; then
+		die "No input files found, exiting.\nRun '${0##*/} acquire' first."
+	fi
+
+	jbig2 -b jbig2basename$$ --dpi "$ADF_DPI" --pdf --symbol-mode "$@" adf.????.pbm || return 1
+	jbig2topdf.py jbig2basename$$ > "$output" || return 1
+	rm -f jbig2basename$$.sym jbig2basename$$.???? || return 1
+
+	if command -v "$ADF_VIEWER" >/dev/null 2>&1 ; then
+		"$ADF_VIEWER" "$output" >/dev/null 2>&1 &
+	fi
+	printf '%s\n' "$output"
 }
 clean() {
 	rm -f adf.????.pbm
 }
 prepare() {
-	output="${1}"
-	test -n "${output}" || die "No output file name"
+	[ "$#" -gt 0 ] || die "Missing output filename"
+	output="$1"
 	shift
-	acquire "$@" &&
-	encode "${output}"
+
+	acquire "$@" && encode "$output"
 }
 full() {
-	prepare "$@" &&
-	clean
+	prepare "$@" && clean
 }
 
-command="${1}"
+if [ "$#" -eq 0 ]; then
+	usage 0
+fi
+
+command="$1"
 shift
 case "${command}" in
 	a*) acquire "$@" ;;
-	c*) clean "$@" ;;
+	c*) clean ;;
 	e*) encode "$@" ;;
 	f*) full "$@" ;;
 	p*) prepare "$@" ;;
-	*) die "Usage: ${0##*/} acquire|clean|encode|full|prepare" ;;
+	*) usage ;;
 esac
+
+# vim: set noexpandtab nolist softtabstop=0 tabstop=4 shiftwidth=4 :

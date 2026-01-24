@@ -21,6 +21,7 @@ from subprocess import run
 HOME = Path.home()
 
 SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
+    ("~/.config/adf/dll.conf",),
     ("~/.config/ghostty/config",),
     ("~/.config/git/attributes",),
     ("~/.config/git/config",),
