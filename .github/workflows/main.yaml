@@ -51,3 +51,12 @@ jobs:
         env:
           LOGNAME: maxwell-k
           MATRIX_IMAGE: ${{ matrix.image }}
+  zizmor:
+    runs-on: ubuntu-24.04
+    # https://github.com/zizmorcore/zizmor-action#permissions
+    permissions: { security-events: write }
+    steps:
+      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+        with: { persist-credentials: false }
+      # yamllint disable-line rule:line-length
+      - uses: zizmorcore/zizmor-action@135698455da5c3b3e55f73f4419e481ab68cdd95 # v0.4.1
