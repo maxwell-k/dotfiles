@@ -79,8 +79,7 @@ prepare() {
 	acquire "$@" && encode "$output"
 }
 full() {
-	prepare "$@" &&
-	clean
+	prepare "$@" && clean
 }
 
 command="${1}"
