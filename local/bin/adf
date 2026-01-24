@@ -33,6 +33,48 @@ ADF_VIEWER="${ADF_VIEWER:-google-chrome}"
 
 export SANE_CONFIG_DIR="$HOME/.config/adf"
 
+usage() {
+cat <<EOF
+Usage: ${0##*/} acquire|clean|encode|full|prepare
+
+DETAILS
+
+	--AutoDeskew=yes is not used as it changes the size of the scanned image
+
+ENVIRONMENT
+
+	ADF_DPI		Resolution in DPI, default is 200 [$ADF_DPI]
+	ADF_VIEWER	Command to open resulting PDF, default is google-chrome [$ADF_VIEWER]
+
+	Other configuration can be controlled by adding command line arguments, see
+	EXAMPLES.
+
+EXAMPLES
+
+	Each example results in a single output file: example.pdf
+
+	Scan a single side:
+
+		adf full example.pdf --batch-count=1
+
+	Scan multiple pages single sided:
+
+		adf full example.pdf '--source=Automatic Document Feeder(left aligned)'
+
+	Scan a very faint single-side:
+
+		adf acquire --mode "True Gray" --batch-count=1
+		mv adf.0001.pbm original
+		magick original -threshold 90% adf.0001.pbm
+		adf encode example.pdf
+
+	Scan a receipt:
+
+		adf full example.pdf --AutoDocumentSize=yes --batch-count=1
+EOF
+  exit "${1:-1}"
+}
+
 die() {
 	printf '%s\n' "$1"
 	exit 1
@@ -125,15 +167,19 @@ full() {
 	prepare "$@" && clean
 }
 
-command="${1}"
+if [ "$#" -eq 0 ]; then
+	usage 0
+fi
+
+command="$1"
 shift
 case "${command}" in
 	a*) acquire "$@" ;;
-	c*) clean "$@" ;;
+	c*) clean ;;
 	e*) encode "$@" ;;
 	f*) full "$@" ;;
 	p*) prepare "$@" ;;
-	*) die "Usage: ${0##*/} acquire|clean|encode|full|prepare" ;;
+	*) usage ;;
 esac
 
 # vim: set noexpandtab nolist softtabstop=0 tabstop=4 shiftwidth=4 :
