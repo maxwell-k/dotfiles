@@ -10,7 +10,7 @@ ADF_VIEWER="${ADF_VIEWER:-google-chrome}"
 
 
 die() {
-	printf '%s\n' "${1}"
+	printf '%s\n' "$1"
 	exit 1
 }
 found() {
