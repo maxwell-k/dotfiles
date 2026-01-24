@@ -4,6 +4,29 @@
 # Copyright 2023 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 #
+# # Pre-requisites
+#
+# `sane-backends, `brscan5` and `jbig2enc`
+#
+# ## sane-backends
+#
+# Command to install `sane-backends` on Fedora Linux 40:
+#
+#   sudo dnf install sane-backends
+#
+# ## brscan5
+#
+# To use with a Brother ADS-1200, first install the driver from:
+# <https://support.brother.com/g/b/downloadlist.aspx?c=gb&lang=en&prod=ads1200_all&os=127>.
+#
+# Commands to install the `brscan5` driver:
+#
+#   wcurl https://download.brother.com/welcome/dlf104036/brscan5-1.5.1-0.x86_64.rpm
+#   sudo rpm --install --verbose --nodigest brscan5-1.5.1-0.x86_64.rpm
+#
+# ## jbig2enc
+#
+# jbig2 and jbig2topdf.py from <https://github.com/agl/jbig2enc> >= 0.30
 
 ADF_DPI="${ADF_DPI:-200}"
 ADF_VIEWER="${ADF_VIEWER:-google-chrome}"
