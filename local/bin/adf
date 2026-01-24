@@ -86,3 +86,5 @@ case "${command}" in
 	p*) prepare "$@" ;;
 	*) die "Usage: ${0##*/} acquire|clean|encode|full|prepare" ;;
 esac
+
+# vim: set noexpandtab nolist softtabstop=0 tabstop=4 shiftwidth=4 :
