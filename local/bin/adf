@@ -6,6 +6,9 @@
 #
 DPI="${DPI:-200}"
 
+ADF_VIEWER="${ADF_VIEWER:-google-chrome}"
+
+
 die() {
 	printf '%s\n' "${1}"
 	exit 1
@@ -60,6 +63,10 @@ encode() {
 		printf 'No input files found, exiting.\n'
 		die "Run '${0##*/} acquire' first."
 	fi
+	if command -v "$ADF_VIEWER" >/dev/null 2>&1 ; then
+		"$ADF_VIEWER" "$output" >/dev/null 2>&1 &
+	fi
+	printf '%s\n' "$output"
 }
 clean() {
 	rm -f adf.????.pbm
