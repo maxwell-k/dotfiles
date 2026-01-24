@@ -72,11 +72,11 @@ clean() {
 	rm -f adf.????.pbm
 }
 prepare() {
-	output="${1}"
-	test -n "${output}" || die "No output file name"
+	[ "$#" -gt 0 ] || die "Missing output filename"
+	output="$1"
 	shift
-	acquire "$@" &&
-	encode "${output}"
+
+	acquire "$@" && encode "$output"
 }
 full() {
 	prepare "$@" &&
