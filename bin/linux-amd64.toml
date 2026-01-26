@@ -82,8 +82,8 @@ version = "--version"
 modifier = "_checksums.txt"
 
 [beancount-language-server]
-url = "https://github.com/polarmutex/beancount-language-server/releases/download/1.7.0/beancount-language-server-linux-x64.gz"
-expected = "31206337f863093eec6b09f31c176a521506c01c90378bde0a96431d3998dd8c"
+url = "https://github.com/polarmutex/beancount-language-server/releases/download/1.8.1/beancount-language-server-linux-x64.gz"
+expected = "b467fe830bbb211ed20ee030a48280903631aa9859496249273613afcc1e01eb"
 version = "--version"
 modifier = ".sha256"
 
