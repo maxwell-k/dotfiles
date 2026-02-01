@@ -24,7 +24,7 @@ ignore = [
 version = "-version"
 
 [deno]
-url = "https://github.com/denoland/deno/releases/download/v2.6.6/deno-x86_64-unknown-linux-gnu.zip"
+url = "https://github.com/denoland/deno/releases/download/v2.6.7/deno-x86_64-unknown-linux-gnu.zip"
 expected = "73a4662b078dd5fab5b461cc960ea635be26f3b8bdb84c689793b418e180ffa2"
 target = "~/.deno/bin/deno"
 version = "--version"
