@@ -83,7 +83,7 @@ modifier = "_checksums.txt"
 
 [beancount-language-server]
 url = "https://github.com/polarmutex/beancount-language-server/releases/download/1.9.0/beancount-language-server-linux-x64.gz"
-expected = "b467fe830bbb211ed20ee030a48280903631aa9859496249273613afcc1e01eb"
+expected = "25ad234ff0ad3bd8929335ddd8ddf8366e3228fad9b8036d68b7a04d1919f964"
 version = "--version"
 modifier = ".sha256"
 
