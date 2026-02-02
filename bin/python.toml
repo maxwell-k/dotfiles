@@ -1,7 +1,7 @@
 #!/usr/bin/env -S python3 bin/dotlocalslashbin.py --input
 [pip]
 # https://pip.pypa.io/en/stable/installation/
-url = "https://bootstrap.pypa.io/pip/zipapp/pip-25.3.pyz"
+url = "https://bootstrap.pypa.io/pip/zipapp/pip-26.0.pyz"
 version = "--version"
 command = "python3.13 -m zipapp --python=/usr/bin/python3.13 --output={target} {downloaded}"
 
