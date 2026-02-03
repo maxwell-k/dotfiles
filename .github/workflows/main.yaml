@@ -13,7 +13,7 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with: { persist-credentials: false }
       - run: bin/linux-amd64.toml
       - run: bin/github.toml
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: smoke
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with: { persist-credentials: false }
       - uses: astral-sh/setup-uv@803947b9bd8e9f986429fa0c5a41c367cd732b41 # v7
         with: { enable-cache: false }
@@ -41,7 +41,7 @@ jobs:
           - "" # use default in ./tests/matrix.sh
           - debian/13/cloud
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with: { persist-credentials: false }
       # setup-incus is pinned manually, because the repository is not tagged
       # yamllint disable-line rule:line-length
@@ -56,7 +56,7 @@ jobs:
     # https://github.com/zizmorcore/zizmor-action#permissions
     permissions: { security-events: write }
     steps:
-      - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
         with: { persist-credentials: false }
       # yamllint disable-line rule:line-length
       - uses: zizmorcore/zizmor-action@135698455da5c3b3e55f73f4419e481ab68cdd95 # v0.4.1
