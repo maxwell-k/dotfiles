@@ -96,6 +96,18 @@ ignore = [
 ]
 version = "--version"
 
+[typst]
+url = "https://github.com/typst/typst/releases/download/v0.14.2/typst-x86_64-unknown-linux-musl.tar.xz"
+expected = "a6044cbad2a954deb921167e257e120ac0a16b20339ec01121194ff9d394996d"
+prefix = "typst-x86_64-unknown-linux-musl/"
+ignore = [
+  "typst-x86_64-unknown-linux-musl",
+  "typst-x86_64-unknown-linux-musl/NOTICE",
+  "typst-x86_64-unknown-linux-musl/LICENSE",
+  "typst-x86_64-unknown-linux-musl/README.md",
+]
+version = "--version"
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
