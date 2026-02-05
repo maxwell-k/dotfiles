@@ -55,6 +55,11 @@ url = "https://github.com/opentofu/opentofu/releases/download/v1.11.4/tofu_1.11.
 modifier = "_SHA256SUMS"
 expected = "f3907e96b5a9f2fce311078ca273bcdf1e13980dac150b2549932c26b515c61b"
 version = "version"
+ignore = [
+  "CHANGELOG.md",
+  "LICENSE",
+  "README.md",
+]
 
 [yq]
 url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_amd64"
