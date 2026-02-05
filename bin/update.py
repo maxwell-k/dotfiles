@@ -205,9 +205,12 @@ def _update(target: Path, key: str) -> None:
 
     if new is None:
         logger.error("No checksum available for %s", key)
+    elif "expected" not in item:
+        logger.error("No checksum to replace for %s, add a placeholder.", key)
     else:
         text = target.read_text().replace(item["expected"], new)
         target.write_text(text)
+        logger.debug("Replaced %s with %s.", item["expected"], new)
 
 
 def _api(url: str) -> str | None:
