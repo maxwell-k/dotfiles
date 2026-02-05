@@ -25,7 +25,7 @@ Mode = Enum("Mode", ["git", "all", "keys"])
 logger = logging.getLogger(__name__)
 
 
-def main(arg_list: list[str] | None = None) -> int:
+def _main(arg_list: list[str] | None = None) -> int:
     """Update each expected field using a modifier field and a GET request."""
     args = parse_args(arg_list)
 
@@ -201,7 +201,7 @@ def _update(target: Path, key: str) -> None:
         filename = url[url.rindex("/") + 1 :]
         new = extract(text, filename)
     elif github_release(item["url"]):
-        new = api(item["url"])
+        new = _api(item["url"])
 
     if new is None:
         logger.error("No checksum available for %s", key)
@@ -210,7 +210,7 @@ def _update(target: Path, key: str) -> None:
         target.write_text(text)
 
 
-def api(url: str) -> str | None:
+def _api(url: str) -> str | None:
     """Fetch the sha2556 from the GitHub releases API."""
     logger.debug("querying GitHub for sha256 for %s", url)
     filename = url[url.rindex("/") + 1 :]
@@ -250,4 +250,4 @@ def _git(target: Path) -> list[str]:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    raise SystemExit(_main())
