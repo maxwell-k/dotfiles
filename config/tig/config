@@ -15,7 +15,7 @@ bind generic 0 !sh -c 'echo %(branch) | tr -d "\\n" | osc52.sh'
 bind main v !git revise %(commit)
 bind main x !git commit --fixup %(commit)
 bind main e !git revise --edit %(commit)
-bind stage F !vimf %(file)
+bind generic F !vimf %(file)
 bind refs <Ctrl-g> <sh -c "echo %(refname) >/tmp/tig-output"
 bind generic <Ctrl-g> <sh -c "echo %(commit) >/tmp/tig-output"
 set ignore-case = smart-case
