@@ -1,4 +1,4 @@
-#!/usr/bin/env -S python3 bin/dotlocalslashbin.py --input
+#!/usr/bin/env -S python3 bin/dotlocalslashbin.py
 [git-jump]
 url = "https://raw.githubusercontent.com/git/git/refs/tags/v2.53.0/contrib/git-jump/git-jump"
 
@@ -7,6 +7,7 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-
 
 [wcurl]
 url = "https://github.com/curl/wcurl/releases/download/v2026.01.05/wcurl"
+version = "--version"
 
 # bin/github.toml
 # Copyright Keith Maxwell
