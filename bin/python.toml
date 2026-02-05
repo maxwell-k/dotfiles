@@ -1,4 +1,4 @@
-#!/usr/bin/env -S python3 bin/dotlocalslashbin.py --input
+#!/usr/bin/env -S python3 bin/dotlocalslashbin.py
 [python]
 url = "/usr/bin/python3.13"
 version = "--version"
