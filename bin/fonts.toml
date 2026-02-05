@@ -1,0 +1,19 @@
+#!/usr/bin/env -S python3 bin/dotlocalslashbin.py --output ~/.local/share/fonts --input
+[fontawesome-free-desktop]
+url = "https://github.com/FortAwesome/Font-Awesome/releases/download/7.1.0/fontawesome-free-7.1.0-desktop.zip"
+expected = "d9776d5e9983faf5c791b2d2d579c53cc566e17963d13e3a4c01fc43dfa2dfd2"
+prefix = "fontawesome-free-7.1.0-desktop/otfs/"
+
+[Roboto]
+url = "https://github.com/googlefonts/roboto-3-classic/releases/download/v3.015/Roboto_v3.015.zip"
+expected = "bee3e9334ea86dd63e184598f31fb16750881c2da1a6f097a66e0f66a95b3d54"
+prefix = "web/static/"
+
+[OTF-source-sans]
+url = "https://github.com/adobe-fonts/source-sans/releases/download/3.052R/OTF-source-sans-3.052R.zip"
+# no checksum available
+prefix = "OTF/"
+
+# bin/fonts.toml
+# Copyright Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
