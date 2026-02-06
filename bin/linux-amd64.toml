@@ -93,7 +93,7 @@ version = "--version"
 modifier = ".sha256"
 
 [jj]
-url = "https://github.com/jj-vcs/jj/releases/download/v0.37.0/jj-v0.37.0-x86_64-unknown-linux-musl.tar.gz"
+url = "https://github.com/jj-vcs/jj/releases/download/v0.38.0/jj-v0.38.0-x86_64-unknown-linux-musl.tar.gz"
 expected = "7fd8e28d65106768054becbc1e0b929bed7c4c963d598f9f9a629bfa92eb7171"
 ignore = [
   "./LICENSE",
