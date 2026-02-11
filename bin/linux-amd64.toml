@@ -41,7 +41,6 @@ url = "https://github.com/astral-sh/uv/releases/download/0.10.2/uv-x86_64-unknow
 expected = "6aa4576c31f791c0b9d4739e256d07358d45e7535695287fec03cf6839e25512"
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
-ignore = ["uv-x86_64-unknown-linux-gnu"]
 modifier = ".sha256"
 
 [fnm]
@@ -106,10 +105,9 @@ url = "https://github.com/typst/typst/releases/download/v0.14.2/typst-x86_64-unk
 expected = "a6044cbad2a954deb921167e257e120ac0a16b20339ec01121194ff9d394996d"
 prefix = "typst-x86_64-unknown-linux-musl/"
 ignore = [
-  "typst-x86_64-unknown-linux-musl",
-  "typst-x86_64-unknown-linux-musl/NOTICE",
-  "typst-x86_64-unknown-linux-musl/LICENSE",
-  "typst-x86_64-unknown-linux-musl/README.md",
+  "NOTICE",
+  "LICENSE",
+  "README.md",
 ]
 version = "--version"
 
