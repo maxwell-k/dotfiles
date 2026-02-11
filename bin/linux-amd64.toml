@@ -111,6 +111,19 @@ ignore = [
 ]
 version = "--version"
 
+[rclone]
+url = "https://github.com/rclone/rclone/releases/download/v1.72.0/rclone-v1.72.0-linux-amd64.zip"
+expected = "f3757aa829828c0f3359301bea25eef4d4fd62de735c47546ee6866c5b5545e2"
+version = "version"
+modifier = "SHA256SUMS"
+prefix = "rclone-v1.72.0-linux-amd64/" # depName=rclone/rclone
+ignore = [
+  "README.txt",
+  "README.html",
+  "rclone.1",
+  "git-log.txt",
+]
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
