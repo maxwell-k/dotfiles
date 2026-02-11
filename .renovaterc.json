@@ -77,6 +77,11 @@
       "description": "Automerge upgrades to GitHub Actions",
       "matchManagers": ["github-actions"],
       "automerge": true
+    },
+    {
+      "description": "Automerge updates to bin/fonts.toml",
+      "matchFileNames": ["bin/fonts.toml"],
+      "automerge": true
     }
   ]
 }
