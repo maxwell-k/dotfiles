@@ -45,7 +45,7 @@ jobs:
         with: { persist-credentials: false }
       # setup-incus is pinned manually, because the repository is not tagged
       # yamllint disable-line rule:line-length
-      - uses: maxwell-k/setup-incus@00f58401f6f4572bba5caeb2f264872357d5d2a4 # main
+      - uses: maxwell-k/setup-incus@3a1a72c48965408955ec5cf6935a34cf0a80fbec # main
       - run: incus admin init --auto
       - run: tests/matrix.sh
         env:
