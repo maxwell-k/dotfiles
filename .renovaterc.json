@@ -15,11 +15,12 @@
       ]
     },
     {
+      "description": "Update version numbers and file names in the URLs for GitHub releases artifacts.",
       "customType": "regex",
       "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]",
-        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/].+[/][^-_]+[-_](?<currentValue>[^-_]+?)[-_].+(?:[.]tar[.]gz|[.]zip)?\""
+        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/].*[/][0-9A-Za-z-_]*(?<currentValue>[0-9]+[.][0-9]+(?:[.][0-9]+)*)[0-9A-Za-z-_]*[.](?:zip|tar[.]gz)"
       ],
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "{{#if (containsString currentValue '.0')}}loose{{else}}semver-coerced{{/if}}"
