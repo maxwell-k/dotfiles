@@ -4,6 +4,15 @@
 
 on: # yamllint disable-line rule:truthy
   workflow_dispatch:
+    inputs:
+      file:
+        description: File to update
+        required: false
+        default: bin/linux-amd64.toml
+        type: choice
+        options:
+          - bin/linux-amd64.toml
+          - bin/fonts.toml
 
 permissions: {}
 
@@ -15,7 +24,8 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 2
-      - run: python3 --version && python3 bin/update.py
+      - env: { TARGET: "${{ inputs.file }}" }
+        run: python3 --version && python3 bin/update.py "--target=$TARGET"
       - env:
           DEPLOY_KEY: ${{ secrets.DOTFILES_DEPLOY_KEY }}
           REPOSITORY: git@github.com:${{ github.repository }}.git
