@@ -15,11 +15,12 @@
       ]
     },
     {
+      "description": "Update version numbers and file names in the URLs for GitHub releases artifacts.",
       "customType": "regex",
       "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
       "matchStrings": [
         "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/](?<currentValue>.+?)[/]",
-        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/].+[/][^-_]+[-_](?<currentValue>[^-_]+?)[-_].+(?:[.]tar[.]gz|[.]zip)?\""
+        "https:[/][/]github[.]com[/](?<depName>.+?)[/]releases[/]download[/].*[/][0-9A-Za-z-_]*(?<currentValue>[0-9]+[.][0-9]+(?:[.][0-9]+)*)[0-9A-Za-z-_]*[.](?:zip|tar[.]gz)"
       ],
       "datasourceTemplate": "github-releases",
       "versioningTemplate": "{{#if (containsString currentValue '.0')}}loose{{else}}semver-coerced{{/if}}"
@@ -41,15 +42,6 @@
       ],
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "spaceship-prompt/spaceship-prompt"
-    },
-    {
-      "customType": "regex",
-      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
-      "matchStrings": [
-        "https:[/][/]bootstrap[.]pypa[.]io[/]pip[/]zipapp[/]pip-(?<currentValue>.+?)[.]pyz"
-      ],
-      "datasourceTemplate": "github-tags",
-      "depNameTemplate": "pypa/pip"
     },
     {
       "description": "Update prefixes in TOML files from github-releases if a depName comment is present",
