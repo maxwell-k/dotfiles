@@ -50,6 +50,15 @@
       ],
       "datasourceTemplate": "github-tags",
       "depNameTemplate": "pypa/pip"
+    },
+    {
+      "description": "Update prefixes in TOML files from github-releases if a depName comment is present",
+      "customType": "regex",
+      "managerFilePatterns": ["/^[[:alnum:]-/]+.toml$/"],
+      "matchStrings": [
+        "prefix = \"\\S*-v?(?<currentValue>[\\d.]+)-\\S*\" # depName=(?<depName>\\S+)"
+      ],
+      "datasourceTemplate": "github-releases"
     }
   ],
   "packageRules": [
