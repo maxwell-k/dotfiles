@@ -61,7 +61,7 @@ ignore = [
 ]
 
 [yq]
-url = "https://github.com/mikefarah/yq/releases/download/v4.52.2/yq_linux_amd64"
+url = "https://github.com/mikefarah/yq/releases/download/v4.52.4/yq_linux_amd64"
 version = "--version"
 expected = "a74bd266990339e0c48a2103534aef692abf99f19390d12c2b0ce6830385c459"
 modifier = "checksums-bsd"
