@@ -80,8 +80,8 @@ ignore = [
 version = "--version"
 
 [jsonnet-language-server]
-url = "https://github.com/grafana/jsonnet-language-server/releases/download/v0.16.0/jsonnet-language-server_0.16.0_linux_amd64"
-expected = "42c7d38515e5a2008de26d678140e2d7fd1825eb977d78023fe997913e3dc2be"
+url = "https://github.com/grafana/jsonnet-language-server/releases/download/v0.17.0/jsonnet-language-server_0.17.0_linux_amd64"
+expected = "1d4327c93505570d9e5bfe43c3b14da669c2e929c4ada3fcd6b4bf97c7cff34e"
 version = "--version"
 modifier = "_checksums.txt"
 
