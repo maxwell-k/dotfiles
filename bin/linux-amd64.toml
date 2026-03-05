@@ -25,7 +25,7 @@ version = "-version"
 
 [deno]
 url = "https://github.com/denoland/deno/releases/download/v2.7.3/deno-x86_64-unknown-linux-gnu.zip"
-expected = "bc3af4d1bedd7893664b925c0f39fb08f7b12242e57ed4acdc0cf64540b4449c"
+expected = "97692549c433fb2967123ee2ad1b7599f2a0b7b745f9919bb791aee1738c966a"
 target = "~/.deno/bin/deno"
 version = "--version"
 modifier = ".sha256sum"
