@@ -124,6 +124,13 @@ ignore = [
   "git-log.txt",
 ]
 
+[gyb]
+url = "https://github.com/GAM-team/got-your-back/releases/download/v1.95/gyb-1.95-linux-x86_64-glibc2.35.tar.xz"
+expected = "e38d6fbf875d6775e4335dbe6a60744ecffe0c1c97a04c59c31c5f52b52eaff4"
+version = "--version"
+ignore = ["LICENSE"]
+prefix = "gyb/"
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
