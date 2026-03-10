@@ -113,7 +113,7 @@ version = "--version"
 
 [rclone]
 url = "https://github.com/rclone/rclone/releases/download/v1.73.2/rclone-v1.73.2-linux-amd64.zip"
-expected = "e9bad0be2ed85128e0d977bf36c165dd474a705ea950d18e1005cef98119407b"
+expected = "00a1d8cb85552b7b07bb0416559b2e78fcf9c6926662a52682d81b5f20c90535"
 version = "version"
 modifier = "SHA256SUMS"
 prefix = "rclone-v1.73.2-linux-amd64/" # depName=rclone/rclone
