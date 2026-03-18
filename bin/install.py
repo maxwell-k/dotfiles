@@ -37,6 +37,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/adf",),
     ("~/.local/bin/ansible-lint",),
     ("~/.local/bin/create-dot-sha256.sh",),
+    ("~/.local/bin/from.py",),
     ("~/.local/bin/gtree",),
     ("~/.local/bin/keep.py",),
     ("~/.local/bin/lint-all",),
