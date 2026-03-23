@@ -35,7 +35,7 @@ Commands to install spaceship:
 ```
 mkdir --parents "$HOME/.zsh" \
 && git clone --config advice.detachedHead=false \
-    --branch=v4.22.0 https://github.com/spaceship-prompt/spaceship-prompt.git \
+    --branch=v4.22.1 https://github.com/spaceship-prompt/spaceship-prompt.git \
     "$HOME/.zsh/spaceship"
 ```
 
