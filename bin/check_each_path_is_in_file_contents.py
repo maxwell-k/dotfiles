@@ -38,7 +38,7 @@ IGNORED = [
 
 def _main() -> int:
     count = 0
-    files = check_output(("git", "ls-files"), text=True).splitlines()
+    files = check_output(("/usr/bin/git", "ls-files"), text=True).splitlines()
     for file in files:
         text = Path(file).read_text()
         if file not in text and file not in IGNORED:
