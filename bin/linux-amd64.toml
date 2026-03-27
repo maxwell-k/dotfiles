@@ -63,7 +63,7 @@ ignore = [
 [yq]
 url = "https://github.com/mikefarah/yq/releases/download/v4.52.5/yq_linux_amd64"
 version = "--version"
-expected = "0c4d965ea944b64b8fddaf7f27779ee3034e5693263786506ccd1c120f184e8c"
+expected = "75d893a0d5940d1019cb7cdc60001d9e876623852c31cfc6267047bc31149fa9"
 modifier = "checksums-bsd"
 
 [jsonnet-lint]
