@@ -67,9 +67,9 @@ expected = "75d893a0d5940d1019cb7cdc60001d9e876623852c31cfc6267047bc31149fa9"
 modifier = "checksums-bsd"
 
 [jsonnet-lint]
-url = "https://github.com/google/go-jsonnet/releases/download/v0.21.0/go-jsonnet_Linux_x86_64.tar.gz"
+url = "https://github.com/google/go-jsonnet/releases/download/v0.22.0/go-jsonnet_0.22.0_linux_amd64.tar.gz"
 modifier = "checksums.txt"
-expected = "ad3181fde77726b02d17eb4e72687020bf2cb35b9336cdeaaca4783c7ff104f7"
+expected = "e87a93ea44e34da92c15636205c7f2240bf3ac92d00ccb855dbb4e7e03ea6941"
 ignore = [
   "LICENSE",
   "README.md",
