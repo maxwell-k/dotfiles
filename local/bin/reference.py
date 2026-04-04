@@ -46,11 +46,6 @@ def sentences(iterator: None | Iterable[str] = None) -> Generator[list[str]]:
         yield path[11:-4].lower().split("-")
 
 
-def file_url(input_: str) -> str:
-    """Return a file:/// url for an PDF."""
-    return f"file://{REFERENCE_REPOSITORY / input_}"
-
-
 def search(
     words: list[str],
     function_: Callable[[Iterable[object]], bool] = any,
@@ -97,13 +92,13 @@ def _main() -> int:
     code = 0
     if command("find"):
         for i in search(argv[2:], any):
-            print(file_url(i))
+            print(i)
     elif command("match"):
         for i in search(argv[2:], all):
-            print(file_url(i))
+            print(i)
     elif command("untracked"):
         for i in paths("--others"):
-            print(file_url(i))
+            print(i)
     else:
         print(__doc__)
 
