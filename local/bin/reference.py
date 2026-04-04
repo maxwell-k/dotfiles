@@ -15,9 +15,9 @@ reference.py
 # SPDX-License-Identifier: MPL-2.0
 
 from collections.abc import Callable, Generator, Iterable
-from os import chdir, environ
+from os import environ
 from pathlib import Path
-from subprocess import check_output
+from subprocess import run
 from sys import argv
 
 try:
@@ -26,25 +26,22 @@ except KeyError as e:
     print("REFERENCE_REPOSITORY environment variable is required and unset")
     raise SystemExit(1) from e
 
+CMD = ("/usr/bin/git", "-C", REFERENCE_REPOSITORY, "ls-files")
+
 
 def search(
     words: list[str],
-    function_: Callable[[Iterable[object]], bool] = any,
+    function_: Callable[[Iterable[bool]], bool] = any,
 ) -> Generator[str]:
     """Yield a path for each found PDF."""
-    query = [i.lower() for i in words]
-    cmd = ["git", "ls-files"]
-    for i in check_output(cmd).split(b"\n"):
-        if not i:
-            continue
-        path = i.decode()
+    result = run(CMD, check=True, capture_output=True, text=True)
+    for path in result.stdout.splitlines():
         sentence = path[11:-4].lower().split("-")
-        if function_(i in sentence for i in query):
+        if function_(i in sentence for i in words):
             yield path
 
 
 def _main() -> int:
-    chdir(REFERENCE_REPOSITORY)
 
     def command(name: str) -> bool:
         return len(argv) > 1 and name.startswith(argv[1])
@@ -55,7 +52,8 @@ def _main() -> int:
     elif command("match"):
         function = all
 
-    print("\n".join(search(argv[2:], function)) if function else __doc__)
+    query = [i.lower() for i in argv[2:]]
+    print("\n".join(search(query, function)) if function else __doc__)
     return 0
 
 
