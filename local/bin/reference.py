@@ -28,9 +28,9 @@ except KeyError as e:
     raise SystemExit(1) from e
 
 
-def paths(extra: None | str = None) -> Generator[str]:
+def paths() -> Generator[str]:
     """Yield each path in the repository."""
-    cmd = ["git", "ls-files"] + ([extra] if extra else [])
+    cmd = ["git", "ls-files"]
     for i in check_output(cmd).split(b"\n"):
         if i:
             yield i.decode()
