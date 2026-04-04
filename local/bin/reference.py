@@ -93,6 +93,7 @@ def _main() -> int:
 
     def command(name: str) -> bool:
         return name.startswith(argv[1])
+
     code = 0
     if command("find"):
         for i in search(argv[2:], any):
@@ -102,10 +103,7 @@ def _main() -> int:
             print(file_url(i))
     elif command("untracked"):
         for i in paths("--others"):
-            if len(argv) == len(("reference.py", "untracked", "path")):
-                print(REFERENCE_REPOSITORY / i)
-            else:
-                print(file_url(i))
+            print(file_url(i))
     else:
         print(__doc__)
 
