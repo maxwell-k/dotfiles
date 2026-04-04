@@ -56,23 +56,11 @@ def search(
             yield path
 
 
-def _argv_ok() -> bool:
-    # Exit if no subcommand
-    if len(argv) == 1:
-        print(__doc__)
-        return False
-
-    return True
-
-
 def _main() -> int:
     chdir(REFERENCE_REPOSITORY)
 
-    if not _argv_ok():
-        return 1
-
     def command(name: str) -> bool:
-        return name.startswith(argv[1])
+        return len(argv) > 1 and name.startswith(argv[1])
 
     function = None
     if command("find"):
