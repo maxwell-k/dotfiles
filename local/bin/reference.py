@@ -67,10 +67,6 @@ def _argv_ok() -> bool:
         print("Zero length path")
         return False
 
-    if not all(i.endswith(".pdf") for i in paths()):
-        print("Path without '.pdf'")
-        return False
-
     return True
 
 
