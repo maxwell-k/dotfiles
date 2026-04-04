@@ -125,13 +125,6 @@ def search(
             yield path
 
 
-def _check() -> int:
-    if any(invalid_dates()) or any(spelling_errors()):
-        print("Errors found, run 'reference.py status' for details")
-        return 1
-    return 0
-
-
 def _status() -> int:
     pdfs = sum(1 for i in paths())
     print(f"{pdfs:8,d} pdf files")
@@ -151,21 +144,6 @@ def _status() -> int:
     print(f"{len(errors):8,d} words not in the dictionary")
     if errors:
         print(f'         see "{REFERENCE_WORD_LIST}"')
-    return 0
-
-
-def _find() -> int:
-    for i in search(argv[2:], any):
-        print(file_url(i))
-    return 0
-
-
-def _untracked() -> int:
-    for i in paths("--others"):
-        if len(argv) == len(("reference.py", "untracked", "path")):
-            print(REFERENCE_REPOSITORY / i)
-        else:
-            print(file_url(i))
     return 0
 
 
@@ -197,25 +175,31 @@ def _main() -> int:
     if not _argv_ok():
         return 1
 
-    # Main functionality
-    if "check".startswith(argv[1]):
-        return _check()
-
-    if "status".startswith(argv[1]):
+    def command(name: str) -> bool:
+        return name.startswith(argv[1])
+    code = 0
+    if command("status"):
         return _status()
-
-    if "find".startswith(argv[1]):
-        return _find()
-
-    if "match".startswith(argv[1]):
+    elif command("check"):
+        if any(invalid_dates()) or any(spelling_errors()):
+            print("Errors found, run 'reference.py status' for details")
+            code = 1
+    elif command("find"):
+        for i in search(argv[2:], any):
+            print(file_url(i))
+    elif command("match"):
         for i in search(argv[2:], all):
             print(file_url(i))
-    elif "untracked".startswith(argv[1]):
-        return _untracked()
+    elif command("untracked"):
+        for i in paths("--others"):
+            if len(argv) == len(("reference.py", "untracked", "path")):
+                print(REFERENCE_REPOSITORY / i)
+            else:
+                print(file_url(i))
     else:
         print(__doc__)
 
-    return 0
+    return code
 
 
 if __name__ == "__main__":
