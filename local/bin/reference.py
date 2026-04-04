@@ -7,8 +7,6 @@ reference.py find word [word‥]
     Print URLs for all PDFs with any of the full words in their name
 reference.py match word [word‥]
     Print URLs for all PDFs with all of the full words in their name
-reference.py untracked [paths]
-    Print URLs or paths for all PDFs that are not tracked in git
 
 """
 
@@ -95,9 +93,6 @@ def _main() -> int:
             print(i)
     elif command("match"):
         for i in search(argv[2:], all):
-            print(i)
-    elif command("untracked"):
-        for i in paths("--others"):
             print(i)
     else:
         print(__doc__)
