@@ -3,14 +3,10 @@
 
 reference.py
     Show this help
-reference.py check
-    Exit with status 1 if any errors are found
 reference.py find word [word‥]
     Print URLs for all PDFs with any of the full words in their name
 reference.py match word [word‥]
     Print URLs for all PDFs with all of the full words in their name
-reference.py status
-    Show information including details of any errors
 reference.py untracked [paths]
     Print URLs or paths for all PDFs that are not tracked in git
 
@@ -20,33 +16,12 @@ reference.py untracked [paths]
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 
-# /// script
-# dependencies = ["pyenchant"]
-# requires-python = ">=3.12"
-# ///
-
-
 from collections.abc import Callable, Generator, Iterable
-from datetime import datetime, UTC
 from itertools import tee
 from os import chdir, environ
 from pathlib import Path
 from subprocess import check_output
 from sys import argv
-
-try:
-    from enchant import DictWithPWL
-except ImportError as e:
-    # This script depends upon https://pyenchant.github.io/pyenchant/
-    print("PyEnchant required and not installed; try python3-enchant")
-    raise SystemExit(1) from e
-
-
-try:
-    REFERENCE_WORD_LIST = environ["REFERENCE_WORD_LIST"]
-except KeyError as e:
-    print("REFERENCE_WORD_LIST environment variable is required and unset")
-    raise SystemExit(1) from e
 
 try:
     REFERENCE_REPOSITORY = Path(environ["REFERENCE_REPOSITORY"])
@@ -63,49 +38,12 @@ def paths(extra: None | str = None) -> Generator[str]:
             yield i.decode()
 
 
-def dates(iterator: None | Generator[str] = None) -> Generator[tuple[int, int, int]]:
-    """Yield the date of each path in the repository."""
-    if iterator is None:
-        iterator = paths()
-    for path in iterator:
-        year, month, day = int(path[:4]), int(path[5:7]), int(path[8:10])
-        yield (year, month, day)
-
-
-def invalid_dates() -> Generator[tuple[int, int, int]]:
-    """Yield any invalid dates."""
-    for date in dates():
-        try:
-            datetime(*date, tzinfo=UTC)
-        except ValueError:
-            yield date
-
-
-def words(iterator: None | Generator[str] = None) -> Generator[str]:
-    """Yield the tuples of words for each file."""
-    if iterator is None:
-        iterator = paths()
-    for path in iterator:
-        yield from path[11:-4].split("-")
-
-
 def sentences(iterator: None | Iterable[str] = None) -> Generator[list[str]]:
     """Yield the tuples of words for each file."""
     if iterator is None:
         iterator = paths()
     for path in iterator:
         yield path[11:-4].lower().split("-")
-
-
-def spelling_errors() -> Generator[str]:
-    """Yield each word not in the dictionary."""
-    dictionary = DictWithPWL("en_GB", REFERENCE_WORD_LIST)
-
-    for i in set(words()):
-        if i.isdigit() or dictionary.check(i):
-            continue
-        else:
-            yield i
 
 
 def file_url(input_: str) -> str:
@@ -123,28 +61,6 @@ def search(
     for path, sentence in zip(paths1, sentences(paths2), strict=True):
         if function_(i in sentence for i in query):
             yield path
-
-
-def _status() -> int:
-    pdfs = sum(1 for i in paths())
-    print(f"{pdfs:8,d} pdf files")
-    print(f"{len(set(words())):8,d} distinct words")
-
-    # Information about date errors
-    errors = 0
-    for date in invalid_dates():
-        errors += 1
-        print("{:04d}/{:02d}/{:02d} is not a valid date".format(*date))
-    print(f"{errors:8,d} invalid dates")
-
-    # Information about spelling errors
-    errors = list(spelling_errors())
-    if errors:
-        print("\n".join(sorted(errors)))
-    print(f"{len(errors):8,d} words not in the dictionary")
-    if errors:
-        print(f'         see "{REFERENCE_WORD_LIST}"')
-    return 0
 
 
 def _argv_ok() -> bool:
@@ -178,13 +94,7 @@ def _main() -> int:
     def command(name: str) -> bool:
         return name.startswith(argv[1])
     code = 0
-    if command("status"):
-        return _status()
-    elif command("check"):
-        if any(invalid_dates()) or any(spelling_errors()):
-            print("Errors found, run 'reference.py status' for details")
-            code = 1
-    elif command("find"):
+    if command("find"):
         for i in search(argv[2:], any):
             print(file_url(i))
     elif command("match"):
