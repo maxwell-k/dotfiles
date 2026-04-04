@@ -36,10 +36,8 @@ def paths() -> Generator[str]:
             yield i.decode()
 
 
-def sentences(iterator: None | Iterable[str] = None) -> Generator[list[str]]:
+def sentences(iterator: Iterable[str]) -> Generator[list[str]]:
     """Yield the tuples of words for each file."""
-    if iterator is None:
-        iterator = paths()
     for path in iterator:
         yield path[11:-4].lower().split("-")
 
