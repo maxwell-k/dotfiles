@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """Helper script for reference PDFs.
 
-reference.py
-    Show this help
 reference.py find word [word‥]
     Print URLs for all PDFs with any of the full words in their name
 reference.py match word [word‥]
     Print URLs for all PDFs with all of the full words in their name
+reference.py
+    Show this help
 
 """
 
@@ -87,17 +87,14 @@ def _main() -> int:
     def command(name: str) -> bool:
         return name.startswith(argv[1])
 
-    code = 0
+    function = None
     if command("find"):
-        for i in search(argv[2:], any):
-            print(i)
+        function = any
     elif command("match"):
-        for i in search(argv[2:], all):
-            print(i)
-    else:
-        print(__doc__)
+        function = all
 
-    return code
+    print("\n".join(search(argv[2:], function)) if function else __doc__)
+    return 0
 
 
 if __name__ == "__main__":
