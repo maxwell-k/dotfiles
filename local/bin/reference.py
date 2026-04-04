@@ -62,11 +62,6 @@ def _argv_ok() -> bool:
         print(__doc__)
         return False
 
-    # Just hygiene, not expected to be broken
-    if min(len(i) for i in paths()) == 0:
-        print("Zero length path")
-        return False
-
     return True
 
 
