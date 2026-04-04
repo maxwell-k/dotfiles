@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Helper script for reference PDFs.
 
-reference.py find word [word‥]
+reference.py find word [word…]
     Print URLs for all PDFs with any of the full words in their name
-reference.py match word [word‥]
+reference.py match word [word…]
     Print URLs for all PDFs with all of the full words in their name
 reference.py
     Show this help
