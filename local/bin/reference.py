@@ -71,10 +71,6 @@ def _argv_ok() -> bool:
         print("Path without '.pdf'")
         return False
 
-    if any(" " in i for i in paths()):
-        print("Space in path")
-        return False
-
     return True
 
 
