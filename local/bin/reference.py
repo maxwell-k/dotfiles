@@ -15,7 +15,6 @@ reference.py
 # SPDX-License-Identifier: MPL-2.0
 
 from collections.abc import Callable, Generator, Iterable
-from itertools import tee
 from os import chdir, environ
 from pathlib import Path
 from subprocess import check_output
@@ -28,28 +27,18 @@ except KeyError as e:
     raise SystemExit(1) from e
 
 
-def paths() -> Generator[str]:
-    """Yield each path in the repository."""
-    cmd = ["git", "ls-files"]
-    for i in check_output(cmd).split(b"\n"):
-        if i:
-            yield i.decode()
-
-
-def sentences(iterator: Iterable[str]) -> Generator[list[str]]:
-    """Yield the tuples of words for each file."""
-    for path in iterator:
-        yield path[11:-4].lower().split("-")
-
-
 def search(
     words: list[str],
     function_: Callable[[Iterable[object]], bool] = any,
 ) -> Generator[str]:
     """Yield a path for each found PDF."""
     query = [i.lower() for i in words]
-    paths1, paths2 = tee(paths())
-    for path, sentence in zip(paths1, sentences(paths2), strict=True):
+    cmd = ["git", "ls-files"]
+    for i in check_output(cmd).split(b"\n"):
+        if not i:
+            continue
+        path = i.decode()
+        sentence = path[11:-4].lower().split("-")
         if function_(i in sentence for i in query):
             yield path
 
