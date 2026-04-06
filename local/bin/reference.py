@@ -52,8 +52,11 @@ def _main() -> int:
     elif command("match"):
         function = all
 
+    def absolute(path: str) -> str:
+        return str(REFERENCE_REPOSITORY.joinpath(path).absolute())
+
     query = [i.lower() for i in argv[2:]]
-    print("\n".join(search(query, function)) if function else __doc__)
+    print("\n".join(map(absolute, search(query, function))) if function else __doc__)
     return 0
 
 
