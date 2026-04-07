@@ -28,7 +28,7 @@ from doctest import ELLIPSIS, testmod
 from os import environ
 from pathlib import Path
 from shlex import join
-from subprocess import run
+from subprocess import DEVNULL, Popen, run
 from textwrap import dedent
 
 import cv2
@@ -37,6 +37,8 @@ import numpy as np
 
 DPI = 300
 SCANIMAGE = "/usr/bin/scanimage"
+VIEWER = "/usr/bin/google-chrome-stable"
+EXCLUDED = {".jp2"}
 BLANK = 250
 ENVRC = {"SANE_CONFIG_DIR": str(Path("~/.config/adf").expanduser())}
 CACHE = Path("cache.pnm")
@@ -105,8 +107,18 @@ def main(_args: list[str] | None = None) -> int:
     img = img[:, left : int(left + width)]
 
     write(args.output, img)
+    view(args.output)
 
     return 0
+
+
+def view(name: str) -> None:
+    """Open a file in viewier."""
+    path = Path(name)
+    if path.suffix in EXCLUDED:
+        return
+    cmd = (VIEWER, path.absolute())
+    Popen(cmd, stdout=DEVNULL, stderr=DEVNULL)
 
 
 def write(name: str, img: np.ndarray) -> None:
