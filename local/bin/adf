@@ -59,7 +59,7 @@ EXAMPLES
 
 	Scan multiple pages single sided:
 
-		adf full example.pdf '--source=Automatic Document Feeder(left aligned)'
+		adf full example.pdf '--source=Automatic Document Feeder(center aligned)'
 
 	Scan a very faint single-side:
 
