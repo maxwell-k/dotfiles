@@ -113,7 +113,8 @@ def write(name: str, img: np.ndarray) -> None:
     """Write an image to a file."""
     path = Path(name)
     if path.suffix.lower() == ".pdf":
-        success, encoded = cv2.imencode(".jp2", img)
+        params = [cv2.IMWRITE_JPEG2000_COMPRESSION_X1000, 20]
+        success, encoded = cv2.imencode(".jp2", img, params)
         if not success:
             msg = "JPEG 2000 encoding failed."
             raise RuntimeError(msg)
