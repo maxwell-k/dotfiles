@@ -91,20 +91,21 @@ def main(_args: list[str] | None = None) -> int:
     if args.debug:
         write("debug0.png", img)
 
-    contour = largest(img)
-    if args.debug:
-        debug = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
-        cv2.drawContours(debug, [contour], -1, (0, 0, 255), 2)
-        write("debug1.png", debug)
+    if not any("-x" in i for i in args.options):
+        contour = largest(img)
+        if args.debug:
+            debug = cv2.cvtColor(img, cv2.COLOR_GRAY2BGR)
+            cv2.drawContours(debug, [contour], -1, (0, 0, 255), 2)
+            write("debug1.png", debug)
 
-    rect = cv2.minAreaRect(contour)
-    rotation = cv2.getRotationMatrix2D(rect[0], rect[-1] + 90.0, 1.0)
-    size = (img.shape[1], img.shape[0])
-    img = cv2.warpAffine(img, rotation, size, flags=cv2.INTER_CUBIC)
+        rect = cv2.minAreaRect(contour)
+        rotation = cv2.getRotationMatrix2D(rect[0], rect[-1] + 90.0, 1.0)
+        size = (img.shape[1], img.shape[0])
+        img = cv2.warpAffine(img, rotation, size, flags=cv2.INTER_CUBIC)
 
-    (centre, _), (_, width), _ = rect
-    left = int(centre - width / 2)
-    img = img[:, left : int(left + width)]
+        (centre, _), (_, width), _ = rect
+        left = int(centre - width / 2)
+        img = img[:, left : int(left + width)]
 
     write(args.output, img, args.compression)
     view(args.output)
