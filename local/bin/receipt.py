@@ -106,7 +106,7 @@ def main(_args: list[str] | None = None) -> int:
     left = int(centre - width / 2)
     img = img[:, left : int(left + width)]
 
-    write(args.output, img)
+    write(args.output, img, args.compression)
     view(args.output)
 
     return 0
@@ -121,11 +121,11 @@ def view(name: str) -> None:
     Popen(cmd, stdout=DEVNULL, stderr=DEVNULL)
 
 
-def write(name: str, img: np.ndarray) -> None:
+def write(name: str, img: np.ndarray, compression: int = 20) -> None:
     """Write an image to a file."""
     path = Path(name)
     if path.suffix.lower() == ".pdf":
-        params = [cv2.IMWRITE_JPEG2000_COMPRESSION_X1000, 20]
+        params = [cv2.IMWRITE_JPEG2000_COMPRESSION_X1000, compression]
         success, encoded = cv2.imencode(".jp2", img, params)
         if not success:
             msg = "JPEG 2000 encoding failed."
@@ -163,8 +163,12 @@ def parse_args(args: list[str] | None) -> Namespace:
 
     >>> parse_args(['output.pnm']).output
     'output.pnm'
+
     >>> parse_args(['output.pnm'])
-    Namespace(... options=[], debug=False, keep=False, test=False)
+    Namespace(... options=[], debug=False, keep=False, compression=20, test=False)
+
+    >>> parse_args(['output.pnm', "--compression=10"])
+    Namespace(... options=[], debug=False, keep=False, compression=10, test=False)
 
     >>> args = parse_args(['--debug', 'example.pdf'])
     >>> args.debug, args.keep
@@ -205,6 +209,12 @@ def parse_args(args: list[str] | None) -> Namespace:
         "--keep",
         action="store_true",
         help=f"keep '{CACHE}'.",
+    )
+    parser.add_argument(
+        "--compression",
+        default=20,
+        type=int,
+        help="target compression ratio 1 to 1,000.",
     )
     parser.add_argument(
         "--test",
