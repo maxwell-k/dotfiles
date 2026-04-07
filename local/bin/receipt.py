@@ -39,6 +39,7 @@ DPI = 300
 SCANIMAGE = "/usr/bin/scanimage"
 VIEWER = "/usr/bin/google-chrome-stable"
 EXCLUDED = {".jp2"}
+BORDER = 10
 BLANK = 250
 ENVRC = {"SANE_CONFIG_DIR": str(Path("~/.config/adf").expanduser())}
 CACHE = Path("cache.pnm")
@@ -104,8 +105,8 @@ def main(_args: list[str] | None = None) -> int:
         img = cv2.warpAffine(img, rotation, size, flags=cv2.INTER_CUBIC)
 
         (centre, _), (_, width), _ = rect
-        left = int(centre - width / 2)
-        img = img[:, left : int(left + width)]
+        left = int(centre - width / 2 - BORDER)
+        img = img[:, left : int(left + width + 2 * BORDER)]
 
     write(args.output, img, args.compression)
     view(args.output)
