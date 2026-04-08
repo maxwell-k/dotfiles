@@ -59,18 +59,26 @@ EXAMPLES
 
 	Scan multiple pages single sided:
 
-		adf full example.pdf '--source=Automatic Document Feeder(left aligned)'
+		adf full example.pdf '--source=Automatic Document Feeder(center aligned)'
 
 	Scan a very faint single-side:
 
-		adf acquire --mode "True Gray" --batch-count=1
-		mv adf.0001.pbm original
-		magick original -threshold 90% adf.0001.pbm
-		adf encode example.pdf
+		adf acquire --mode "True Gray" --batch-count=1 \\
+		&& mv adf.0001.pbm original \\
+		&& magick original -threshold 90% adf.0001.pbm \\
+		&& adf encode example.pdf
 
 	Scan a receipt:
 
 		adf full example.pdf --AutoDocumentSize=yes --batch-count=1
+	
+	Scan a landscape page:
+
+		adf acquire --batch-count=1 \\
+		&& mv adf.0001.pbm original \\
+		&& magick original -rotate 90 adf.0001.pbm \\
+		&& adf encode example.pdf
+
 EOF
   exit "${1:-1}"
 }
