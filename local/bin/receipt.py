@@ -24,7 +24,7 @@ Process means:
 
 import logging
 from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
-from doctest import ELLIPSIS, testmod
+from doctest import testmod
 from os import environ
 from pathlib import Path
 from shlex import join
@@ -55,7 +55,7 @@ def main(_args: list[str] | None = None) -> int:
     logger.debug("command line arguments: %s", args)
 
     if args.test:
-        results = testmod(optionflags=ELLIPSIS)
+        results = testmod()
         logger.info("test results: %s", results)
         return max(0, min(results.failed, 1))
 
@@ -163,18 +163,26 @@ def error_if_scanner_missing(name: str, env: dict[str, str]) -> None:
 def parse_args(args: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
-    >>> parse_args(['output.pnm']).output
+    Check the simplest case:
+
+    >>> args = parse_args(['output.pnm'])
+    >>> args.output
     'output.pnm'
+    >>> args.options, args.debug, args.keep, args.compression, args.test
+    ([], False, False, 20, False)
 
-    >>> parse_args(['output.pnm'])
-    Namespace(... options=[], debug=False, keep=False, compression=20, test=False)
+    Check that compression is parsed as an integer:
 
-    >>> parse_args(['output.pnm', "--compression=10"])
-    Namespace(... options=[], debug=False, keep=False, compression=10, test=False)
+    >>> parse_args(['output.pnm', "--compression=10"]).compression
+    10
+
+    Check that setting --debug implies --keep:
 
     >>> args = parse_args(['--debug', 'example.pdf'])
     >>> args.debug, args.keep
     (True, True)
+
+    Check that options for scanimage can be parsed:
 
     >>> parse_args(['example.pdf', '--', '-x100']).options
     ['-x100']
