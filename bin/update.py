@@ -14,13 +14,14 @@
 import json
 import logging
 from argparse import ArgumentParser, Namespace
+from doctest import testmod
 from enum import Enum
 from pathlib import Path
 from subprocess import run
 from tomllib import load, loads
 from urllib.request import HTTPError, Request, urlopen
 
-Mode = Enum("Mode", ["git", "all", "keys"])
+Mode = Enum("Mode", ["git", "all", "test", "keys"])
 
 logger = logging.getLogger(__name__)
 
@@ -34,6 +35,11 @@ def _main(arg_list: list[str] | None = None) -> int:
     format_ += "%(message)s"
     logging.basicConfig(level=level, format=format_)
     logger.debug("command line arguments: %s", args)
+
+    if args.mode == Mode.test:
+        results = testmod()
+        logger.info("test results: %s", results)
+        return max(0, min(results.failed, 1))
 
     keys: list[str] = []
 
@@ -58,23 +64,40 @@ def _main(arg_list: list[str] | None = None) -> int:
 def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
+    Defaults if no arguments:
+
     >>> parse_args([])
     Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
-    >>> parse_args(['git'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
+    If target is the empty string, then use the default:
 
-    >>> parse_args(['all'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.all: 2>)
+    >>> parse_args(['--target=']).target
+    PosixPath('bin/linux-amd64.toml')
 
-    >>> parse_args(['keys', 'one'])   # doctest: +ELLIPSIS
-    Namespace(target=..., debug=False, mode=<Mode.keys: 3>, key=['one'])
+    `git`, `all` and `test` subcommands have no required arguments:
+
+    >>> parse_args(['git']).mode
+    <Mode.git: 1>
+    >>> parse_args(['all']).mode
+    <Mode.all: 2>
+    >>> parse_args(['test']).mode
+    <Mode.test: 3>
+
+    `keys` subcommand has a required argument:
+
+    >>> result = parse_args(['keys', 'one'])
+    >>> result.mode, result.key
+    (<Mode.keys: 4>, ['one'])
     """
     parser = ArgumentParser()
 
     help_ = "file to update, default: '%(default)s'"
     default = Path("bin/linux-amd64.toml")
-    parser.add_argument("--target", nargs="?", type=Path, help=help_, default=default)
+
+    def path(arg: str) -> Path:
+        return Path(arg) if arg else default
+
+    parser.add_argument("--target", nargs="?", type=path, help=help_, default=default)
     parser.add_argument("--debug", action="store_true", help="show debug logging.")
     parser.set_defaults(mode=Mode.git)
 
@@ -85,6 +108,7 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     key = subparsers.add_parser("keys", help="update specified keys")
     key.set_defaults(mode=Mode.keys)
     key.add_argument("key", nargs="+", type=str, help="item to update")
+    subparsers.add_parser("test", help="run doctests").set_defaults(mode=Mode.test)
     return parser.parse_args(arg_list)
 
 
