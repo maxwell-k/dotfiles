@@ -3,6 +3,9 @@
 # SPDX-License-Identifier: CC0-1.0
 
 on: # yamllint disable-line rule:truthy
+  pull_request:
+    types: [review_requested]
+    paths: [bin/linux-amd64.toml] # default target in bin/update.py
   workflow_dispatch:
     inputs:
       file:
@@ -29,7 +32,12 @@ jobs:
       - env:
           DEPLOY_KEY: ${{ secrets.DOTFILES_DEPLOY_KEY }}
           REPOSITORY: git@github.com:${{ github.repository }}.git
-          REFSPEC: HEAD:${{ github.ref }}
+          REFSPEC: >-
+            HEAD:${{
+              github.event_name == 'pull_request'
+              && github.head_ref
+              || github.ref
+            }}
         run: |
           if git diff --exit-code ; then exit 0 ; fi
           git \
