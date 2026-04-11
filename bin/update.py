@@ -69,6 +69,11 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     >>> parse_args([])
     Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
+    If target is the empty string:
+
+    >>> parse_args(['--target=']).target
+    PosixPath('.')
+
     `git`, `all` and `test` subcommands have no required arguments:
 
     >>> parse_args(['git']).mode
