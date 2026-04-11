@@ -8,14 +8,10 @@ on: # yamllint disable-line rule:truthy
     paths: [bin/linux-amd64.toml] # default target in bin/update.py
   workflow_dispatch:
     inputs:
-      file:
-        description: File to update
+      target:
+        description: Target file to update
         required: false
-        default: bin/linux-amd64.toml
-        type: choice
-        options:
-          - bin/linux-amd64.toml
-          - bin/fonts.toml
+        type: string
 
 permissions: {}
 
@@ -27,7 +23,7 @@ jobs:
         with:
           persist-credentials: false
           fetch-depth: 2
-      - env: { TARGET: "${{ inputs.file }}" }
+      - env: { TARGET: "${{ inputs.target }}" }
         run: python3 --version && python3 bin/update.py "--target=$TARGET"
       - env:
           DEPLOY_KEY: ${{ secrets.DOTFILES_DEPLOY_KEY }}
