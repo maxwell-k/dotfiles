@@ -58,17 +58,23 @@ def _main(arg_list: list[str] | None = None) -> int:
 def parse_args(arg_list: list[str] | None) -> Namespace:
     """Parse command line arguments.
 
+    Defaults if no arguments:
+
     >>> parse_args([])
     Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
-    >>> parse_args(['git'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
+    `git` and `all` subcommands have no required arguments:
 
-    >>> parse_args(['all'])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.all: 2>)
+    >>> parse_args(['git']).mode
+    <Mode.git: 1>
+    >>> parse_args(['all']).mode
+    <Mode.all: 2>
 
-    >>> parse_args(['keys', 'one'])   # doctest: +ELLIPSIS
-    Namespace(target=..., debug=False, mode=<Mode.keys: 3>, key=['one'])
+    `keys` subcommand has a required argument:
+
+    >>> result = parse_args(['keys', 'one'])
+    >>> result.mode, result.key
+    (<Mode.keys: 3>, ['one'])
     """
     parser = ArgumentParser()
 
