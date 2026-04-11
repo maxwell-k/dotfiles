@@ -69,10 +69,10 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     >>> parse_args([])
     Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
 
-    If target is the empty string:
+    If target is the empty string, then use the default:
 
     >>> parse_args(['--target=']).target
-    PosixPath('.')
+    PosixPath('bin/linux-amd64.toml')
 
     `git`, `all` and `test` subcommands have no required arguments:
 
@@ -93,7 +93,11 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
 
     help_ = "file to update, default: '%(default)s'"
     default = Path("bin/linux-amd64.toml")
-    parser.add_argument("--target", nargs="?", type=Path, help=help_, default=default)
+
+    def path(arg: str) -> Path:
+        return Path(arg) if arg else default
+
+    parser.add_argument("--target", nargs="?", type=path, help=help_, default=default)
     parser.add_argument("--debug", action="store_true", help="show debug logging.")
     parser.set_defaults(mode=Mode.git)
 
