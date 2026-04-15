@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 """Scan A4 pages in landscape.
 
 Relies upon the system package manager to install python-sane. Configure ALE

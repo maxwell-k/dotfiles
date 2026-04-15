@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run
+#!/usr/bin/env -S uv run --script
 """Scan a receipt, process it and save as a PDF.
 
 Process means:

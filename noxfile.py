@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run
+#!/usr/bin/env -S uv run --script
 # noxfile.py
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
