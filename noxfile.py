@@ -79,8 +79,12 @@ def black(session: Session) -> None:
 @nox.session(python=False)
 def vendor(session: Session) -> None:
     """Run bin/vendor.toml and check for changes."""
-    for cmd in ["bin/vendor.toml", "git diff --exit-code"]:
-        session.run(*cmd.split(" "))
+    for cmd in [
+        ["bin/vendor.toml"],
+        ["git", "clean", "-f", "*.dist-info/*"],
+        ["git", "diff", "--exit-code"],
+    ]:
+        session.run(*cmd)
 
 
 @nox.session(python=False)
