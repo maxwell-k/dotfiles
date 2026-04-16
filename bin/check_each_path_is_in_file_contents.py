@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Check that each file contains its filename."""
 
 # bin/check_each_path_is_in_file_contents.py

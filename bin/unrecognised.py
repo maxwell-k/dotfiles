@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Check for unrecognised files in ~/.local/bin/."""
 
 # /// script

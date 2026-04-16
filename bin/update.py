@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Upate the checksums in a TOML file."""
 
 # bin/update.py

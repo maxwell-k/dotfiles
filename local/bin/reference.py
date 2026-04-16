@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Helper script for reference PDFs.
 
 reference.py find word [word…]

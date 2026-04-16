@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Install symbolic links to files in this repository.
 
 Maintain compatibility with the system Python on Debian stable. Today that is

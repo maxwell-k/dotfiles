@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Show information about PDFs stored in git.
 
 Requires git and optionally pdfinfo from poppler
