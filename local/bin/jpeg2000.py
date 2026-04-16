@@ -41,7 +41,7 @@ def _main(_args: list[str] | None = None) -> int:
         results = testmod()
         logger.info("Test results: %s", results)
         return max(0, min(results.failed, 1))
-    paths = list(Path().glob("*.p[nb]m"))
+    paths = sorted(Path().glob("*.p[nb]m"))
     images = [_convert(Image.open(i), args.compression) for i in paths]
 
     img2pdf.default_dpi = DPI
