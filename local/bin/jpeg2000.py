@@ -26,6 +26,7 @@ from PIL import Image
 
 DPI = 300
 VIEWER = Path("/usr/bin/google-chrome-stable")
+DEFAULT_COMPRESSION = 20
 
 logger = logging.getLogger(__name__)
 
@@ -74,8 +75,8 @@ def parse_args(args: list[str] | None) -> Namespace:
 
     Supports --compression:
 
-    >>> parse_args(['example.pdf']).compression
-    20
+    >>> parse_args(['example.pdf']).compression == DEFAULT_COMPRESSION
+    True
     >>> parse_args(['example.pdf', '--compression=40']).compression
     40
 
@@ -106,9 +107,9 @@ def parse_args(args: list[str] | None) -> Namespace:
     )
     parser.add_argument(
         "--compression",
-        default=20,
+        default=DEFAULT_COMPRESSION,
         type=int,
-        help="approximate rate of size reduction.",
+        help=f"approximate rate of size reduction (default: {DEFAULT_COMPRESSION})",
     )
     parser.add_argument(
         "--test",
