@@ -113,12 +113,12 @@ def parse_args(args: list[str] | None) -> Namespace:
     parser.add_argument(
         "--test",
         action="store_true",
-        help="run doctest against this file.",
+        help="run doctest against this file",
     )
     parser.add_argument(
         "--debug",
         action="store_true",
-        help="show debug logging.",
+        help="show debug logging",
     )
     parsed = parser.parse_args(args)
     if parsed.output is None and not parsed.test:
