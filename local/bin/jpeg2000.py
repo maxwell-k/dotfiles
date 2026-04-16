@@ -48,7 +48,7 @@ def _main(_args: list[str] | None = None) -> int:
         img2pdf.convert(images, outputstream=outputstream)
 
     size = args.output.stat().st_size
-    logger.info("Wrote %s bytes to %s.", f"{size:,}", args.output)
+    logger.info("Wrote %s bytes to %s", f"{size:,}", args.output)
 
     if VIEWER.is_file() and VIEWER.stat().st_mode & S_IXUSR:
         cmd = (VIEWER, args.output.absolute())
