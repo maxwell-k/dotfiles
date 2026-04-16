@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run
+#!/usr/bin/env -S uv run --script
 # noxfile.py
 # Copyright 2025 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
@@ -79,8 +79,12 @@ def black(session: Session) -> None:
 @nox.session(python=False)
 def vendor(session: Session) -> None:
     """Run bin/vendor.toml and check for changes."""
-    for cmd in ["bin/vendor.toml", "git diff --exit-code"]:
-        session.run(*cmd.split(" "))
+    for cmd in [
+        ["bin/vendor.toml"],
+        ["git", "clean", "-f", "*.dist-info/*"],
+        ["git", "diff", "--exit-code"],
+    ]:
+        session.run(*cmd)
 
 
 @nox.session(python=False)
@@ -100,8 +104,12 @@ def doctest(session: Session) -> None:
 def pyright(session: Session) -> None:
     """Run pyright on all Python files."""
     for i in _python_files(session):
-        session.run("local/bin/venv.py", "--create", "--quiet", i, external=True)
-        cmd = "npm exec --yes pyright -- --pythonpath=.venv/bin/python"
+        shebang = Path(i).read_text().splitlines()[0]
+        if shebang == "#!/usr/bin/env python3":
+            cmd = "npm exec --yes pyright -- --pythonpath=/usr/bin/python3"
+        else:
+            session.run("local/bin/venv.py", "--create", "--quiet", i, external=True)
+            cmd = "npm exec --yes pyright -- --pythonpath=.venv/bin/python"
         session.run(*cmd.split(" "), i, external=True)
 
 

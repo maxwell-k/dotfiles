@@ -1,4 +1,4 @@
-#!/usr/bin/env -S uv run
+#!/usr/bin/env -S uv run --script
 """Scan a receipt, process it and save as a PDF.
 
 Process means:
@@ -75,14 +75,18 @@ def main(_args: list[str] | None = None) -> int:
             "--source=Automatic Document Feeder(center aligned)",
             *args.options,
         )
-        result = run(cmd, capture_output=True, check=True, env=env)
+        result = run(cmd, capture_output=True, check=False, env=env)
         logger.debug("returncode %s from `%s`", result.returncode, join(cmd))
-        scan = result.stdout
+        scan = result.stdout if result.returncode == 0 else b""
+        if result.stderr:
+            logger.error(result.stderr.decode().strip())
 
-    img = cv2.imdecode(np.frombuffer(scan, np.uint8), cv2.IMREAD_GRAYSCALE)
+    img = None
+    if scan:
+        img = cv2.imdecode(np.frombuffer(scan, np.uint8), cv2.IMREAD_GRAYSCALE)
     if img is None:
-        msg = "Failed to read image from scanner."
-        raise RuntimeError(msg)
+        logger.error("Failed to read image from scanner.")
+        return 1
 
     if args.keep and not CACHE.is_file():
         write("cache.pnm", img)
