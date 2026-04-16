@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """Check and optionally set up a virutal environment.
 
 Based on inline script metadata. Requires uv. Does not support version

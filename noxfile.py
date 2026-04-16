@@ -23,6 +23,7 @@ from nox.sessions import Session
 nox.options.default_venv_backend = "uv"
 
 VENV = Path(".venv").absolute()
+PYTHON3 = "/usr/bin/python3"
 
 
 @nox.session(python=False)
@@ -93,8 +94,9 @@ def doctest(session: Session) -> None:
     files = _files(session, ">>> ")
     files.remove("noxfile.py")
     for i in files:
-        python = "python"
-        if "/// script" in Path(i).read_text():
+        if shebang(i) == PYTHON3:
+            python = PYTHON3
+        else:
             session.run("local/bin/venv.py", "--create", "--quiet", i)
             python = ".venv/bin/python"
         session.run(python, "-m", "doctest", "-v", i)
@@ -104,9 +106,8 @@ def doctest(session: Session) -> None:
 def pyright(session: Session) -> None:
     """Run pyright on all Python files."""
     for i in _python_files(session):
-        shebang = Path(i).read_text().splitlines()[0]
-        if shebang == "#!/usr/bin/env python3":
-            cmd = "npm exec --yes pyright -- --pythonpath=/usr/bin/python3"
+        if shebang(i) == PYTHON3:
+            cmd = f"npm exec --yes pyright -- --pythonpath={PYTHON3}"
         else:
             session.run("local/bin/venv.py", "--create", "--quiet", i, external=True)
             cmd = "npm exec --yes pyright -- --pythonpath=.venv/bin/python"
@@ -130,6 +131,11 @@ def _python_files(session: Session) -> list[str]:
     Assumes all Python files include the string "requires-python".
     """
     return _files(session, "requires-python")
+
+
+def shebang(script: str) -> str:
+    """Return the first line of a script after #!."""
+    return Path(script).read_text().splitlines()[0].removeprefix("#!")
 
 
 if __name__ == "__main__":

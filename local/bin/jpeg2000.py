@@ -26,6 +26,7 @@ from PIL import Image
 
 DPI = 300
 VIEWER = Path("/usr/bin/google-chrome-stable")
+DEFAULT_COMPRESSION = 20
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,7 @@ def _main(_args: list[str] | None = None) -> int:
         results = testmod()
         logger.info("Test results: %s", results)
         return max(0, min(results.failed, 1))
-    paths = list(Path().glob("*.pbm"))
+    paths = sorted(Path().glob("*.p[nb]m"))
     images = [_convert(Image.open(i), args.compression) for i in paths]
 
     img2pdf.default_dpi = DPI
@@ -48,7 +49,7 @@ def _main(_args: list[str] | None = None) -> int:
         img2pdf.convert(images, outputstream=outputstream)
 
     size = args.output.stat().st_size
-    logger.info("Wrote %s bytes to %s.", f"{size:,}", args.output)
+    logger.info("Wrote %s bytes to %s", f"{size:,}", args.output)
 
     if VIEWER.is_file() and VIEWER.stat().st_mode & S_IXUSR:
         cmd = (VIEWER, args.output.absolute())
@@ -74,8 +75,8 @@ def parse_args(args: list[str] | None) -> Namespace:
 
     Supports --compression:
 
-    >>> parse_args(['example.pdf']).compression
-    20
+    >>> parse_args(['example.pdf']).compression == DEFAULT_COMPRESSION
+    True
     >>> parse_args(['example.pdf', '--compression=40']).compression
     40
 
@@ -106,19 +107,19 @@ def parse_args(args: list[str] | None) -> Namespace:
     )
     parser.add_argument(
         "--compression",
-        default=20,
+        default=DEFAULT_COMPRESSION,
         type=int,
-        help="approximate rate of size reduction.",
+        help=f"approximate rate of size reduction (default: {DEFAULT_COMPRESSION})",
     )
     parser.add_argument(
         "--test",
         action="store_true",
-        help="run doctest against this file.",
+        help="run doctest against this file",
     )
     parser.add_argument(
         "--debug",
         action="store_true",
-        help="show debug logging.",
+        help="show debug logging",
     )
     parsed = parser.parse_args(args)
     if parsed.output is None and not parsed.test:
