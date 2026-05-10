@@ -131,6 +131,13 @@ version = "--version"
 ignore = ["LICENSE"]
 prefix = "gyb/"
 
+[age]
+url = "https://github.com/FiloSottile/age/releases/download/v1.3.1/age-v1.3.1-linux-amd64.tar.gz"
+expected = "bdc69c09cbdd6cf8b1f333d372a1f58247b3a33146406333e30c0f26e8f51377"
+version = "--version"
+ignore = ["LICENSE", "age-inspect", "age-plugin-batchpass"]
+prefix = "age/"
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
