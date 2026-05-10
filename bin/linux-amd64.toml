@@ -37,7 +37,7 @@ version = "--version"
 modifier = "SHASUMS256.txt"
 
 [uv]
-url = "https://github.com/astral-sh/uv/releases/download/0.11.8/uv-x86_64-unknown-linux-gnu.tar.gz"
+url = "https://github.com/astral-sh/uv/releases/download/0.11.12/uv-x86_64-unknown-linux-gnu.tar.gz"
 expected = "56dd1b66701ecb62fe896abb919444e4b83c5e8645cca953e6ddd496ff8a0feb"
 version = "--version"
 prefix = "uv-x86_64-unknown-linux-gnu/"
