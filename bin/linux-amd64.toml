@@ -50,9 +50,9 @@ version = "--version"
 expected = "7807664f39d39fc518da1c35ba0181e4b3267603c4b1dedeb4b5fc6ae440a224"
 
 [tofu]
-url = "https://github.com/opentofu/opentofu/releases/download/v1.11.6/tofu_1.11.6_linux_amd64.zip"
+url = "https://github.com/opentofu/opentofu/releases/download/v1.11.7/tofu_1.11.7_linux_amd64.zip"
 modifier = "_SHA256SUMS"
-expected = "68026be376f8910a318645acc65f21da8b39ab86946cb0dd6cd16ef1705f34b3"
+expected = "2ae4434e08da9a17372c11509d11b07f1cb3730dea0bf7ff658bdb4b83b1cbab"
 version = "version"
 ignore = [
   "CHANGELOG.md",
