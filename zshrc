@@ -8,6 +8,7 @@
 #
 bindkey -v  # vi mode, see man zshzle
 setopt interactive_comments
+setopt RM_STAR_WAIT # encourage the user to expand the star wildcard with tab
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
 # Command line completion {{{1
 # these files must be generated before the compinit commands
