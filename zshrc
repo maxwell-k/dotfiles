@@ -41,9 +41,6 @@ lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
 ywd() { printf '%s' "$PWD" | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
 yz() { fc -l -n 0- | fzf --tac | osc52.sh ; }
 # }}}
-motd() { #{{{
-  : > /run/motd && systemctl --user restart uncommitted && cat /run/motd
-} #}}}
 yy() { # {{{
   if [ ! -t 0 ] ; then
     tail -n 1
@@ -234,6 +231,5 @@ else
   PS1="%? [%23<<%d]%# "
 fi
 # }}}
-if [ -s /run/motd ]; then cat /run/motd ; fi
 if [ -f ~/.zshrc.local ]; then . ~/.zshrc.local ; fi # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
