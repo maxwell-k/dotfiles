@@ -131,7 +131,7 @@ bindkey _M vicmd '^p' zshrc_tig
 # Menu selection with vi-keys and {{{
 # Usage:
 # - use `Shift` and `Tab` together to open the menu
-# - use `Tab` ofr down, `Shift-Tab` for up, arrows or `hjkl`
+# - use `Tab` for down, `Shift-Tab` for up, arrows or `hjkl`
 # - use `Shift` and `Enter` together to add multiple selections
 # - use `u` for undo
 # Configuration:
