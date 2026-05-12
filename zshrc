@@ -8,6 +8,7 @@
 #
 bindkey -v  # vi mode, see man zshzle
 setopt interactive_comments
+setopt RM_STAR_WAIT # encourage the user to expand the star wildcard with tab
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
 # Command line completion {{{1
 # these files must be generated before the compinit commands
@@ -41,9 +42,6 @@ lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
 ywd() { printf '%s' "$PWD" | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
 yz() { fc -l -n 0- | fzf --tac | osc52.sh ; }
 # }}}
-motd() { #{{{
-  : > /run/motd && systemctl --user restart uncommitted && cat /run/motd
-} #}}}
 yy() { # {{{
   if [ ! -t 0 ] ; then
     tail -n 1
@@ -131,7 +129,7 @@ bindkey _M vicmd '^p' zshrc_tig
 # Menu selection with vi-keys and {{{
 # Usage:
 # - use `Shift` and `Tab` together to open the menu
-# - use `Tab` ofr down, `Shift-Tab` for up, arrows or `hjkl`
+# - use `Tab` for down, `Shift-Tab` for up, arrows or `hjkl`
 # - use `Shift` and `Enter` together to add multiple selections
 # - use `u` for undo
 # Configuration:
@@ -234,6 +232,5 @@ else
   PS1="%? [%23<<%d]%# "
 fi
 # }}}
-if [ -s /run/motd ]; then cat /run/motd ; fi
 if [ -f ~/.zshrc.local ]; then . ~/.zshrc.local ; fi # late so that PS1 & spaceship can be overridden
 # vim: set foldmethod=marker foldlevel=0 filetype=sh :
