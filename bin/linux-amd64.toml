@@ -1,7 +1,7 @@
 #!/usr/bin/env -S python3 bin/dotlocalslashbin.py
 [a4]
 url = "https://github.com/maxwell-k/a4/releases/download/0.2.5/a4"
-expected = "96fdcf4d3d96182b8da23ec97809098ff8171d11b28d2eb9fcb71024cff5443f"
+expected = "5c6b52b7fd81dcb9c929f540b48de66881c2880f19d30ec56bfe0b833033e7bf"
 version = "--version"
 modifier = "SHA256SUMS"
 
