@@ -127,6 +127,12 @@ version = "--version"
 ignore = ["LICENSE", "age-inspect", "age-plugin-batchpass"]
 prefix = "age/"
 
+[ssh-tpm-agent]
+url = "https://github.com/Foxboron/ssh-tpm-agent/releases/download/v0.9.0/ssh-tpm-agent-v0.9.0-linux-amd64.tar.gz"
+expected = "74a36e384b1898693b1434220ffa51adc50846fe94f24668d4b484daa0bebb1a"
+ignore = ["LICENSE"]
+prefix = "ssh-tpm-agent/"
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
