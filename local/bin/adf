@@ -53,28 +53,24 @@ EXAMPLES
 
 	Each example results in a single output file: example.pdf
 
-	Scan a single side:
+	Scan a single sided document:
 
-		adf full example.pdf --batch-count=1
-
-	Scan multiple pages single sided:
-
-		adf full example.pdf '--source=Automatic Document Feeder(center aligned)'
+		adf full example.pdf -s
 
 	Scan a very faint single-side:
 
-		adf acquire --mode "True Gray" --batch-count=1 \\
+		adf acquire -s --mode "True Gray" \\
 		&& mv adf.0001.pbm original \\
 		&& magick original -threshold 90% adf.0001.pbm \\
 		&& adf encode example.pdf
 
 	Scan a receipt:
 
-		adf full example.pdf --AutoDocumentSize=yes --batch-count=1
+		adf full example.pdf -s --AutoDocumentSize=yes
 	
 	Scan a landscape page:
 
-		adf acquire --batch-count=1 \\
+		adf acquire -s \\
 		&& mv adf.0001.pbm original \\
 		&& magick original -rotate 90 adf.0001.pbm \\
 		&& adf encode example.pdf
@@ -115,9 +111,11 @@ acquire() {
 				"$@"
 			;;
 		*brother5*)
+			duplex=",Duplex"
+			if [ "$1" = "-s" ] ; then duplex="" && shift; fi
 			_acquire \
 				"--mode=Black & White" \
-				"--source=Automatic Document Feeder(center aligned,Duplex)" \
+				"--source=Automatic Document Feeder(center aligned$duplex)" \
 				--batch=adf.%04d.pbm \
 				"$@"
 			;;
@@ -183,11 +181,11 @@ command="$1"
 shift
 case "${command}" in
 	a*) acquire "$@" ;;
-	c*) clean ;;
+	c*) clean "$@" ;;
 	e*) encode "$@" ;;
 	f*) full "$@" ;;
 	p*) prepare "$@" ;;
-	*) usage ;;
+	*) usage "$@" ;;
 esac
 
 # vim: set noexpandtab nolist softtabstop=0 tabstop=4 shiftwidth=4 :

@@ -40,7 +40,7 @@ def main() -> None:
             text = i.read_text()
         except UnicodeDecodeError:
             text = "\n\n"
-        if text.splitlines()[1].startswith("exec npm exec"):
+        if text.startswith("#!") and text.splitlines()[1].startswith("exec npm exec"):
             # wrappers around npm exec installed in vimfiles
             continue
         print(i)
