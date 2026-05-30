@@ -116,6 +116,7 @@ acquire() {
 			_acquire \
 				"--mode=Black & White" \
 				"--source=Automatic Document Feeder(center aligned$duplex)" \
+				--format=pnm \
 				--batch=adf.%04d.pbm \
 				"$@"
 			;;
