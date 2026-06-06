@@ -36,7 +36,7 @@ create "$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete --shell=
 create "$HOME/.local/bin/uv generate-shell-completion zsh"
 create "$HOME/.local/bin/jj util completion zsh"
 create "$HOME/.deno/bin/deno completions zsh"
-unset create executable site
+unset site create executable
 autoload -U compinit && compinit #}}}1
 # Functions for use as commands {{{1
 # <80 characters, alphabetically sorted {{{
