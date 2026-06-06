@@ -46,6 +46,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/lint-all",),
     ("~/.local/bin/mvh1", "local/bin/mvh1.py"),
     ("~/.local/bin/mvslugify",),
+    ("~/.local/bin/openwhispr.py",),
     ("~/.local/bin/pdf-information.py",),
     ("~/.local/bin/percollate",),
     ("~/.local/bin/podcast-to-dropbox.py",),
