@@ -10,6 +10,15 @@ bindkey -v  # vi mode, see man zshzle
 setopt interactive_comments
 setopt RM_STAR_WAIT # encourage the user to expand the star wildcard with tab
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
+# Aliases and abbreviations {{{1
+abbr="$HOME/.local/share/zsh/zsh-abbr/zsh-abbr.zsh"
+if [ -f "$abbr" ];  then
+  export ABBR_USER_ABBREVIATIONS_FILE="$HOME/github.com/maxwell-k/dotfiles/.abbr"
+  source "$abbr"
+  unalias egrep fgrep ll run-help which which-command xzegrep xzfgrep xzgrep zegrep zfgrep zgrep
+  unalias grep l. ls # in-use
+fi
+unset abbr
 # Command line completion {{{1
 # these files must be generated before the compinit commands
 site="$HOME/.local/share/zsh/site-functions"
@@ -29,12 +38,6 @@ create "$HOME/.local/bin/jj util completion zsh"
 create "$HOME/.deno/bin/deno completions zsh"
 unset create executable site
 autoload -U compinit && compinit #}}}1
-# Aliases {{{1
-alias cp="cp -i"  # To avoid accidentally over-writing content
-alias mv="mv -i"  # "
-alias rm="rm -i"  # To avoid accidentally deleting content
-alias ls="ls --color=auto --group-directories-first"
-alias lc="tig --reverse remotes/origin/HEAD.."
 # Functions for use as commands {{{1
 # <80 characters, alphabetically sorted {{{
 gcd() { cd "$(git rev-parse --show-toplevel)" || return ; }

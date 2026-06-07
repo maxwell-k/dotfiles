@@ -1,0 +1,18 @@
+#!/usr/bin/env -S python3 bin/dotlocalslashbin.py --output=/home/maxwell-k/.local/share/zsh/
+# zsh-abbr
+# Based upon https://github.com/olets/homebrew-tap/blob/main/zsh-abbr@6.rb
+["site-functions/_abbr"]
+url = "https://raw.githubusercontent.com/olets/zsh-abbr/refs/tags/v6.5.2/completions/_abbr"
+
+["zsh-abbr/zsh-abbr.zsh"]
+url = "https://raw.githubusercontent.com/olets/zsh-abbr/refs/tags/v6.5.2/zsh-abbr.zsh"
+
+["zsh-abbr/zsh-job-queue/zsh-job-queue.zsh"]
+url = "https://raw.githubusercontent.com/olets/zsh-job-queue/refs/tags/v3.0.0/zsh-job-queue.zsh"
+
+["zsh-abbr/man/man1/abbr.1"]
+url = "https://raw.githubusercontent.com/olets/zsh-abbr/refs/tags/v6.5.2/man/man1/abbr.1"
+#
+# bin/abbr.toml
+# SPDX-FileCopyrightText: 2025 Keith Maxwell <keith.maxwell@gmail.com>
+# SPDX-License-Identifier: CC0-1.0
