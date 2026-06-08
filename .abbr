@@ -1,5 +1,6 @@
 abbr "cp"="cp -i"
 abbr "G"="google-chrome"
+abbr "gcd"="cd \"\$(git rev-parse --show-toplevel)\""
 abbr "gloe"="git ls-files --others --exclude-standard"
 abbr "grep"="grep --color=auto"
 abbr "l."="ls -d .* --color=auto"

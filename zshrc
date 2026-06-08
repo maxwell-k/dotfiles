@@ -40,7 +40,6 @@ unset site create call executable file
 autoload -U compinit && compinit #}}}1
 # Functions for use as commands {{{1
 # <80 characters, alphabetically sorted {{{
-gcd() { cd "$(git rev-parse --show-toplevel)" || return ; }
 lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
 ywd() { printf '%s' "$PWD" | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
 yz() { fc -l -n 0- | fzf --tac | osc52.sh ; }
