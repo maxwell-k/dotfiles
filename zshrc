@@ -40,7 +40,7 @@ unset site create call executable file
 autoload -U compinit && compinit #}}}1
 # Functions for use as commands {{{1
 # <80 characters, alphabetically sorted {{{
-yz() { fc -l -n 0- | fzf --tac | osc52.sh ; }
+yz() { fc -rln 0- | fzf | osc52.sh ; }
 # }}}
 yy() { # {{{
   if [ ! -t 0 ] ; then
