@@ -151,8 +151,7 @@ bindkey -M menuselect u undo
 # }}}
 # }}}1
 # Environment variables {{{1
-# Interactive command line {{{2
-# Set the PATH {{{3
+# Set the PATH {{{2
 #
 # On MacOS /usr/libexec/path_helper changes the order of the entries in PATH.
 # Following the advice in the gist below I do not use a separate zshenv file to
@@ -170,20 +169,14 @@ do
       *) export PATH="$i:$PATH" ;;
     esac
 done
-unset i # }}}3
-if [ -x /usr/bin/vim ]; then
-  export EDITOR=vim
-else
-  export EDITOR=vi
-fi
-export FCEDIT=$EDITOR
-export READNULLCMD=cat  # more is the default
+unset i # }}}2
+if [ -x /usr/bin/vim ]; then export EDITOR=vim ; else export EDITOR=vi ; fi
 if fzf --version >/dev/null 2>&1 ; then export FZF_DEFAULT_OPTS='--height=10 --bind=ctrl-a:select-all' ; fi
 if command -v pager >/dev/null ; then export PAGER=pager ; fi
-# https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
-export NCURSES_NO_UTF8_ACS=1
-# Wider {{{2
 export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
+export FCEDIT=$EDITOR
+export NCURSES_NO_UTF8_ACS=1  # https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
+export READNULLCMD=cat  # more is the default
 # }}}1
 # Prompt — PS1 {{{1
 # https://spaceship-prompt.sh
