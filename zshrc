@@ -10,6 +10,15 @@ bindkey -v  # vi mode, see man zshzle
 setopt interactive_comments
 setopt RM_STAR_WAIT # encourage the user to expand the star wildcard with tab
 FPATH="$FPATH:$HOME/.local/share/zsh/site-functions"
+# Aliases and abbreviations {{{1
+abbr="$HOME/.local/share/zsh/zsh-abbr/zsh-abbr.zsh"
+if [ -f "$abbr" ];  then
+  export ABBR_USER_ABBREVIATIONS_FILE="$HOME/github.com/maxwell-k/dotfiles/abbr"
+  source "$abbr"
+  unalias egrep fgrep ll run-help which which-command xzegrep xzfgrep xzgrep zegrep zfgrep zgrep
+  unalias grep l. ls # in-use
+fi
+unset abbr
 # Command line completion {{{1
 # these files must be generated before the compinit commands
 site="$HOME/.local/share/zsh/site-functions"
@@ -27,29 +36,8 @@ create "$HOME/.local/share/uv/tools/nox/bin/register-python-argcomplete --shell=
 create "$HOME/.local/bin/uv generate-shell-completion zsh"
 create "$HOME/.local/bin/jj util completion zsh"
 create "$HOME/.deno/bin/deno completions zsh"
-unset create executable site
+unset site create call executable file
 autoload -U compinit && compinit #}}}1
-# Aliases {{{1
-alias cp="cp -i"  # To avoid accidentally over-writing content
-alias mv="mv -i"  # "
-alias rm="rm -i"  # To avoid accidentally deleting content
-alias ls="ls --color=auto --group-directories-first"
-alias lc="tig --reverse remotes/origin/HEAD.."
-# Functions for use as commands {{{1
-# <80 characters, alphabetically sorted {{{
-gcd() { cd "$(git rev-parse --show-toplevel)" || return ; }
-lfcd () { cd "$(command lf -print-last-dir "$@")" || return ; }
-ywd() { printf '%s' "$PWD" | sed "s,^$HOME,~," | ygg ; printf '\n' ; }
-yz() { fc -l -n 0- | fzf --tac | osc52.sh ; }
-# }}}
-yy() { # {{{
-  if [ ! -t 0 ] ; then
-    tail -n 1
-  else
-    fc -ln -1
-  fi | tr -d '\n' | ygg ; >&2 printf '\n'
-} # }}}
-# }}}
 # Editing command lines {{{1
 bindkey -M vicmd v edit-command-line
 autoload edit-command-line
@@ -154,8 +142,7 @@ bindkey -M menuselect u undo
 # }}}
 # }}}1
 # Environment variables {{{1
-# Interactive command line {{{2
-# Set the PATH {{{3
+# Set the PATH {{{2
 #
 # On MacOS /usr/libexec/path_helper changes the order of the entries in PATH.
 # Following the advice in the gist below I do not use a separate zshenv file to
@@ -173,21 +160,14 @@ do
       *) export PATH="$i:$PATH" ;;
     esac
 done
-unset i # }}}3
-if [ -x /usr/bin/vim ]; then
-  export EDITOR=vim
-else
-  export EDITOR=vi
-fi
-export FCEDIT=$EDITOR
-export READNULLCMD=cat  # more is the default
+unset i # }}}2
+if [ -x /usr/bin/vim ]; then export EDITOR=vim ; else export EDITOR=vi ; fi
 if fzf --version >/dev/null 2>&1 ; then export FZF_DEFAULT_OPTS='--height=10 --bind=ctrl-a:select-all' ; fi
 if command -v pager >/dev/null ; then export PAGER=pager ; fi
-# https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
-export NCURSES_NO_UTF8_ACS=1
-# Wider {{{2
 export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
-export DOTDROP_PROFILE=default
+export FCEDIT=$EDITOR
+export NCURSES_NO_UTF8_ACS=1  # https://chromium.googlesource.com/apps/libapps/+/master/nassh/doc/FAQ.md#Why-do-curses-apps-display-x_q_etc_instead-of-and-and-other-graphics
+export READNULLCMD=cat  # more is the default
 # }}}1
 # Prompt — PS1 {{{1
 # https://spaceship-prompt.sh

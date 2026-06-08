@@ -1,0 +1,10 @@
+#!/bin/sh
+# local/bin/yy
+# Copyright 2026 Keith Maxwell
+# SPDX-License-Identifier: MPL-2.0
+#
+if [ ! -t 0 ] ; then
+  tail -n 1
+else
+  fc -ln -1
+fi | tr -d '\n' | ygg ; >&2 printf '\n'

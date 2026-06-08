@@ -14,7 +14,7 @@ config:
         sudo: ALL=(ALL) NOPASSWD:ALL
         shell: /usr/bin/zsh
 #
-# config-debian.yaml
+# tests/config-debian.yaml
 # Copyright 2024 Keith Maxwell
 # SPDX-License-Identifier: MPL-2.0
 # vim: set filetype=yaml.dprint :

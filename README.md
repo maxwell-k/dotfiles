@@ -15,7 +15,7 @@
 Command to start a container and install the dependencies for these
 instructions:
 
-    incus launch images:debian/13/cloud c1 < config-debian.yaml
+    incus launch images:debian/13/cloud c1 < tests/config-debian.yaml
 
 Command to login:
 
