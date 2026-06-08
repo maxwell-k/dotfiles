@@ -184,7 +184,6 @@ if command -v pager >/dev/null ; then export PAGER=pager ; fi
 export NCURSES_NO_UTF8_ACS=1
 # Wider {{{2
 export ANSIBLE_COLLECTIONS_PATH="$HOME/.ansible/collections:/usr/lib/python3.12/site-packages/ansible_collections/"
-export DOTDROP_PROFILE=default
 # }}}1
 # Prompt — PS1 {{{1
 # https://spaceship-prompt.sh
