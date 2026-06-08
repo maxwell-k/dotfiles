@@ -39,9 +39,6 @@ create "$HOME/.deno/bin/deno completions zsh"
 unset site create call executable file
 autoload -U compinit && compinit #}}}1
 # Functions for use as commands {{{1
-# <80 characters, alphabetically sorted {{{
-yz() { fc -rln 1 | fzf | perl -pe "chomp if eof" | ygg ; print ; }
-# }}}
 yy() { # {{{
   if [ ! -t 0 ] ; then
     tail -n 1
