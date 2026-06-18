@@ -91,7 +91,7 @@ version = "--version"
 
 [typst]
 url = "https://github.com/typst/typst/releases/download/v0.15.0/typst-x86_64-unknown-linux-musl.tar.xz"
-expected = "a6044cbad2a954deb921167e257e120ac0a16b20339ec01121194ff9d394996d"
+expected = "59b207df01be2dab9f13e80f73d04d7ff8273ffd46b3dd1b9eef5c60f3eeabea"
 prefix = "typst-x86_64-unknown-linux-musl/"
 ignore = [
   "NOTICE",
