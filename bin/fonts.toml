@@ -6,7 +6,7 @@ prefix = "fontawesome-free-7.2.0-desktop/otfs/" # depName=FortAwesome/Font-Aweso
 
 [Roboto]
 url = "https://github.com/googlefonts/roboto-3-classic/releases/download/v3.016/Roboto_v3.016.zip"
-expected = "bee3e9334ea86dd63e184598f31fb16750881c2da1a6f097a66e0f66a95b3d54"
+expected = "1653dbe12f248da8fb0b9920db7b9496cd677ed3981154f6f15285c8bd4e334f"
 prefix = "web/static/"
 
 [OTF-source-sans]
