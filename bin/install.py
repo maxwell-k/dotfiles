@@ -55,7 +55,6 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/repositories.py",),
     ("~/.local/bin/venv.py",),
     ("~/.local/bin/ygg",),
-    ("~/.local/bin/yy",),
     ("~/.tmux.conf",),
     ("~/.zshrc",),
 ]

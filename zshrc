@@ -38,6 +38,15 @@ create "$HOME/.local/bin/jj util completion zsh"
 create "$HOME/.deno/bin/deno completions zsh"
 unset site create call executable file
 autoload -U compinit && compinit #}}}1
+# Functions for use as commands {{{1
+yy() { # {{{
+  if [ ! -t 0 ] ; then
+    tail -n 1
+  else
+    fc -ln -1
+  fi | tr -d '\n' | ygg ; >&2 printf '\n'
+} # }}}
+# }}}
 # Editing command lines {{{1
 bindkey -M vicmd v edit-command-line
 autoload edit-command-line
