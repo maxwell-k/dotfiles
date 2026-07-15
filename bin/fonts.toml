@@ -1,8 +1,8 @@
 #!/usr/bin/env -S python3 bin/dotlocalslashbin.py --output ~/.local/share/fonts
 [fontawesome-free-desktop]
-url = "https://github.com/FortAwesome/Font-Awesome/releases/download/7.3.0/fontawesome-free-7.3.0-desktop.zip"
+url = "https://github.com/FortAwesome/Font-Awesome/releases/download/7.3.1/fontawesome-free-7.3.1-desktop.zip"
 expected = "719c61d1b2b595d166af27dac1fdce1391726b6eed7986076aa13b232976cfcd"
-prefix = "fontawesome-free-7.3.0-desktop/otfs/" # depName=FortAwesome/Font-Awesome
+prefix = "fontawesome-free-7.3.1-desktop/otfs/" # depName=FortAwesome/Font-Awesome
 
 [Roboto]
 url = "https://github.com/googlefonts/roboto-3-classic/releases/download/v3.016/Roboto_v3.016.zip"
