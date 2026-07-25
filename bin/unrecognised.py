@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 """Check for unrecognised files in ~/.local/bin/."""
 
+# bin/unrecognised.py
+# SPDX-License-Identifier: MPL-2.0
+# Copyright 2025 Keith Maxwell
+
 # /// script
 # requires-python = ">=3.11"
 # dependencies = []
@@ -48,7 +52,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
-# bin/unrecognised.py
-# SPDX-License-Identifier: MPL-2.0
-# Copyright Keith Maxwell 2025
