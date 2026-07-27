@@ -19,7 +19,9 @@ instructions:
 
 Command to login:
 
-    incus exec c1 -- su --login "$LOGNAME"
+    incus exec c1 -- su -l "$LOGNAME"
+
+<!-- -l not --login for Alpine Linux because busybox doens't support --login -->
 
 (Optional) Command to download `.zshrc` from the main branch of this repository on GitHub:
 
