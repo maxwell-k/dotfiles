@@ -60,6 +60,9 @@ key_bindings=/usr/share/fzf/shell/key-bindings.zsh
 if [ ! -f "$key_bindings" ] && [ -d /opt/homebrew/Cellar/fzf ] ; then
   key_bindings="$(find /opt/homebrew/Cellar/fzf -name key-bindings.zsh)"
 fi
+if [ ! -f "$key_bindings" ] ; then
+  key_bindings=/usr/share/fzf/key-bindings.zsh
+fi
 if [ -f "$key_bindings" ] ; then
   # load binding for ctrl-r ^r
   . "$key_bindings"
