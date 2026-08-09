@@ -15,8 +15,7 @@ abbr="$HOME/.local/share/zsh/zsh-abbr/zsh-abbr.zsh"
 if [ -f "$abbr" ];  then
   export ABBR_USER_ABBREVIATIONS_FILE="$HOME/github.com/maxwell-k/dotfiles/abbr"
   source "$abbr"
-  unalias egrep fgrep ll run-help which which-command xzegrep xzfgrep xzgrep zegrep zfgrep zgrep
-  unalias grep l. ls # in-use
+  unalias -m '*' # for in-use ls and l. see ./abbr
 fi
 unset abbr
 # Command line completion {{{1
