@@ -122,7 +122,7 @@ prefix = "gyb/"
 
 [age]
 url = "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz"
-expected = "bdc69c09cbdd6cf8b1f333d372a1f58247b3a33146406333e30c0f26e8f51377"
+expected = "cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10"
 version = "--version"
 ignore = ["LICENSE", "age-inspect", "age-plugin-batchpass"]
 prefix = "age/"
