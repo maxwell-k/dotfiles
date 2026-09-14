@@ -21,6 +21,11 @@ from subprocess import run
 from tomllib import load, loads
 from urllib.request import HTTPError, Request, urlopen
 
+_DEFAULT = Path("bin/linux-amd64.toml")
+_EPILOG = f"""The `--target` option is ignored if: (1) using git mode, (2) the
+target is the default  — '{_DEFAULT}' — (3) the target did not change in the last
+commit and (4) one other file changed in the last commit."""
+
 Mode = Enum("Mode", ["git", "all", "test", "keys"])
 
 logger = logging.getLogger(__name__)
@@ -42,6 +47,20 @@ def _main(arg_list: list[str] | None = None) -> int:
         return max(0, min(results.failed, 1))
 
     keys: list[str] = []
+
+    cmd = ("git", "diff", "--name-only", "HEAD^", "HEAD")
+    result = run(cmd, capture_output=True, check=True, text=True)
+    files = [Path(i) for i in result.stdout.strip().split("\n")]
+    if (
+        args.mode == Mode.git
+        and args.target == _DEFAULT
+        and args.target not in files
+        and len(files) == 1
+    ):
+        msg = "the default target ('%s') did not change in the last commit"
+        msg += " updating '%s' instead"
+        logger.info(msg, args.target, files[0])
+        args.target = files[0]
 
     if args.mode == Mode.all:
         with args.target.open("rb") as file:
@@ -89,15 +108,14 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     >>> result.mode, result.key
     (<Mode.keys: 4>, ['one'])
     """
-    parser = ArgumentParser()
+    parser = ArgumentParser(epilog=_EPILOG)
 
     help_ = "file to update, default: '%(default)s'"
-    default = Path("bin/linux-amd64.toml")
 
     def path(arg: str) -> Path:
-        return Path(arg) if arg else default
+        return Path(arg) if arg else _DEFAULT
 
-    parser.add_argument("--target", nargs="?", type=path, help=help_, default=default)
+    parser.add_argument("--target", nargs="?", type=path, help=help_, default=_DEFAULT)
     parser.add_argument("--debug", action="store_true", help="show debug logging.")
     parser.set_defaults(mode=Mode.git)
 
