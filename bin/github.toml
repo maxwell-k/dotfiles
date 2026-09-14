@@ -7,7 +7,7 @@ url = "https://raw.githubusercontent.com/libapps/libapps-mirror/refs/tags/nassh-
 
 [wcurl]
 url = "https://github.com/curl/wcurl/releases/download/v2026.08.30/wcurl"
-expected = "180aaaa62b84e6a92bdebc7e31992c82b446ee72c37006d349c7882c5b54d1ae"
+expected = "739a03b12f98c8ba864b8775440a5b4e337248e4986e51528da5806387894f65"
 version = "--version"
 
 # bin/github.toml
