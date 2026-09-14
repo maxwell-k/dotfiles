@@ -81,8 +81,8 @@ version = "--version"
 modifier = ".sha256"
 
 [jj]
-url = "https://github.com/jj-vcs/jj/releases/download/v0.44.0/jj-v0.44.0-x86_64-unknown-linux-musl.tar.gz"
-expected = "0a07bab4641a55fd2bc2fd1563ba3a3f9a577584086ad74086a1c5b69b3ffce9"
+url = "https://github.com/jj-vcs/jj/releases/download/v0.45.1/jj-v0.45.1-x86_64-unknown-linux-musl.tar.gz"
+expected = "f35438350b5d61963aac5dd74ede510b31d6b9690769d1a6268cf058cc825f72"
 ignore = [
   "./LICENSE",
   "./README.md",
