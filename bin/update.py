@@ -13,18 +13,17 @@
 
 import json
 import logging
-from argparse import ArgumentParser, Namespace
+from argparse import ArgumentParser, Namespace, RawDescriptionHelpFormatter
 from doctest import testmod
 from enum import Enum
 from pathlib import Path
+from shlex import join
 from subprocess import run
 from tomllib import load, loads
 from urllib.request import HTTPError, Request, urlopen
 
-_DEFAULT = Path("bin/linux-amd64.toml")
-_EPILOG = f"""The `--target` option is ignored if: (1) using git mode, (2) the
-target is the default  — '{_DEFAULT}' — (3) the target did not change in the last
-commit and (4) one other file changed in the last commit."""
+_DIFF = ("git", "diff", "--name-only", "HEAD^", "HEAD", "*.toml")
+_EPILOG = "default target:\n  --target defaults to the first path in:\n  " + join(_DIFF)
 
 Mode = Enum("Mode", ["git", "all", "test", "keys"])
 
@@ -48,22 +47,19 @@ def _main(arg_list: list[str] | None = None) -> int:
 
     keys: list[str] = []
 
-    cmd = ("git", "diff", "--name-only", "HEAD^", "HEAD")
-    result = run(cmd, capture_output=True, check=True, text=True)
-    files = [Path(i) for i in result.stdout.strip().split("\n")]
-    if (
-        args.mode == Mode.git
-        and args.target == _DEFAULT
-        and args.target not in files
-        and len(files) == 1
-    ):
-        msg = "the default target ('%s') did not change in the last commit"
-        msg += " updating '%s' instead"
-        logger.info(msg, args.target, files[0])
-        args.target = files[0]
+    if args.target == "":
+        result = run(_DIFF, capture_output=True, check=True, text=True)
+        args.target = result.stdout.strip().split("\n", maxsplit=1)[0]
+        msg = "set target to '%s' from `%s`"
+        logger.debug(msg, args.target, join(_DIFF))
+
+    path = Path(args.target)
+    if not path.is_file():
+        logger.error("target is not a file '%s'", args.target)
+        return 1
 
     if args.mode == Mode.all:
-        with args.target.open("rb") as file:
+        with path.open("rb") as file:
             toml = load(file)
         for key, value in toml.items():
             if "expected" in value:
@@ -71,11 +67,11 @@ def _main(arg_list: list[str] | None = None) -> int:
     elif args.mode == Mode.keys:
         keys.extend(args.key)
     else:
-        keys.extend(_git(args.target))
+        keys.extend(_git(path))
 
-    logger.debug("looping through keys: %s", keys)
+    logger.debug("updating '%s' looping through keys: %s", path, keys)
     for key in keys:
-        _update(args.target, key)
+        _update(path, key)
 
     return 0
 
@@ -86,12 +82,12 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     Defaults if no arguments:
 
     >>> parse_args([])
-    Namespace(target=PosixPath('bin/linux-amd64.toml'), debug=False, mode=<Mode.git: 1>)
+    Namespace(target='', debug=False, mode=<Mode.git: 1>)
 
-    If target is the empty string, then use the default:
+    Accept the empty string for target:
 
     >>> parse_args(['--target=']).target
-    PosixPath('bin/linux-amd64.toml')
+    ''
 
     `git`, `all` and `test` subcommands have no required arguments:
 
@@ -108,25 +104,27 @@ def parse_args(arg_list: list[str] | None) -> Namespace:
     >>> result.mode, result.key
     (<Mode.keys: 4>, ['one'])
     """
-    parser = ArgumentParser(epilog=_EPILOG)
+    parser = ArgumentParser(epilog=_EPILOG, formatter_class=RawDescriptionHelpFormatter)
 
-    help_ = "file to update, default: '%(default)s'"
-
-    def path(arg: str) -> Path:
-        return Path(arg) if arg else _DEFAULT
-
-    parser.add_argument("--target", nargs="?", type=path, help=help_, default=_DEFAULT)
+    help_ = "file to update, see below for default"
+    parser.add_argument("--target", help=help_, default="")
     parser.add_argument("--debug", action="store_true", help="show debug logging.")
     parser.set_defaults(mode=Mode.git)
 
     subparsers = parser.add_subparsers()
-    subparsers.add_parser("all", help="update all keys").set_defaults(mode=Mode.all)
+
+    all_ = subparsers.add_parser("all", help="update all keys")
+    all_.set_defaults(mode=Mode.all)
+
     help_ = "update keys that change in the last git commit (default)"
     subparsers.add_parser("git", help=help_).set_defaults(mode=Mode.git)
-    key = subparsers.add_parser("keys", help="update specified keys")
-    key.set_defaults(mode=Mode.keys)
-    key.add_argument("key", nargs="+", type=str, help="item to update")
+
+    keys = subparsers.add_parser("keys", help="update specified keys")
+    keys.set_defaults(mode=Mode.keys)
+    keys.add_argument("key", nargs="+", type=str, help="item to update")
+
     subparsers.add_parser("test", help="run doctests").set_defaults(mode=Mode.test)
+
     return parser.parse_args(arg_list)
 
 
