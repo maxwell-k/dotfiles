@@ -56,7 +56,7 @@ jobs:
           LOGNAME: maxwell-k
           MATRIX_IMAGE: ${{ matrix.image }}
   zizmor:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     # https://github.com/zizmorcore/zizmor-action#permissions
     permissions: { security-events: write }
     steps:
