@@ -20,3 +20,11 @@ bind generic F !vimf %(file)
 bind refs <Ctrl-g> <sh -c "echo %(refname) >/tmp/tig-output"
 bind generic <Ctrl-g> <sh -c "echo %(commit) >/tmp/tig-output"
 set ignore-case = smart-case
+
+# To view the numeric colours:
+# for i in {0..255}; do printf "\e[38;5;${i}mcolor%-5i\e[0m" "$i" ; (( (i + 1) % 8 == 0 )) && echo ; done
+color default     15      235
+color cursor      15      241
+color title-focus default default underline
+color title-blur  default default
+color date        244     default
