@@ -133,6 +133,12 @@ expected = "74a36e384b1898693b1434220ffa51adc50846fe94f24668d4b484daa0bebb1a"
 ignore = ["LICENSE"]
 prefix = "ssh-tpm-agent/"
 
+[dnscontrol]
+url = "https://github.com/DNSControl/dnscontrol/releases/download/v5.2.0/dnscontrol_5.2.0_linux_amd64.tar.gz"
+expected = "9b82d5734af489013a733de991ccd557dcaeebe1631dcc842e4123bb93acc612"
+ignore = ["LICENSE", "README.md"]
+version = "--version"
+
 # bin/linux-amd64.toml
 # Copyright Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
