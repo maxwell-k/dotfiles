@@ -114,8 +114,8 @@ ignore = [
 ]
 
 [gyb]
-url = "https://github.com/GAM-team/got-your-back/releases/download/v1.95/gyb-1.95-linux-x86_64-glibc2.35.tar.xz"
-expected = "e38d6fbf875d6775e4335dbe6a60744ecffe0c1c97a04c59c31c5f52b52eaff4"
+url = "https://github.com/GAM-team/got-your-back/releases/download/v1.97/gyb-1.97-linux-x86_64-glibc2.35.tar.xz"
+expected = "112270a87200313fc0a73f3a89e9b53e1d610dba07d0b7b0a061673200911878"
 version = "--version" # gyb --version creates ~/.local/bin/lastcheck.txt
 ignore = ["LICENSE"]
 prefix = "gyb/"
