@@ -135,7 +135,7 @@ prefix = "ssh-tpm-agent/"
 
 [dnscontrol]
 url = "https://github.com/DNSControl/dnscontrol/releases/download/v5.3.0/dnscontrol_5.3.0_linux_amd64.tar.gz"
-expected = "9b82d5734af489013a733de991ccd557dcaeebe1631dcc842e4123bb93acc612"
+expected = "40048d163f39434fe2611fd6907539b1373972832f8fe886f100c6be8f5c1cd6"
 ignore = ["LICENSE", "README.md"]
 version = "--version"
 
