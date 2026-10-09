@@ -14,10 +14,11 @@ from pathlib import Path
 from tomllib import load
 
 TARGET = Path("~/.local/bin/").expanduser()
+_REPOSITORY_ROOT = Path(__file__).parent.parent
 TOML_INPUTS = [
-    "bin/python.toml",
-    "bin/github.toml",
-    "bin/linux-amd64.toml",
+    _REPOSITORY_ROOT / "bin/python.toml",
+    _REPOSITORY_ROOT / "bin/github.toml",
+    _REPOSITORY_ROOT / "bin/linux-amd64.toml",
 ]
 
 
@@ -25,7 +26,7 @@ def main() -> None:
     """Check for unrecognised files in ~/.local/bin/."""
     toml = set()
     for toml_input in TOML_INPUTS:
-        with Path(toml_input).open("rb") as file:
+        with toml_input.open("rb") as file:
             toml |= set(load(file).keys())
     unrecognised = set(TARGET.iterdir())
     # if pulumi is in toml, then recognise pulumi-language-python and others
