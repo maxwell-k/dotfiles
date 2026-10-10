@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """Check for unrecognised files in ~/.local/bin/."""
 
-# bin/unrecognised.py
+# local/bin/unrecognised.py
 # SPDX-License-Identifier: MPL-2.0
 # Copyright 2025 Keith Maxwell
 
@@ -14,7 +14,7 @@ from pathlib import Path
 from tomllib import load
 
 TARGET = Path("~/.local/bin/").expanduser()
-_REPOSITORY_ROOT = Path(__file__).parent.parent
+_REPOSITORY_ROOT = Path(__file__).resolve().parent.parent.parent
 TOML_INPUTS = [
     _REPOSITORY_ROOT / "bin/python.toml",
     _REPOSITORY_ROOT / "bin/github.toml",

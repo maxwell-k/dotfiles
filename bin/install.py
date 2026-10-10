@@ -53,6 +53,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/receipt.py",),
     ("~/.local/bin/reference.py",),
     ("~/.local/bin/repositories.py",),
+    ("~/.local/bin/unrecognised.py",),
     ("~/.local/bin/venv.py",),
     ("~/.local/bin/ygg",),
     ("~/.tmux.conf",),
