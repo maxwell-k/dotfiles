@@ -20,6 +20,7 @@ TOML_INPUTS = [
     _REPOSITORY_ROOT / "bin/github.toml",
     _REPOSITORY_ROOT / "bin/linux-amd64.toml",
 ]
+LISTED = _REPOSITORY_ROOT / "recognised.toml"
 
 
 def main() -> None:
@@ -35,8 +36,15 @@ def main() -> None:
     unrecognised -= {i for i in links if "uv" in i.readlink().parts}
     unrecognised -= {i for i in links if "dotfiles" in i.readlink().parts}
     unrecognised -= {i for i in links if ".vim" in i.readlink().parts}
+    listed = set()
+    if LISTED.is_file():
+        with LISTED.open("rb") as file:
+            for i in load(file).get("items", []):
+                listed.add(i)
     for i in unrecognised:
         if i.name == "__pycache__":
+            continue
+        if i.name in listed:
             continue
         if not i.is_file():
             msg = f"{i} is not a file."
