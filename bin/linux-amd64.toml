@@ -132,6 +132,9 @@ ignore = [
   "LICENSE",
   "age-inspect",
   "age-plugin-batchpass",
+  "age-plugin-pq",
+  "age-plugin-tag",
+  "age-plugin-tagpq",
 ]
 prefix = "age/"
 
