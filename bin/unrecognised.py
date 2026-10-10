@@ -30,8 +30,7 @@ def main() -> None:
         with toml_input.open("rb") as file:
             toml |= set(load(file).keys())
     unrecognised = set(TARGET.iterdir())
-    # if pulumi is in toml, then recognise pulumi-language-python and others
-    unrecognised -= {i for i in unrecognised if any(i.name.startswith(j) for j in toml)}
+    unrecognised -= {i for i in unrecognised if any(i.name == j for j in toml)}
     links = {i for i in unrecognised if i.is_symlink()}
     unrecognised -= {i for i in links if "uv" in i.readlink().parts}
     unrecognised -= {i for i in links if "dotfiles" in i.readlink().parts}
