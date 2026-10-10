@@ -42,8 +42,6 @@ def main() -> None:
             for i in load(file).get("items", []):
                 listed.add(i)
     for i in unrecognised:
-        if i.name == "__pycache__":
-            continue
         if i.name in listed:
             continue
         if not i.is_file():
