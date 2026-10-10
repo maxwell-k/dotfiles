@@ -113,12 +113,16 @@ ignore = [
   "git-log.txt",
 ]
 
-[gyb]
-url = "https://github.com/GAM-team/got-your-back/releases/download/v1.97/gyb-1.97-linux-x86_64-glibc2.35.tar.xz"
-expected = "112270a87200313fc0a73f3a89e9b53e1d610dba07d0b7b0a061673200911878"
-version = "--version" # gyb --version creates ~/.local/bin/lastcheck.txt
-ignore = ["LICENSE"]
-prefix = "gyb/"
+# [gyb] is not included here after issues using the v1.97 release:
+# gyb-1.97-linux-x86_64-glibc2.35.tar.xz contained gyb/lib/ unlike other
+# artifacts and gyb-1.97-linux-x86_64-legacy.tar.xz produce a PyInstaller /
+# Python 3.14 error. Renovate updates the URL below as a reminder to keep the
+# instructions for running from source up to date.
+# url = "https://github.com/GAM-team/got-your-back/releases/download/v1.97/gyb-1.97-linux-x86_64-glibc2.35.tar.xz"
+# expected = "112270a87200313fc0a73f3a89e9b53e1d610dba07d0b7b0a061673200911878"
+# version = "--version" # gyb --version creates ~/.local/bin/lastcheck.txt
+# ignore = ["LICENSE"]
+# prefix = "gyb/"
 
 [age]
 url = "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz"
