@@ -50,36 +50,15 @@ def _main() -> int:
     if required:
         cmd.append("--python=" + required)
     cmd.append(str(PATH))
-    _run(cmd)
-
-    if required and not required.startswith(">="):
-        logger.warning("Requirement comparison not supported: %s", required)
-
-    if required and required.startswith(">="):
-        result = _run((str(PYTHON), "--version"), stdout=True)
-        logger.debug("stdout.strip() %s", result.stdout.strip())
-        version = result.stdout.removeprefix("Python ")
-        actual = tuple(int(i) for i in version.split("."))
-        expected = tuple(int(i) for i in required.removeprefix(">=").split("."))
-        if not actual >= expected:
-            logger.error("Incorrect Python version found: %s", version)
-            return 1
+    result = _run(cmd)
 
     dependencies = cast("set[str]", metadata.get("dependencies", set()))
     logger.debug("dependencies %s", dependencies)
     if dependencies:
         cmd = (*head, "pip", "install", f"--python={PYTHON}", *dependencies)
-        _run(cmd)
-    cmd = (*head, "pip", "list", f"--python={PYTHON}", "--format=json")
-    result = run(cmd, check=True, capture_output=True, text=True)
-    names = {i["name"] for i in loads(result.stdout)}
-    logger.debug("names %s", names)
-    missing = set(dependencies) - names
-    if missing:
-        logger.error("Missing dependencies: %s", missing)
-        return 1
+        result = _run(cmd)
 
-    return 0
+    return result.returncode
 
 
 def _run(cmd: Cmd, *, stdout: bool = False) -> CompletedProcess:
