@@ -92,7 +92,7 @@ def _main() -> int:
 
 def _run(cmd: Cmd, *, stdout: bool = False) -> CompletedProcess:
     """Run a command in a subprocess with logging."""
-    logger.debug("Running: %s", " ".join(quote(i) for i in cmd))
+    logger.info("Running— %s", " ".join(quote(i) for i in cmd))
     if stdout:
         return run(cmd, check=True, stdout=PIPE, text=True)
     return run(cmd, check=True)
