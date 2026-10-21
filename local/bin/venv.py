@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-"""Check and optionally set up a virutal environment.
+"""Set up a virutal environment.
 
-Based on inline script metadata. Requires uv. Does not support version
-specifiers in package dependencies.
+Based on inline script metadata. Requires uv.
 """
 
 # local/bin/venv.py
@@ -18,8 +17,6 @@ import argparse
 import logging
 import re
 import tomllib
-from json import loads
-from os import access, X_OK
 from pathlib import Path
 from shlex import quote
 from subprocess import CompletedProcess, PIPE, run
@@ -49,50 +46,24 @@ def _main() -> int:
     head = ("uv", "--quiet") if args.quiet else ("uv",)
     required = metadata.get("requires-python", None)
     logger.debug("requires-python %s", required)
-    if args.create:
-        cmd = [*head, "venv", "--clear"]
-        if required:
-            cmd.append("--python=" + required)
-        cmd.append(str(PATH))
-        _run(cmd)
-
-    if not access(PYTHON, X_OK):
-        logger.error("%s is not executable, do you want to --create it?", PYTHON)
-        return 1
-
-    if required and not required.startswith(">="):
-        logger.warning("Requirement comparison not supported: %s", required)
-
-    if required and required.startswith(">="):
-        result = _run((str(PYTHON), "--version"), stdout=True)
-        logger.debug("stdout.strip() %s", result.stdout.strip())
-        version = result.stdout.removeprefix("Python ")
-        actual = tuple(int(i) for i in version.split("."))
-        expected = tuple(int(i) for i in required.removeprefix(">=").split("."))
-        if not actual >= expected:
-            logger.error("Incorrect Python version found: %s", version)
-            return 1
+    cmd = [*head, "venv", "--clear"]
+    if required:
+        cmd.append("--python=" + required)
+    cmd.append(str(PATH))
+    result = _run(cmd)
 
     dependencies = cast("set[str]", metadata.get("dependencies", set()))
     logger.debug("dependencies %s", dependencies)
-    if args.create and dependencies:
+    if dependencies:
         cmd = (*head, "pip", "install", f"--python={PYTHON}", *dependencies)
-        _run(cmd)
-    cmd = (*head, "pip", "list", f"--python={PYTHON}", "--format=json")
-    result = run(cmd, check=True, capture_output=True, text=True)
-    names = {i["name"] for i in loads(result.stdout)}
-    logger.debug("names %s", names)
-    missing = set(dependencies) - names
-    if missing:
-        logger.error("Missing dependencies: %s", missing)
-        return 1
+        result = _run(cmd)
 
-    return 0
+    return result.returncode
 
 
 def _run(cmd: Cmd, *, stdout: bool = False) -> CompletedProcess:
     """Run a command in a subprocess with logging."""
-    logger.debug("Running: %s", " ".join(quote(i) for i in cmd))
+    logger.info("Running— %s", " ".join(quote(i) for i in cmd))
     if stdout:
         return run(cmd, check=True, stdout=PIPE, text=True)
     return run(cmd, check=True)
@@ -102,8 +73,6 @@ def _parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     help_ = "script with inline metadata"
     parser.add_argument("script", type=Path, help=help_)
-    help_ = "create a new virtual environment"
-    parser.add_argument("-c", "--create", action="store_true", help=help_)
     help_ = "pass --quiet to uv"
     parser.add_argument("-q", "--quiet", action="store_true", help=help_)
     help_ = "show debug output"
