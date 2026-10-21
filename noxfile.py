@@ -97,7 +97,7 @@ def doctest(session: Session) -> None:
         if shebang(i) == PYTHON3:
             python = PYTHON3
         else:
-            session.run("local/bin/venv.py", "--create", "--quiet", i)
+            session.run("local/bin/venv.py", "--quiet", i)
             python = ".venv/bin/python"
         session.run(python, "-m", "doctest", "-v", i)
 
@@ -109,7 +109,7 @@ def pyright(session: Session) -> None:
         if shebang(i) == PYTHON3:
             cmd = f"npm exec --yes pyright -- --pythonpath={PYTHON3}"
         else:
-            session.run("local/bin/venv.py", "--create", "--quiet", i, external=True)
+            session.run("local/bin/venv.py", "--quiet", i, external=True)
             cmd = "npm exec --yes pyright -- --pythonpath=.venv/bin/python"
         session.run(*cmd.split(" "), i, external=True)
 
