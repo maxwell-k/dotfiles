@@ -6,8 +6,9 @@ version = "--version"
 modifier = "SHA256SUMS"
 
 [actionlint]
-url = "https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_linux_amd64.tar.gz"
-expected = "8aca8db96f1b94770f1b0d72b6dddcb1ebb8123cb3712530b08cc387b349a3d8"
+# rhysd/actionlint appears unmaintained
+url = "https://github.com/kjanat/actionlint/releases/download/v1.16.1/actionlint_1.16.1_linux_amd64.tar.gz"
+expected = "d566eee8af147ee1fa24ee204e1a171fcf8b5ce40e267c39a7383c7f20e6236d"
 modifier = "_checksums.txt"
 ignore = [
   "LICENSE.txt",
@@ -16,8 +17,20 @@ ignore = [
   "docs/api.md",
   "docs/checks.md",
   "docs/config.md",
+  "docs/conformance.md",
+  "docs/design/package-layout.md",
   "docs/install.md",
   "docs/reference.md",
+  "docs/schema-audit-actions.md",
+  "docs/schema-audit-contexts.md",
+  "docs/schema-audit-nested.md",
+  "docs/schema-audit.md",
+  "docs/screenshots/actionlint-dark.gif",
+  "docs/screenshots/actionlint-dark.tape",
+  "docs/screenshots/actionlint-light.gif",
+  "docs/screenshots/actionlint-light.tape",
+  "docs/screenshots/actionlint.yaml",
+  "docs/screenshots/demo-workflow.yaml",
   "docs/usage.md",
   "man/actionlint.1",
 ]
