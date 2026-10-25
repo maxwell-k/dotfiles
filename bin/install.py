@@ -43,6 +43,8 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/jpeg2000.py",),
     ("~/.local/bin/keep.py",),
     ("~/.local/bin/landscape.py",),
+    ("~/.local/bin/node",),
+    ("~/.local/bin/npm",),
     ("~/.local/bin/lint-all",),
     ("~/.local/bin/mvh1", "local/bin/mvh1.py"),
     ("~/.local/bin/mvslugify",),
