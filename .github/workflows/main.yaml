@@ -11,7 +11,7 @@ permissions: {}
 
 jobs:
   smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
@@ -19,7 +19,7 @@ jobs:
       - run: bin/github.toml
       #      bin/python.toml is not run, python3.13 is not installed
   main:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     needs: smoke
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -37,7 +37,7 @@ jobs:
     uses: maxwell-k/dotlocalslashbin/.github/workflows/renovate.yaml@d1558d04ad82861ead2cce45fb850a05c47e4fc7 # v0.0.27
   matrix:
     needs: smoke
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     strategy:
       fail-fast: false
       matrix:
@@ -65,7 +65,7 @@ jobs:
       # yamllint disable-line rule:line-length
       - uses: zizmorcore/zizmor-action@53290badfa369cb0bf7ad16342cb62c2fa47ac7b # v0.8.0
   fonts:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
