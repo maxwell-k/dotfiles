@@ -65,7 +65,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
 
 def _determine(
     specification: tuple[str] | tuple[str, str],
-    repository: str | Path | None = None,
+    repository: str | None = None,
 ) -> tuple[Path, Path]:
     """Determine the link and the target from the specification.
 
@@ -75,8 +75,8 @@ def _determine(
     >>> _determine(('~/.a/b', 'a/b.py'), '~/repository')
     (PosixPath('~/.a/b'), PosixPath('../repository/a/b.py'))
     """
-    repository = _repository() if repository is None else Path(repository)
-    relative = Path(repository).relative_to(Path("~"))
+    repository_path = _repository() if repository is None else Path(repository)
+    relative = repository_path.relative_to(Path("~"))
     link_string = specification[0]
     link = Path(link_string)
     prefix = Path(relpath(Path("~"), link.parent))
