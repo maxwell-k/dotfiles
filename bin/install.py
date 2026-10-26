@@ -69,11 +69,11 @@ def _determine(
 ) -> tuple[Path, Path]:
     """Determine the link and the target from the specification.
 
-    >>> _determine(('~/.a',), '~/b')
-    (PosixPath('~/.a'), PosixPath('b/a'))
+    >>> _determine(('~/.a',), '~/repository')
+    (PosixPath('~/.a'), PosixPath('repository/a'))
 
-    >>> _determine(('~/.a/b', 'a/b.py'), '~/d')
-    (PosixPath('~/.a/b'), PosixPath('../d/a/b.py'))
+    >>> _determine(('~/.a/b', 'a/b.py'), '~/repository')
+    (PosixPath('~/.a/b'), PosixPath('../repository/a/b.py'))
     """
     repository = _repository() if repository is None else Path(repository)
     relative = Path(repository).relative_to(Path("~"))
