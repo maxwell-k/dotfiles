@@ -1,4 +1,4 @@
-# .npmrc
+# npmrc
 # Copyright 2026 Keith Maxwell
 # SPDX-License-Identifier: CC0-1.0
 engine-strict=true
