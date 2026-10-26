@@ -43,11 +43,11 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/jpeg2000.py",),
     ("~/.local/bin/keep.py",),
     ("~/.local/bin/landscape.py",),
-    ("~/.local/bin/node",),
-    ("~/.local/bin/npm",),
     ("~/.local/bin/lint-all",),
     ("~/.local/bin/mvh1", "local/bin/mvh1.py"),
     ("~/.local/bin/mvslugify",),
+    ("~/.local/bin/node",),
+    ("~/.local/bin/npm",),
     ("~/.local/bin/openwhispr.py",),
     ("~/.local/bin/pdf-information.py",),
     ("~/.local/bin/percollate",),
@@ -58,25 +58,26 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/unrecognised.py",),
     ("~/.local/bin/venv.py",),
     ("~/.local/bin/ygg",),
-    ("~/.tmux.conf",),
+    ("~/.npmrc", ".npmrc"),
+    ("~/.tmux.conf", ".tmux.conf"),
     ("~/.zshrc",),
 ]
 
 
 def _determine(
     specification: tuple[str] | tuple[str, str],
-    repository: str | Path | None = None,
+    repository: str | None = None,
 ) -> tuple[Path, Path]:
     """Determine the link and the target from the specification.
 
-    >>> _determine(('~/.a',), '~/b')
-    (PosixPath('~/.a'), PosixPath('b/a'))
+    >>> _determine(('~/.a',), '~/repository')
+    (PosixPath('~/.a'), PosixPath('repository/a'))
 
-    >>> _determine(('~/.a/b', 'a/b.py'), '~/d')
-    (PosixPath('~/.a/b'), PosixPath('../d/a/b.py'))
+    >>> _determine(('~/.a/b', 'a/b.py'), '~/repository')
+    (PosixPath('~/.a/b'), PosixPath('../repository/a/b.py'))
     """
-    repository = _repository() if repository is None else Path(repository)
-    relative = Path(repository).relative_to(Path("~"))
+    repository_path = _repository() if repository is None else Path(repository)
+    relative = repository_path.relative_to(Path("~"))
     link_string = specification[0]
     link = Path(link_string)
     prefix = Path(relpath(Path("~"), link.parent))
