@@ -58,7 +58,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.local/bin/unrecognised.py",),
     ("~/.local/bin/venv.py",),
     ("~/.local/bin/ygg",),
-    ("~/.npmrc", ".npmrc"),
+    ("~/.npmrc",),
     ("~/.tmux.conf", ".tmux.conf"),
     ("~/.zshrc",),
 ]
