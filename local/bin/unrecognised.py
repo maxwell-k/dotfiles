@@ -47,13 +47,6 @@ def main() -> None:
         if not i.is_file():
             msg = f"{i} is not a file."
             raise ValueError(msg)
-        try:
-            text = i.read_text()
-        except UnicodeDecodeError:
-            text = "\n\n"
-        if text.startswith("#!") and text.splitlines()[1].startswith("exec npm exec"):
-            # wrappers around npm exec installed in vimfiles
-            continue
         print(i)
 
 
