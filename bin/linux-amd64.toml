@@ -8,7 +8,7 @@ modifier = "SHA256SUMS"
 [actionlint]
 # rhysd/actionlint appears unmaintained
 url = "https://github.com/kjanat/actionlint/releases/download/v1.17.0/actionlint_1.17.0_linux_amd64.tar.gz"
-expected = "d566eee8af147ee1fa24ee204e1a171fcf8b5ce40e267c39a7383c7f20e6236d"
+expected = "620abd485a12b6ab1125b844a876414e1d5bd2af8a3125b27f82b01d0d9d6e5a"
 modifier = "_checksums.txt"
 ignore = [
   "LICENSE.txt",
