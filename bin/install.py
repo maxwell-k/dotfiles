@@ -34,6 +34,7 @@ SPECIFICATIONS: list[tuple[str] | tuple[str, str]] = [
     ("~/.config/pgcli/config",),
     ("~/.config/tig/config",),
     ("~/.config/yamllint/config",),
+    ("~/.config/zathura/zathurarc",),
     ("~/.local/bin/adf",),
     ("~/.local/bin/ansible-lint",),
     ("~/.local/bin/bag.py",),
