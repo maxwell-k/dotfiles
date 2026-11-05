@@ -34,16 +34,16 @@ def pdfinfo(file_: str) -> dict:
 def output(files: list[str], sizes: list[int], pages: list[int] | None = None) -> None:
     """Print some summary measures."""
     total = sum(sizes)
-    rows = [
-        ["Number of files", len(files), "20,d"],
-        ["Total number of bytes", total, ">20,d"],
-        ["Average number of bytes", total, "23,.2f"],
+    rows: list[tuple[str, int | float, str]] = [
+        ("Number of files", len(files), "20,d"),
+        ("Total number of bytes", total, ">20,d"),
+        ("Average number of bytes", total, "23,.2f"),
     ]
     if pages is not None:
         rows += [
-            ["Total pages", sum(pages), "20,d"],
-            ["Average number of pages", sum(pages) / len(files), "23.2f"],
-            ["Average number of bytes per page", total, "23,.2f"],
+            ("Total pages", sum(pages), "20,d"),
+            ("Average number of pages", sum(pages) / len(files), "23.2f"),
+            ("Average number of bytes per page", total, "23,.2f"),
         ]
     print("\n".join("{0:50s} {1:{2}}".format(*row) for row in rows))
 
