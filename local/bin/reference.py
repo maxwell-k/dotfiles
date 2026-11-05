@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+#
+# /// script
+# requires-python = ">=3.12"
+# dependencies = []
+# ///
+
 """Helper script for reference PDFs.
 
 reference.py find word [word…]
