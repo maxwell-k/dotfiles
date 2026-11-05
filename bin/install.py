@@ -2,7 +2,7 @@
 """Install symbolic links to files in this repository.
 
 Maintain compatibility with the system Python on Debian stable. Today that is
-Python 3.11.
+Python 3.13 on Debian 13, trixie.
 """
 
 # bin/install.py
@@ -10,7 +10,7 @@ Python 3.11.
 # SPDX-License-Identifier: MPL-2.0
 
 # /// script
-# requires-python = ">=3.11"
+# requires-python = ">=3.12"
 # dependencies = []
 # ///
 

@@ -77,3 +77,20 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
       - run: bin/fonts.toml
+  uv-check:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with: { persist-credentials: false }
+      # yamllint disable-line rule:line-length
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with: { enable-cache: false }
+      - run: >-
+          git ls-files '*.py' ':(exclude)local/bin/landscape.py'
+          | xargs -t -n1 uv --preview-features check-command check --script
+      # local/bin/landscape.py is excluded above because it has a dependency on
+      # python-sane. python-sane does not publish wheels and requires a C
+      # compiler and development headers to install from a source distribution.
+      # To check locally, try a system package. For example on Fedora Linux
+      # install python3-sane with dnf and run:
+      # uv tool run ty check --python /usr/bin/python local/bin/landscape.py

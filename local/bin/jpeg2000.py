@@ -24,7 +24,7 @@ from subprocess import DEVNULL, Popen
 import img2pdf
 from PIL import Image
 
-DPI = 300
+DPI = 300.0
 VIEWER = Path("/usr/bin/google-chrome-stable")
 DEFAULT_COMPRESSION = 20
 
