@@ -1,0 +1,4 @@
+# config/zathura/zathurarc
+# Copyright 2026 Keith Maxwell
+# SPDX-License-Identifier: CC0-1.0
+set database null
