@@ -15,7 +15,7 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
-#   "urllib3",
+#   "urllib3>=2.0",
 # ]
 # ///
 
