@@ -35,7 +35,7 @@ import cv2
 import img2pdf
 import numpy as np
 
-DPI = 300
+DPI = 300.0
 SCANIMAGE = "/usr/bin/scanimage"
 VIEWER = "/usr/bin/google-chrome-stable"
 EXCLUDED = {".jp2"}
