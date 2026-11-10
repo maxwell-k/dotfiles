@@ -63,7 +63,7 @@ version = "--version"
 expected = "7807664f39d39fc518da1c35ba0181e4b3267603c4b1dedeb4b5fc6ae440a224"
 
 [yq]
-url = "https://github.com/mikefarah/yq/releases/download/v4.54.2/yq_linux_amd64"
+url = "https://github.com/mikefarah/yq/releases/download/v4.54.3/yq_linux_amd64"
 version = "--version"
 expected = "44c7759059b4910827a0059a2757b22001e59360cdecdb2ef8dedc4b6c7e9f32"
 modifier = "checksums-bsd"
