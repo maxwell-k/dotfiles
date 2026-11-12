@@ -147,7 +147,7 @@ ignore = ["LICENSE"]
 prefix = "ssh-tpm-agent/"
 
 [dnscontrol]
-url = "https://github.com/DNSControl/dnscontrol/releases/download/v5.7.2/dnscontrol_5.7.2_linux_amd64.tar.gz"
+url = "https://github.com/DNSControl/dnscontrol/releases/download/v5.8.2/dnscontrol_5.8.2_linux_amd64.tar.gz"
 expected = "e4022a8b7def34b5876f6bdc0db0479e0dd7e19708f82c98428cce537c79b82d"
 ignore = ["LICENSE", "README.md"]
 version = "--version"
