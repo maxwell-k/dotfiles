@@ -114,11 +114,11 @@ ignore = [
 version = "--version"
 
 [rclone]
-url = "https://github.com/rclone/rclone/releases/download/v1.75.2/rclone-v1.75.2-linux-amd64.zip"
+url = "https://github.com/rclone/rclone/releases/download/v1.76.0/rclone-v1.76.0-linux-amd64.zip"
 expected = "349ac8fba6ff65d6247043f1750cdcb518ec5d500ef91463a10d37c0ccdf3702"
 version = "version"
 modifier = "SHA256SUMS"
-prefix = "rclone-v1.75.2-linux-amd64/" # depName=rclone/rclone
+prefix = "rclone-v1.76.0-linux-amd64/" # depName=rclone/rclone
 ignore = [
   "README.txt",
   "README.html",
