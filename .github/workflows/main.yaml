@@ -48,7 +48,11 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with: { persist-credentials: false }
       - run: sudo apt-get update && sudo apt-get --assume-yes install incus
-      - run: tests/matrix.sh
+      # root, incus-admin group members and incus group members can all run
+      # incus commands. Switching groups in GitHub actions is difficult so use
+      # sudo, see: <https://github.com/orgs/community/discussions/40236>.
+      - run: sudo incus admin init --auto
+      - run: sudo tests/matrix.sh
         env:
           LOGNAME: maxwell-k
           MATRIX_IMAGE: ${{ matrix.image }}
