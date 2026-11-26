@@ -1,5 +1,5 @@
 #!/bin/sh
-MATRIX_IMAGE="${MATRIX_IMAGE:-fedora/43/cloud}"
+MATRIX_IMAGE="${MATRIX_IMAGE:-fedora/45/cloud}"
 incus create "images:$MATRIX_IMAGE" c1 \
   < "tests/config-${MATRIX_IMAGE%%/*}.yaml" \
 && incus file push tests/99-preserve-hostname.cfg c1/etc/cloud/cloud.cfg.d/ \
